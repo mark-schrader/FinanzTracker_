@@ -12,6 +12,19 @@ In dem Projekt Plan stellen wir sowohl die Organisation, Praktiken und Bewertung
 
 == Projektorganisation
 //Introduce the project team, team members, and roles that they play during this project. If applicable, introduce work areas, domains, or technical work packages that are assigned to team members. Introduce neighboring projects, relationships, and communication channels. If the project is introduced somewhere else, reference that location with a link.
+Wir sind die Budget Buddies. Ein Team, welches sich der finanziellen Misslage aller Studenten annimmt. 
+
+[%header]
+|===
+| Name | Email | Rolle
+| Til Guhlmann | til.guhlmann@stud.htw-dresden.de | Product Owner
+| Enna Ellen Scheer | ennaellen.scheer@stud.htw-dresden.de | Scrum Master, Ansprechpartner
+| Mark Schrader | mark.schrader@stud.htw-dresden.de | Repository Verantwortlicher
+| Emujin Uuganbayar | emujin.uuganbayar@stud.htw-dresden.de | Dev-Team
+| Erik Vogt | erik.vogt@stud.htw-dresden.de  | Dev-Team, Lektor
+| Khanh Ly La | khanhly.la@stud.htw-dresden.de | Dev-Team
+| Justus Müller | justus.mueller@stud.htw-dresden.de | Dev-Team
+|===
 
 
 == Praktiken und Bewertung
