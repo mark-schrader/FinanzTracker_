@@ -1,5 +1,5 @@
 = Vision: *Budget Buddies*
-Til Guhlmann <til.guhlmann@stud.htw-dresden.de>; Enna Scheer <enna.scheer@stud.htw-dresden.de>; Emujin Uuganbayar <emujin.uuganbayar@stud.htw-dresden.de>; Erik Vogt <erik.vogt@stud.htw-dresden.de>; Justus Müller <justus.mueller@stud.htw-dresden.de>; Mark Schrader <mark.schrader@stud.htw-dresden.de>; Khankhly La <khankhly.la@stud.htw-dresden.de>;
+Til Guhlmann <til.guhlmann@stud.htw-dresden.de>; Enna Scheer <enna.scheer@stud.htw-dresden.de>; Emujin Uuganbayar <emujin.uuganbayar@stud.htw-dresden.de>; Erik Vogt <erik.vogt@stud.htw-dresden.de>; Justus Müller <justus.mueller@stud.htw-dresden.de>; Mark Schrader <mark.schrader@stud.htw-dresden.de>; Khanh Ly La <khanhly.la@stud.htw-dresden.de>;
 {localdatetime}
 include::../_includes/default-attributes.inc.adoc[]
 // Platzhalter für weitere Dokumenten-Attribute
@@ -69,13 +69,13 @@ Unser Ziel ist es, finanzielle Selbstbestimmung für alle zu ermöglichen – un
 | Name | Beschreibung | Verantwortlichkeiten
 
 
-| [Budget Buddies - Team]
-| [Enwicklungsteam (auch Studenten) (inkl. UX-Designer, Tester, Analysten, Architekten)]
-| [Das Entwicklungsteam ist verantwortlich für die Entwicklung des Systems und sorgt dafür, dass das System den Anforderungen der Stakeholder entspricht] 
+| Budget Buddies - Projektteam
+| Kursteilnehmer:innen des Moduls SE1, auch Entwickler:innen genannt, die für dieses Projekt zugeteilt wurden und die Verantwortung für die Entwicklung des Systems übernehmen.
+| Das Entwicklungsteam ist verantwortlich für die Entwicklung des Systems und sorgt dafür, dass das System den Anforderungen der Stakeholder entspricht, sowie für die Qualitätssicherung des Systems.
 
-| [Studierende]
-| [Studierende. Das System wird von den Studierenden genutzt, um ihre Finanzen zu verwalten und ihre Geld nachzuvollziehen.]
-| [Die Studierenden sind die Hauptnutzer des Systems.]
+| Studierende
+| Die Zielgruppe des Systems sind Studierende, die ihre Finanzen verwalten möchten.
+| Die Studierenden sind die Hauptnutzer des Systems. Sie nutzen das System, um ihre Einnahmen und Ausgaben zu verfolgen, Budgets zu erstellen und Sparziele zu erreichen.
 |===
 
 Die Verfeinerung der Stakeholder, die das System benutzen, wird im UX-Konzept mittels Personas vorgenommen.
