@@ -1,18 +1,18 @@
-= Vision: {project-name}
-Vorname Nachname <email@domain.org>; Vorname2 Nachname2 <email2@domain.org>; Vorname3 Nachname3 <email3@domain.org>
+= Vision: *Budget Buddies*
+Til Guhlmann <til.guhlmann@stud.htw-dresden.de>; Enna Scheer <enna.scheer@stud.htw-dresden.de>; Emujin Uuganbayar <emujin.uuganbayar@stud.htw-dresden.de>; Erik Vogt <erik.vogt@stud.htw-dresden.de>; Justus Müller <justus.mueller@stud.htw-dresden.de>; Mark Schrader <mark.schrader@stud.htw-dresden.de>; Khankhly La <khankhly.la@stud.htw-dresden.de>;
 {localdatetime}
 include::../_includes/default-attributes.inc.adoc[]
 // Platzhalter für weitere Dokumenten-Attribute
 
 
 == Einführung
-Der Zweck dieses Dokuments ist es, die wesentlichen Bedarfe und Funktionalitäten des Systems {project-system-name} überblicksartig zu beschreiben. Der Fokus liegt auf den Fähigkeiten, die von Stakeholdern und adressierten Nutzern benötigt werden, und der Begründung dieser Bedarfe. Die Details, wie das System {project-system-name} diese Bedarfe erfüllt, werden durch User Stories im Product Backlog sowie dem UX-Konzept beschrieben.
+Der Zweck dieses Dokuments ist es, die wesentlichen Bedarfe und Funktionalitäten des Systems *Budget Buddies* überblicksartig zu beschreiben. Der Fokus liegt auf den Fähigkeiten, die von Stakeholdern und adressierten Nutzern benötigt werden, und der Begründung dieser Bedarfe. Die Details, wie das System *Budget Buddies* diese Bedarfe erfüllt, werden durch _User Stories_ im _Product Backlog_ sowie dem _UX-Konzept_ beschrieben.
 
 === Zweck
 Der Zweck dieses Dokuments ist es, die wesentlichen Anforderungen an das System aus Sicht und mit den Begriffen der künftigen Anwender zu beschreiben.
 
 === Gültigkeitsbereich (Scope)
-Dieses Visions-Dokument bezieht sich auf das System {project-system-name}, das von <Team> entwickelt wird. Das System wird es <Zielkunde/Auftraggeber> erlauben, <Hauptfunktionen> zu nutzen, um damit <Vorteile> zu erreichen / <Aufgabe> zu erleichtern / <Problem> zu lösen.
+Dieses Visions-Dokument bezieht sich auf das System *Budget Buddies*, das von *Finanz Tracker AG* entwickelt wird. Das System wird es der Zielgruppe bzw. den *Studenten* erlauben, unsere Hauptfunktionen wie _Verwaltung und Erfassen der Einnahmen und Ausgaben, Erstellen individueller Budgets sowie das Anlegen von Sparkonten für spezifische Ziele_ zu nutzen, um damit bessere finanzielle Organisation zu erreichen, Budgetdisziplin fördern, Eigenverantwortung stärken.
 
 === Definitionen, Akronyme und Abkürzungen
 //Verweis passend zum Belegabgabe-Template se1_belegabgabe_t00.adoc
@@ -20,13 +20,19 @@ Siehe <<#glossary, Glossar>>.
 //Siehe <<./glossary.adoc#glossary, Glossar>>.
 
 === Referenzen
-(hier externe Verweise zu anderen Dokumenten, Quellen, Standards etc. einfügen, sofern notwendig)
+//hier externe Verweise zu anderen Dokumenten, Quellen, Standards etc. einfügen, sofern notwendig
 
 
 == Positionierung
 
 === Fachliche Motivation
-//Erläutern Sie kurz den Hintergrund, in dem das Projekt angesiedelt ist. Welches Problem soll gelöst werden, wie ist es entstanden? Welche Verbesserung wird angestrebt. Achten Sie darauf, eine fachliche (organisatorische, betriebswirtschaftliche) Perspektive einzunehmen.
+Die *Budget Buddies AG* ist ein junges Start-up, gegründet von sieben engagierten Bachelor-Student:innen im letzten Semester ihres Studiums. Aus eigener Erfahrung wissen sie: Viele Studierende kämpfen mit finanziellen Schwierigkeiten, unvorhergesehenen Ausgaben und mangelndem Überblick über ihre Finanzen.
+
+Bestehende Lösungen auf dem Markt sind oft komplex und teuer. Für viele Studierende einfach nicht leistbar.
+
+Genau hier setzt *Budget Buddy* an: Eine kostenlose, intuitive App, die speziell auf die Bedürfnisse junger Menschen zugeschnitten ist. Sie hilft dabei, Einnahmen und Ausgaben zu verwalten, Budgets zu erstellen und Sparziele zu erreichen – einfach, übersichtlich und völlig kostenlos.
+
+Unser Ziel ist es, finanzielle Selbstbestimmung für alle zu ermöglichen – unabhängig vom Kontostand.
 
 === Produktvision
 //Eine Produktvision beschreibt das Einsatzziel der Anwendung und sorgt für ein gemeinsames Ziel und Verständnis für alle Beteiligten im Projekt. Geben Sie in knapper Form übersichtsartig die Positionierung der angestrebten Lösung im Vergleich zu verfügbaren Alternativen dar. Das folgende Format kann dazu verwendet werden:
@@ -34,13 +40,11 @@ Siehe <<#glossary, Glossar>>.
 
 [cols="1,3"]
 |===
-| Für | [Zielkunde / Persona]
-| der / die | [Angabe des Bedarfs oder Chance]
-| ist das  | [Produktname]
-| eine  | [Produktkategorie]
-| der / die | [Aussage zum Hauptvorteil / Alleinstellungsmerkmal]
-| anders als | [wesentliche Lösungsalternative]
-| kann unser Produkt | [Aussage zum Hauptunterschied]
+| Für | Studenten/Schüler
+| der / die | Managemet der persönlichen Finanzen
+| ist das  | Budget Buddies
+| eine  | FinTech, PFM 
+| der / die | kostengünstig
 |===
 
 
