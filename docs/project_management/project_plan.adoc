@@ -48,7 +48,7 @@ Wir sind die Budget Buddies. Ein Team, welches sich der finanziellen Misslage al
 | Datum | Erkenntnisse/Was haben wir gelernt?
 | 23.04.2025
 |
-- Veriefung der Arbeit mit Asciidoc, speziell Tabellen und Formatierung
+- Vertiefung der Arbeit mit Asciidoc, speziell Tabellen und Formatierung
 
 - Push/Pull bei Github geübt
 
