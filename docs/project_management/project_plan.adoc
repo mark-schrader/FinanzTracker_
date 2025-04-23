@@ -42,4 +42,19 @@ Wir sind die Budget Buddies. Ein Team, welches sich der finanziellen Misslage al
 
 
 == Erkenntnisse (Lessons learned)
-// Führen Sie hier die wesentlichen Erkenntnisse auf, die Sie in den Retrospektiven gewonnen haben. Legen Sie besonderen Fokus auf die Maßnahmen, die Sie getroffen haben um Verbesserungen in den verschiedenen Aspekten des Projekts zu erzielen, z.B. dem Entwicklungsprozess, der technischen und organisatorischen Umgebung oder der Zusammenarbeit im Team.
+
+[%header] 
+|===
+| Datum | Erkenntnisse/Was haben wir gelernt?
+| 23.04.2025
+|
+- Vertiefung der Arbeit mit Asciidoc, speziell Tabellen und Formatierung
+
+- Push/Pull bei Github geübt
+
+- Personas an Aufgabenstellung angepasst
+ 
+
+ 
+
+|===
