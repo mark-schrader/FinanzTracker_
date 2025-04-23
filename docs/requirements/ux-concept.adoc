@@ -100,32 +100,33 @@ a|
 |===
 
 |===
-|Name | XXX
+|Name | Mustus Iüller
 
 |Demografie 
 a| 
-* Alter: XXX
-* Geschlecht: XXX 
-* Wohnort: XXX
-* Studienfach: XXX
+* Alter: 24
+* Geschlecht: männlich 
+* Wohnort: Dresden
+* Studienfach: Wirtschaftsinformatik
 
 |Technische Fähigkeiten
 a|
-* XXX
-* XXX
-* XXX
+* Gut 
+* nutzt seinen PC täglich 
+* kennt sich mit den meisten Sachen sehr gut aus
 
 |Bedürfnisse / Ziele
 a|
-* XXX
-* XXX
-* XXX
+* Sicherheit am Monatsende nicht ins Minus zu gehen
+* Will seine Miete und Verpflegung absichern
+* Geht gern Feiern und will sich das auch nicht nehmen lassen
+* Will seinen Unisport Kurs gern weiter machen
 
 |Hindernisse / Frustration
 a|
-* XXX
-* XXX
-* XXX
+* Ist frisch nach Deutschland (Dresden) gezogen und hat Probleme Euros richtig einzuschätzen (Lira ist eine tote Währung)
+* Sieht den Urlaub in der Heimat in Gefahr
+* Wenn er betrunken ist, shoppt er gern sehr viel auf AliExpress neue Sonnenbrillen und „Gucci Caps“ wovon er durchaus schon genug hat
 |===
 
 |===
