@@ -61,7 +61,7 @@ a|
 
 |Bedürfnisse / Ziele
 a|
-* nutzt gerne zu häufig Online Shopping und muss ihre Ausgaben überwachen
+* nutzt gerne zu häufig Online Shopping und muss ihre Ausgaben überwachen                            
 * braucht Zahlungserinnerungen für regelmäßige Zahlungen wie Miete oder Strom
 * nutzt sehr gerne Ratenkäufe und in 30 Tagen bezahlen
 
@@ -73,32 +73,30 @@ a|
 |===
 
 |===
-|Name | XXX
+|Name | Lukas Miffländer
 
 |Demografie 
 a| 
-* Alter: XXX
-* Geschlecht: XXX 
-* Wohnort: XXX
-* Studienfach: XXX
+* Alter: 22
+* Geschlecht: Männlich 
+* Wohnort: Dresden
+* Studienfach: Wirtschaftsingenieurwesen
 
 |Technische Fähigkeiten
 a|
-* XXX
-* XXX
-* XXX
+* hohe Technikaffinität 
+* nutzt sehr gerne Tool wie Notion, Excel und Banking-Apps
 
 |Bedürfnisse / Ziele
 a|
-* XXX
-* XXX
-* XXX
+* liebt Struktur in seinem Leben und analysiert gerne Satistiken und Diagramme
+* wohnt in einer WG und muss gelegentlich für seine Mitbewohner einkaufen gehen
+* braucht automatische Kategorisierung
 
 |Hindernisse / Frustration
 a|
-* XXX
-* XXX
-* XXX
+* ist zwar eigentlich gut strukturiert, aber gelegentlich etwas schusselig und vergisst Dinge
+* findet unübersichtliche Apps und Webseiten sehr abstoßend
 |===
 
 |===
