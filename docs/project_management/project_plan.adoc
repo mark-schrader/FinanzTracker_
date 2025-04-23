@@ -7,6 +7,7 @@ include::../_includes/default-attributes.inc.adoc[]
 
 == Einführung
 //Kurze Beschreibung und Überblick zum Dokument.
+In dem Projekt Plan stellen wir sowohl die Organisation, Praktiken und Bewertung, unsere Deployment Strategie, als auch unsere Erkenntnisse am Ende jeder Iteration dar. 
 
 
 == Projektorganisation
