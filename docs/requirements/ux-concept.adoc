@@ -132,32 +132,33 @@ a|
 image::images/Mustus_Iueller.png[width=200, height=300]
 
 |===
-|Name | XXX
+|Name | Gil Thulmann
 
 |Demografie 
 a| 
-* Alter: XXX
-* Geschlecht: XXX 
-* Wohnort: XXX
-* Studienfach: XXX
+* Alter: 21
+* Geschlecht: weiblich 
+* Wohnort: Dresden
+* Studienfach: Sozialwissenschaften
 
 |Technische Fähigkeiten
 a|
-* XXX
-* XXX
-* XXX
+* Durchschnittlich 
+* nutzt regelmäßig ihr Smartphone für Social Media und Uni-Organisation
 
 |Bedürfnisse / Ziele
 a|
-* XXX
-* XXX
-* XXX
+* Klare Übersicht über Einnahmen & Ausgaben
+* Frühwarnsystem bei drohendem Geldmangel
+* Automatische Erinnerungen für Miete & Semesterbeiträge
+* Motivation, regelmäßig etwas für den Sommerurlaub zu sparen
 
 |Hindernisse / Frustration
 a|
-* XXX
-* XXX
-* XXX
+* kein großes Interesse an Finanzen,
+* verliert aber schnell den Überblick über ihre Ausgaben
+* Angst, am Monatsende kein Geld mehr übrig zu haben
+
 |===
 
 |===
