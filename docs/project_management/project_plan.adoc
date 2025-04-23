@@ -52,7 +52,7 @@ Wir sind die Budget Buddies. Ein Team, welches sich der finanziellen Misslage al
 
 - Push/Pull bei Github geübt
 
-- Personas an Aufgabenstellung angepasst
+- Personas an Aufgabenstellung angepasst -> Teamkommunikation verbessern (unterschiedliches Ausgangswissen)
  
 
 
