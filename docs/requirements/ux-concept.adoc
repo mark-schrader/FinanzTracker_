@@ -129,7 +129,7 @@ a|
 * Wenn er betrunken ist, shoppt er gern sehr viel auf AliExpress neue Sonnenbrillen und „Gucci Caps“ wovon er durchaus schon genug hat
 |===
 
-image::images/Mustus_Iueller.png[width=300, height=300]
+image::images/Mustus_Iueller.png[width=200, height=300]
 
 |===
 |Name | XXX
