@@ -40,8 +40,8 @@ Unser Ziel ist es, finanzielle Selbstbestimmung für alle zu ermöglichen – un
 
 [cols="1,3"]
 |===
-| Für | Studenten/Schüler
-| der / die | Managemet der persönlichen Finanzen
+| Für | Student*innen/Schüler*innen
+| der / die | Management der persönlichen Finanzen
 | ist das  | Budget Buddies
 | eine  | FinTech, PFM 
 | der / die | kostengünstig
@@ -90,18 +90,18 @@ Die Verfeinerung der Stakeholder, die das System benutzen, wird im UX-Konzept mi
 |===
 | Bedarf | Priorität | Features / Funktionen | Geplantes Release
 | xx | 10/10 | Eintragen von Finanzeinnahmen | xx
-| xx | 10/10 | Eintragen von Finanzentnahmen | xx
-| xx | 10/10 | Kategorierung von Einnahmen und Ausgaben | xx
+| xx | 10/10 | Eintragen von Finanzausgaben | xx
+| xx | 10/10 | Kategorisierung von Einnahmen und Ausgaben | xx
 | xx | 10/10 | Übersicht über aktuelle Finanzen | xx
 | xx | 9/10 | Prognosen  | xx
 | xx | 7/10 | Spar-challenges | xx
-| xx | 6/10 | Automatisches Kopieren der wiederkehrende Ausgaben ins neue Semester (Grundkonzept) | xx
+| xx | 6/10 | Automatisches Kopieren der wiederkehrenden Ausgaben ins neue Semester (Grundkonzept) | xx
 | xx | 5/10 | Finanzdaten-Export | xx
-| xx | 5/10 | Simplies Layout | xx
-| xx | 5/10 | Zweite Sprache als Englisch | xx
+| xx | 5/10 | Simples Layout | xx
+| xx | 5/10 | Zweite Sprache (Englisch) | xx
 | xx | 4/10 | Dark-Mode | xx
 | xx | 4/10 | individuelle anpassbare Elemente (Farben, Graphen, Zeiträum) | xx
-| xx | 3/10 | Modulare Layout (Entfernen von Modulen möglich) | xx
+| xx | 3/10 | Modulares Layout (Entfernen von Modulen möglich) | xx
 
 
 |===
