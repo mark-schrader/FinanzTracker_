@@ -64,9 +64,14 @@ Siehe <<#glossary, Glossar>>.
 |===
 | Name | Beschreibung | Verantwortlichkeiten
 
-| [Benennung des Stakeholders (als Rolle)]
-| [Kurze Beschreibung des Stakeholders und seiner Ziele]
-| [Fassen Sie die wesentlichen Verantwortlichkeiten des Stakeholder mit Bezug auf das zu entwickelnde System kurz zusammen, d.h. ihr besonderen Interessen. Beispiele: Dieser Stakeholder sorgt dafür, dass das System gewartet wird / dass die angezeigten Daten aktuell sind / überwacht den Projektfortschritt / usw.]
+
+| [Budget Buddies - Team]
+| [Enwicklungsteam (auch Studenten) (inkl. UX-Designer, Tester, Analysten, Architekten)]
+| [Das Entwicklungsteam ist verantwortlich für die Entwicklung des Systems und sorgt dafür, dass das System den Anforderungen der Stakeholder entspricht] 
+
+| [Studierende]
+| [Studierende. Das System wird von den Studierenden genutzt, um ihre Finanzen zu verwalten und ihre Geld nachzuvollziehen.]
+| [Die Studierenden sind die Hauptnutzer des Systems.]
 |===
 
 Die Verfeinerung der Stakeholder, die das System benutzen, wird im UX-Konzept mittels Personas vorgenommen.
@@ -80,7 +85,21 @@ Die Verfeinerung der Stakeholder, die das System benutzen, wird im UX-Konzept mi
 [%header, cols="4,1,4,1"]
 |===
 | Bedarf | Priorität | Features / Funktionen | Geplantes Release
-| xx | xx | xx | xx
+| xx | 10/10 | Eintragen von Finanzeinnahmen | xx
+| xx | 10/10 | Eintragen von Finanzentnahmen | xx
+| xx | 10/10 | Kategorierung von Einnahmen und Ausgaben | xx
+| xx | 10/10 | Übersicht über aktuelle Finanzen | xx
+| xx | 9/10 | Prognosen  | xx
+| xx | 7/10 | Spar-challenges | xx
+| xx | 6/10 | Automatisches Kopieren der wiederkehrende Ausgaben ins neue Semester (Grundkonzept) | xx
+| xx | 5/10 | Finanzdaten-Export | xx
+| xx | 5/10 | Simplies Layout | xx
+| xx | 5/10 | Zweite Sprache als Englisch | xx
+| xx | 4/10 | Dark-Mode | xx
+| xx | 4/10 | individuelle anpassbare Elemente (Farben, Graphen, Zeiträum) | xx
+| xx | 3/10 | Modulare Layout (Entfernen von Modulen möglich) | xx
+
+
 |===
 
 
@@ -97,5 +116,8 @@ Hinweise:
 [%header, cols="4,1,1"]
 |===
 | Anforderung | Priorität | Geplantes Release
-| xx | xx | xx
+| Rechnungs -& Belegscanner | 4/10 | xx
+| AI-basierter Finanzcoach | 3/10 | xx
+| Offline-Funktionalität | 3/10 | xx
+| 2-Faktor-Authentifizierung | 2/10 | xx
 |===
