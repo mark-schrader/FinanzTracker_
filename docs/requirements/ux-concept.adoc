@@ -15,7 +15,207 @@ In diesem Dokument werden die Benutzeroberflächen des Systems {project-system-n
 * Angaben über die Gestaltung der Benutzeroberfläche, z.B. Styling, Bedienbarkeit, ...
 
 == Personas
-// Fügen Sie hier als Tabelle oder Bild die Persons der wichtigsten Stakeholder ein
+|===
+|Name | Tina Durner
+
+|Demografie 
+a| 
+* Alter: 22
+* Geschlecht: weiblich 
+* Wohnort: Dresden
+* Studienfach: Geoinformation
+
+|Technische Fähigkeiten
+a|
+* nicht technickfremd, nicht der größte Computerfan, nutzt eigentlich lieber Handy
+* kann gut mit Excel umgehen wegen den ganzen Datenanalysen in ihrem Studiengang
+* zeichnet gerne auf ihrem Tablet
+
+|Bedürfnisse / Ziele
+a|
+* Reist gerne in viele Länder, liebt Städte Trips
+* hat eine Spardose, wo sie jede Woche eine bestimmte Summe an Bargeld reinwürft für geplannte Reisen
+* braucht einen monatlichen Puffer für Ramsch, den sie aber glücklich macht
+
+|Hindernisse / Frustration
+a|
+* wird schnell ungeduldig
+* Opfer von Girl Math
+|===
+
+|===
+|Name | Laura Weber
+
+|Demografie 
+a| 
+* Alter: 24
+* Geschlecht: Weiblich
+* Wohnort: Dresden
+* Studienfach: BWL
+
+|Technische Fähigkeiten
+a|
+* IOS Nutzerin
+* viel auf TikTok, Instagram und YouTube
+* nutzt Apps / Webseiten, um Rabatte oder Sonderangebote zu finden 
+
+|Bedürfnisse / Ziele
+a|
+* nutzt gerne zu häufig Online Shopping und muss ihre Ausgaben überwachen
+* braucht Zahlungserinnerungen für regelmäßige Zahlungen wie Miete oder Strom
+* nutzt sehr gerne Ratenkäufe und in 30 Tagen bezahlen
+
+|Hindernisse / Frustration
+a|
+* impulsives Ausgaben, vor allem bei Online Shopping
+* hat Schwierigkeiten ihre Ausgaben zu kontrollieren aufgrund spontaner Ausgaben
+* verliert schnell die Übersicht, wann sie was noch bezahlen muss
+|===
+
+|===
+|Name | XXX
+
+|Demografie 
+a| 
+* Alter: XXX
+* Geschlecht: XXX 
+* Wohnort: XXX
+* Studienfach: XXX
+
+|Technische Fähigkeiten
+a|
+* XXX
+* XXX
+* XXX
+
+|Bedürfnisse / Ziele
+a|
+* XXX
+* XXX
+* XXX
+
+|Hindernisse / Frustration
+a|
+* XXX
+* XXX
+* XXX
+|===
+
+|===
+|Name | XXX
+
+|Demografie 
+a| 
+* Alter: XXX
+* Geschlecht: XXX 
+* Wohnort: XXX
+* Studienfach: XXX
+
+|Technische Fähigkeiten
+a|
+* XXX
+* XXX
+* XXX
+
+|Bedürfnisse / Ziele
+a|
+* XXX
+* XXX
+* XXX
+
+|Hindernisse / Frustration
+a|
+* XXX
+* XXX
+* XXX
+|===
+
+|===
+|Name | XXX
+
+|Demografie 
+a| 
+* Alter: XXX
+* Geschlecht: XXX 
+* Wohnort: XXX
+* Studienfach: XXX
+
+|Technische Fähigkeiten
+a|
+* XXX
+* XXX
+* XXX
+
+|Bedürfnisse / Ziele
+a|
+* XXX
+* XXX
+* XXX
+
+|Hindernisse / Frustration
+a|
+* XXX
+* XXX
+* XXX
+|===
+
+|===
+|Name | XXX
+
+|Demografie 
+a| 
+* Alter: XXX
+* Geschlecht: XXX 
+* Wohnort: XXX
+* Studienfach: XXX
+
+|Technische Fähigkeiten
+a|
+* XXX
+* XXX
+* XXX
+
+|Bedürfnisse / Ziele
+a|
+* XXX
+* XXX
+* XXX
+
+|Hindernisse / Frustration
+a|
+* XXX
+* XXX
+* XXX
+|===
+
+|===
+|Name | XXX
+
+|Demografie 
+a| 
+* Alter: XXX
+* Geschlecht: XXX 
+* Wohnort: XXX
+* Studienfach: XXX
+
+|Technische Fähigkeiten
+a|
+* XXX
+* XXX
+* XXX
+
+|Bedürfnisse / Ziele
+a|
+* XXX
+* XXX
+* XXX
+
+|Hindernisse / Frustration
+a|
+* XXX
+* XXX
+* XXX
+|===
 
 == Nutzungskontext
 // Beschreiben Sie die Arbeitsaufgaben, Arbeitsmittel, physische und soziale Umgebung, in der das Produkt genutzt wird. 
