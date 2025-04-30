@@ -24,8 +24,8 @@ In diesem Dokument werden die Benutzeroberflächen des Systems {project-system-n
 * Angaben über die Gestaltung der Benutzeroberfläche, z.B. Styling, Bedienbarkeit, ...
 
 == Personas
-image::tina_durner.jpg[]
 |===
+|Bild a| image::tina_durner.jpg[alt=tina_durner_personenbild,width=160,height=120]
 |Name | Tina Durner
 
 |Demografie 
@@ -53,8 +53,9 @@ a|
 * Opfer von Girl-Math
 |===
 
-image::Laura_Weber.jpg[]
+
 |===
+|Bild a| image::Laura_Weber.jpg[alt=Laura_Weber_personenbild,width=160,height=120]
 |Name | Laura Weber
 
 |Demografie 
@@ -83,8 +84,9 @@ a|
 * verliert schnell die Übersicht, wann sie "Was" noch bezahlen muss
 |===
 
-image::Lukas_Miffländer.png[]
+
 |===
+|Bild a| image::Lukas_Miffländer.png[alt=lukas_miffländer_personenbild,width=160,height=120]
 |Name | Lukas Miffländer
 
 |Demografie 
@@ -111,8 +113,9 @@ a|
 * findet unübersichtliche Apps und Webseiten sehr abstoßend
 |===
 
-image::Mustus_Iueller.png[width=200, height=300]
+
 |===
+|Bild a| image::Mustus_Iueller.png[alt=Mustus_Iueller_personenbild,width=100,height=150]
 |Name | Mustus Iüller 
 
 |Demografie 
@@ -142,8 +145,9 @@ a|
 * Wenn er betrunken ist, shoppt er gern sehr viel auf AliExpress neue Sonnenbrillen und „Gucci Caps“, wovon er durchaus schon genug hat
 |===
 
-image::Gil_Tuhlmann.png[]
+
 |===
+|Bild a| image::gil_tuhlmann.png[alt=gil_tuhlmann_personenbild,width=160,height=120]
 |Name | Gil Thulmann
 
 |Demografie 
@@ -173,8 +177,9 @@ a|
 * hatte schon häufig das Problem, dass am Monatsende kein Geld mehr übrig war
 |===
 
-image::Wuce_Brillis.png[]
+
 |===
+|Bild a| image::wuce_brillis.png[alt=wuce_brillis_personenbild,width=160,height=120]
 |Name | Wuce Brillis
 
 |Demografie 
