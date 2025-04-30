@@ -100,7 +100,7 @@ a|
 |===
 
 |===
-|Name | Mustus Iüller
+|Name | Mustus Iüller 
 
 |Demografie 
 a| 
@@ -117,15 +117,15 @@ a|
 
 |Bedürfnisse / Ziele
 a|
-* Sicherheit am Monatsende nicht ins Minus zu gehen
-* Will seine Miete und Verpflegung absichern
-* Geht gern Feiern und will sich das auch nicht nehmen lassen
-* Will seinen Unisport Kurs gern weiter machen
+* braucht die Sicherheit am, dass er am  Monatsende nicht ins Minus geht trozt seinem Stipendium 
+* muss seine Nebenkosten immer pünktlich abgeben, somit muss Miete und Verpflegung abgesichert sein
+* geht gern Feiern und will sich das auch nicht nehmen lassen
+* Will unbedingt seinen Unisport Kurs gern weiter machen
 
 |Hindernisse / Frustration
 a|
-* Ist frisch nach Deutschland (Dresden) gezogen und hat Probleme Euros richtig einzuschätzen (Lira ist eine tote Währung)
-* Sieht den Urlaub in der Heimat in Gefahr
+* Ist frisch nach Deutschland (Dresden) gezogen und hat Probleme Euronen richtig einzuschätzen (Lira ist eine tote Währung)
+* Sieht den Urlaub in der Heimat in Gefahr, wenn er nicht langsam anfängt zu sparen
 * Wenn er betrunken ist, shoppt er gern sehr viel auf AliExpress neue Sonnenbrillen und „Gucci Caps“ wovon er durchaus schon genug hat
 |===
 
@@ -148,75 +148,44 @@ a|
 
 |Bedürfnisse / Ziele
 a|
-* Klare Übersicht über Einnahmen & Ausgaben
+* braucht eine klare Übersicht über Einnahmen & Ausgaben mit Prognosen für eingehende Ausgaben 
 * Frühwarnsystem bei drohendem Geldmangel
-* Automatische Erinnerungen für Miete & Semesterbeiträge
-* Motivation, regelmäßig etwas für den Sommerurlaub zu sparen
+* Automatische Erinnerungen für feste Ausgaben wie Miete & Semesterbeiträge
+* Motivation durch einen Sparrspiel damit sie regelmäßig etwas für den Sommerurlaub zurück legt
+
 
 |Hindernisse / Frustration
 a|
-* kein großes Interesse an Finanzen,
-* verliert aber schnell den Überblick über ihre Ausgaben
-* Angst, am Monatsende kein Geld mehr übrig zu haben
-
+* hat kein großes Interesse ihre Finanzen ins kleinste Detail zu tracken
+* verliert sehr schnell den Überblick über ihre Ausgaben, da sie gerne hier und da sich mal was gönnt
+* hatte schon häufig das Problem, dass am Monatsende kein Geld mehr übrig war
 |===
 
 |===
-|Name | XXX
+|Name | Wuce Brillis
 
 |Demografie 
 a| 
-* Alter: XXX
-* Geschlecht: XXX 
-* Wohnort: XXX
-* Studienfach: XXX
+* Alter: 27
+* Geschlecht: männlich
+* Wohnort: Leipzig
+* Studienfach: BWLer
 
 |Technische Fähigkeiten
 a|
-* XXX
-* XXX
-* XXX
+* kennt sich Grundlegen mit Webseiten, Apps und ähnlichen aus
+* ist aber nicht der größte Technikfreak
 
 |Bedürfnisse / Ziele
 a|
-* XXX
-* XXX
-* XXX
+* hat großes Interesse an Sparzielen, z. B. für sein neues Fahrrad oder neue LED-Lampe
+* will alles genau detailliert dargestellt haben, um seinen wissendurst zu stillen
+* muss Ein-& Ausnahemn gut übeischtlich einsehen können 
 
 |Hindernisse / Frustration
 a|
-* XXX
-* XXX
-* XXX
-|===
-
-|===
-|Name | XXX
-
-|Demografie 
-a| 
-* Alter: XXX
-* Geschlecht: XXX 
-* Wohnort: XXX
-* Studienfach: XXX
-
-|Technische Fähigkeiten
-a|
-* XXX
-* XXX
-* XXX
-
-|Bedürfnisse / Ziele
-a|
-* XXX
-* XXX
-* XXX
-
-|Hindernisse / Frustration
-a|
-* XXX
-* XXX
-* XXX
+* notorischer Besserwisser, der sich gerne in Details verliert
+* wird manchmal ungeduldig, wenn andere nicht sofort auf seinem Wissensstand sind
 |===
 
 == Nutzungskontext
