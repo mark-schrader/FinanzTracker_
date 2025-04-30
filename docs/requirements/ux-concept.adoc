@@ -27,20 +27,20 @@ a|
 
 |Technische Fähigkeiten
 a|
-* nicht technickfremd, nicht der größte Computerfan, nutzt eigentlich lieber Handy
-* kann gut mit Excel umgehen wegen den ganzen Datenanalysen in ihrem Studiengang
+* nicht technikfremd, nicht der größte Computerfan, nutzt lieber das Handy
+* kann gut mit Excel umgehen, aufgrund der ganzen Datenanalysen in ihrem Studiengang
 * zeichnet gerne auf ihrem Tablet
 
 |Bedürfnisse / Ziele
 a|
-* Reist gerne in viele Länder, liebt Städte Trips
-* hat eine Spardose, wo sie jede Woche eine bestimmte Summe an Bargeld reinwürft für geplannte Reisen
-* braucht einen monatlichen Puffer für Ramsch, den sie aber glücklich macht
+* Reist gerne in verschiedene Länder, liebt Städtetrips
+* hat eine Spardose, in die sie jede Woche eine bestimmte Summe an Bargeld reinwürft, für geplannte Reisen
+* braucht einen monatlichen Puffer für Ramsch, der sie aber glücklich macht
 
 |Hindernisse / Frustration
 a|
-* wird schnell ungeduldig
-* Opfer von Girl Math
+* schnell ungeduldig
+* Opfer von Girl-Math
 |===
 
 |===
@@ -57,19 +57,19 @@ a|
 a|
 * IOS Nutzerin
 * viel auf TikTok, Instagram und YouTube
-* nutzt Apps / Webseiten, um Rabatte oder Sonderangebote zu finden 
+* nutzt Apps / Webseiten für Rabatte oder Sonderangebote  
 
 |Bedürfnisse / Ziele
 a|
-* nutzt gerne zu häufig Online Shopping und muss ihre Ausgaben überwachen                            
+* nutzt zu häufig Online-Shopping und muss ihre Ausgaben überwachen                            
 * braucht Zahlungserinnerungen für regelmäßige Zahlungen wie Miete oder Strom
-* nutzt sehr gerne Ratenkäufe und in 30 Tagen bezahlen
+* nutzt sehr gerne Ratenkäufe und in "30 Tagen bezahlen"
 
 |Hindernisse / Frustration
 a|
-* impulsives Ausgaben, vor allem bei Online Shopping
+* impulsive Ausgaben, vor allem bei Online-Shopping
 * hat Schwierigkeiten ihre Ausgaben zu kontrollieren aufgrund spontaner Ausgaben
-* verliert schnell die Übersicht, wann sie was noch bezahlen muss
+* verliert schnell die Übersicht, wann sie "Was" noch bezahlen muss
 |===
 
 |===
@@ -89,13 +89,13 @@ a|
 
 |Bedürfnisse / Ziele
 a|
-* liebt Struktur in seinem Leben und analysiert gerne Satistiken und Diagramme
+* liebt Struktur in seinem Leben und analysiert gerne Statistiken und Diagramme
 * wohnt in einer WG und muss gelegentlich für seine Mitbewohner einkaufen gehen
 * braucht automatische Kategorisierung
 
 |Hindernisse / Frustration
 a|
-* ist zwar eigentlich gut strukturiert, aber gelegentlich etwas schusselig und vergisst Dinge
+* ist zwar gut strukturiert, aber gelegentlich etwas schusselig und vergisst Dinge
 * findet unübersichtliche Apps und Webseiten sehr abstoßend
 |===
 
@@ -117,16 +117,16 @@ a|
 
 |Bedürfnisse / Ziele
 a|
-* braucht die Sicherheit am, dass er am  Monatsende nicht ins Minus geht trozt seinem Stipendium 
+* braucht die Sicherheit, dass er am  Monatsende nicht ins Minus geht, trozt seines Stipendiums
 * muss seine Nebenkosten immer pünktlich abgeben, somit muss Miete und Verpflegung abgesichert sein
-* geht gern Feiern und will sich das auch nicht nehmen lassen
-* Will unbedingt seinen Unisport Kurs gern weiter machen
+* geht gerne Feiern und will sich das auch nicht nehmen lassen
+* Will unbedingt seinen Unisportkurs gern weiter machen
 
 |Hindernisse / Frustration
 a|
 * Ist frisch nach Deutschland (Dresden) gezogen und hat Probleme Euronen richtig einzuschätzen (Lira ist eine tote Währung)
 * Sieht den Urlaub in der Heimat in Gefahr, wenn er nicht langsam anfängt zu sparen
-* Wenn er betrunken ist, shoppt er gern sehr viel auf AliExpress neue Sonnenbrillen und „Gucci Caps“ wovon er durchaus schon genug hat
+* Wenn er betrunken ist, shoppt er gern sehr viel auf AliExpress neue Sonnenbrillen und „Gucci Caps“, wovon er durchaus schon genug hat
 |===
 
 image::images/Mustus_Iueller.png[width=200, height=300]
@@ -151,7 +151,7 @@ a|
 * braucht eine klare Übersicht über Einnahmen & Ausgaben mit Prognosen für eingehende Ausgaben 
 * Frühwarnsystem bei drohendem Geldmangel
 * Automatische Erinnerungen für feste Ausgaben wie Miete & Semesterbeiträge
-* Motivation durch einen Sparrspiel damit sie regelmäßig etwas für den Sommerurlaub zurück legt
+* Motivation durch einen Sparspiel damit sie regelmäßig etwas für den Sommerurlaub zurück legt
 
 
 |Hindernisse / Frustration
@@ -179,8 +179,8 @@ a|
 |Bedürfnisse / Ziele
 a|
 * hat großes Interesse an Sparzielen, z. B. für sein neues Fahrrad oder neue LED-Lampe
-* will alles genau detailliert dargestellt haben, um seinen wissendurst zu stillen
-* muss Ein-& Ausnahemn gut übeischtlich einsehen können 
+* will alles genau detailliert dargestellt haben, um seinen Wissendurst zu stillen
+* muss Ein-& Ausnahmen gut übersichtlich einsehen können 
 
 |Hindernisse / Frustration
 a|
@@ -197,7 +197,7 @@ a|
 //Zutreffendes angeben, nicht zutreffendes streichen oder auskommentieren
 . Anzahl der Personen, die an der Erfüllung der Aufgabe beteiligt sind. Ändert sich das?
 . Wie lange dauert die Bearbeitung der Aufgabe? Wie viel Zeit wird für jeden Arbeitsschritt benötigt? Ändert sich das?
-. Gibt es besondere Umgebungsbedingungen, z.B. mobil, offline, Außeneinsatz, Touchbedienung, Nutzung durch seh- oder hörbeeinträchtigte Personen?
+. Gibt es besondere Umgebungsbedingungen, z.B. Mobil, Offline, Außeneinsatz, Touchbedienung, Nutzung durch seh- oder hörbeeinträchtigte Personen?
 . Welche Systemplattformen werden heute eingesetzt? Welche sind es ggf. zukünftig?
 . Welche anderen Anwendungen sind im Einsatz? Muss ihre Anwendung mit diesen integriert werden?
 
