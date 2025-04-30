@@ -17,6 +17,7 @@ In diesem Dokument werden die Benutzeroberflächen des Systems {project-system-n
 * Angaben über die Gestaltung der Benutzeroberfläche, z.B. Styling, Bedienbarkeit, ...
 
 == Personas
+image::tina_durner.jpg[]
 |===
 |Name | Tina Durner
 
@@ -45,8 +46,7 @@ a|
 * Opfer von Girl-Math
 |===
 
-image::tina_durner.jpg[]
-
+image::Laura_Weber.jpg[]
 |===
 |Name | Laura Weber
 
@@ -76,8 +76,7 @@ a|
 * verliert schnell die Übersicht, wann sie "Was" noch bezahlen muss
 |===
 
-image::Laura_Weber.jpg[]
-
+image::Lukas_Miffländer.png[]
 |===
 |Name | Lukas Miffländer
 
@@ -105,8 +104,7 @@ a|
 * findet unübersichtliche Apps und Webseiten sehr abstoßend
 |===
 
-image::Lukas_Miffländer.png[]
-
+image::Mustus_Iueller.png[width=200, height=300]
 |===
 |Name | Mustus Iüller 
 
@@ -137,8 +135,7 @@ a|
 * Wenn er betrunken ist, shoppt er gern sehr viel auf AliExpress neue Sonnenbrillen und „Gucci Caps“, wovon er durchaus schon genug hat
 |===
 
-image::Mustus_Iueller.png[width=200, height=300]
-
+image::Gil_Tuhlmann.png[]
 |===
 |Name | Gil Thulmann
 
@@ -169,8 +166,7 @@ a|
 * hatte schon häufig das Problem, dass am Monatsende kein Geld mehr übrig war
 |===
 
-image::Gil_Tuhlmann.png[]
-
+image::Wuce_Brillis.png[]
 |===
 |Name | Wuce Brillis
 
@@ -197,8 +193,6 @@ a|
 * notorischer Besserwisser, der sich gerne in Details verliert
 * wird manchmal ungeduldig, wenn andere nicht sofort auf seinem Wissensstand sind
 |===
-
-image::Wuce_Brillis.png[]
 
 == Nutzungskontext
 // Beschreiben Sie die Arbeitsaufgaben, Arbeitsmittel, physische und soziale Umgebung, in der das Produkt genutzt wird. 
