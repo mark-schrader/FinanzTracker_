@@ -162,61 +162,30 @@ a|
 |===
 
 |===
-|Name | XXX
+|Name | Wuce Brillis
 
 |Demografie 
 a| 
-* Alter: XXX
-* Geschlecht: XXX 
-* Wohnort: XXX
-* Studienfach: XXX
+* Alter: 27
+* Geschlecht: männlich
+* Wohnort: Leipzig
+* Studienfach: BWLer
 
 |Technische Fähigkeiten
 a|
-* XXX
-* XXX
-* XXX
+* kennt sich Grundlegen mit Webseiten, Apps und ähnlichen aus
+* ist aber nicht der größte Technikfreak
 
 |Bedürfnisse / Ziele
 a|
-* XXX
-* XXX
-* XXX
+* hat großes Interesse an Sparzielen, z. B. für sein neues Fahrrad oder neue LED-Lampe
+* will alles genau detailliert dargestellt haben, um seinen wissendurst zu stillen
+* muss Ein-& Ausnahemn gut übeischtlich einsehen können 
 
 |Hindernisse / Frustration
 a|
-* XXX
-* XXX
-* XXX
-|===
-
-|===
-|Name | XXX
-
-|Demografie 
-a| 
-* Alter: XXX
-* Geschlecht: XXX 
-* Wohnort: XXX
-* Studienfach: XXX
-
-|Technische Fähigkeiten
-a|
-* XXX
-* XXX
-* XXX
-
-|Bedürfnisse / Ziele
-a|
-* XXX
-* XXX
-* XXX
-
-|Hindernisse / Frustration
-a|
-* XXX
-* XXX
-* XXX
+* notorischer Besserwisser, der sich gerne in Details verliert
+* wird manchmal ungeduldig, wenn andere nicht sofort auf seinem Wissensstand sind
 |===
 
 == Nutzungskontext
