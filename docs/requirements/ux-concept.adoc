@@ -43,6 +43,8 @@ a|
 * Opfer von Girl-Math
 |===
 
+image::tina durner.jpg[]
+
 |===
 |Name | Laura Weber
 
@@ -72,6 +74,8 @@ a|
 * verliert schnell die Übersicht, wann sie "Was" noch bezahlen muss
 |===
 
+image::Laura Weber.jpg[]
+
 |===
 |Name | Lukas Miffländer
 
@@ -98,6 +102,8 @@ a|
 * ist zwar gut strukturiert, aber gelegentlich etwas schusselig und vergisst Dinge
 * findet unübersichtliche Apps und Webseiten sehr abstoßend
 |===
+
+image::Lukas Miffländer.png[]
 
 |===
 |Name | Mustus Iüller 
@@ -161,6 +167,8 @@ a|
 * hatte schon häufig das Problem, dass am Monatsende kein Geld mehr übrig war
 |===
 
+image::Gil Tuhlmann.png[]
+
 |===
 |Name | Wuce Brillis
 
@@ -187,6 +195,8 @@ a|
 * notorischer Besserwisser, der sich gerne in Details verliert
 * wird manchmal ungeduldig, wenn andere nicht sofort auf seinem Wissensstand sind
 |===
+
+image::Wuce Brillis.png[]
 
 == Nutzungskontext
 // Beschreiben Sie die Arbeitsaufgaben, Arbeitsmittel, physische und soziale Umgebung, in der das Produkt genutzt wird. 

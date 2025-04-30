@@ -89,19 +89,19 @@ Die Verfeinerung der Stakeholder, die das System benutzen, wird in der "ux-conze
 [%header, cols="4,1,4,1"]
 |===
 | Bedarf | Priorität | Features / Funktionen | Geplantes Release
-| xx | 10/10 | Eintragen von Finanzeinnahmen | xx
-| xx | 10/10 | Eintragen von Finanzausgaben | xx
-| xx | 10/10 | Kategorisierung von Einnahmen und Ausgaben | xx
-| xx | 10/10 | Übersicht über aktuelle Finanzen | xx
-| xx | 9/10 | Prognosen  | xx
-| xx | 7/10 | Spar-challenges | xx
-| xx | 6/10 | Automatisches Kopieren der wiederkehrenden Ausgaben ins neue Semester (Grundkonzept) | xx
-| xx | 5/10 | Finanzdaten-Export | xx
-| xx | 5/10 | Simples Layout | xx
-| xx | 5/10 | Zweite Sprache (Englisch) | xx
-| xx | 4/10 | Dark-Mode | xx
-| xx | 4/10 | individuelle anpassbare Elemente (Farben, Graphen, Zeiträum) | xx
-| xx | 3/10 | Modulares Layout (Entfernen von Modulen möglich) | xx
+| Eintragen von Finanzeinnahmen | 10/10 | Möglichkeit zur manuellen Eingabe von Einnahmen inkl. Datum, Betrag, Kategorie | xx
+| Eintragen von Finanzausgaben | 10/10 | Erfassung aller Ausgaben mit Tags/Kategorien und Wiederholungseinstellungen | xx
+| Kategorisierung von Einnahmen und Ausgaben | 10/10 | System zur Verwaltung und Anpassung von Kategorien | xx
+| Übersicht über aktuelle Finanzen | 10/10 | Dashboard mit grafischer und tabellarischer Darstellung aktueller Finanzlage | xx
+| Prognosen | 9/10 | Vorhersage zukünftiger Finanzentwicklungen basierend auf bisherigen Daten | xx
+| Spar-challenges | 7/10 | Vordefinierte oder benutzerdefinierte Challenges mit Fortschrittsanzeige | xx
+| Wiederkehrende Ausgaben automatisch ins nächste Semester übernehmen | 6/10 | Automatisches Kopieren der wiederkehrenden Ausgaben ins neue Semester (Grundkonzept) | xx
+| Finanzdaten-Export | 5/10 | Export als CSV, Excel oder PDF zur Archivierung oder Analyse | xx
+| Simples Layout | 5/10 | Intuitives und minimalistisches UI für einfache Bedienung | xx
+| Zweite Sprache (Englisch) | 5/10 |  Umschaltfunktion zwischen Deutsch und Englisch | xx
+| Dark-Mode | 4/10 | Dunkles Farbschema für angenehme Nutzung bei wenig Licht | xx
+| Individuelle anpassbare Elemente | 4/10 | Benutzerdefinierte Gestaltung von Farben, Diagrammen und Zeitraumfiltern | xx
+| Modulares Layout (Entfernen von Modulen möglich) | 3/10 | Frei anpassbares Interface, bei dem einzelne Module ein-/ausblendbar sind | xx
 
 
 |===
