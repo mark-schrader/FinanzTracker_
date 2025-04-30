@@ -103,6 +103,7 @@ In unserem Projekt verwenden wir eine angepasste Form des *agilen Scrum-Ansatzes
 |
 - GitHub-Merch mit "STRG+Enter", damit Änderungskommentar sichtbar ist
 
+- Wiederholumg der Benutzung von Git-Project
 
-
+- Verstanden was der Unterschied zwischen User Storys und Persona ist
 |===
