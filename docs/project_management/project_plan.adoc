@@ -29,16 +29,53 @@ Wir sind die Budget Buddies. Ein Team, welches sich der finanziellen Misslage al
 
 == Praktiken und Bewertung
 //Describe or reference which management and technical practices will be used in the project, such as iterative development, continuous integration, independent testing and list any changes or particular configuration to the project. Specify how you will track progress in each practice. As an example, for iterative development the team may decide to use iteration assessments and iteration burndown reports and collect metrics such as velocity (completed work item points/ iteration).
+== Verwendete Management- und technische Praktiken im Projekt
 
+In unserem Projekt verwenden wir eine angepasste Form des *agilen Scrum-Ansatzes*, die auf unsere verfügbaren Kapazitäten (5 Stunden pro Woche pro Teammitglied, inkl. 1,5 Stunden Teammeeting) zugeschnitten ist. Die wichtigsten Management- und technischen Praktiken sowie die Fortschrittsverfolgung sind wie folgt organisiert:
+
+=== 1. Iterative Entwicklung (Scrum-Sprints)
+
+* Wir arbeiten in *einwöchigen Sprints*, die im wöchentlichen 1,5-stündigen Meeting geplant, überprüft und reflektiert werden.
+* Jede Woche werden wenige, priorisierte Aufgaben (z. B. 1–2 Story Points pro Mitglied) umgesetzt.
+
+=== 2. Continuous Integration (CI)
+
+* Code wird regelmäßig in ein gemeinsames Repository gepusht.
+* Eine automatisierte CI-Pipeline (GitHub) führt bei jedem Commit Builds und Tests aus.
+* Änderungen werden kleinteilig entwickelt, um Merge-Konflikte und Integrationsprobleme zu vermeiden.
+
+=== 3. Unabhängiges Testen
+
+* Testaufgaben werden möglichst von Teammitgliedern übernommen, die nicht direkt am betroffenen Feature gearbeitet haben.
+* Es werden einfache manuelle Tests sowie automatisierte Unit-Tests durchgeführt. (evtl. noch ueberarbeiten)
+* Fehler werden dokumentiert und im nächsten Sprint behoben.
+
+=== Zusammenfassung der Fortschrittsverfolgung
+
+[cols="1,2", options="header"]
+|===
+| Praktik                 | Methode zur Fortschrittsmessung
+| Iterative Entwicklung   | Velocity, Taskboard, Sprint Review, Retrospektive
+| Continuous Integration  | Build-Status, erfolgreiche Commits, Codequalität
+| Unabhängiges Testen     | Fehlerberichte, Testabdeckung
+|===
 
 === Definition of Ready
 // Listen Sie hier die Kriterien auf, die ein Product Backlog Item (z.B. User Story) erfüllen muss, damit es bei der Sprint-Planung berücksichtigt werden kann
+* die Enntwicklung ist abgeschlossen
+* das Programm ist bereit für den Test
+* keine unabhängige Person hat das Produkt gesehen
 
 === Definition of Done
 // Listen Sie hier alle Kritierien auf, damit die Aufgabe eines bestimmten Typs (z.B. Task, User Story) als abgeschlossen gilt.
+* das Programm wurde von einer nicht am Entwicklungsprozess beteiligten Person getestet
+* eine unbeteiligte Person hat das Produkt getestet und ist zufrieden
 
 == Deployment
 //Outline the strategy for deploying the software (and its updates) into the production environment.
+* wir planen einen betriebsfähigen Prototypen bis zur 27. KW 2025 herauszubringen
+* das fertige Produkt soll Anfang 2026 launchen
+* Updates nach dem Launch sind nicht vorgesehen 
 
 
 == Erkenntnisse (Lessons learned)
