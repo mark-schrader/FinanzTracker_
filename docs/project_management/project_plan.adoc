@@ -90,8 +90,10 @@ In unserem Projekt verwenden wir eine angepasste Form des *agilen Scrum-Ansatzes
 - Push/Pull bei Github geübt
 
 - Personas an Aufgabenstellung angepasst -> Teamkommunikation verbessern (unterschiedliches Ausgangswissen)
- 
+|30.04.2025
+|
+- GitHub-Merch mit "STRG+Enter", damit Änderungskommentar sichtbar ist
 
- 
+
 
 |===
