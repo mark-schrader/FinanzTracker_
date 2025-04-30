@@ -28,11 +28,11 @@ Siehe <<#glossary, Glossar>>.
 === Fachliche Motivation
 Die *Budget Buddies AG* ist ein junges Start-up, gegründet von sieben engagierten Bachelor-Student:innen im letzten Semester ihres Studiums. Aus eigener Erfahrung wissen sie: Viele Studierende kämpfen mit finanziellen Schwierigkeiten, unvorhergesehenen Ausgaben und mangelndem Überblick über ihre Finanzen.
 
-Bestehende Lösungen auf dem Markt sind oft komplex und teuer. Für viele Studierende einfach nicht leistbar.
+Bestehende Lösungen auf dem Markt sind oft komplex und teuer und daher für viele Student:innen nicht praktikabel.
 
 Genau hier setzt *Budget Buddy* an: Eine kostenlose, intuitive App, die speziell auf die Bedürfnisse junger Menschen zugeschnitten ist. Sie hilft dabei, Einnahmen und Ausgaben zu verwalten, Budgets zu erstellen und Sparziele zu erreichen – einfach, übersichtlich und völlig kostenlos.
 
-Unser Ziel ist es, finanzielle Selbstbestimmung für alle zu ermöglichen – unabhängig vom Kontostand.
+Unser Ziel ist es, finanzielle Selbstbestimmung für Alle zu ermöglichen – unabhängig vom Kontostand!
 
 === Produktvision
 //Eine Produktvision beschreibt das Einsatzziel der Anwendung und sorgt für ein gemeinsames Ziel und Verständnis für alle Beteiligten im Projekt. Geben Sie in knapper Form übersichtsartig die Positionierung der angestrebten Lösung im Vergleich zu verfügbaren Alternativen dar. Das folgende Format kann dazu verwendet werden:
@@ -70,15 +70,15 @@ Unser Ziel ist es, finanzielle Selbstbestimmung für alle zu ermöglichen – un
 
 
 | Budget Buddies - Projektteam
-| Kursteilnehmer:innen des Moduls SE1, auch Entwickler:innen genannt, die für dieses Projekt zugeteilt wurden und die Verantwortung für die Entwicklung des Systems übernehmen.
-| Das Entwicklungsteam ist verantwortlich für die Entwicklung des Systems und sorgt dafür, dass das System den Anforderungen der Stakeholder entspricht, sowie für die Qualitätssicherung des Systems.
+| Kursteilnehmer:innen des Moduls SE1, auch Entwickler:innen genannt, die diesem Projekt zugeteilt wurden.
+| Das Entwicklungsteam ist verantwortlich für die Entwicklung des Systems, der Einhaltung der Anforderungen aller Stakeholder und  die Qualitätssicherung des Systems.
 
 | Studierende
 | Die Zielgruppe des Systems sind Studierende, die ihre Finanzen verwalten möchten.
 | Die Studierenden sind die Hauptnutzer des Systems. Sie nutzen das System, um ihre Einnahmen und Ausgaben zu verfolgen, Budgets zu erstellen und Sparziele zu erreichen.
 |===
 
-Die Verfeinerung der Stakeholder, die das System benutzen, wird im UX-Konzept mittels Personas vorgenommen.
+Die Verfeinerung der Stakeholder, die das System benutzen, wird in der "ux-conzept.adoc", mittels Personas vorgenommen.
 
 
 == Produktüberblick
