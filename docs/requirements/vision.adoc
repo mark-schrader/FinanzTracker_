@@ -6,13 +6,13 @@ include::../_includes/default-attributes.inc.adoc[]
 
 
 == Einführung
-Der Zweck dieses Dokuments ist es, die wesentlichen Bedarfe und Funktionalitäten des Systems *Budget Buddies* überblicksartig zu beschreiben. Der Fokus liegt auf den Fähigkeiten, die von Stakeholdern und adressierten Nutzern benötigt werden, und der Begründung dieser Bedarfe. Die Details, wie das System *Budget Buddies* diese Bedarfe erfüllt, werden durch _User Stories_ im _Product Backlog_ sowie dem _UX-Konzept_ beschrieben.
+Dieses Dokuments zeigt die wesentlichen Bedarfe und Funktionalitäten des Systems *Budget Buddies*. Der Fokus liegt auf den Fähigkeiten, die von Stakeholdern und adressierten Nutzern benötigt werden, und der Begründung dieser. Die Details, wie das System *Budget Buddies* diese Bedarfe erfüllt, werden durch _User Stories_ im _Product Backlog_ sowie dem _UX-Konzept_ beschrieben.
 
 === Zweck
 Der Zweck dieses Dokuments ist es, die wesentlichen Anforderungen an das System aus Sicht und mit den Begriffen der künftigen Anwender zu beschreiben.
 
 === Gültigkeitsbereich (Scope)
-Dieses Visions-Dokument bezieht sich auf das System *Budget Buddies*, das von *Finanz Tracker AG* entwickelt wird. Das System wird es der Zielgruppe bzw. den *Studenten* erlauben, unsere Hauptfunktionen wie _Verwaltung und Erfassen der Einnahmen und Ausgaben, Erstellen individueller Budgets sowie das Anlegen von Sparkonten für spezifische Ziele_ zu nutzen, um damit bessere finanzielle Organisation zu erreichen, Budgetdisziplin fördern, Eigenverantwortung stärken.
+Dieses Visions-Dokument bezieht sich auf das System *Budget Buddies*, das von *Finanz Tracker AG* entwickelt wird. Das System wird es der Zielgruppe bzw. den *Studierenden* erlauben die Hauptfunktionen _Verwaltung und Erfassen der Einnahmen und Ausgaben, Erstellen individueller Budgets, sowie das Anlegen von Sparkonten für spezifische Ziele_ zu nutzen. Als Ziel dient die bessere finanzielle Organisation, die eigene Budgetdisziplin einhalten und die Eigenverantwortung zu stärken.
 
 === Definitionen, Akronyme und Abkürzungen
 //Verweis passend zum Belegabgabe-Template se1_belegabgabe_t00.adoc
