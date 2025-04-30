@@ -22,6 +22,10 @@ In diesem Dokument werden die wesentlichen Begriffe aus dem Anwendungsgebiet (Fa
 |===
 | Begriff | Definition und Erläuterung | Synonyme
 //| Kommissionierung | Bereitstellung von Waren aus einem Lager entsprechend eines Kundenauftrags | (keine)
+| Stakeholder | Ein Stakeholder ist eine Person oder Gruppe, die ein Interesse an einem Projekt hat und davon direkt oder indirekt betroffen ist. a|
+* Anspruchsgruppe 
+* Interessensgruppe 
+* Beteiligte
 | xx | xx | xx
 |===
 
