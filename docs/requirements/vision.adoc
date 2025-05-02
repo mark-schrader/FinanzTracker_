@@ -35,9 +35,9 @@ Siehe <<#glossary, Glossar>>.
 == Positionierung
 
 === Fachliche Motivation
-Die *Budget Buddies AG* ist ein junges Start-up, gegründet von sieben engagierten Bachelor-Student:innen im letzten Semester ihres Studiums. Aus eigener Erfahrung wissen sie: Viele Studierende kämpfen mit finanziellen Schwierigkeiten, unvorhergesehenen Ausgaben und mangelndem Überblick über ihre Finanzen.
+Die *Budget Buddies AG* ist ein junges Start-up, gegründet von sieben engagierten Bachelor-Student*innen im 4. Semester ihres Studiums. Aus eigener Erfahrung wissen sie: Viele Studierende kämpfen mit finanziellen Schwierigkeiten, unvorhergesehenen Ausgaben und mangelndem Überblick über ihre Finanzen.
 
-Bestehende Lösungen auf dem Markt sind oft komplex und teuer und daher für viele Student:innen nicht praktikabel.
+Bestehende Lösungen auf dem Markt sind oft komplex und teuer und daher für viele Student*innen nicht praktikabel.
 
 Genau hier setzt *Budget Buddy* an: Eine kostenlose, intuitive App, die speziell auf die Bedürfnisse junger Menschen zugeschnitten ist. Sie hilft dabei, Einnahmen und Ausgaben zu verwalten, Budgets zu erstellen und Sparziele zu erreichen – einfach, übersichtlich und völlig kostenlos.
 
@@ -50,10 +50,12 @@ Unser Ziel ist es, finanzielle Selbstbestimmung für Alle zu ermöglichen – un
 [cols="1,3"]
 |===
 | Für | Student*innen/Schüler*innen
-| der / die | Management der persönlichen Finanzen
-| ist das  | Budget Buddies
-| eine  | FinTech, PFM 
-| der / die | kostengünstig
+| die | Probleme mit dem Management der persönlichen Finanzen haben
+| ist | Budget Buddies 
+| eine | FinTech, PFM Anwendung
+| die | das Budget der Student*innen nicht nur schont, sondern sogar verbessert
+| anders als | abogebundene Alternativen, die den Student*innen noch zusätzlich auf der Tasche liegen
+| ist unser Produkt | genau auf die finanzielle Situation von Studierenden zugeschnitten
 |===
 
 
@@ -79,12 +81,23 @@ Unser Ziel ist es, finanzielle Selbstbestimmung für Alle zu ermöglichen – un
 
 
 | Budget Buddies - Projektteam
-| Kursteilnehmer:innen des Moduls SE1, auch Entwickler:innen genannt, die diesem Projekt zugeteilt wurden.
+| Entwickler*innen, die im Sinne eines Hochschulmoduls die Aufgabe bekamen, den Studenten mit ihren finanziellen Problemen unter die Arme greifen.      
+
+"Sie sind wie die Avengers." _Lucas Effenberger (HTW Student)_
 | Das Entwicklungsteam ist verantwortlich für die Entwicklung des Systems, der Einhaltung der Anforderungen aller Stakeholder und  die Qualitätssicherung des Systems.
 
 | Studierende
 | Die Zielgruppe des Systems sind Studierende, die ihre Finanzen verwalten möchten.
 | Die Studierenden sind die Hauptnutzer des Systems. Sie nutzen das System, um ihre Einnahmen und Ausgaben zu verfolgen, Budgets zu erstellen und Sparziele zu erreichen.
+
+| Gesetzgeber
+| Stellt gesetzliche Rahmenbedingungen wie Datenschutz, IT-Sicherheit, Barrierefreiheit etc. bereit
+| Einhaltung der DSGVO (z. B. Datenminimierung, Nutzerrechte), Anforderungen an Barrierefreiheit, Gesetzliche Standards für Finanzdatenverarbeitung beachten
+
+| Dozent
+| Fachlich betreuende Person im Projektmodul
+| Betreuung und Bewertung, Inhaltliche und technische Unterstützung, Abnahme
+
 |===
 
 Die Verfeinerung der Stakeholder, die das System benutzen, wird in der "ux-conzept.adoc", mittels Personas vorgenommen.
