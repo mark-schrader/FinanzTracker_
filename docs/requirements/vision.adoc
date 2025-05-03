@@ -50,12 +50,12 @@ Unser Ziel ist es, finanzielle Selbstbestimmung für Alle zu ermöglichen – un
 [cols="1,3"]
 |===
 | Für | Student*innen/Schüler*innen
-| die | Probleme mit dem Management der persönlichen Finanzen haben
+| die | Schwierigkeiten bei der Verwaltung ihrer persönlichen Finanzen haben
 | ist | Budget Buddies 
-| eine | FinTech, PFM Anwendung
-| die | das Budget der Student*innen nicht nur schont, sondern sogar verbessert
+| eine | FinTech-Anwendung im Bereich Personal Finance Management (PFM)
+| die | nicht nur hilft, das vorhandene Budget effizient zu nutzen, sondern aktiv zur finanziellen Verbesserung beiträgt
 | anders als | abogebundene Alternativen, die den Student*innen noch zusätzlich auf der Tasche liegen
-| ist unser Produkt | genau auf die finanzielle Situation von Studierenden zugeschnitten
+| ist unser Produkt | exakt auf die Bedürfnisse und finanziellen Rahmenbedingungen von Studierenden zugeschnitten – kostenfrei, praxisnah und unterstützend
 |===
 
 
