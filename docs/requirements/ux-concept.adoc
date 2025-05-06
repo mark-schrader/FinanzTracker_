@@ -75,7 +75,7 @@ a|
 a|
 * nutzt zu häufig Online-Shopping und muss ihre Ausgaben überwachen                            
 * braucht Zahlungserinnerungen für regelmäßige Zahlungen wie Miete oder Strom
-* nutzt sehr gerne Ratenkäufe und in "30 Tagen bezahlen"
+* nutzt sehr gerne Ratenkäufe und "in 30 Tagen bezahlen"
 
 |Hindernisse / Frustration
 a|
