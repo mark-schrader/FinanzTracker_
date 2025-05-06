@@ -23,14 +23,26 @@ In diesem Dokument werden die wesentlichen Begriffe aus dem Anwendungsgebiet (Fa
 | Begriff | Definition und Erläuterung | Synonyme
 //| Kommissionierung | Bereitstellung von Waren aus einem Lager entsprechend eines Kundenauftrags | (keine)
 | Stakeholder | Stakeholer sind Personen oder Gruppen, die Interesse an einem Projekt/Produkt haben und davon direkt oder indirekt betroffen sind. a|
-* Anspruchsgruppe 
-* Interessensgruppe 
+* engl. _stakeholder_ = Interessenvertreter
+* Anteilseigner  
 * Beteiligte
 | Wireframe | sehr früher, konzeptioneller Entwurf einer Website oder eines Software-Frontends v.a.: dynamisch, statisch a| 
-* Drahtmodell
+* engl. _wire frame_ = Drahtmodell
 * Blaupause
 * digitales Modell
-| xx | xx | xx |
+| Ramsch | wertloses Zeug  a|
+* Plunder
+* Kram
+| Avengers | Die Avengers sind die Hauptprotagonisten des _Marvel Cinematic Universe (Franchise/fiktives Universum)_ und eine Gruppe der mächtigsten Superhelden der Welt. a| 
+* engl. _avenger_ = Rächer  
+| DSGVO | Datenschutzgrundverordnung a| 
+* /
+| Product Owner| xx | xx 
+| Scrum Master | xx | xx 
+| Dev-Team | xx | xx 
+| Korrektor | eine Person, die [...] hinsichtlich Rechtschreibung, Grammatik, Typografie, Stil und Interpunktion überprüft und Fehler zur Korrektur [...] a|
+* lat. _corrector_ = Verbesserer
+* Berichtiger 
 |===
 
 
