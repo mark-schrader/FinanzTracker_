@@ -22,11 +22,15 @@ In diesem Dokument werden die wesentlichen Begriffe aus dem Anwendungsgebiet (Fa
 |===
 | Begriff | Definition und Erläuterung | Synonyme
 //| Kommissionierung | Bereitstellung von Waren aus einem Lager entsprechend eines Kundenauftrags | (keine)
-| Stakeholder | Ein Stakeholder ist eine Person oder Gruppe, die ein Interesse an einem Projekt hat und davon direkt oder indirekt betroffen ist. a|
+| Stakeholder | Stakeholer sind Personen oder Gruppen, die Interesse an einem Projekt/Produkt haben und davon direkt oder indirekt betroffen sind. a|
 * Anspruchsgruppe 
 * Interessensgruppe 
 * Beteiligte
-| xx | xx | xx
+| Wireframe | sehr früher, konzeptioneller Entwurf einer Website oder eines Software-Frontends v.a.: dynamisch, statisch a| 
+* Drahtmodell
+* Blaupause
+* digitales Modell
+| xx | xx | xx |
 |===
 
 
@@ -35,7 +39,8 @@ In diesem Dokument werden die wesentlichen Begriffe aus dem Anwendungsgebiet (Fa
 |===
 | Abkürzung | Bedeutung | Erläuterung
 //| UP | Unified Process | Vorgehensmodell für die Softwareentwicklung
-| xx | xx | xx
+| v.a.| vor allem | hauptsächlich, besonders
+| xx | xx | xx |
 |===
 
 == Verzeichnis der Datenstrukturen
