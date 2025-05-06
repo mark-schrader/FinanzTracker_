@@ -1,4 +1,4 @@
-= Glossar: Finanztracker_
+= Glossar: Finanztracker 
 
 *Til Guhlmann* <til.guhlmann@stud.htw-dresden.de> +
 *Enna Scheer* <enna.scheer@stud.htw-dresden.de> +
@@ -18,41 +18,78 @@ include::../_includes/default-attributes.inc.adoc[]
 In diesem Dokument werden die wesentlichen Begriffe aus dem Anwendungsgebiet (Fachdomäne) der Finanztracker_ definiert. Zur besseren Übersichtlichkeit sind Begriffe, Abkürzungen und Datendefinitionen gesondert aufgeführt.
 
 == Begriffe
-[%header]
+=== Rollen im Projekt (Scrum Edition)
 |===
 | Begriff | Definition und Erläuterung | Synonyme
-//| Kommissionierung | Bereitstellung von Waren aus einem Lager entsprechend eines Kundenauftrags | (keine)
+// | Kommissionierung | Bereitstellung von Waren aus einem Lager entsprechend eines Kundenauftrags | (keine)
 | Stakeholder | Stakeholer sind Personen oder Gruppen, die Interesse an einem Projekt/Produkt haben und davon direkt oder indirekt betroffen sind. a|
 * engl. _stakeholder_ = Interessenvertreter
 * Anteilseigner  
 * Beteiligte
-| Wireframe | sehr früher, konzeptioneller Entwurf einer Website oder eines Software-Frontends v.a.: dynamisch, statisch a| 
-* engl. _wire frame_ = Drahtmodell
-* Blaupause
-* digitales Modell
-| Ramsch | wertloses Zeug  a|
-* Plunder
-* Kram
-| Avengers | Die Avengers sind die Hauptprotagonisten des _Marvel Cinematic Universe (Franchise/fiktives Universum)_ und eine Gruppe der mächtigsten Superhelden der Welt. a| 
-* engl. _avenger_ = Rächer  
-| DSGVO | Datenschutzgrundverordnung a| 
-* /
-| Product Owner| xx | xx 
-| Scrum Master | xx | xx 
-| Dev-Team | xx | xx 
+// | Ramsch | wertloses Zeug  a|
+// * Plunder
+// * Kram
+// | Avengers | Die Avengers sind die Hauptprotagonisten des _Marvel Cinematic Universe (Franchise/fiktives Universum)_ und eine Gruppe der mächtigsten Superhelden der Welt. a| 
+// * engl. _avenger_ = Rächer  
+// | DSGVO | Datenschutzgrundverordnung a| 
+// * /
+| Product Owner| Sorgt für werthaltiges Produkt & entscheidet welche Anforderungen in welcher Reihenfolge umgesetzt werden. a|
+* Projekt Manager*
+| Scrum Master | Verantwortlich für die Teamproduktivität und sorgt für korrekte Anwendung der Prozessregeln. Sie/er moderiert die Meetings a| * Agiles Coach 
+| Dev-Team | Sorgt für die technische Umsetzung des Produkts a| 
+* Entwicklungsteam 
+* Programmierer
 | Korrektor | eine Person, die [...] hinsichtlich Rechtschreibung, Grammatik, Typografie, Stil und Interpunktion überprüft und Fehler zur Korrektur [...] a|
 * lat. _corrector_ = Verbesserer
 * Berichtiger 
 |===
+=== Scrum Artefakte 
+|===
+| Begriff | Definition und Erläuterung 
+| Product Backlog | Eine geordnete Liste von allem, die als Anforderungsquelle für alle Änderungen am Produkt dient 
+| Sprint Backlog| Es wird vom DevTeam am Anfang eines Sprints erstellt (Angestrebtes Ergebnis und passende PBI und DoR). Es enthält TASKS, die zur Realisierung der Anforderungen dient. Die Aufgaben müssen im Laufe des Sprint abgearbeitet werden. 
+| Produkt Inkrement | Es ist das Ergebnis des jeweiligen Sprints. Aus den Inkrementen wird Schritt für Schritt das Produkt| 
+|===
 
+=== Fachbegriffe, die im Projekt täglich benutzt werden
+|===
+| Begriff | Definition und Erläuterung | Synonyme
+| Software | Eine Sammlung von Programmen, Daten, Anweisung für eine bestimmte Aufgabe | -
+| Wireframe | sehr früher, konzeptioneller Entwurf einer Website oder eines Software-Frontends v.a.: dynamisch, statisch a| 
+* engl. _wire frame_ = Drahtmodell
+* Blaupause
+* digitales Modell
+| User story | Eine kurze, einfache Beschreibung einer Funktion oder Anforderung aus Sicht eines Nutzers. a| * User Case
+| Persona | Repräsentiert Gruppen von Nutzern mit ähnlichen Eigenschaften, Verhalten und Problemen. Es enthält _Name, Alter, Geschlecht, Foto, Beruf, Hobbys usw._ a| * fiktives Profil
+| Produktvision | Kurze Beschreibung des Zielbildes (Was & Warum), Motivation und Inspiration a| 
+* Zukunftsbild
+* engl. Mission
+| Scope | Rahmen eines Produkts oder Projekts a| 
+* Umfang
+* engl. Rahmenbedingung
+| Modell| Eine Abbildung von der realen Welt für einen bestimmten Zweck | -
+| Opportunity | Eine Begründung, warum man die Software entwickelt a| * Möglichkeit
+| Requirements | Funktionen, Eigenschaften oder Bedingungen, die ein Produkt oder eine Lösung erfüllen muss, um den Bedürfnissen der Nutzer und Stakeholder gerecht zu werden.Es wird laufend besprochen und angepasst. a| * Systemanforderung
+| Refactoring | Techniken, mit denen ich mein Code besser mache, ohne es zu verändern a| 
+* engl. rewriting, recoding
+| Way of working | Tools, Methoden und Prinzipien, die vom Team ausgewählt sind a| * Arbeitsweise
+| Definition of Ready | die Kriterien, die ein Product Backlog Item (z. B. eine User Story) erfüllen muss, bevor es in einen Sprint aufgenommen werden kann. | -
+| Definition of Done| Kriterien, die erfüllt sein müssen, damit ein Product Backlog Item oder ein Inkrement als „fertig“ gilt. Es fasst Aspekte wie Code-Qualität, Tests, Dokumentation oder Abnahme durch Stakeholder um| -
+|||
+|===
 
 == Abkürzungen und Akronyme
 [%header]
 |===
-| Abkürzung | Bedeutung | Erläuterung
-//| UP | Unified Process | Vorgehensmodell für die Softwareentwicklung
-| v.a.| vor allem | hauptsächlich, besonders
-| xx | xx | xx |
+| Abkürzung | Bedeutung 
+| v.a.| vor allem 
+| US | User Story 
+| SE | Software Engineering 
+| PO | Product Owner 
+| SM | Scrum Master 
+| PBI | Produkt Backlog Item 
+| DoR | Definition of Ready 
+| DoD | Definition of Done 
 |===
 
 == Verzeichnis der Datenstrukturen
