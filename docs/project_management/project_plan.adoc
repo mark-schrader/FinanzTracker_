@@ -99,11 +99,14 @@ In unserem Projekt verwenden wir eine angepasste Form des *agilen Scrum-Ansatzes
 - Push/Pull bei Github geübt
 
 - Personas an Aufgabenstellung angepasst -> Teamkommunikation verbessern (unterschiedliches Ausgangswissen)
-|30.04.2025
+| 30.04.2025
 |
 - GitHub-Merch mit "STRG+Enter", damit Änderungskommentar sichtbar ist
 
 - Wiederholumg der Benutzung von Git-Project
 
 - Verstanden was der Unterschied zwischen User Storys und Persona ist
+| 07.05.2025
+|
+- Visualisierung von Tasks im Miro-Board erstellt
 |===
