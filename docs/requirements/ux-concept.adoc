@@ -187,7 +187,7 @@ a|
 * Alter: 27
 * Geschlecht: männlich
 * Wohnort: Leipzig
-* Studienfach: BWLer
+* Studienfach: Betriebswirtschaftslehre
 
 |Technische Fähigkeiten
 a|

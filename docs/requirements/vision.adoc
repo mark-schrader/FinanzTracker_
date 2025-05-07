@@ -115,7 +115,7 @@ Die Verfeinerung der Stakeholder, die das System benutzen, wird in der "ux-conze
 | Anmelden und Ausloggen | sehr wichtig | Authentifizierung durch Username und Password | xx
 | Eintragen von Finanzausgaben | sehr wichtig | Erfassung aller Ausgaben mit Tags/Kategorien und Wiederholungseinstellungen | xx
 | Kategorisierung von Einnahmen und Ausgaben | wichtig | System zur Verwaltung und Anpassung von Kategorien | xx
-| Übersicht über aktuelle Finanzen | sehr wcihtig | Dashboard mit grafischer und tabellarischer Darstellung aktueller Finanzlage | xx
+| Übersicht über aktuelle Finanzen | sehr wichtig | Dashboard mit grafischer und tabellarischer Darstellung aktueller Finanzlage | xx
 | Prognosen | nicht wichtig | Vorhersage zukünftiger Finanzentwicklungen basierend auf bisherigen Daten | xx
 | Spar-challenges | wichtig | Vordefinierte oder benutzerdefinierte Challenges mit Fortschrittsanzeige | xx
 | Wiederkehrende Ausgaben automatisch ins nächste Semester übernehmen | wichtig | Automatisches Kopieren der wiederkehrenden Ausgaben ins neue Semester (Grundkonzept) | xx
