@@ -111,19 +111,20 @@ Die Verfeinerung der Stakeholder, die das System benutzen, wird in der "ux-conze
 [%header, cols="4,1,4,1"]
 |===
 | Bedarf | Priorität | Features / Funktionen | Geplantes Release
-| Eintragen von Finanzeinnahmen |  | Möglichkeit zur manuellen Eingabe von Einnahmen inkl. Datum, Betrag, Kategorie | xx
-| Eintragen von Finanzausgaben | | Erfassung aller Ausgaben mit Tags/Kategorien und Wiederholungseinstellungen | xx
-| Kategorisierung von Einnahmen und Ausgaben | | System zur Verwaltung und Anpassung von Kategorien | xx
-| Übersicht über aktuelle Finanzen | | Dashboard mit grafischer und tabellarischer Darstellung aktueller Finanzlage | xx
-| Prognosen | | Vorhersage zukünftiger Finanzentwicklungen basierend auf bisherigen Daten | xx
-| Spar-challenges | | Vordefinierte oder benutzerdefinierte Challenges mit Fortschrittsanzeige | xx
-| Wiederkehrende Ausgaben automatisch ins nächste Semester übernehmen | | Automatisches Kopieren der wiederkehrenden Ausgaben ins neue Semester (Grundkonzept) | xx
-| Finanzdaten-Export | | Export als CSV, Excel oder PDF zur Archivierung oder Analyse | xx
-| Simples Layout | | Intuitives und minimalistisches UI für einfache Bedienung | xx
-| Zweite Sprache (Englisch) | |  Umschaltfunktion zwischen Deutsch und Englisch | xx
-| Dark-Mode | | Dunkles Farbschema für angenehme Nutzung bei wenig Licht | xx
-| Individuelle anpassbare Elemente | | Benutzerdefinierte Gestaltung von Farben, Diagrammen und Zeitraumfiltern | xx
-| Modulares Layout (Entfernen von Modulen möglich) | | Frei anpassbares Interface, bei dem einzelne Module ein-/ausblendbar sind | xx
+| Eintragen von Finanzeinnahmen | sehr wichtig | Möglichkeit zur manuellen Eingabe von Einnahmen inkl. Datum, Betrag, Kategorie | xx
+| Anmelden und Ausloggen | sehr wichtig | Authentifizierung durch Username und Password | xx
+| Eintragen von Finanzausgaben | sehr wichtig | Erfassung aller Ausgaben mit Tags/Kategorien und Wiederholungseinstellungen | xx
+| Kategorisierung von Einnahmen und Ausgaben | wichtig | System zur Verwaltung und Anpassung von Kategorien | xx
+| Übersicht über aktuelle Finanzen | sehr wcihtig | Dashboard mit grafischer und tabellarischer Darstellung aktueller Finanzlage | xx
+| Prognosen | nicht wichtig | Vorhersage zukünftiger Finanzentwicklungen basierend auf bisherigen Daten | xx
+| Spar-challenges | wichtig | Vordefinierte oder benutzerdefinierte Challenges mit Fortschrittsanzeige | xx
+| Wiederkehrende Ausgaben automatisch ins nächste Semester übernehmen | wichtig | Automatisches Kopieren der wiederkehrenden Ausgaben ins neue Semester (Grundkonzept) | xx
+| Finanzdaten-Export | nicht wichtig | Export als CSV, Excel oder PDF zur Archivierung oder Analyse | xx
+| Simples Layout | sehr wichtig | Intuitives und minimalistisches UI für einfache Bedienung | xx
+| Zweite Sprache (Englisch) | wichtig |  Umschaltfunktion zwischen Deutsch und Englisch | xx
+| Dark-Mode | nicht wichtig | Dunkles Farbschema für angenehme Nutzung bei wenig Licht | xx
+| Individuelle anpassbare Elemente | nicht wichtig | Benutzerdefinierte Gestaltung von Farben, Diagrammen und Zeitraumfiltern | xx
+| Modulares Layout (Entfernen von Modulen möglich) |  nicht wichtig | Frei anpassbares Interface, bei dem einzelne Module ein-/ausblendbar sind | xx
 
 
 |===
@@ -142,8 +143,8 @@ Hinweise:
 [%header, cols="4,1,1"]
 |===
 | Anforderung | Priorität | Geplantes Release
-| Rechnungs -& Belegscanner | | xx
-| AI-basierter Finanzcoach | | xx
-| Offline-Funktionalität | | xx
-| 2-Faktor-Authentifizierung | | xx
+| Rechnungs -& Belegscanner | nicht wichtig | xx
+| AI-basierter Finanzcoach | nicht wichtig | xx
+| Offline-Funktionalität | sehr wichtig | xx
+| 2-Faktor-Authentifizierung | sehr wichtig | xx
 |===
