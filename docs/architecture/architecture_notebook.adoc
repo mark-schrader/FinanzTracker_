@@ -30,9 +30,29 @@ Dieses Dokument beschreibt die Philosophie, Entscheidungen, Nebenbedingungen, Be
 == Entscheidungen, Nebenbedingungen und Begründungen
 //[List the decisions that have been made regarding architectural approaches and the constraints being placed on the way that the developers build the system. These will serve as guidelines for defining architecturally significant parts of the system. Justify each decision or constraint so that developers understand the importance of building the system according to the context created by those decisions and constraints. This may include a list of DOs and DON’Ts to guide the developers in building the system.]
 
-. NodeJs im Backend und VueJs im Frontend, weil beides in EWA gelehrt wurde und damit unser Wissen noch frisch ist.
-. Entscheidung oder Einschränkung oder Begründung 2
+|===
+| Entscheidung | für | Begründung
+| Vue.js | Frontend | 
+* haben wir in EWA vor kurzem erst verwendet
 
+* darin ist unser Wissen noch relativ frisch 
+| Node.js | Backend | 
+* um Frontend und Backend in Js einheitlich zu behalten
+* weil wir auch das in EWA bereits gehabt haben
+| MariaDB | Datenbank | 
+* um die Daten zu speichern
+* auch das haben wir in EWA bereits genutzt
+* wird von den Frameworks gut unterstützt
+* gute Performance
+* Open Source
+| ? | Server | ?
+| Englisch | Variablen und Funktionsnamen | 
+* gängig
+* demokratische Einigung
+| Deutsch | Codekommentare | 
+* Verständnisprobleme vermeiden
+* für ausführliche Erläuterungen
+|===
 
 == Schichten oder Architektur-Framework
 //[Describe the architectural pattern that you will use or how the architecture will be consistent and uniform. This could be a simple reference to an existing or well-known architectural pattern, such as the Layer framework, a reference to a high-level model of the framework, or a description of how the major system components should be put together.]

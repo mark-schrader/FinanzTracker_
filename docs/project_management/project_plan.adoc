@@ -40,7 +40,7 @@ Wir sind die Budget Buddies. Ein Team, welches sich der finanziellen Misslage al
 //Describe or reference which management and technical practices will be used in the project, such as iterative development, continuous integration, independent testing and list any changes or particular configuration to the project. Specify how you will track progress in each practice. As an example, for iterative development the team may decide to use iteration assessments and iteration burndown reports and collect metrics such as velocity (completed work item points/ iteration).
 == Verwendete Management- und technische Praktiken im Projekt
 
-In unserem Projekt verwenden wir eine angepasste Form des *agilen Scrum-Ansatzes*, die auf unsere verfügbaren Kapazitäten (5 Stunden pro Woche pro Teammitglied, inkl. 1,5 Stunden Teammeeting) zugeschnitten ist. Die wichtigsten Management- und technischen Praktiken sowie die Fortschrittsverfolgung sind wie folgt organisiert:
+In unserem Projekt verwenden wir eine angepasste Form des *agilen Scrum-Ansatzes*, die auf unsere verfügbaren Kapazitäten (ca. 5 Stunden pro Woche pro Teammitglied, inkl. 1,5 Stunden Teammeeting) zugeschnitten ist. Die wichtigsten Management- und technischen Praktiken sowie die Fortschrittsverfolgung sind wie folgt organisiert:
 
 === 1. Iterative Entwicklung (Scrum-Sprints)
 
@@ -99,11 +99,14 @@ In unserem Projekt verwenden wir eine angepasste Form des *agilen Scrum-Ansatzes
 - Push/Pull bei Github geübt
 
 - Personas an Aufgabenstellung angepasst -> Teamkommunikation verbessern (unterschiedliches Ausgangswissen)
-|30.04.2025
+| 30.04.2025
 |
 - GitHub-Merch mit "STRG+Enter", damit Änderungskommentar sichtbar ist
 
 - Wiederholumg der Benutzung von Git-Project
 
 - Verstanden was der Unterschied zwischen User Storys und Persona ist
+| 07.05.2025
+|
+- Visualisierung von Tasks im Miro-Board erstellt
 |===
