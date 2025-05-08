@@ -92,7 +92,7 @@ Unser Ziel ist es, finanzielle Selbstbestimmung für Alle zu ermöglichen – un
 
 | Gesetzgeber
 | Stellt gesetzliche Rahmenbedingungen wie Datenschutz, IT-Sicherheit, Barrierefreiheit etc. bereit
-| Einhaltung der DSGVO (z. B. Datenminimierung, Nutzerrechte), Anforderungen an Barrierefreiheit, Gesetzliche Standards für Finanzdatenverarbeitung beachten
+| Einhaltung der DSGVO (z.B. Datenminimierung, Nutzerrechte), Anforderungen an Barrierefreiheit, Gesetzliche Standards für Finanzdatenverarbeitung beachten
 
 | Dozent
 | Fachlich betreuende Person im Projektmodul
