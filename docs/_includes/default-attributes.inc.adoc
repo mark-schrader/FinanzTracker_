@@ -1,6 +1,6 @@
 // Meta
-:project-name: Projektthema (T00)
-:project-system-name: Software-Name
+:project-name: FinanzTracker_
+:project-system-name: Budget Buddies
 // Settings:
 :toc:
 :toc-title: Inhaltsverzeichnis
