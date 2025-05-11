@@ -36,7 +36,7 @@ In diesem Dokument werden die wesentlichen Begriffe aus dem Anwendungsgebiet (Fa
 | Product Owner| Sorgt für werthaltiges Produkt & entscheidet welche Anforderungen in welcher Reihenfolge umgesetzt werden. a|
 * Projekt Manager*
 | Scrum Master | Verantwortlich für die Teamproduktivität und sorgt für korrekte Anwendung der Prozessregeln. Sie/er moderiert die Meetings a| * Agiles Coach 
-| Dev-Team | Sorgt für die technische Umsetzung des Produkts a| 
+| Development-Team | Sorgt für die technische Umsetzung des Produkts a| 
 * Entwicklungsteam 
 * Programmierer
 | Korrektor | eine Person, die [...] hinsichtlich Rechtschreibung, Grammatik, Typografie, Stil und Interpunktion überprüft und Fehler zur Korrektur [...] a|
@@ -75,7 +75,8 @@ In diesem Dokument werden die wesentlichen Begriffe aus dem Anwendungsgebiet (Fa
 | Way of working | Tools, Methoden und Prinzipien, die vom Team ausgewählt sind a| * Arbeitsweise
 | Definition of Ready | die Kriterien, die ein Product Backlog Item (z. B. eine User Story) erfüllen muss, bevor es in einen Sprint aufgenommen werden kann. | -
 | Definition of Done| Kriterien, die erfüllt sein müssen, damit ein Product Backlog Item oder ein Inkrement als „fertig“ gilt. Es fasst Aspekte wie Code-Qualität, Tests, Dokumentation oder Abnahme durch Stakeholder um| -
-|||
+|Iteration| Eine Zeitspanne von 1 Monat/ 4 Wochen, am Ende gibt es ein Review|
+|Sprint| Eine Zeitspanne von 1 Woche, am Anfang werden neue Aufgaben vom Development Team angefangen, welche sie in der nächsten Woche bearbeiten wollen|
 |===
 
 == Abkürzungen und Akronyme
