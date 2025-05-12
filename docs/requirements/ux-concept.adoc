@@ -210,16 +210,28 @@ a|
 // Beschreiben Sie die Arbeitsaufgaben, Arbeitsmittel, physische und soziale Umgebung, in der das Produkt genutzt wird. 
 // Eventuell sind Angaben zu Fehlerquellen, Häufigkeiten von Ereignisse sowie Bearbeitungsdauern von Vorgängen relevant
 
-//Hier sind einige Anregungen:
+1. Aufgaben / Nutzungsszenarien
+* Wobei soll unser Produkt helfen?
+* Eine benutzerfreundliche und kostenfreie App, die gezielt für die Bedürfnisse junger Menschen entwickelt wurde. Sie unterstützt dabei, Einnahmen und Ausgaben im Blick zu behalten, Budgets festzulegen und Sparziele zu erreichen – klar strukturiert, unkompliziert und absolut kostenlos.
+* Welche Funktionen sind für sie besonders wichtig?
+* dass der Student klar und übersichtlich seine Einnahmen und Ausgaben analysierenn und verstehen kann
+* das jeder Student unsere Anwendung nutzen kann
 
-//Zutreffendes angeben, nicht zutreffendes streichen oder auskommentieren
-. Anzahl der Personen, die an der Erfüllung der Aufgabe beteiligt sind. Ändert sich das?
-. Wie lange dauert die Bearbeitung der Aufgabe? Wie viel Zeit wird für jeden Arbeitsschritt benötigt? Ändert sich das?
-. Gibt es besondere Umgebungsbedingungen, z.B. Mobil, Offline, Außeneinsatz, Touchbedienung, Nutzung durch seh- oder hörbeeinträchtigte Personen?
-. Welche Systemplattformen werden heute eingesetzt? Welche sind es ggf. zukünftig?
-. Welche anderen Anwendungen sind im Einsatz? Muss ihre Anwendung mit diesen integriert werden?
+2. Kontext der Nutzung
+* Geräte: primär Handy, aber auch Laptop möglich
+* Ort: direkt unterwegs oder später zuhause
+* Technisches Vorwissen: kein großes Technisches Vorwissen nötig, man sollte aber mit Handy oder Laptop klar kommen
 
-Hier können zudem bei Bedarf Teile des Unternehmensmodells (Prozesse, Organigramme, IT-Landschaft, ...) eingefügt werden, um die beteiligten Aufgaben und Rollen zu skizzieren.
+3. Probleme / Frustrationen
+* Was frustriert oder behindert die Nutzer?
+* zu komplexes, unübersichtliches Layout 
+* zu viele Farben
+* zu viel Werbung
+* zu lange Ladezeiten
+* kein verständliches Intuitives Handeln 
+* keine Anpassbarkeit an eigene Wünsche
+
+_Hier können zudem bei Bedarf Teile des Unternehmensmodells (Prozesse, Organigramme, IT-Landschaft, ...) eingefügt werden, um die beteiligten Aufgaben und Rollen zu skizzieren._
 
 == Wireframes und Wireflow
 // Fügen Sie Wireframes als Bilder oder als Link (z.B. zu einem Miroboard) ein
