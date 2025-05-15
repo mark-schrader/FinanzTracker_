@@ -211,9 +211,13 @@ a|
 // Eventuell sind Angaben zu Fehlerquellen, Häufigkeiten von Ereignisse sowie Bearbeitungsdauern von Vorgängen relevant
 
 1. Aufgaben / Nutzungsszenarien
-* Wobei soll unser Produkt helfen?
+
+    Wobei soll unser Produkt helfen?
+
 * Eine benutzerfreundliche und kostenfreie App, die gezielt für die Bedürfnisse junger Menschen entwickelt wurde. Sie unterstützt dabei, Einnahmen und Ausgaben im Blick zu behalten, Budgets festzulegen und Sparziele zu erreichen – klar strukturiert, unkompliziert und absolut kostenlos.
-* Welche Funktionen sind für sie besonders wichtig?
+    
+    Welche Funktionen sind für sie besonders wichtig?
+
 * dass der Student klar und übersichtlich seine Einnahmen und Ausgaben analysierenn und verstehen kann
 * das jeder Student unsere Anwendung nutzen kann
 
@@ -223,7 +227,9 @@ a|
 * Technisches Vorwissen: kein großes Technisches Vorwissen nötig, man sollte aber mit Handy oder Laptop klar kommen
 
 3. Probleme / Frustrationen
-* Was frustriert oder behindert die Nutzer?
+
+     Was frustriert oder behindert die Nutzer?
+
 * zu komplexes, unübersichtliches Layout 
 * zu viele Farben
 * zu viel Werbung
@@ -231,7 +237,7 @@ a|
 * kein verständliches Intuitives Handeln 
 * keine Anpassbarkeit an eigene Wünsche
 
-_Hier können zudem bei Bedarf Teile des Unternehmensmodells (Prozesse, Organigramme, IT-Landschaft, ...) eingefügt werden, um die beteiligten Aufgaben und Rollen zu skizzieren._
+//_Hier können zudem bei Bedarf Teile des Unternehmensmodells (Prozesse, Organigramme, IT-Landschaft, ...) eingefügt werden, um die beteiligten Aufgaben und Rollen zu skizzieren._
 
 == Wireframes und Wireflow
 // Fügen Sie Wireframes als Bilder oder als Link (z.B. zu einem Miroboard) ein
