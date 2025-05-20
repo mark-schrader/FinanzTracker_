@@ -75,8 +75,10 @@ In diesem Dokument werden die wesentlichen Begriffe aus dem Anwendungsgebiet (Fa
 | Way of working | Tools, Methoden und Prinzipien, die vom Team ausgewählt sind a| * Arbeitsweise
 | Definition of Ready | die Kriterien, die ein Product Backlog Item (z. B. eine User Story) erfüllen muss, bevor es in einen Sprint aufgenommen werden kann. | -
 | Definition of Done| Kriterien, die erfüllt sein müssen, damit ein Product Backlog Item oder ein Inkrement als „fertig“ gilt. Es fasst Aspekte wie Code-Qualität, Tests, Dokumentation oder Abnahme durch Stakeholder um| -
-|Iteration| Eine Arbeitszeitspanne von 1 Monat in der das Entwicklerteam arbeitet, am Ende gibt es ein Review|
-|Sprint| Eine Zeitspanne von 1 Woche, am Anfang werden neue Aufgaben vom  Entwicklerteam angefangen, welche sie in der nächsten Woche bearbeiten|
+| Iteration | Eine Arbeitszeitspanne von 1 Monat in der das Entwicklerteam arbeitet, am Ende gibt es ein Review| -
+| Sprint | Eine Zeitspanne von 1 Woche, am Anfang werden neue Aufgaben vom  Entwicklerteam angefangen, welche sie in der nächsten Woche bearbeiten| -
+| Usability | die Bedingungen, unter unser Produkt benutzt wird. (In welchem Nutzungskontext kann unser Produkt genutzt werden?) a| 
+* Begrauchstauglichkeit  
 |===
 
 == Abkürzungen und Akronyme
