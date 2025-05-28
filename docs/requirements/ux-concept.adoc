@@ -240,5 +240,5 @@ a|
 //_Hier können zudem bei Bedarf Teile des Unternehmensmodells (Prozesse, Organigramme, IT-Landschaft, ...) eingefügt werden, um die beteiligten Aufgaben und Rollen zu skizzieren._
 
 == Wireframes und Wireflow
-// Fügen Sie Wireframes als Bilder oder als Link (z.B. zu einem Miroboard) ein
+Hier finden Sie unser Wireframe-Mockup im Miro-Board: https://miro.com/app/board/uXjVIEzzp5w=/
 // Beziehen Sie ihre Wireframes auf konkrete User Stories oder Epics.
