@@ -1,0 +1,9 @@
+
+monatTrend //String: printf("es steigt diesen monat!")
+monatTrendProzent // +4,7% / -5,5% auf absolutwert
+jahrTrend
+jahrTrendProzent
+sparzielTrend
+sparzielTrendProzent
+dauerTrend //seit beginn des erstellens
+dauerTrendProzent
