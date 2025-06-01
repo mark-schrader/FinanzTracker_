@@ -6,18 +6,22 @@
 
 generator client {
   provider = "prisma-client-js"
-  output   = "../generated/prisma"
 }
 
 datasource db {
-  provider = "sqlite"
-  url      = "file:./dev.db"
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
 }
 
 model User {
-  user_id Int @id @default(autoincrement())
-  name String
-  email String @unique
-  birthdate DateTime
-  Kontostand Int // Betrag in Cent
+   userid @id @default(autoincrement())
+    firstname String,
+    lastname String,
+    university String,
+    birthdate DateTime,
+    createdAt DateTime @default(now())
+    username String,
+    email String @unique
+    password String 
 }
