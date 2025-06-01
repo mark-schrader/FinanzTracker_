@@ -1,4 +1,5 @@
 
+
 monatTrend //String: printf("es steigt diesen monat!")
 monatTrendProzent // +4,7% / -5,5% auf absolutwert
 jahrTrend
@@ -7,3 +8,21 @@ sparzielTrend
 sparzielTrendProzent
 dauerTrend //seit beginn des erstellens
 dauerTrendProzent
+
+function user{
+userid @id @default(autoincrement())
+firstname,
+secondname,
+university,
+birtdate,
+username,
+email @unique
+passwort
+}
+
+Einzahlung:
+
+Auszahlung:
+
+Sparziel:
+
