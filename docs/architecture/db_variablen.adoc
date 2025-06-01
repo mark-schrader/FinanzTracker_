@@ -1,61 +1,58 @@
-
-
 function analyze_dashboard{
-    monatTrend string, //printf("es steigt diesen monat!")
-    monatTrendProzent double, // +4,7% / -5,5% auf absolutwert
-    jahrTrend string,
-    jahrTrendProzent double,
-    sparzielTrend string,
-    sparzielTrendProzent double,
-    dauerTrend string, //seit beginn des erstellens
-    dauerTrendProzent double
+    monthTrend string, //printf("es steigt diesen monat!")
+    monthTrendPercent double, // +4,7% / -5,5% auf absolutwert
+    yearTrend string,
+    yearTrendPercent double,
+    savingsGoalTrend string,
+    savingsGoalTrendPercent double,
+    durationTrend string, //seit beginn des erstellens
+    durationTrendPercent double
 }
 
 function user{
     userid @id @default(autoincrement())
-    firstname   Sring,
-    secondname String,
+    firstname String,
+    lastname String,
     university String,
-    birtdate DateTime,
+    birthdate DateTime,
     createdAt DateTime @default(now())
-    username String ,
+    username String,
     email String @unique
-    passwort String 
+    password String 
 }
 
-function einzahlung{
-    kontostand_alt  //vlt
-    kontostand_neu  //vlt
-    betrag  Int // betrag in cent
-    datum Datetime @default(now())
-    uhrzeit Datetime @default(now())
-    kategorie enum
+function deposit{
+    balance_old  //vlt
+    balance_new  //vlt
+    amount Int // betrag in cent
+    date DateTime @default(now())
+    time DateTime @default(now())
+    category enum
 }
 
-function auszahlung{
-    kontostand_alt  //vlt
-    kontostand_neu  //vlt
-    betrag  Int // betrag in cent
-    datum Datetime @default(now())
-    uhrzeit Datetime @default(now())
-    kategorie enum
+function withdrawal{
+    balance_old  //vlt
+    balance_new  //vlt
+    amount Int // betrag in cent
+    date DateTime @default(now())
+    time DateTime @default(now())
+    category enum
 }
 
-function kategorie{
-    kategorieid @id @default(autoincrement())
-    kategorie enum //z.b. "Essen", "Freizeit", "Miete"
+function category{
+    categoryid @id @default(autoincrement())
+    category enum //z.b. "Essen", "Freizeit", "Miete"
     color String //hex color
 }
 
-function sparziel{
+function savings_goal{
     userid Int @relation(fields: [userid], references: [userid])
-    sparzielid Int @id @default(autoincrement())
-    betrag Int //betrag in cent
-    datum DateTime @default(now())
-    uhrzeit DateTime @default(now())
-    kategorie enum
-    laufzeit DateTime //bis wann soll es erreicht sein
+    savingsgoalid Int @id @default(autoincrement())
+    amount Int //betrag in cent
+    date DateTime @default(now())
+    time DateTime @default(now())
+    category enum
+    duration DateTime //bis wann soll es erreicht sein
     status enum //erreicht, nicht erreicht, in bearbeitung
-    namesparziel String //name des sparziels
+    savingsgoalname String //name des sparziels
 }
-
