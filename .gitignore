@@ -4,5 +4,6 @@
 .DS_Store
 *~
 .vscode
+.env
 
 !src/nuxt-test-erik/nuxt1/
