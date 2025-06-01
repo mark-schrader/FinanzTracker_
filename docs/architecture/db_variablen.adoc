@@ -1,28 +1,44 @@
 
 
-monatTrend //String: printf("es steigt diesen monat!")
-monatTrendProzent // +4,7% / -5,5% auf absolutwert
-jahrTrend
-jahrTrendProzent
-sparzielTrend
-sparzielTrendProzent
-dauerTrend //seit beginn des erstellens
-dauerTrendProzent
+function analyze_dashboard{
+    monatTrend //String: printf("es steigt diesen monat!")
+    monatTrendProzent // +4,7% / -5,5% auf absolutwert
+    jahrTrend
+    jahrTrendProzent
+    sparzielTrend
+    sparzielTrendProzent
+    dauerTrend //seit beginn des erstellens
+    dauerTrendProzent
 
 function user{
-userid @id @default(autoincrement())
-firstname,
-secondname,
-university,
-birtdate,
-username,
-email @unique
-passwort
+    userid @id @default(autoincrement())
+    firstname   Sring,
+    secondname String,
+    university String,
+    birtdate DateTime,
+    createdAt DateTime @default(now())
+    username String ,
+    email String @unique
+    passwort String 
 }
 
-Einzahlung:
+function einzahlung{
+    kontostand_alt  //vlt
+    kontostand_neu  //vlt
+    betrag  Int // betrag in cent
+    datum Datetime @default(now())
+    uhrzeit Datetime @default(now())
+    kategorie enum
+}
 
-Auszahlung:
+function auszahlung{
+    kontostand_alt  //vlt
+    kontostand_neu  //vlt
+    betrag  Int // betrag in cent
+    datum Datetime @default(now())
+    uhrzeit Datetime @default(now())
+    kategorie enum
+}
 
 Sparziel:
 
