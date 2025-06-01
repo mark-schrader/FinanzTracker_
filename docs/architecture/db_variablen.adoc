@@ -1,14 +1,15 @@
 
 
 function analyze_dashboard{
-    monatTrend //String: printf("es steigt diesen monat!")
-    monatTrendProzent // +4,7% / -5,5% auf absolutwert
-    jahrTrend
-    jahrTrendProzent
-    sparzielTrend
-    sparzielTrendProzent
-    dauerTrend //seit beginn des erstellens
-    dauerTrendProzent
+    monatTrend string, //printf("es steigt diesen monat!")
+    monatTrendProzent double, // +4,7% / -5,5% auf absolutwert
+    jahrTrend string,
+    jahrTrendProzent double,
+    sparzielTrend string,
+    sparzielTrendProzent double,
+    dauerTrend string, //seit beginn des erstellens
+    dauerTrendProzent double
+}
 
 function user{
     userid @id @default(autoincrement())
@@ -40,5 +41,9 @@ function auszahlung{
     kategorie enum
 }
 
-Sparziel:
+function kategorie{
+    kategorieid @id @default(autoincrement())
+    kategorie enum //z.b. "Essen", "Freizeit", "Miete"
+    color String //hex color
+}
 
