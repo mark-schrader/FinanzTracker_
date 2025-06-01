@@ -47,3 +47,15 @@ function kategorie{
     color String //hex color
 }
 
+function sparziel{
+    userid Int @relation(fields: [userid], references: [userid])
+    sparzielid Int @id @default(autoincrement())
+    betrag Int //betrag in cent
+    datum DateTime @default(now())
+    uhrzeit DateTime @default(now())
+    kategorie enum
+    laufzeit DateTime //bis wann soll es erreicht sein
+    status enum //erreicht, nicht erreicht, in bearbeitung
+    namesparziel String //name des sparziels
+}
+
