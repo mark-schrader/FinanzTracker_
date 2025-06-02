@@ -39,7 +39,7 @@ include::{docs}/_includes/default-attributes.inc.adoc[]
 // --- 4. include Pfade anpassen ---------------
 
 // --- Projektdokumentation ---
-= Projektdokumentation
+== Projektdokumentation
 * Projektplan
 
 :imagesdir: {docs-project-management}/images
@@ -49,7 +49,7 @@ include::{docs-project-management}/project_plan.adoc[lines=1..1;4..-1,leveloffse
 <<<
 
 // --- Technische Spezifikation ---
-= Technische Spezifikation
+== Technische Spezifikation
 * Produktvision
 * Glossar und Domänenmodel
 * UX-Konzept
@@ -68,7 +68,7 @@ include::{docs-requirements}/ux-concept.adoc[lines=1..1;4..-1,leveloffset=+1]
 <<<
 
 // --- Entwurfsdokumentation ---
-= Entwurfsdokumentation
+== Entwurfsdokumentation
 * Architektur-Notizbuch
 * Test Cases
 
