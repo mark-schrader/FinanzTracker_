@@ -32,7 +32,7 @@ function deposit{
     amount Int // betrag in cent
     date DateTime @default(now())
     time DateTime @default(now())
-    category Category
+    enum Category
 }
 
 function withdrawal{
@@ -41,7 +41,7 @@ function withdrawal{
     amount Int // betrag in cent
     date DateTime @default(now())
     time DateTime @default(now())
-    category Category
+    enum Category
 }
 
 enum Category {
