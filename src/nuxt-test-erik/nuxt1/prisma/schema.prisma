@@ -45,9 +45,9 @@ function withdrawal{
 }
 
 enum Category {
-  Platzhalter 1
-  Platzhalter 2
-  Platzhalter 3
-  Platzhalter 4
-  Platzhalter 5
+  Platzhalter1
+  Platzhalter2
+  Platzhalter3
+  Platzhalter4
+  Platzhalter5
 }
