@@ -38,8 +38,8 @@ function deposit{
     balance_old  
     balance_new  
     amount Int 
-    date DateTime @default(now())
-    time DateTime @default(now())
+    date DateTime 
+    time DateTime 
     category Category
 }
 
@@ -47,8 +47,8 @@ function withdrawal{
     balance_old  
     balance_new  
     amount Int 
-    date DateTime @default(now())
-    time DateTime @default(now())
+    date DateTime 
+    time DateTime 
     category Category
 }
 
