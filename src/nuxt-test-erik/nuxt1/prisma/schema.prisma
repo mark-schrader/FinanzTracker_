@@ -34,7 +34,7 @@ model User {
     password String 
 }
 
-function deposit{
+function deposit {
     balance_old  
     balance_new  
     amount Int 
@@ -43,7 +43,7 @@ function deposit{
     category Category
 }
 
-function withdrawal{
+function withdrawal {
     balance_old  
     balance_new  
     amount Int 
