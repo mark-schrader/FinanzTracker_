@@ -35,18 +35,18 @@ model User {
 }
 
 function deposit{
-    balance_old  //vlt
-    balance_new  //vlt
-    amount Int // betrag in cent
+    balance_old  
+    balance_new  
+    amount Int 
     date DateTime @default(now())
     time DateTime @default(now())
     category Category
 }
 
 function withdrawal{
-    balance_old  //vlt
-    balance_new  //vlt
-    amount Int // betrag in cent
+    balance_old  
+    balance_new  
+    amount Int 
     date DateTime @default(now())
     time DateTime @default(now())
     category Category
