@@ -15,11 +15,11 @@ generator client {
 }
 
 enum Category {
-  Platzhalter1 String
-  Platzhalter2 String
-  Platzhalter3 String 
-  Platzhalter4 String
-  Platzhalter5 String
+  Platzhalter1 
+  Platzhalter2 
+  Platzhalter3 
+  Platzhalter4 
+  Platzhalter5 
 }
 
 model User {
