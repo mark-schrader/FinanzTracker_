@@ -14,6 +14,14 @@ generator client {
   provider = "prisma-client-js"
 }
 
+enum Category {
+  Platzhalter1
+  Platzhalter2
+  Platzhalter3
+  Platzhalter4
+  Platzhalter5
+}
+
 model User {
    userid Int @id @default(autoincrement())
     firstname String
@@ -32,7 +40,7 @@ function deposit{
     amount Int // betrag in cent
     date DateTime @default(now())
     time DateTime @default(now())
-    enum Category
+    category Category
 }
 
 function withdrawal{
@@ -41,13 +49,7 @@ function withdrawal{
     amount Int // betrag in cent
     date DateTime @default(now())
     time DateTime @default(now())
-    enum Category
+    category Category
 }
 
-enum Category {
-  Platzhalter1
-  Platzhalter2
-  Platzhalter3
-  Platzhalter4
-  Platzhalter5
-}
+
