@@ -25,3 +25,21 @@ model User {
     email String @unique
     password String 
 }
+
+function deposit{
+    balance_old  //vlt
+    balance_new  //vlt
+    amount Int // betrag in cent
+    date DateTime @default(now())
+    time DateTime @default(now())
+    category enum
+}
+
+function withdrawal{
+    balance_old  //vlt
+    balance_new  //vlt
+    amount Int // betrag in cent
+    date DateTime @default(now())
+    time DateTime @default(now())
+    category enum
+}
