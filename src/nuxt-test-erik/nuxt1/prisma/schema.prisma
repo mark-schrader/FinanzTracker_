@@ -15,11 +15,11 @@ generator client {
 }
 
 enum Category {
-  Platzhalter1
-  Platzhalter2
-  Platzhalter3
-  Platzhalter4
-  Platzhalter5
+  Platzhalter1 String
+  Platzhalter2 String
+  Platzhalter3 String 
+  Platzhalter4 String
+  Platzhalter5 String
 }
 
 model User {
@@ -35,20 +35,20 @@ model User {
 }
 
 model deposit {
-  balance_old  
-  balance_new  
+  balance_old Int
+  balance_new Int 
   amount Int 
-  date DateTime 
-  time DateTime 
+  date DateTime @default(now())
+  time DateTime @default(now())
   category Category
 }
 
-model withdrawal {
-  balance_old  
-  balance_new  
+model withdrawal{
+  balance_old Int
+  balance_new Int
   amount Int 
-  date DateTime 
-  time DateTime 
+  date DateTime @default(now())
+  time DateTime @default(now())
   category Category
 }
 
