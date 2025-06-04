@@ -23,33 +23,33 @@ enum Category {
 }
 
 model User {
-   userid Int @id @default(autoincrement())
-    firstname String
-    lastname String
-    university String
-    birthdate DateTime
-    createdAt DateTime @default(now())
-    username String
-    email String @unique
-    password String 
+  userid Int @id @default(autoincrement())
+  firstname String
+  lastname String
+  university String
+  birthdate DateTime
+  createdAt DateTime @default(now())
+  username String
+  email String @unique
+  password String 
 }
 
 function deposit {
-    balance_old  
-    balance_new  
-    amount Int 
-    date DateTime 
-    time DateTime 
-    category Category
+  balance_old  
+  balance_new  
+  amount Int 
+  date DateTime 
+  time DateTime 
+  category Category
 }
 
 function withdrawal {
-    balance_old  
-    balance_new  
-    amount Int 
-    date DateTime 
-    time DateTime 
-    category Category
+  balance_old  
+  balance_new  
+  amount Int 
+  date DateTime 
+  time DateTime 
+  category Category
 }
 
 
