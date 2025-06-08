@@ -74,7 +74,7 @@ include::{docs-architecture}/architecture_notebook.adoc[lines=12..-1,leveloffset
 
 === Test Cases
 :imagesdir: {docs-test}/images
-include::{docs-test}/test_cases.adoc[lines=3..-1,leveloffset=+2]
+include::{docs-test}/test_cases.adoc[lines=4..-1,leveloffset=+2]
 <<<
 
 
