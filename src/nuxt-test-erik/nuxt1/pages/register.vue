@@ -8,7 +8,7 @@
     <input v-model.number="startamount" type="number" placeholder="Startbetrag (€)" required />
     <input v-model="username" placeholder="Username" required />
     <input v-model="email" placeholder="Email" type="email" required />
-    <input v-model="password" ülaceholder="Passwort" type="password" required />
+    <input v-model="password" placeholder="Passwort" type="password" required />
     <button type="submit">Registrieren</button>
   </form>
 </template>
