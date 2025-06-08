@@ -210,25 +210,25 @@ a|
 // Beschreiben Sie die Arbeitsaufgaben, Arbeitsmittel, physische und soziale Umgebung, in der das Produkt genutzt wird. 
 // Eventuell sind Angaben zu Fehlerquellen, Häufigkeiten von Ereignisse sowie Bearbeitungsdauern von Vorgängen relevant
 
-1. Aufgaben / Nutzungsszenarien
+=== Aufgaben / Nutzungsszenarien
 
-    Wobei soll unser Produkt helfen?
+*Wobei soll unser Produkt helfen?*
 
-* Eine benutzerfreundliche und kostenfreie App, die gezielt für die Bedürfnisse junger Menschen entwickelt wurde. Sie unterstützt dabei, Einnahmen und Ausgaben im Blick zu behalten, Budgets festzulegen und Sparziele zu erreichen – klar strukturiert, unkompliziert und absolut kostenlos.
+- Eine benutzerfreundliche und kostenfreie App, die gezielt für die Bedürfnisse junger Menschen entwickelt wurde. Sie unterstützt dabei, Einnahmen und Ausgaben im Blick zu behalten, Budgets festzulegen und Sparziele zu erreichen – klar strukturiert, unkompliziert und absolut kostenlos.
     
-    Welche Funktionen sind für sie besonders wichtig?
+*Welche Funktionen sind für sie besonders wichtig?*
 
 * dass der Student klar und übersichtlich seine Einnahmen und Ausgaben analysierenn und verstehen kann
 * das jeder Student unsere Anwendung nutzen kann
 
-2. Kontext der Nutzung
+=== Kontext der Nutzung
 * Geräte: primär Handy, aber auch Laptop möglich
 * Ort: direkt unterwegs oder später zuhause
 * Technisches Vorwissen: kein großes Technisches Vorwissen nötig, man sollte aber mit Handy oder Laptop klar kommen
 
-3. Probleme / Frustrationen
+=== Probleme / Frustrationen
 
-     Was frustriert oder behindert die Nutzer?
+*Was frustriert oder behindert die Nutzer?*
 
 * zu komplexes, unübersichtliches Layout 
 * zu viele Farben
