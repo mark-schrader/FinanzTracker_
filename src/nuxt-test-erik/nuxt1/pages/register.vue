@@ -24,6 +24,7 @@ const email = ref('')
 const password = ref('')
 
 async function submit() {
+    console.log("Formular wurde abgeschickt")  
   const response = await $fetch('/api/user/create', {
     method: 'POST',
     body: {
