@@ -68,8 +68,9 @@ In diesem Dokument werden die wesentlichen Begriffe aus dem Anwendungsgebiet (Fa
 |===
 | Abkürzung | Bedeutung 
 | VK | variable Kosten 
-| FK | Feste Kosten
-| a | a 
+| FK | feste Kosten
+| EIN | Einnahme
+| AUS | Ausgabe
 |===
 
 == Verzeichnis der Datenstrukturen
