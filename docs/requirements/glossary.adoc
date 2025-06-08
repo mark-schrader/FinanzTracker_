@@ -36,6 +36,7 @@ In diesem Dokument werden die wesentlichen Begriffe aus dem Anwendungsgebiet (Fa
 * lat. _corrector_ = Verbesserer
 * Berichtiger 
 |===
+
 === Scrum Artefakte 
 |===
 | Begriff | Definition und Erläuterung 
@@ -52,10 +53,13 @@ In diesem Dokument werden die wesentlichen Begriffe aus dem Anwendungsgebiet (Fa
 | Ausgabe | Geld, das du für Produkte oder Dienstleistungen ausgibst, z. B. für Miete, Einkäufe, Abos oder Freizeit. Ausgaben verringern dein Budget. | Kosten, Zahlung, Aufwendung, Abgang, Verbrauch
 | Sparchallenge | Eine spielerisch gestaltete Herausforderung mit dem Ziel, in einem bestimmten Zeitraum gezielt Geld zur Seite zu legen. Solche Challenges motivieren zum regelmäßigen Sparen. | Sparspiel, Sparaktion, Sparwettbewerb, Geld-Challenge, Sparziel-Herausforderung
 | Pleitegeier | Umgangssprachlicher Ausdruck für jemanden, der kaum oder kein Geld mehr hat. In einer App kann der Pleitegeier als Symbol oder Figur auftauchen, wenn das Budget knapp wird. | Zahlungsunfähiger, Geldnotfall
-| a | a | a
-| a | a | a
-| a | a | a
-| a | a | a
+| Budget | Ein festgelegter Geldrahmen für Ausgaben in einem bestimmten Zeitraum oder einer bestimmten Kategorie. | Monatsbudget, Wochenlimit, Ausgabenplanung
+| Fixkosten | Monatlich wiederkehrende, meist gleichbleibende Ausgaben (z. B. Miete, Abos, Versicherungen). | feste Ausgaben, regelmäßige Kosten
+| Variable Kosten | Ausgaben, die sich je nach Konsumverhalten verändern (z. B. Einkäufe, Restaurantbesuche) | flexible Ausgaben, konsumabhängige Kosten
+| Kategorie / Kategorisierung | Klassifizierung von Transaktionen nach Typ (z. B. Lebensmittel, Mobilität, Freizeit). | Ausgabenkategorie, Typenzuordnung, Sortierung
+| Finanzprognose | Eine Vorausschau basierend auf bisherigen Einnahmen/Ausgaben, z. B. wie viel am Monatsende übrig bleibt. | Budgetprognose
+| Saldo | Aktueller Kontostand, also der Betrag, der sich nach Abzug aller Ausgaben und Hinzurechnung aller Einnahmen auf dem Konto befindet. Ein positiver Saldo bedeutet Guthaben, ein negativer Saldo zeigt, dass das Konto überzogen ist.| Kontostand, Endbetrag, Finanzstatus
+| Dashboard  | Die zentrale Übersichtsseite der App. Es zeigt wichtige Finanzinformationen auf einen Blick – z. B. Kontostände, Ausgaben, Einnahmen, Sparziele oder Budgetwarnungen. | Übersicht, Finanzübersicht, Cockpit 
 | a | a | a
 |===
 
@@ -63,8 +67,8 @@ In diesem Dokument werden die wesentlichen Begriffe aus dem Anwendungsgebiet (Fa
 [%header]
 |===
 | Abkürzung | Bedeutung 
-| a | a 
-| a | a 
+| VK | variable Kosten 
+| FK | Feste Kosten
 | a | a 
 |===
 
