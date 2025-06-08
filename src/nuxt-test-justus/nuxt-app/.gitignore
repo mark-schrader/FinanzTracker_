@@ -1,4 +1,4 @@
-Nuxt dev/build outputs
+# Nuxt dev/build outputs
 .output
 .data
 .nuxt
@@ -6,21 +6,19 @@ Nuxt dev/build outputs
 .cache
 dist
 
-Node dependencies
+# Node dependencies
 node_modules
 
-Logs
+# Logs
 logs
-.log
+*.log
 
-Misc
+# Misc
 .DS_Store
 .fleet
 .idea
 
-Local env files
+# Local env files
 .env
-.env.
+.env.*
 !.env.example
-
-/generated/prisma
