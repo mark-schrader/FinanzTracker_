@@ -15,20 +15,20 @@ include::../_includes/default-attributes.inc.adoc[]
 
 
 == Einführung
-Dieses Dokuments zeigt die wesentlichen Bedarfe und Funktionalitäten des Systems *Budget Buddies*. Der Fokus liegt auf den Fähigkeiten, die von Stakeholdern und adressierten Nutzern benötigt werden, und der Begründung dieser. Die Details, wie das System *Budget Buddies* diese Bedarfe erfüllt, werden durch _User Stories_ im _Product Backlog_ sowie dem _UX-Konzept_ beschrieben.
+Dieses Dokuments zeigt die wesentlichen Bedarfe und Funktionalitäten des Systems *Pleitegeier*. Der Fokus liegt auf den Fähigkeiten, die von Stakeholdern und adressierten Nutzern benötigt werden, und der Begründung dieser. Die Details, wie das System *Pleitegeier* diese Bedarfe erfüllt, werden durch _User Stories_ im _Product Backlog_ sowie dem _UX-Konzept_ beschrieben.
 
 === Zweck
 Der Zweck dieses Dokuments ist es, die wesentlichen Anforderungen an das System aus Sicht und mit den Begriffen der künftigen Anwender zu beschreiben.
 
 === Gültigkeitsbereich (Scope)
-Dieses Visions-Dokument bezieht sich auf das System *Budget Buddies*, das von *Finanz Tracker AG* entwickelt wird. Das System wird es der Zielgruppe bzw. den *Studierenden* erlauben die Hauptfunktionen _Verwaltung und Erfassen der Einnahmen und Ausgaben, Erstellen individueller Budgets, sowie das Anlegen von Sparkonten für spezifische Ziele_ zu nutzen. Als Ziel dient die bessere finanzielle Organisation, die eigene Budgetdisziplin einhalten und die Eigenverantwortung zu stärken.
+Dieses Visions-Dokument bezieht sich auf das System *Pleitegeier*, das von *Budget Buddies AG* entwickelt wird. Das System wird es der Zielgruppe bzw. den *Studierenden* erlauben die Hauptfunktionen _Verwaltung und Erfassen der Einnahmen und Ausgaben, Erstellen individueller Budgets, sowie das Anlegen von Sparkonten für spezifische Ziele_ zu nutzen. Als Ziel dient die bessere finanzielle Organisation, die eigene Budgetdisziplin einhalten und die Eigenverantwortung zu stärken.
 
 === Definitionen, Akronyme und Abkürzungen
 //Verweis passend zum Belegabgabe-Template se1_belegabgabe_t00.adoc
 Siehe <<#glossary, Glossar>>.
 //Siehe <<./glossary.adoc#glossary, Glossar>>.
 
-=== Referenzen
+//=== Referenzen
 //hier externe Verweise zu anderen Dokumenten, Quellen, Standards etc. einfügen, sofern notwendig
 
 
@@ -39,7 +39,7 @@ Die *Budget Buddies AG* ist ein junges Start-up, gegründet von sieben engagiert
 
 Bestehende Lösungen auf dem Markt sind oft komplex und teuer und daher für viele Student*innen nicht praktikabel.
 
-Genau hier setzt *Budget Buddy* an: Eine kostenlose, intuitive App, die speziell auf die Bedürfnisse junger Menschen zugeschnitten ist. Sie hilft dabei, Einnahmen und Ausgaben zu verwalten, Budgets zu erstellen und Sparziele zu erreichen – einfach, übersichtlich und völlig kostenlos.
+Genau hier setzt *Budget Buddy AG* an: Eine kostenlose, intuitive App, die speziell auf die Bedürfnisse junger Menschen zugeschnitten ist. Sie hilft dabei, Einnahmen und Ausgaben zu verwalten, Budgets zu erstellen und Sparziele zu erreichen – einfach, übersichtlich und völlig kostenlos.
 
 Unser Ziel ist es, finanzielle Selbstbestimmung für Alle zu ermöglichen – unabhängig vom Kontostand!
 
@@ -51,7 +51,7 @@ Unser Ziel ist es, finanzielle Selbstbestimmung für Alle zu ermöglichen – un
 |===
 | Für | Student*innen/Schüler*innen
 | die | Schwierigkeiten bei der Verwaltung ihrer persönlichen Finanzen haben
-| ist | Budget Buddy
+| ist | Pleitegeier
 | eine | FinTech-Anwendung im Bereich Personal Finance Management (PFM)
 | die | nicht nur hilft, das vorhandene Budget effizient zu nutzen, sondern aktiv zur finanziellen Verbesserung beiträgt
 | anders als | abogebundene Alternativen, die den Student*innen noch zusätzlich auf der Tasche liegen
@@ -80,10 +80,10 @@ Unser Ziel ist es, finanzielle Selbstbestimmung für Alle zu ermöglichen – un
 | Name | Beschreibung | Verantwortlichkeiten
 
 
-| Budget Buddies - Projektteam
+| Budget Buddies AG - Projektteam
 | Entwickler*innen, die im Sinne eines Hochschulmoduls die Aufgabe bekamen, den Studenten mit ihren finanziellen Problemen unter die Arme greifen.      
 
-"Sie sind wie die Avengers." _Lucas Effenberger (HTW Student)_
+//"Sie sind wie die Avengers." _Lucas Effenberger (HTW Student)_
 | Das Entwicklungsteam ist verantwortlich für die Entwicklung des Systems, der Einhaltung der Anforderungen aller Stakeholder und  die Qualitätssicherung des Systems.
 
 | Studierende

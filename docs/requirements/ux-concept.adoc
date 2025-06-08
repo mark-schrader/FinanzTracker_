@@ -15,7 +15,7 @@ include::../_includes/default-attributes.inc.adoc[]
 
 
 == Einführung
-In diesem Dokument werden die Benutzeroberflächen des Systems {project-system-name} beschrieben. Dies können sein:
+In diesem Dokument werden die Benutzeroberflächen des Systems Pleitegeier beschrieben. Dies können sein:
 
 * Personas der wichtigsten Stakeholder
 * Nutzerkontext
