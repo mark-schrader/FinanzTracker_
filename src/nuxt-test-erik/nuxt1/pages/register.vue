@@ -1,4 +1,18 @@
 
+<template>
+  <form @submit.prevent="submit">
+    <input v-model="firstname" placeholder="Vorname" required />
+    <input v-model="lastname" placeholder="Nachname" required />
+    <input v-model="university" placeholder="Uni" required />
+    <input v-model="birthdate" type="date" required />
+    <input v-model.number="startamount" type="number" placeholder="Startbetrag (€)" required />
+    <input v-model="username" placeholder="Username" required />
+    <input v-model="email" type="email" required />
+    <input v-model="password" type="password" required />
+    <button type="submit">Registrieren</button>
+  </form>
+</template>
+
 <script setup>
 import { ref } from 'vue' // ← wichtig!
 
