@@ -1,5 +1,26 @@
+Nuxt dev/build outputs
+.output
+.data
+.nuxt
+.nitro
+.cache
+dist
+
+Node dependencies
 node_modules
-# Keep environment variables out of version control
+
+Logs
+logs
+.log
+
+Misc
+.DS_Store
+.fleet
+.idea
+
+Local env files
 .env
+.env.
+!.env.example
 
 /generated/prisma
