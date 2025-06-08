@@ -1,3 +1,3 @@
 export default defineNuxtConfig({
-    devtools: true,
+  devtools: true,
 })
