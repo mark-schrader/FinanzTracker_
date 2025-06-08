@@ -1,26 +1,23 @@
-async function submit() {
-  console.log("Formular wurde abgeschickt")
+// server/api/user/create.ts
 
-  const data = {
-    firstname: firstname.value,
-    lastname: lastname.value,
-    university: university.value,
-    birthdate: new Date(birthdate.value).toISOString(),
-    startamount: Math.round(startamount.value * 100),
-    username: username.value,
-    email: email.value,
-    password: password.value
-  }
+import { PrismaClient } from '@prisma/client'
+const prisma = new PrismaClient()
 
-  console.log('Wird gesendet:', data)
+export default defineEventHandler(async (event) => {
+  const body = await readBody(event)
 
-  try {
-    const response = await $fetch('/api/user/create', {
-      method: 'POST',
-      body: data
-    })
-    console.log('User erfolgreich angelegt:', response)
-  } catch (err) {
-    console.error('Fehler beim Speichern:', err)
-  }
-}
+  const user = await prisma.user.create({
+    data: {
+      firstname: body.firstname,
+      lastname: body.lastname,
+      university: body.university,
+      birthdate: new Date(body.birthdate),
+      startamount: body.startamount,
+      username: body.username,
+      email: body.email,
+      password: body.password
+    }
+  })
+
+  return user
+})
