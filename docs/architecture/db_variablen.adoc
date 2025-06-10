@@ -1,3 +1,4 @@
+//hinzugefügt
 model User {
   userid        Int       @id @default(autoincrement())
   firstname     String
@@ -18,14 +19,14 @@ model User {
   reminders   Reminder[]
 }
 
+//hinzugefügt
 model Category {
   id       Int      @id @default(autoincrement())
   name     String
   type     CategoryType
-  user     User?    @relation(fields: [userId], references: [userid])
-  userId   Int?
-  icon     String?
-  color    String?
+  userId   Int     @relation(fields: [userId], references: [userid])
+  icon     String
+  color    String
 
   incomes  Income[]
   expenses Expense[]
@@ -36,12 +37,11 @@ enum CategoryType {
   expense
 }
 
+//hinzugefügt
 model Income {
   id          Int       @id @default(autoincrement())
-  user        User      @relation(fields: [userId], references: [userid])
-  userId      Int
-  category    Category? @relation(fields: [categoryId], references: [id])
-  categoryId  Int?
+  user_id     Int       @relation(fields: [userId], references: [userid])
+  category_id Int       @relation(fields: [categoryId], references: [id])
   source      String?
   amount      Float
   date        DateTime
@@ -49,43 +49,49 @@ model Income {
   note        String?
 }
 
+//hinzugefügt
 model Expense {
   id          Int       @id @default(autoincrement())
-  user        User      @relation(fields: [userId], references: [userid])
-  userId      Int
-  category    Category? @relation(fields: [categoryId], references: [id])
-  categoryId  Int?
+  userId      Int       @relation(fields: [userId], references: [userid])
+  category_id  Int      @relation(fields: [categoryId], references: [id])
   amount      Float
   date        DateTime
   interval    Interval  @default(once)
   note        String?
 }
 
-enum Interval {
+enum interval_typ {
   once
   monthly
   semesterly
 }
 
-model Budget {
+//hinzugefügt
+model Budget { 
   id        Int      @id @default(autoincrement())
-  user      User     @relation(fields: [userId], references: [userid])
-  userId    Int
+  userId    Int      @relation(fields: [userId], references: [userid])
   period    String
   amount    Float
   createdAt DateTime @default(now())
 }
 
+//hinzugefügt
 model Goal {
   id        Int      @id @default(autoincrement())
-  user      User     @relation(fields: [userId], references: [userid])
-  userId    Int
+  user_id   Int      @relation(fields: [userId], references: [userid])
   name      String
   target    Float
   saved     Float    @default(0)
   dueDate   DateTime?
   createdAt DateTime @default(now())
 }
+
+
+
+
+
+
+
 
 //Brauchen wir das ???
 model Reminder {
