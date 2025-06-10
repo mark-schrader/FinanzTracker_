@@ -1,26 +1,111 @@
-function analyze_dashboard{
-    monthTrend string, //printf("es steigt diesen monat!")
-    monthTrendPercent double, // +4,7% / -5,5% auf absolutwert
-    yearTrend string,
-    yearTrendPercent double,
-    savingsGoalTrend string,
-    savingsGoalTrendPercent double,
-    durationTrend string, //seit beginn des erstellens
-    durationTrendPercent double
+model User {
+  userid        Int       @id @default(autoincrement())
+  firstname     String
+  lastname      String
+  university    String
+  birthdate     DateTime
+  createdAt     DateTime  @default(now())
+  username      String
+  email         String    @unique
+  password_hash String
+
+  // Relationen
+  categories  Category[]
+  incomes     Income[]
+  expenses    Expense[]
+  budgets     Budget[]
+  goals       Goal[]
+  reminders   Reminder[]
 }
 
-function user{
-    userid @id @default(autoincrement())
-    firstname String,
-    lastname String,
-    university String,
-    birthdate DateTime,
-    createdAt DateTime @default(now())
-    username String,
-    email String @unique
-    password String 
+model Category {
+  id       Int      @id @default(autoincrement())
+  name     String
+  type     CategoryType
+  user     User?    @relation(fields: [userId], references: [userid])
+  userId   Int?
+  icon     String?
+  color    String?
+
+  incomes  Income[]
+  expenses Expense[]
 }
 
+enum CategoryType {
+  income
+  expense
+}
+
+model Income {
+  id          Int       @id @default(autoincrement())
+  user        User      @relation(fields: [userId], references: [userid])
+  userId      Int
+  category    Category? @relation(fields: [categoryId], references: [id])
+  categoryId  Int?
+  source      String?
+  amount      Float
+  date        DateTime
+  interval    Interval  @default(once)
+  note        String?
+}
+
+model Expense {
+  id          Int       @id @default(autoincrement())
+  user        User      @relation(fields: [userId], references: [userid])
+  userId      Int
+  category    Category? @relation(fields: [categoryId], references: [id])
+  categoryId  Int?
+  amount      Float
+  date        DateTime
+  interval    Interval  @default(once)
+  note        String?
+}
+
+enum Interval {
+  once
+  monthly
+  semesterly
+}
+
+model Budget {
+  id        Int      @id @default(autoincrement())
+  user      User     @relation(fields: [userId], references: [userid])
+  userId    Int
+  period    String
+  amount    Float
+  createdAt DateTime @default(now())
+}
+
+model Goal {
+  id        Int      @id @default(autoincrement())
+  user      User     @relation(fields: [userId], references: [userid])
+  userId    Int
+  name      String
+  target    Float
+  saved     Float    @default(0)
+  dueDate   DateTime?
+  createdAt DateTime @default(now())
+}
+
+//Brauchen wir das ???
+model Reminder {
+  id        Int      @id @default(autoincrement())
+  user      User     @relation(fields: [userId], references: [userid])
+  userId    Int
+  title     String
+  dueDate   DateTime
+  repeat    Repeat   @default(once)
+  notified  Boolean  @default(false)
+}
+
+enum Repeat {
+  once
+  monthly
+  semesterly
+}
+
+
+// alte Ideen
 function deposit{
     balance_old  //vlt
     balance_new  //vlt
@@ -39,11 +124,6 @@ function withdrawal{
     category enum
 }
 
-function category{
-    categoryid @id @default(autoincrement())
-    category enum //z.b. "Essen", "Freizeit", "Miete"
-    color String //hex color
-}
 
 function savings_goal{
     userid Int @relation(fields: [userid], references: [userid])
@@ -55,4 +135,15 @@ function savings_goal{
     duration DateTime //bis wann soll es erreicht sein
     status enum //erreicht, nicht erreicht, in bearbeitung
     savingsgoalname String //name des sparziels
+}
+
+function analyze_dashboard{
+    monthTrend string, //printf("es steigt diesen monat!")
+    monthTrendPercent double, // +4,7% / -5,5% auf absolutwert
+    yearTrend string,
+    yearTrendPercent double,
+    savingsGoalTrend string,
+    savingsGoalTrendPercent double,
+    durationTrend string, //seit beginn des erstellens
+    durationTrendPercent double
 }
