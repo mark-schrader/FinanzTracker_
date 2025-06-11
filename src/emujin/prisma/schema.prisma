@@ -1,0 +1,59 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+// npx prisma studio
+
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum Category {
+  Platzhalter1 
+  Platzhalter2 
+  Platzhalter3 
+  Platzhalter4 
+  Platzhalter5 
+}
+
+model User {
+  userid Int @id @default(autoincrement())
+  firstname String
+  lastname String
+  university String
+  birthdate DateTime
+  createdAt DateTime @default(now())
+  startamount Int
+  username String
+  email String @unique
+  password String 
+}
+
+model deposit {
+  deposit_id Int @id @default(autoincrement())
+  balance_old Int
+  balance_new Int 
+  amount Int 
+  date DateTime @default(now())
+  time DateTime @default(now())
+  category Category
+}
+
+model withdrawal{
+  withdrawal_id Int @id @default(autoincrement())
+  balance_old Int
+  balance_new Int
+  amount Int 
+  date DateTime @default(now())
+  time DateTime @default(now())
+  category Category
+}
+
