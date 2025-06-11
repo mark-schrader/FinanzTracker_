@@ -1,4 +1,5 @@
 <template>
+     <Header />
      <header />
 <h1>Wilkommen bei Pleitegeier</h1>
 <p>Wir machen bei deienen Finanzen Klarschiff und veranschaulichendir deine Geldbewegungen im Altag.</p>
@@ -10,5 +11,5 @@
 </style>
 
 <script setup>
-import header from '~/components/header copy.vue'
+import Header from '~/components/Header.vue'
 </script>
