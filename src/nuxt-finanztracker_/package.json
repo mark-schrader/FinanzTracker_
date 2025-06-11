@@ -11,12 +11,8 @@
   },
   "dependencies": {
     "@prisma/client": "^6.9.0",
-    "nuxt": "^3.17.4",
-    "vue": "^3.5.15",
+    "nuxt": "^3.17.5",
+    "vue": "^3.5.16",
     "vue-router": "^4.5.1"
-  },
-  "devDependencies": {
-    "prisma": "^6.9.0",
-    "supabase": "^2.23.4"
   }
 }

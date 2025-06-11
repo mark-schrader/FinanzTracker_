@@ -26,7 +26,14 @@ Dieses Dokument beschreibt die Philosophie, Entscheidungen, Nebenbedingungen, Be
 //Hinweise: Beschreiben Sie den zentralen Ansatz für ihre Architektur. Identifizieren Sie alle Aspekte, die die Philosophie beeinflussen, z.B. komplexe Auslieferung Aspekte, Anpassung von Altsystemen oder besondere Geschwindigkeitsanforderungen. Muss es besonders robust sein, um eine langfristige Wartung und Pflege zu ermöglichen? Welche Ziele haben wir?
 
 //Formulieren Sie eine Reihe von Zielen, die die Architektur in ihrer Struktur und ihrem Verhalten erfüllen muss. Identifizieren Sie kritische Fragen, die von der Architektur adressiert werden müssen, z.B. besondere Hardware-Abhängigkeiten, die vom Rest des Systems isoliert werden sollten oder Sicherstellung der Funktionsfähigkeit unter besonderen Bedingungen (z.B. Offline-Nutzung).
-
+|===
+| Plattformübergreifende Verfügbarkeit | Die Anwendung soll als plattformunabhängige Webanwendung implementiert werden. Sie soll ohne Anpassungen sowohl in gängigen Desktop-Browsern als auch auf mobilen Endgeräten vollständig funktionsfähig sein.
+| Modularer Aufbau | Frontend und Backend sind so gestaltet, dass sie unabhängig voneinander weiterentwickelt und angepasst werden können.
+| Wartungsfreundliche Architektur | Das System soll eine klare Trennung zwischen Frontend und Backend aufweisen. Diese Entkopplung soll eine bessere Wartbarkeit, geringere Komplexität und leichtere Erweiterbarkeit ermöglichen.
+| Hohe Leistungsfähigkeit | Die Anwendung soll auf eine hohe Performance ausgelegt sein. Hierzu zählen kurze Antwortzeiten durch optimierte Datenbankzugriffe sowie der Einsatz asynchroner Prozesse im Backend, wo dies sinnvoll ist.
+| Skalierbarkeit | Die Systemarchitektur ist so konzipiert, dass sie ein zukünftiges Wachstum problemlos unterstützt, etwa durch die Integration weiterer Microservices oder zusätzlicher Authentifizierungsanbieter.
+| Datensicherheit und Datenschutz | Sensible Informationen wie Einnahmen und Ausgaben werden sicher verarbeitet und übertragen.
+|===
 
 == Annahmen und Abhängigkeiten
 //[List the assumptions and dependencies that drive architectural decisions. This could include sensitive or critical areas, dependencies on legacy interfaces, the skill and experience of the team, the availability of important resources, and so forth]
@@ -69,6 +76,10 @@ link:requiremenets/vision.adoc[Anforderungen für die Architektur]
 
 == Schichten oder Architektur-Framework
 //[Describe the architectural pattern that you will use or how the architecture will be consistent and uniform. This could be a simple reference to an existing or well-known architectural pattern, such as the Layer framework, a reference to a high-level model of the framework, or a description of how the major system components should be put together.]
+
+Für unser Projekt verwenden wir das Framework **Nuxt.js**, das auf Vue.js basiert. Nuxt bietet eine strukturierte, komponentenbasierte Architektur mit einer klaren Trennung von Darstellung (Pages, Components, Layouts), Logik (Script-Bereich in Komponenten, Middleware) und Zustand (Server API, Plugins, Modules). Die Architektur folgt dabei einem vereinfachten MVC-Prinzip und wird durch konventionenbasiertes Routing und modulare Erweiterbarkeit unterstützt.
+
+Diese Struktur erleichtert die Wartbarkeit, Wiederverwendbarkeit und Skalierbarkeit unserer Anwendung.
 
 
 == Architektursichten (Views)

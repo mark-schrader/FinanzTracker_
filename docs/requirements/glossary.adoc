@@ -26,13 +26,6 @@ In diesem Dokument werden die wesentlichen Begriffe aus dem Anwendungsgebiet (Fa
 * engl. _stakeholder_ = Interessenvertreter
 * Anteilseigner  
 * Beteiligte
-// | Ramsch | wertloses Zeug  a|
-// * Plunder
-// * Kram
-// | Avengers | Die Avengers sind die Hauptprotagonisten des _Marvel Cinematic Universe (Franchise/fiktives Universum)_ und eine Gruppe der mächtigsten Superhelden der Welt. a| 
-// * engl. _avenger_ = Rächer  
-// | DSGVO | Datenschutzgrundverordnung a| 
-// * /
 | Product Owner| Sorgt für werthaltiges Produkt & entscheidet welche Anforderungen in welcher Reihenfolge umgesetzt werden. a|
 * Projekt Manager*
 | Scrum Master | Verantwortlich für die Teamproduktivität und sorgt für korrekte Anwendung der Prozessregeln. Sie/er moderiert die Meetings a| * Agiles Coach 
@@ -43,6 +36,7 @@ In diesem Dokument werden die wesentlichen Begriffe aus dem Anwendungsgebiet (Fa
 * lat. _corrector_ = Verbesserer
 * Berichtiger 
 |===
+
 === Scrum Artefakte 
 |===
 | Begriff | Definition und Erläuterung 
@@ -54,45 +48,28 @@ In diesem Dokument werden die wesentlichen Begriffe aus dem Anwendungsgebiet (Fa
 === Fachbegriffe, die im Projekt täglich benutzt werden
 |===
 | Begriff | Definition und Erläuterung | Synonyme
-| Software | Eine Sammlung von Programmen, Daten, Anweisung für eine bestimmte Aufgabe | -
-| Wireframe | sehr früher, konzeptioneller Entwurf einer Website oder eines Software-Frontends v.a.: dynamisch, statisch a| 
-* engl. _wire frame_ = Drahtmodell
-* Blaupause
-* digitales Modell
-| User story | Eine kurze, einfache Beschreibung einer Funktion oder Anforderung aus Sicht eines Nutzers. a| * User Case
-| Persona | Repräsentiert Gruppen von Nutzern mit ähnlichen Eigenschaften, Verhalten und Problemen. Es enthält _Name, Alter, Geschlecht, Foto, Beruf, Hobbys usw._ a| * fiktives Profil
-| Produktvision | Kurze Beschreibung des Zielbildes (Was & Warum), Motivation und Inspiration a| 
-* Zukunftsbild
-* engl. Mission
-| Scope | Rahmen eines Produkts oder Projekts a| 
-* Umfang
-* engl. Rahmenbedingung
-| Modell| Eine Abbildung von der realen Welt für einen bestimmten Zweck | -
-| Opportunity | Eine Begründung, warum man die Software entwickelt a| * Möglichkeit
-| Requirements | Funktionen, Eigenschaften oder Bedingungen, die ein Produkt oder eine Lösung erfüllen muss, um den Bedürfnissen der Nutzer und Stakeholder gerecht zu werden.Es wird laufend besprochen und angepasst. a| * Systemanforderung
-| Refactoring | Techniken, mit denen ich mein Code besser mache, ohne es zu verändern a| 
-* engl. rewriting, recoding
-| Way of working | Tools, Methoden und Prinzipien, die vom Team ausgewählt sind a| * Arbeitsweise
-| Definition of Ready | die Kriterien, die ein Product Backlog Item (z. B. eine User Story) erfüllen muss, bevor es in einen Sprint aufgenommen werden kann. | -
-| Definition of Done| Kriterien, die erfüllt sein müssen, damit ein Product Backlog Item oder ein Inkrement als „fertig“ gilt. Es fasst Aspekte wie Code-Qualität, Tests, Dokumentation oder Abnahme durch Stakeholder um| -
-| Iteration | Eine Arbeitszeitspanne von 1 Monat in der das Entwicklerteam arbeitet, am Ende gibt es ein Review| -
-| Sprint | Eine Zeitspanne von 1 Woche, am Anfang werden neue Aufgaben vom  Entwicklerteam angefangen, welche sie in der nächsten Woche bearbeiten| -
-| Usability | die Bedingungen, unter unser Produkt benutzt wird. (In welchem Nutzungskontext kann unser Produkt genutzt werden?) a| 
-* Begrauchstauglichkeit  
+| Finanzguru | Finanzguru ist eine deutsche Multi-Banking- und Haushaltsbuch-App, die all deine Giro-, Kreditkarten-, Depot- und sogar Krypto-Konten in einer Übersicht bündelt. Die App kategorisiert Umsätze automatisch, erkennt Verträge / Abos, erinnert an Kündigungsfristen und schlägt Optimierungen sowie Sparziele vor. | Budget-App, Finanzmanager-App, Haushaltsbuch-App
+| Einnahme | Geldbetrag, der dir zufließt, z. B. durch Gehalt, Verkäufe oder Nebenjobs. Einnahmen erhöhen dein verfügbares Budget. | Geldeingang, Einkünfte, Erlös, Zufluss, Einkommen
+| Ausgabe | Geld, das du für Produkte oder Dienstleistungen ausgibst, z. B. für Miete, Einkäufe, Abos oder Freizeit. Ausgaben verringern dein Budget. | Kosten, Zahlung, Aufwendung, Abgang, Verbrauch
+| Sparchallenge | Eine spielerisch gestaltete Herausforderung mit dem Ziel, in einem bestimmten Zeitraum gezielt Geld zur Seite zu legen. Solche Challenges motivieren zum regelmäßigen Sparen. | Sparspiel, Sparaktion, Sparwettbewerb, Geld-Challenge, Sparziel-Herausforderung
+| Pleitegeier | Umgangssprachlicher Ausdruck für jemanden, der kaum oder kein Geld mehr hat. In einer App kann der Pleitegeier als Symbol oder Figur auftauchen, wenn das Budget knapp wird. | Zahlungsunfähiger, Geldnotfall
+| Budget | Ein festgelegter Geldrahmen für Ausgaben in einem bestimmten Zeitraum oder einer bestimmten Kategorie. | Monatsbudget, Wochenlimit, Ausgabenplanung
+| Fixkosten | Monatlich wiederkehrende, meist gleichbleibende Ausgaben (z. B. Miete, Abos, Versicherungen). | feste Ausgaben, regelmäßige Kosten
+| Variable Kosten | Ausgaben, die sich je nach Konsumverhalten verändern (z. B. Einkäufe, Restaurantbesuche) | flexible Ausgaben, konsumabhängige Kosten
+| Kategorie / Kategorisierung | Klassifizierung von Transaktionen nach Typ (z. B. Lebensmittel, Mobilität, Freizeit). | Ausgabenkategorie, Typenzuordnung, Sortierung
+| Finanzprognose | Eine Vorausschau basierend auf bisherigen Einnahmen/Ausgaben, z. B. wie viel am Monatsende übrig bleibt. | Budgetprognose
+| Saldo | Aktueller Kontostand, also der Betrag, der sich nach Abzug aller Ausgaben und Hinzurechnung aller Einnahmen auf dem Konto befindet. Ein positiver Saldo bedeutet Guthaben, ein negativer Saldo zeigt, dass das Konto überzogen ist.| Kontostand, Endbetrag, Finanzstatus
+| Dashboard  | Die zentrale Übersichtsseite der App. Es zeigt wichtige Finanzinformationen auf einen Blick – z. B. Kontostände, Ausgaben, Einnahmen, Sparziele oder Budgetwarnungen. | Übersicht, Finanzübersicht, Cockpit 
 |===
 
 == Abkürzungen und Akronyme
 [%header]
 |===
 | Abkürzung | Bedeutung 
-| v.a.| vor allem 
-| US | User Story 
-| SE | Software Engineering 
-| PO | Product Owner 
-| SM | Scrum Master 
-| PBI | Produkt Backlog Item 
-| DoR | Definition of Ready 
-| DoD | Definition of Done 
+| VK | variable Kosten 
+| FK | feste Kosten
+| EIN | Einnahme
+| AUS | Ausgabe
 |===
 
 == Verzeichnis der Datenstrukturen

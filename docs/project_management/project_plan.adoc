@@ -21,7 +21,7 @@ In dem Projektplan stellen wir die Organisation, Praktiken, Bewertungen, unsere 
 
 == Projektorganisation
 //Introduce the project team, team members, and roles that they play during this project. If applicable, introduce work areas, domains, or technical work packages that are assigned to team members. Introduce neighboring projects, relationships, and communication channels. If the project is introduced somewhere else, reference that location with a link.
-Wir sind die Budget Buddies. Ein Team, welches sich der finanziellen Misslage aller Studenten annimmt! 
+Wir sind die Budget Buddies AG. Ein Team, welches sich der finanziellen Misslage aller Studenten annimmt! 
 
 [%header]
 |===
@@ -42,18 +42,18 @@ Wir sind die Budget Buddies. Ein Team, welches sich der finanziellen Misslage al
 
 In unserem Projekt verwenden wir eine angepasste Form des *agilen Scrum-Ansatzes*, die auf unsere verfügbaren Kapazitäten (ca. 5 Stunden pro Woche pro Teammitglied, inkl. 1,5 Stunden Teammeeting) zugeschnitten ist. Die wichtigsten Management- und technischen Praktiken sowie die Fortschrittsverfolgung sind wie folgt organisiert:
 
-=== 1. Iterative Entwicklung (Scrum-Sprints)
+==== Iterative Entwicklung (Scrum-Sprints)
 
 * Wir arbeiten in *einwöchigen Sprints*, die im wöchentlichen 1,5-stündigen Meeting geplant, überprüft und reflektiert werden.
 * Jede Woche werden wenige, priorisierte Aufgaben (z. B. 1–2 Story Points pro Mitglied) umgesetzt.
 
-=== 2. Continuous Integration (CI)
+==== Continuous Integration (CI)
 
 * Code wird regelmäßig in ein gemeinsames Repository gepusht.
 * Eine automatisierte CI-Pipeline (GitHub) führt bei jedem Commit Builds und Tests aus.
 * Änderungen werden kleinteilig entwickelt, um Merge-Konflikte und Integrationsprobleme zu vermeiden.
 
-=== 3. Unabhängiges Testen
+==== Unabhängiges Testen
 
 * Testaufgaben werden möglichst von Teammitgliedern übernommen, die nicht direkt am betroffenen Feature gearbeitet haben.
 * Es werden einfache manuelle Tests sowie automatisierte Unit-Tests durchgeführt. (evtl. noch ueberarbeiten)

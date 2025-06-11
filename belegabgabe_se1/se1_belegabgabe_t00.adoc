@@ -1,7 +1,7 @@
 // --- 1. Projektthema -------------------------
 = SE I - Belegabgabe: {project-name}
 // --- 2. Teammitglieder -----------------------
-Vorname Nachname <s00000@htw-dresden.de>; Vorname Nachname <s00000@htw-dresden.de>; Vorname Nachname <s00000@htw-dresden.de>; Vorname Nachname <s00000@htw-dresden.de>; Vorname Nachname <s00000@htw-dresden.de>; Vorname Nachname <s00000@htw-dresden.de>
+Til Guhlmann <til.guhlmann@stud.htw-dresden.de>; Enna Scheer <enna.scheer@stud.htw-dresden.de>; Emujin Uuganbayar <emujin.uuganbayar@stud.htw-dresden.de>; Erik Vogt <erik.vogt@stud.htw-dresden.de>; Justus Müller <justus.mueller@stud.htw-dresden.de>; Mark Schrader <smark.schrader@stud.htw-dresden.de>; Khanh Ly La <khanhly.la@stud.htw-dresden.de>
 // --- 3. Abgabedatum --------------------------
 01. Januar 2025
 // ---------------------------------------------
@@ -34,52 +34,52 @@ include::{docs}/_includes/default-attributes.inc.adoc[]
 :docs-test: {docs}/test
 :docs-development: {docs}/development
 
-<<<
 
 // --- 4. include Pfade anpassen ---------------
 
 // --- Projektdokumentation ---
-== Projektdokumentation
-* Projektplan
+//== Projektdokumentation
 
 :imagesdir: {docs-project-management}/images
 
 // Projektplan
-include::{docs-project-management}/project_plan.adoc[lines=1..1;4..-1,leveloffset=+1]
+include::{docs-project-management}/project_plan.adoc[lines=1;12..-1,leveloffset=+1]
 <<<
 
 // --- Technische Spezifikation ---
 == Technische Spezifikation
-* Produktvision
-* Glossar und Domänenmodel
-* UX-Konzept
+
+=== Produktvision
+include::{docs-requirements}/vision.adoc[lines=12..-1,leveloffset=+2]
+<<<
+
+=== Glossar und Domänenmodel
+[#glossary]
+include::{docs-requirements}/glossary.adoc[lines=12..-1,leveloffset=+2]
+<<<
+
+=== UX-Konzept
+include::{docs-requirements}/ux-concept.adoc[lines=12..-1,leveloffset=+2]
+<<<
+>>>>>>> 0b9a9fc7461c1aa227c5e364399c988ebd2c1527
 
 :imagesdir: {docs-requirements}/images
 
-// Produktvision
-include::{docs-requirements}/vision.adoc[lines=1..1;4..-1,leveloffset=+1]
-<<<
-// Glossar und Domänenmodell
-[#glossary]
-include::{docs-requirements}/glossary.adoc[lines=1..1;4..-1,leveloffset=+1]
-<<<
-// UX-Konzept
-include::{docs-requirements}/ux-concept.adoc[lines=1..1;4..-1,leveloffset=+1]
-<<<
 
 // --- Entwurfsdokumentation ---
 == Entwurfsdokumentation
-* Architektur-Notizbuch
-* Test Cases
 
-// Architektur-Notizbuch
+=== Architektur-Notizbuch
+
 :imagesdir: {docs-architecture}/images
-include::{docs-architecture}/architecture_notebook.adoc[lines=1..1;4..-1,leveloffset=+1]
+include::{docs-architecture}/architecture_notebook.adoc[lines=12..-1,leveloffset=+2]
 <<<
-// Test Cases
+
+=== Test Cases
 :imagesdir: {docs-test}/images
-include::{docs-test}/test_cases.adoc[lines=1..1;4..-1,leveloffset=+1]
+include::{docs-test}/test_cases.adoc[lines=4..-1,leveloffset=+2]
 <<<
+
 
 // ---------------------------------------------
 
