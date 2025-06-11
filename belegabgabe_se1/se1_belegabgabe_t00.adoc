@@ -34,7 +34,6 @@ include::{docs}/_includes/default-attributes.inc.adoc[]
 :docs-test: {docs}/test
 :docs-development: {docs}/development
 
-<<<
 
 // --- 4. include Pfade anpassen ---------------
 
@@ -49,6 +48,7 @@ include::{docs-project-management}/project_plan.adoc[lines=1;12..-1,leveloffset=
 
 // --- Technische Spezifikation ---
 == Technische Spezifikation
+
 === Produktvision
 include::{docs-requirements}/vision.adoc[lines=12..-1,leveloffset=+2]
 <<<
@@ -61,13 +61,16 @@ include::{docs-requirements}/glossary.adoc[lines=12..-1,leveloffset=+2]
 === UX-Konzept
 include::{docs-requirements}/ux-concept.adoc[lines=12..-1,leveloffset=+2]
 <<<
+>>>>>>> 0b9a9fc7461c1aa227c5e364399c988ebd2c1527
 
 :imagesdir: {docs-requirements}/images
 
 
 // --- Entwurfsdokumentation ---
 == Entwurfsdokumentation
+
 === Architektur-Notizbuch
+
 :imagesdir: {docs-architecture}/images
 include::{docs-architecture}/architecture_notebook.adoc[lines=12..-1,leveloffset=+2]
 <<<
