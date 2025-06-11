@@ -49,7 +49,7 @@ In diesem Dokument werden die wesentlichen Begriffe aus dem Anwendungsgebiet (Fa
 |===
 | Begriff | Definition und Erläuterung | Synonyme
 | Finanzguru | Finanzguru ist eine deutsche Multi-Banking- und Haushaltsbuch-App, die all deine Giro-, Kreditkarten-, Depot- und sogar Krypto-Konten in einer Übersicht bündelt. Die App kategorisiert Umsätze automatisch, erkennt Verträge / Abos, erinnert an Kündigungsfristen und schlägt Optimierungen sowie Sparziele vor. | Budget-App, Finanzmanager-App, Haushaltsbuch-App
-| Einnahme | Geldbetrag, der dir zufließt, z. B. durch Gehalt, Geschenke, Verkäufe oder Nebenjobs. Einnahmen erhöhen dein verfügbares Budget. | Geldeingang, Einkünfte, Erlös, Zufluss, Einkommen
+| Einnahme | Geldbetrag, der dir zufließt, z. B. durch Gehalt, Verkäufe oder Nebenjobs. Einnahmen erhöhen dein verfügbares Budget. | Geldeingang, Einkünfte, Erlös, Zufluss, Einkommen
 | Ausgabe | Geld, das du für Produkte oder Dienstleistungen ausgibst, z. B. für Miete, Einkäufe, Abos oder Freizeit. Ausgaben verringern dein Budget. | Kosten, Zahlung, Aufwendung, Abgang, Verbrauch
 | Sparchallenge | Eine spielerisch gestaltete Herausforderung mit dem Ziel, in einem bestimmten Zeitraum gezielt Geld zur Seite zu legen. Solche Challenges motivieren zum regelmäßigen Sparen. | Sparspiel, Sparaktion, Sparwettbewerb, Geld-Challenge, Sparziel-Herausforderung
 | Pleitegeier | Umgangssprachlicher Ausdruck für jemanden, der kaum oder kein Geld mehr hat. In einer App kann der Pleitegeier als Symbol oder Figur auftauchen, wenn das Budget knapp wird. | Zahlungsunfähiger, Geldnotfall
