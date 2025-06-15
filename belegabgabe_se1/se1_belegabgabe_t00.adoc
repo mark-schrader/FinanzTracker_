@@ -61,7 +61,6 @@ include::{docs-requirements}/glossary.adoc[lines=12..-1,leveloffset=+2]
 === UX-Konzept
 include::{docs-requirements}/ux-concept.adoc[lines=12..-1,leveloffset=+2]
 <<<
->>>>>>> 0b9a9fc7461c1aa227c5e364399c988ebd2c1527
 
 :imagesdir: {docs-requirements}/images
 

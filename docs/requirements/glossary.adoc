@@ -73,6 +73,7 @@ In diesem Dokument werden die wesentlichen Begriffe aus dem Anwendungsgebiet (Fa
 |===
 
 == Verzeichnis der Datenstrukturen
+// Objekte für das Domänemodell
 [%header]
 |===
 | Bezeichnung | Definition | Format | Gültigkeitsregeln | Aliase
