@@ -1,4 +1,9 @@
 export default defineNuxtConfig({
-  devtools: true,
-  css: ['animate.css'],
-})
+  compatibilityDate: '2025-05-15',
+  devtools: { enabled: true },
+  css: [
+    '~/assets/css/tailwind.css',
+    'animate.css',
+  ],
+  modules: ['@nuxtjs/tailwindcss']
+  })
