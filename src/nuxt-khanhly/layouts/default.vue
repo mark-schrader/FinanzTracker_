@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col min-h-screen text-gray-800 dark:text-gray-100 bg-gray-300 dark:bg-gray-900">
+  <div class="flex flex-col min-h-screen text-grau-800 dark:text-gray-100 bg-blue-200 dark:bg-gray-900">
     <!-- Header -->
     <Header />
 
