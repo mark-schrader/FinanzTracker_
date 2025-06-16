@@ -69,9 +69,10 @@
         <thead class="bg-gray-100">
           <tr>
             <th class="border p-2">Datum</th>
-            <th class="border p-2">Uhrzeit</th>
             <th class="border p-2">Betrag</th>
+            <th class="border p-2">Zyklus</th>
             <th class="border p-2">Kontoinhaber</th>
+            <th class="border p-2">Notiz</th>
             <th class="border p-2">Kategorie</th>
             <th class="border p-2">Kommentar</th>
           </tr>
@@ -79,7 +80,6 @@
         <tbody>
           <tr v-for="(t, index) in filteredTransactions" :key="index">
             <td class="border p-2">{{ t.date }}</td>
-            <td class="border p-2">{{ t.time }}</td>
             <td class="border p-2 text-right"
                :class="{
                 'text-green-600': t.type === 'Einnahme',
@@ -88,7 +88,9 @@
               >
                {{ t.amount }}
               </td>
+            <td class="border p-2">{{ t.interval }}</td>
             <td class="border p-2">{{ t.owner }}</td>
+            <td class="border p-2">{{ t.purpose }}</td>
             <td class="border p-2">{{ t.category }}</td>
             <td class="border p-2">{{ t.comment }}</td>
           </tr>

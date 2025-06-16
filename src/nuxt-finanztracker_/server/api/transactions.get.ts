@@ -33,7 +33,10 @@ export default defineEventHandler(async () => {
     date: exp.date.toISOString().split('T')[0],
     time: '—',
     amount: `-${exp.amount.toFixed(2)} €`,
+    interval: exp.interval,
     owner: exp.user?.username || 'Unbekannt',
+    use: exp.use,
+    purpose: exp.use,   //mit source zusammenfügen in purpose
     category: exp.categories?.name || '',
     comment: exp.note || ''
   }))
@@ -44,7 +47,10 @@ export default defineEventHandler(async () => {
     date: inc.date.toISOString().split('T')[0],
     time: '—',
     amount: `+${inc.amount.toFixed(2)} €`,
+    interval: inc.interval,
     owner: inc.user?.username || 'Unbekannt',
+    source: inc.source,
+    purpose: inc.source,  //mit use zusammenfügen in purpose
     category: inc.categories?.name || '',
     comment: inc.note || ''
   }))
