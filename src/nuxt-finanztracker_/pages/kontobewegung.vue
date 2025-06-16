@@ -8,7 +8,7 @@
 
     <!-- Kontostand -->
     <div class="bg-gray-100 text-center text-xl p-4 rounded shadow mb-6">
-      Aktueller Kontostand: <strong>1.234,56 €</strong>
+      Aktueller Kontostand: <strong>{{ currentBalance }}</strong>
     </div>
 
     <!-- Buttons as NuxtLinks -->
@@ -80,7 +80,14 @@
           <tr v-for="(t, index) in filteredTransactions" :key="index">
             <td class="border p-2">{{ t.date }}</td>
             <td class="border p-2">{{ t.time }}</td>
-            <td class="border p-2 text-right">{{ t.amount }}</td>
+            <td class="border p-2 text-right"
+               :class="{
+                'text-green-600': t.type === 'Einnahme',
+                'text-red-600': t.type === 'Ausgabe'
+               }"
+              >
+               {{ t.amount }}
+              </td>
             <td class="border p-2">{{ t.owner }}</td>
             <td class="border p-2">{{ t.category }}</td>
             <td class="border p-2">{{ t.comment }}</td>
@@ -92,29 +99,28 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue' // Import Vue's reactive features
+// Reaktive Zustände und Lifecycle
+import { ref, computed, onMounted } from 'vue'
+import { useFetch } from '#app'
 
 const search = ref('')
-const transactions = ref([
-  {
-    date: '2025-06-01',
-    time: '08:30',
-    amount: '+1200,00 €',
-    owner: 'DEX01234',
-    category: 'Gehalt',
-    comment: 'Lohnzahlung'
-  },
-  {
-    date: '2025-06-03',
-    time: '16:45',
-    amount: '-75,99 €',
-    owner: 'DEX01234',
-    category: 'Einkauf',
-    comment: 'Supermarkt'
-  }
-])
+const transactions = ref([])
 
-// Filter transactions based on search input
+// später: const userId = 1
+
+onMounted(async () => {
+  //später Benutzer hier
+  // const { data, error } = await useFetch(`/api/transactions?user_id=${userId}`)
+  const { data, error } = await useFetch('/api/transactions')
+
+  if (error.value) {
+    console.error('Fehler beim Laden:', error.value)
+  } else {
+    transactions.value = data.value || []
+  }
+})
+
+// Suchfilter für Tabelle
 const filteredTransactions = computed(() => {
   return transactions.value.filter(t =>
     Object.values(t).some(field =>
@@ -122,4 +128,37 @@ const filteredTransactions = computed(() => {
     )
   )
 })
+
+//Fkt. für aktuellen Kontostand
+function parseEuro(euroString) {
+  if (!euroString) return 0
+
+  // Entferne alles außer Ziffern, Komma, Punkt (Vorzeichen bewusst NICHT übernehmen)
+  let cleaned = euroString.replace(/[^0-9.,]/g, '')
+
+  if (cleaned.includes('.') && cleaned.includes(',')) {
+    cleaned = cleaned.replace(/\./g, '') // Tausenderpunkt entfernen
+    cleaned = cleaned.replace(',', '.') // Dezimalzeichen anpassen
+  } else if (cleaned.includes(',')) {
+    cleaned = cleaned.replace(',', '.')
+  }
+
+  const value = parseFloat(cleaned)
+  return isNaN(value) ? 0 : value
+}
+
+
+// Computed: Berechnet aktuellen Kontostand
+const currentBalance = computed(() => {
+  const sum = transactions.value.reduce((total, t) => {
+    const amount = parseEuro(t.amount)
+    if (t.type === 'Ausgabe') return total - amount
+    if (t.type === 'Einnahme') return total + amount
+    return total // fallback, falls Typ fehlt
+  }, 0)
+
+  return sum.toFixed(2).replace('.', ',') + ' €'
+})
+
 </script>
+
