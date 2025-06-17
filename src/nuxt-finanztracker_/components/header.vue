@@ -5,7 +5,7 @@ import darkMode from '~/components/darkMode.vue'
 const route = useRoute() // Get the current route to highlight active navigation item
 
 const navItems = [
-  { label: "DASHBOARD", href: "/dashboard" },
+  { label: "DASHBOARD", href: "/dashboard_test" },
   { label: "KONTOBEWEGUNG", href: "/kontobewegung" },
   { label: "CHALLENGE", href: "/challenge" },
   { label: "EXPORT", href: "/export" },

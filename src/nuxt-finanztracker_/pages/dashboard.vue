@@ -9,15 +9,15 @@
     <!-- Finanzübersicht -->
     <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
       <div class="bg-white shadow rounded p-4 text-center">
-        <p class="text-gray-500">Kontostand</p>
+        <p>Kontostand</p>
         <p class="text-2xl font-bold text-blue-600">{{ currentBalance }}</p>
       </div>
-      <div class="bg-green-100 shadow rounded p-4 text-center">
-        <p class="text-gray-500">Gesamte Einnahmen</p>
+      <div class="bg-green-200 shadow rounded p-4 text-center">
+        <p>Gesamte Einnahmen</p>
         <p class="text-xl font-semibold text-green-700">{{ totalIncome }}</p>
       </div>
-      <div class="bg-red-100 shadow rounded p-4 text-center">
-        <p class="text-gray-500">Gesamte Ausgaben</p>
+      <div class="bg-red-200 shadow rounded p-4 text-center">
+        <p>Gesamte Ausgaben</p>
         <p class="text-xl font-semibold text-red-700">{{ totalExpenses }}</p>
       </div>
     </div>
@@ -38,21 +38,23 @@
       </ul>
     </div>
 
-    <!-- Schnellzugriff -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-      <NuxtLink to="/kontobewegung"
-        class="bg-green-600 text-white rounded-lg py-6 text-center font-semibold hover:bg-green-700 shadow">
-        + Einnahme hinzufügen
-      </NuxtLink>
-      <NuxtLink to="/kontobewegung"
-        class="bg-red-600 text-white rounded-lg py-6 text-center font-semibold hover:bg-red-700 shadow">
-        - Ausgabe hinzufügen
-      </NuxtLink>
-      <NuxtLink to="/kategorien"
-        class="bg-blue-600 text-white rounded-lg py-6 text-center font-semibold hover:bg-blue-700 shadow">
-        Kategorien verwalten
-      </NuxtLink>
-    </div>
+   <!-- Schnellzugriff -->
+<div class="flex flex-wrap justify-between gap-3">
+  <NuxtLink to="/kontobewegung"
+    class="flex-1 min-w-[120px] max-w-[200px] bg-green-100 hover:bg-green-200 text-green-700 rounded-md px-3 py-2 text-center text-sm font-medium shadow">
+    + Einnahme
+  </NuxtLink>
+  <NuxtLink to="/kontobewegung"
+    class="flex-1 min-w-[120px] max-w-[200px] bg-red-100 hover:bg-red-200 text-red-700 rounded-md px-3 py-2 text-center text-sm font-medium shadow">
+    - Ausgabe
+  </NuxtLink>
+  <NuxtLink to="/kategorien"
+    class="flex-1 min-w-[120px] max-w-[200px] bg-blue-100 hover:bg-blue-200 text-blue-700 rounded-md px-3 py-2 text-center text-sm font-medium shadow">
+    Kategorien
+  </NuxtLink>
+</div>
+
+
   </div>
 </template>
 
