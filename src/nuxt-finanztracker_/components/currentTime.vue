@@ -1,9 +1,9 @@
 <script setup>
-import { ref, onMounted, onBeforeUnmount } from 'vue'
+import { ref, onMounted, onBeforeUnmount } from 'vue' 
 
-const now = ref(new Date().toLocaleString())
+const now = ref(new Date().toLocaleString()) 
 
-let timer
+let timer 
 
 onMounted(() => {
   timer = setInterval(() => {
@@ -12,7 +12,7 @@ onMounted(() => {
 })
 
 onBeforeUnmount(() => {
-  clearInterval(timer)
+  clearInterval(timer) //to clear the timer when the component is unmounted
 })
 </script>
 
