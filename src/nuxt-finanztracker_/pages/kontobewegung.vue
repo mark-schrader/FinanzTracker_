@@ -43,9 +43,11 @@
 
             <label class="block text-sm font-medium">Zyklus</label>
             <select v-model="incomeForm.interval" class="border px-2 py-1 rounded w-full">
-              <option value="">Einmalig</option>
-              <option value="monatlich">Monatlich</option>
-              <option value="jährlich">Jährlich</option>
+              <option value="once">Einmalig</option>
+              <option value="weekly">Wöchendlich</option>
+              <option value="monthly">Monatlich</option>
+              <option value="semesterly">Semester</option>
+              <option value="annual">Jährlich</option>
             </select>
           </div>
 
@@ -88,10 +90,12 @@
             <textarea v-model="expenseForm.note" class="border px-2 py-1 rounded w-full"></textarea>
 
             <label class="block text-sm font-medium">Zyklus</label>
-            <select v-model="expenseForm.interval" class="border px-2 py-1 rounded w-full">
-              <option value="">Einmalig</option>
-              <option value="monatlich">Monatlich</option>
-              <option value="jährlich">Jährlich</option>
+            <select v-model="incomeForm.interval" class="border px-2 py-1 rounded w-full">
+              <option value="once">Einmalig</option>
+              <option value="weekly">Wöchendlich</option>
+              <option value="monthly">Monatlich</option>
+              <option value="semesterly">Semester</option>
+              <option value="annual">Jährlich</option>
             </select>
           </div>
 
