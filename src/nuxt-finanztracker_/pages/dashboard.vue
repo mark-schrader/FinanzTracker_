@@ -1,59 +1,52 @@
 <template>
   <div class="p-6 max-w-screen-xl mx-auto space-y-6">
+
     <!-- Header -->
-    <div class="flex items-center justify-between">
-      <h1 class="text-3xl font-bold">Dashboard</h1>
-      <CurrentTime />
+    <h1 class="text-2xl md:text-3xl font-bold">Dashboard: Account Balance</h1>
+
+    <!-- Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <!-- Verlauf des Kontostands -->
+    <div class="col-span-1 md:col-span-2 bg-gray-200 rounded-md p-6 min-h-[180px]">
+      <p class="text-base font-medium mb-4">Verlauf des Kontostands</p>
+      <verlaufChart :transactions="transactions" />
     </div>
 
-    <!-- Finanzübersicht -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-      <div class="bg-white shadow rounded p-4 text-center">
-        <p>Kontostand</p>
-        <p class="text-2xl font-bold text-blue-600">{{ currentBalance }}</p>
+      <!-- Einnahme nächste 7 Tage -->
+      <div class="bg-gray-100 rounded-lg p-6 flex flex-col items-center justify-center min-h-[150px]">
+        <p class="font-medium mb-2">Einnahme nächste 7 Tage</p>
+        <svg class="w-10 h-10 text-gray-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+        </svg>
       </div>
-      <div class="bg-green-200 shadow rounded p-4 text-center">
-        <p>Gesamte Einnahmen</p>
-        <p class="text-xl font-semibold text-green-700">{{ totalIncome }}</p>
+
+      <!-- Ausgaben nächste 7 Tage -->
+      <div class="bg-gray-100 rounded-lg p-6 flex flex-col items-center justify-center min-h-[150px]">
+        <p class="font-medium mb-2">Ausgabe nächste 7 Tage</p>
+        <svg class="w-10 h-10 text-gray-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+        </svg>
       </div>
-      <div class="bg-red-200 shadow rounded p-4 text-center">
-        <p>Gesamte Ausgaben</p>
-        <p class="text-xl font-semibold text-red-700">{{ totalExpenses }}</p>
+
+      <!-- Ausgaben pro Kategorie -->
+      <div class="bg-gray-100 rounded-lg p-6 flex flex-col items-center justify-center min-h-[150px]">
+        <p class="font-medium mb-2">Ausgaben pro Kategorie</p>
+        <svg class="w-10 h-10 text-gray-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M11 3v18m4-14h6M5 9h6m4 10h6M5 19h6" />
+        </svg>
+      </div>
+
+      <!-- Individuelles Dashboard -->
+      <div class="bg-gray-100 rounded-lg p-6 flex flex-col items-center justify-center min-h-[150px]">
+        <p class="font-medium mb-2">Individuelles Dashboard</p>
+        <svg class="w-10 h-10 text-gray-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+        </svg>
       </div>
     </div>
 
-    <!-- Letzte Bewegungen -->
-    <div class="bg-white shadow rounded p-4">
-      <h2 class="text-lg font-semibold mb-2">Letzte Kontobewegungen</h2>
-      <ul class="divide-y">
-        <li v-for="(t, index) in latestTransactions" :key="index" class="py-2 flex justify-between items-center">
-          <div>
-            <p class="font-medium">{{ t.purpose || t.source }}</p>
-            <p class="text-sm text-gray-500">{{ t.date }} • {{ t.category }}</p>
-          </div>
-          <div :class="t.type === 'Einnahme' ? 'text-green-600' : 'text-red-600'">
-            {{ t.amount }}
-          </div>
-        </li>
-      </ul>
-    </div>
-
-   <!-- Schnellzugriff -->
-<div class="flex flex-wrap justify-between gap-3">
-  <NuxtLink to="/kontobewegung"
-    class="flex-1 min-w-[120px] max-w-[200px] bg-green-100 hover:bg-green-200 text-green-700 rounded-md px-3 py-2 text-center text-sm font-medium shadow">
-    + Einnahme
-  </NuxtLink>
-  <NuxtLink to="/kontobewegung"
-    class="flex-1 min-w-[120px] max-w-[200px] bg-red-100 hover:bg-red-200 text-red-700 rounded-md px-3 py-2 text-center text-sm font-medium shadow">
-    - Ausgabe
-  </NuxtLink>
-  <NuxtLink to="/kategorien"
-    class="flex-1 min-w-[120px] max-w-[200px] bg-blue-100 hover:bg-blue-200 text-blue-700 rounded-md px-3 py-2 text-center text-sm font-medium shadow">
-    Kategorien
-  </NuxtLink>
-</div>
-
+    <!-- Kontobewegungstabelle -->
+    <bewegungstabelle :transactions="transactions" /> 
 
   </div>
 </template>
@@ -62,53 +55,20 @@
 import { ref, computed, onMounted } from 'vue'
 import { useFetch } from '#app'
 
-// Daten & Suche
 const transactions = ref([])
+const search = ref('')
 
 onMounted(async () => {
   const { data, error } = await useFetch('/api/transactions')
   if (data.value) transactions.value = data.value
 })
 
-// Hilfsfunktion
-function parseEuro(euroString) {
-  if (!euroString) return 0
-  let cleaned = euroString.replace(/[^0-9.,]/g, '')
-  if (cleaned.includes('.') && cleaned.includes(',')) {
-    cleaned = cleaned.replace(/\./g, '').replace(',', '.')
-  } else if (cleaned.includes(',')) {
-    cleaned = cleaned.replace(',', '.')
-  }
-  const value = parseFloat(cleaned)
-  return isNaN(value) ? 0 : value
-}
-
-// Gesamtwerte
-const currentBalance = computed(() => {
-  return transactions.value.reduce((total, t) => {
-    const amount = parseEuro(t.amount)
-    return t.type === 'Einnahme' ? total + amount : total - amount
-  }, 0).toFixed(2).replace('.', ',') + ' €'
-})
-
-const totalIncome = computed(() => {
-  const sum = transactions.value
-    .filter(t => t.type === 'Einnahme')
-    .reduce((acc, t) => acc + parseEuro(t.amount), 0)
-  return sum.toFixed(2).replace('.', ',') + ' €'
-})
-
-const totalExpenses = computed(() => {
-  const sum = transactions.value
-    .filter(t => t.type === 'Ausgabe')
-    .reduce((acc, t) => acc + parseEuro(t.amount), 0)
-  return sum.toFixed(2).replace('.', ',') + ' €'
-})
-
-// Letzte 5 Transaktionen
-const latestTransactions = computed(() => {
-  return [...transactions.value]
-    .sort((a, b) => new Date(b.date) - new Date(a.date))
-    .slice(0, 5)
-})
+// Search filter
+const filteredTransactions = computed(() =>
+  transactions.value.filter(t =>
+    Object.values(t).some(field =>
+      String(field).toLowerCase().includes(search.value.toLowerCase())
+    )
+  )
+)
 </script>

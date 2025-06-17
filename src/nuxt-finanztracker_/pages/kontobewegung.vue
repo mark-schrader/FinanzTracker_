@@ -131,7 +131,6 @@
 </template>
 
 
-
 <script setup>
 
 // Reaktive Zustände und Lifecycle
