@@ -5,7 +5,9 @@
 
     <!-- Inhalt -->
     <main class="container m-auto pt-45 flex-grow">  <!-- flex-grow allows the main content to expand -->
-      <NuxtPage />
+      <div class="bg-white/20 backdrop-blur-md rounded-xl shadow-lg p-6">
+        <NuxtPage />
+      </div>
     </main>
 
     <!-- Footer -->
