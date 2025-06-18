@@ -2,7 +2,10 @@
   <div class="p-6 max-w-screen-xl mx-auto space-y-6">
 
     <!-- Header -->
-    <h1 class="text-2xl md:text-3xl font-bold">Dashboard: Account Balance</h1>
+    <div class="flex items-center justify-between mb-6">
+      <h1 class="text-3xl font-bold">Dashboard: Account Balance</h1>
+      <CurrentTime /> <!-- Current time component -->
+    </div>
 
     <!-- Grid -->
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
