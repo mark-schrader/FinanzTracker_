@@ -5,7 +5,7 @@
       <input type="text" v-model="search" placeholder="Suchen..."
         class="border border-gray-300 rounded px-2 py-1 text-sm hover:border-red-500" />
     </div>
-
+  <div class="overflow-x-auto"> <!-- horizontal scrolling wenn Bildschirm klein ist -->
     <table class="w-full table-auto border text-sm">
       <thead class="bg-gray-100">
         <tr>
@@ -37,6 +37,7 @@
       </tbody>
     </table>
   </div>
+</div>
 </template>
 
 <script setup>
