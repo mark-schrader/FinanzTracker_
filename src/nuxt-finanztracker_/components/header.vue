@@ -34,7 +34,7 @@ const navItems = [
               :class="[
                 route.path === item.href // check if the current route matches the href
                   ? 'pb-1 border-b-2 text-red-600 border-red-600' //highlight active link
-                  : 'text-gray-700 hover:text-yellow-600 hover:border-yellow-600 pb-1 border-b-2 border-transparent' // default style for inactive links
+                  : 'text-gray-700 hover:text-blue-700 pb-1 border-b-2 border-transparent' // default style for inactive links
               ]"
             >
               {{ item.label }} 

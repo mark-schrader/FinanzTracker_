@@ -28,7 +28,7 @@ useHead({
 
     <h2 class="text-2xl font-semibold text-gray-900 mt-8 mb-2">3. Datenschutz</h2>
     <p class="text-gray-800 mb-4">
-      Informationen zur Verarbeitung personenbezogener Daten findest du in unserer <NuxtLink to="/footerItem/cookies" class="text-blue-600 underline hover:text-yellow-600">Cookies</NuxtLink>.
+      Informationen zur Verarbeitung personenbezogener Daten findest du in unserer <NuxtLink to="/footerItem/cookies" class="underline hover:text-blue-700">Cookies</NuxtLink>.
     </p>
 
     <h2 class="text-2xl font-semibold text-gray-900 mt-8 mb-2">4. Änderungen</h2>

@@ -119,7 +119,7 @@
 
       <!-- Daueraufträge -->
       <NuxtLink to="/dauerauftraege"
-        class="bg-yellow-100 hover:bg-yellow-200 text-yellow-700 font-semibold py-4 rounded shadow
+        class="bg-blue-100 hover:bg-blue-200 text-blue-700 font-semibold py-4 rounded shadow
            text-center flex flex-col items-center justify-center space-y-2 transform hover:scale-105 transition-transform duration-200">
         <span class="text-lg">Daueraufträge verwalten</span>
       </NuxtLink>
