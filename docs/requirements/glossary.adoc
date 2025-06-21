@@ -76,19 +76,79 @@ In diesem Dokument werden die wesentlichen Begriffe aus dem Anwendungsgebiet (Fa
 // Objekte für das Domänemodell
 [%header]
 |===
-| Bezeichnung | Definition | Format | Gültigkeitsregeln | Aliase
+| Bezeichnung | Definition | Aliase | Attribut | Gültigkeitsregeln 
 
-| Anmeldedaten
-| Zusammensetzung von Benutzername und Passwort.
-| String
-| Emailadresse muss `@`-Zeichen und `.` Punkt enthalten.
-| Login
+| Benutzer 
+| Person die Pleitegeier benutzt
+| User
+a| 
+. Vorname 
+. Name 
+. Email
+a| 
+. Vorname muss ein existierender Vorname sein ohne Zahlen oder Sonderzeichen
+. Nachname muss ein existierender Nachname sein ohne Zahlen oder Sonderzeichen
+. Emailadresse muss @-Zeichen und . Punkt enthalten.
+
+| Transaktion 
+| Eine Transaktion ist ein finanzieller Vorgang zwischen zwei Parteien.
+| Zahlungsvorgang
+a| 
+. Typ
+. Betrag
+. Date
+a| 
+. Typ hat ein Enum mit {Einnahme, Ausgabe} zur Auswahl
+. Betrag muss ein Decimal Zahl sein
+. Datum muss ein existierendes Datum sein
+
+| Kategorie 
+| In welcher Kategorie eine Trankation gespeichert wird 
+| Gruppe
+a| 
+. Name
+. Typ
+a| 
+. Name muss ein String sein
+. Typ hat ein Enum mit {Fixkosten, Variable Kosten} zur Auswahl
+
+| Budgtet
+| Ein Budget ist ein geplanter finanzieller Rahmen für Ausgaben.
+| Finanzplan
+a| 
+. Betrag
+. Zeitraum
+a| 
+. betrag muss eine Decimal Zahl sein
+. Zeitraum hat in Enum mit {Monat, Woche, Tage} zur Auswahl
+
+| Sparchallenge
+| Eine Sparchallenge ist eine motivierende Methode zum regelmäßigen Geldsparen.
+| Sparaktion
+a| 
+. Titel
+. Beschreibung
+. Zielbetrag
+. Startdatum
+. Enddatum
+a| 
+. Titel muss ein String sein
+. Beschreibung muss ein String sein 
+. Zielbetrag muss eine Decimal Zahl sein
+. Startdatum muss ein existierendes Datum sein
+. Enddatum muss ein existierendes Datum sein und hinter dem Startdatum liegen 
 
 | xx
 | xx
 | xx
-| xx
-| xx
+a| 
+. asd
+. asd
+. asd
+a| 
+. asd
+. asd
+. asd
 |===
 
 == Domänenmodell
