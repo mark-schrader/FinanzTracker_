@@ -112,15 +112,13 @@ a|
 . Name muss ein String sein
 . Typ hat ein Enum mit {Fixkosten, Variable Kosten} zur Auswahl
 
-| Budgtet
-| Ein Budget ist ein geplanter finanzieller Rahmen für Ausgaben.
+| Kontostand
+| Der aktuelle Kontostand vom Benutzer
 | Finanzplan
 a| 
 . Betrag
-. Zeitraum
 a| 
 . betrag muss eine Decimal Zahl sein
-. Zeitraum hat in Enum mit {Monat, Woche, Tage} zur Auswahl
 
 | Sparchallenge
 | Eine Sparchallenge ist eine motivierende Methode zum regelmäßigen Geldsparen.
