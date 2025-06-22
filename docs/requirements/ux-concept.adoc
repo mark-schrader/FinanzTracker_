@@ -115,7 +115,7 @@ a|
 
 
 |===
-|Bild a| image::Mustus_Iueller.png[alt=Mustus_Iueller_personenbild,width=100,height=150]
+|Bild a| image::Mustus_Iueller.png[width=100,height=150]
 |Name | Mustus Iüller 
 
 |Demografie 
