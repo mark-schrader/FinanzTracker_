@@ -86,7 +86,7 @@ a|
 
 
 |===
-|Bild a| image::../images/Lukas_Miffländer.png[alt=lukas_miffländer_personenbild,width=160,height=120]
+|Bild a| image::Lukas_Miffländer.png[alt=lukas_miffländer_personenbild,width=160,height=120]
 |Name | Lukas Miffländer
 
 |Demografie 
@@ -115,7 +115,7 @@ a|
 
 
 |===
-|Bild a| image::Mustus_Iueller.png[alt=Mustus_Iueller_personenbild,width=100,height=150]
+|Bild a| image::Mustus_Iueller.png[width=100,height=150]
 |Name | Mustus Iüller 
 
 |Demografie 
