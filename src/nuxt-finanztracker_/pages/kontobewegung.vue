@@ -36,7 +36,13 @@
             <input v-model="incomeForm.source" type="text" class="border px-2 py-1 rounded w-full" />
 
             <label class="block text-sm font-medium">Kategorie</label>
-            <input v-model="incomeForm.category" type="text" class="border px-2 py-1 rounded w-full" />
+            <select v-model="incomeForm.category" class="border px-2 py-1 rounded w-full">
+              <option disabled value="">Bitte wählen</option>
+              <option v-for="cat in categories.filter(c => c.type === 'income')" :key="cat.id" :value="cat.id">
+                {{ cat.name }}
+              </option>
+            </select>
+
 
             <label class="block text-sm font-medium">Kommentar</label>
             <textarea v-model="incomeForm.note" class="border px-2 py-1 rounded w-full"></textarea>
@@ -84,13 +90,20 @@
             <input v-model="expenseForm.purpose" type="text" class="border px-2 py-1 rounded w-full" />
 
             <label class="block text-sm font-medium">Kategorie</label>
-            <input v-model="expenseForm.category" type="text" class="border px-2 py-1 rounded w-full" />
+            <select v-model="expenseForm.category" class="border px-2 py-1 rounded w-full">
+              <option disabled value="">Bitte wählen</option>
+              <option v-for="cat in categories.filter(c => c.type === 'expense')" :key="cat.id" :value="cat.id">
+                {{ cat.name }}
+              </option>
+            </select>
+            
+
 
             <label class="block text-sm font-medium">Kommentar</label>
             <textarea v-model="expenseForm.note" class="border px-2 py-1 rounded w-full"></textarea>
 
             <label class="block text-sm font-medium">Zyklus</label>
-            <select v-model="incomeForm.interval" class="border px-2 py-1 rounded w-full">
+            <select v-model="expenseForm.interval" class="border px-2 py-1 rounded w-full">
               <option value="once">Einmalig</option>
               <option value="weekly">Wöchendlich</option>
               <option value="monthly">Monatlich</option>
@@ -132,72 +145,26 @@
 
 
 <script setup>
-
-// Reaktive Zustände und Lifecycle
+//Imports
 import { ref, computed, onMounted } from 'vue'
-import { useFetch } from '#app'
+import { useFetch } from '#app' // Nuxt-eigene Fetch-Funktion für SSR/CSR-Anfragen
 
+//Reaktive Daten
+
+// Suchfeld für die Tabelle (nicht sichtbar in Template, aber vorbereitet)
 const search = ref('')
+
+// Alle Transaktionen (Einnahmen & Ausgaben)
 const transactions = ref([])
 
+// Kategorien für Einnahmen & Ausgaben
+const categories = ref([])
 
-// später: const userId = 1
-onMounted(async () => {
-  //später Benutzer hier
-  // const { data, error } = await useFetch(`/api/transactions?user_id=${userId}`)
-  const { data, error } = await useFetch('/api/transactions')
-
-  if (error.value) {
-    console.error('Fehler beim Laden:', error.value)
-  } else {
-    transactions.value = data.value || []
-  }
-})
-
-// Suchfilter für Tabelle
-const filteredTransactions = computed(() => {
-  return transactions.value.filter(t =>
-    Object.values(t).some(field =>
-      String(field).toLowerCase().includes(search.value.toLowerCase())
-    )
-  )
-})
-
-//Fkt. für aktuellen Kontostand
-function parseEuro(euroString) {
-  if (!euroString) return 0
-
-  // Entferne alles außer Ziffern, Komma, Punkt (Vorzeichen bewusst NICHT übernehmen)
-  let cleaned = euroString.replace(/[^0-9.,]/g, '')
-
-  if (cleaned.includes('.') && cleaned.includes(',')) {
-    cleaned = cleaned.replace(/\./g, '') // Tausenderpunkt entfernen
-    cleaned = cleaned.replace(',', '.') // Dezimalzeichen anpassen
-  } else if (cleaned.includes(',')) {
-    cleaned = cleaned.replace(',', '.')
-  }
-
-  const value = parseFloat(cleaned)
-  return isNaN(value) ? 0 : value
-}
-
-
-// Computed: Berechnet aktuellen Kontostand
-const currentBalance = computed(() => {
-  const sum = transactions.value.reduce((total, t) => {
-    const amount = parseEuro(t.amount)
-    if (t.type === 'Ausgabe') return total - amount
-    if (t.type === 'Einnahme') return total + amount
-    return total // fallback, falls Typ fehlt
-  }, 0)
-
-  return sum.toFixed(2).replace('.', ',') + ' €'
-})
-
-
-//Modal für Einnahme
+// Modalsteuerung für Einnahme & Ausgabe
 const showIncomeModal = ref(false)
+const showExpenseModal = ref(false)
 
+// Formular-Daten für Einnahmen
 const incomeForm = ref({
   amount: '',
   date: '',
@@ -207,25 +174,96 @@ const incomeForm = ref({
   interval: ''
 })
 
+// Formular-Daten für Ausgaben
+const expenseForm = ref({
+  amount: '',
+  date: '',
+  purpose: '',
+  category: '',
+  note: '',
+  interval: ''
+})
+
+//Lifecycle Hook zum Laden von Kategorien & Transaktionen
+
+onMounted(async () => {
+  // Lade Kategorien von API
+  const { data, error } = await useFetch('/api/categories')
+  if (error.value) {
+    console.error('Fehler beim Laden der Kategorien:', error.value)
+  } else {
+    categories.value = data.value || []
+  }
+
+  // Lade Transaktionen von API
+  const tResult = await useFetch('/api/transactions')
+  if (tResult.error.value) {
+    console.error('Fehler beim Laden der Transaktionen:', tResult.error.value)
+  } else {
+    transactions.value = tResult.data.value || []
+  }
+})
+
+//Hilfsfunktionen & Computed Properties
+
+// Filtert die Transaktionen anhand der Suchanfrage
+const filteredTransactions = computed(() => {
+  return transactions.value.filter(t =>
+    Object.values(t).some(field =>
+      String(field).toLowerCase().includes(search.value.toLowerCase())
+    )
+  )
+})
+
+// Konvertiert einen Euro-String ("1.234,56 €") in eine Float-Zahl (1234.56)
+function parseEuro(euroString) {
+  if (!euroString) return 0
+
+  let cleaned = euroString.replace(/[^0-9.,]/g, '') // Entfernt Symbole
+  if (cleaned.includes('.') && cleaned.includes(',')) {
+    cleaned = cleaned.replace(/\./g, '') // Punkt = Tausendertrennzeichen → entfernen
+    cleaned = cleaned.replace(',', '.') // Komma = Dezimaltrennzeichen → umwandeln
+  } else if (cleaned.includes(',')) {
+    cleaned = cleaned.replace(',', '.')
+  }
+
+  const value = parseFloat(cleaned)
+  return isNaN(value) ? 0 : value
+}
+
+// Berechnet den aktuellen Kontostand auf Basis der Transaktionen
+const currentBalance = computed(() => {
+  const sum = transactions.value.reduce((total, t) => {
+    const amount = parseEuro(t.amount)
+    if (t.type === 'Ausgabe') return total - amount
+    if (t.type === 'Einnahme') return total + amount
+    return total // fallback
+  }, 0)
+
+  // Gibt Wert formatiert als z.B. "123,45 €" zurück
+  return sum.toFixed(2).replace('.', ',') + ' €'
+})
+
+//Modal-Handling & Form-Submit
+
+// Einnahme speichern
 function submitIncome() {
-  // 👇 Hier später POST an /api/income oder ähnliche API
   console.log('Neue Einnahme:', incomeForm.value)
 
-  // Temporär dem Array hinzufügen:
   transactions.value.push({
     type: 'Einnahme',
     date: incomeForm.value.date,
     time: '—',
     amount: `+${parseFloat(incomeForm.value.amount).toFixed(2)} €`,
     interval: incomeForm.value.interval,
-    owner: 'Du', // evtl. dynamisch
+    owner: 'Du',
     source: incomeForm.value.source,
     purpose: incomeForm.value.source,
-    category: incomeForm.value.category,
+    category_id: incomeForm.value.category,
     comment: incomeForm.value.note
   })
 
-  // Formular zurücksetzen & schließen
+  // Formular zurücksetzen & Modal schließen
   incomeForm.value = {
     amount: '',
     date: '',
@@ -237,18 +275,7 @@ function submitIncome() {
   showIncomeModal.value = false
 }
 
-//Modal für Ausgaben
-const showExpenseModal = ref(false)
-
-const expenseForm = ref({
-  amount: '',
-  date: '',
-  purpose: '',
-  category: '',
-  note: '',
-  interval: ''
-})
-
+// Ausgabe speichern
 function submitExpense() {
   console.log('Neue Ausgabe:', expenseForm.value)
 
@@ -261,11 +288,11 @@ function submitExpense() {
     owner: 'Du',
     source: expenseForm.value.purpose,
     purpose: expenseForm.value.purpose,
-    category: expenseForm.value.category,
+    category_id: expenseForm.value.category,
     comment: expenseForm.value.note
   })
 
-  // Formular leeren & Modal schließen
+  // Formular zurücksetzen & Modal schließen
   expenseForm.value = {
     amount: '',
     date: '',
@@ -276,5 +303,5 @@ function submitExpense() {
   }
   showExpenseModal.value = false
 }
-
 </script>
+
