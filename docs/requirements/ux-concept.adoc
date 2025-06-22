@@ -86,7 +86,7 @@ a|
 
 
 |===
-|Bild a| image::../images/Lukas_Miffländer.png[alt=lukas_miffländer_personenbild,width=160,height=120]
+|Bild a| image::Lukas_Miffländer.png[alt=lukas_miffländer_personenbild,width=160,height=120]
 |Name | Lukas Miffländer
 
 |Demografie 

@@ -42,6 +42,7 @@ include::{docs}/_includes/default-attributes.inc.adoc[]
 
 :imagesdir: {docs-project-management}/images
 
+
 // Projektplan
 include::{docs-project-management}/project_plan.adoc[lines=1;12..-1,leveloffset=+1]
 <<<
@@ -55,15 +56,14 @@ include::{docs-requirements}/vision.adoc[lines=12..-1,leveloffset=+2]
 
 === Glossar und Domänenmodel
 [#glossary]
+:imagesdir: {docs-requirements}/images
 include::{docs-requirements}/glossary.adoc[lines=12..-1,leveloffset=+2]
 <<<
 
 === UX-Konzept
+:imagesdir: {docs-requirements}/images
 include::{docs-requirements}/ux-concept.adoc[lines=12..-1,leveloffset=+2]
 <<<
-
-:imagesdir: {docs-requirements}/images
-
 
 // --- Entwurfsdokumentation ---
 == Entwurfsdokumentation
