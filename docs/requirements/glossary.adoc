@@ -201,4 +201,4 @@ a|
 
 == Domänenmodell
 // Fügen Sie hier eine Abbildung mit ihrem Domänenmodell ein
-image::images/Domänemodell.jpg[]
+image::../images/Domänemodell.jpg[]
