@@ -61,7 +61,7 @@ model goals {
 /// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
 model incomes {
   id          Int           @id @default(autoincrement())
-  user_id     BigInt
+  user_id     BigInt?
   category_id Int
   source      String?
   amount      Decimal       @db.Decimal(10, 2)
@@ -69,7 +69,7 @@ model incomes {
   interval    interval_type @default(once)
   note        String?
   categories  categories    @relation(fields: [category_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  user        user          @relation(fields: [user_id], references: [userid], onDelete: Cascade)
+  user        user?         @relation(fields: [user_id], references: [userid], onDelete: Cascade)
 }
 
 /// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.

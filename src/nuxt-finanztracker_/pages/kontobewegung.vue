@@ -87,7 +87,7 @@
             <input v-model="expenseForm.date" type="date" class="border px-2 py-1 rounded w-full" />
 
             <label class="block text-sm font-medium">Zweck</label>
-            <input v-model="expenseForm.purpose" type="text" class="border px-2 py-1 rounded w-full" />
+            <input v-model="expenseForm.use" type="text" class="border px-2 py-1 rounded w-full" />
 
             <label class="block text-sm font-medium">Kategorie</label>
             <select v-model="expenseForm.category" class="border px-2 py-1 rounded w-full">
@@ -187,22 +187,19 @@ const expenseForm = ref({
 //Lifecycle Hook zum Laden von Kategorien & Transaktionen
 
 onMounted(async () => {
-  // Lade Kategorien von API
-  const { data, error } = await useFetch('/api/categories')
-  if (error.value) {
-    console.error('Fehler beim Laden der Kategorien:', error.value)
-  } else {
-    categories.value = data.value || []
-  }
+  try {
+    // Lade Kategorien
+    const catData = await $fetch('/api/categories')
+    categories.value = catData || []
 
-  // Lade Transaktionen von API
-  const tResult = await useFetch('/api/transactions')
-  if (tResult.error.value) {
-    console.error('Fehler beim Laden der Transaktionen:', tResult.error.value)
-  } else {
-    transactions.value = tResult.data.value || []
+    // Lade Transaktionen
+    const transData = await $fetch('/api/transactions')
+    transactions.value = transData || []
+  } catch (err) {
+    console.error('Fehler beim Laden der Daten:', err)
   }
 })
+
 
 //Hilfsfunktionen & Computed Properties
 
@@ -247,61 +244,97 @@ const currentBalance = computed(() => {
 //Modal-Handling & Form-Submit
 
 // Einnahme speichern
-function submitIncome() {
-  console.log('Neue Einnahme:', incomeForm.value)
+async function submitIncome() {
+  try {
+    const res = await $fetch('/api/income', {
+      method: 'POST',
+      body: {
+        amount: incomeForm.value.amount,
+        date: incomeForm.value.date,
+        source: incomeForm.value.source,
+        category: incomeForm.value.category,
+        note: incomeForm.value.note,
+        interval: incomeForm.value.interval
+      }
+    })
 
-  transactions.value.push({
-    type: 'Einnahme',
-    date: incomeForm.value.date,
-    time: '—',
-    amount: `+${parseFloat(incomeForm.value.amount).toFixed(2)} €`,
-    interval: incomeForm.value.interval,
-    owner: 'Du',
-    source: incomeForm.value.source,
-    purpose: incomeForm.value.source,
-    category_id: incomeForm.value.category,
-    comment: incomeForm.value.note
-  })
+    console.log('Erfolgreich gespeichert:', res)
 
-  // Formular zurücksetzen & Modal schließen
-  incomeForm.value = {
-    amount: '',
-    date: '',
-    source: '',
-    category: '',
-    note: '',
-    interval: ''
+    // Anzeige aktualisieren
+    transactions.value.push({
+      type: 'Einnahme',
+      date: incomeForm.value.date,
+      time: '—',
+      amount: `+${parseFloat(incomeForm.value.amount).toFixed(2)} €`,
+      interval: incomeForm.value.interval,
+      owner: 'Du',
+      source: incomeForm.value.source,
+      purpose: incomeForm.value.source,
+      category_id: incomeForm.value.category,
+      comment: incomeForm.value.note
+    })
+
+    // Reset + Modal schließen
+    incomeForm.value = {
+      amount: '',
+      date: '',
+      source: '',
+      category: '',
+      note: '',
+      interval: ''
+    }
+    showIncomeModal.value = false
+  } catch (err) {
+    console.error('Fehler beim Speichern:', err)
   }
-  showIncomeModal.value = false
 }
+
+
 
 // Ausgabe speichern
-function submitExpense() {
-  console.log('Neue Ausgabe:', expenseForm.value)
+async function submitExpense() {
+  try {
+    const res = await $fetch('/api/expense', {
+      method: 'POST',
+      body: {
+        amount: expenseForm.value.amount,
+        date: expenseForm.value.date,
+        use: expenseForm.value.use,
+        category: expenseForm.value.category,
+        note: expenseForm.value.note,
+        interval: expenseForm.value.interval
+      }
+    })
 
-  transactions.value.push({
-    type: 'Ausgabe',
-    date: expenseForm.value.date,
-    time: '—',
-    amount: `-${parseFloat(expenseForm.value.amount).toFixed(2)} €`,
-    interval: expenseForm.value.interval,
-    owner: 'Du',
-    source: expenseForm.value.purpose,
-    purpose: expenseForm.value.purpose,
-    category_id: expenseForm.value.category,
-    comment: expenseForm.value.note
-  })
+    console.log('Ausgabe erfolgreich gespeichert:', res)
 
-  // Formular zurücksetzen & Modal schließen
-  expenseForm.value = {
-    amount: '',
-    date: '',
-    purpose: '',
-    category: '',
-    note: '',
-    interval: ''
+    // Anzeige aktualisieren
+    transactions.value.push({
+      type: 'Ausgabe',
+      date: expenseForm.value.date,
+      time: '—',
+      amount: `-${parseFloat(expenseForm.value.amount).toFixed(2)} €`,
+      interval: expenseForm.value.interval,
+      owner: 'Null',
+      use: expenseForm.value.use,
+      category_id: expenseForm.value.category,
+      comment: expenseForm.value.note
+    })
+
+    // Reset + Modal schließen
+    expenseForm.value = {
+      amount: '',
+      date: '',
+      use: '',
+      category: '',
+      note: '',
+      interval: ''
+    }
+    showExpenseModal.value = false
+  } catch (err) {
+    console.error('Fehler beim Speichern der Ausgabe:', err)
   }
-  showExpenseModal.value = false
 }
+
 </script>
 
