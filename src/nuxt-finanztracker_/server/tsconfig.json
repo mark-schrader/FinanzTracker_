@@ -1,3 +1,10 @@
 {
-  "extends": "../.nuxt/tsconfig.server.json"
+  "extends": "../.nuxt/tsconfig.server.json",
+  "compilerOptions": {
+      "types": ["@nuxt/types", "@nuxt/kit", "@nuxt/schema"],
+    "paths": {
+      "#app": ["./.nuxt/types/app"]
+  }
+  },
 }
+

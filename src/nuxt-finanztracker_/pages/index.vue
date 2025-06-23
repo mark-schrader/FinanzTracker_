@@ -64,13 +64,13 @@
           <form action="..." class="form-container" method="post">
             <h1 class="register-text">Register →</h1>
             <label for="fname">Vorname</label>
-            <input type="text" name="fname" id="fname" />
+            <input type="text" name="fname" id="fname" v-model="form.firstname" />
 
             <label for="lname">Nachname</label>
-            <input type="text" name="lname" id="lname" />
+            <input type="text" name="lname" id="lname" v-model="form.lastname" />
 
             <label for="uni">Universität</label>
-            <select id="uni" name="uni">
+            <select id="uni" name="uni" v-model="form.university">
               <option value="htw">HTW Dresden</option>
               <option value="tu">TU Dresden</option>
               <option value="fh">Fachhochschule Dresden</option>
@@ -80,13 +80,14 @@
             </select>
 
             <label for="bday">Geburtstag</label>
-            <input type="date" name="bday" id="bday" />
+            <input type="date" name="bday" id="bday" v-model="form.birthdate" />
 
             <label for="email">Email</label>
             <input
               type="email"
               name="email"
               placeholder="Enter Email"
+              v-model="form.email"
               required
             />
 
@@ -95,6 +96,7 @@
               type="password"
               placeholder="Enter Password"
               name="psw"
+              v-model="form.password"
               pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
               title="Muss mindestens eine Zahl und einen Groß- und Kleinbuchstaben sowie mindestens 8 oder mehr Zeichen enthalten"
               required
@@ -246,12 +248,50 @@ select {
 }
 </style>
 
-<script setup>
+<script setup lang="ts">
+
 import AppFooter from "~/components/AppFooter.vue";
 import AppHeader from "~/components/AppHeader.vue";
-import { ref } from "vue";
+import { reactive, ref } from "vue";
+import { useRouter } from 'vue-router';
+
+
 const showLogin = ref(false);
 const showRegister = ref(false);
+
+//form und fetch für create user
+
+const router = useRouter();
+const form = reactive({
+  email: "",
+  password: "",
+  firstname: "",
+  lastname: "",
+  university: "",
+  birthdate: "",
+  username: "",
+  startamount: ""
+})
+
+const register = async () => {
+  try {
+    const res = await fetch('/api/user/create', {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(form)
+    });
+
+    const data = await res.json();
+
+    if (data.status === 'success') {
+      router.push('/dashboard')
+    }
+  } catch (err) {
+    console.error('Fehler bei Registrierung:', err)
+  }
+}
 
 function openLogin() {
   showLogin.value = true;

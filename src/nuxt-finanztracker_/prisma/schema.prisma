@@ -74,7 +74,8 @@ model incomes {
 
 /// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
 model user {
-  userid        BigInt       @id(map: "User_pkey") @default(autoincrement())
+  userid        BigInt      @id(map: "User_pkey") @default(autoincrement())
+  supabaseid    String      @unique
   firstname     String
   lastname      String
   university    String
@@ -82,7 +83,6 @@ model user {
   createdAt     DateTime     @default(now())
   username      String
   email         String       @unique(map: "User_email_key")
-  password_hash String
   startamount   Int
   budgets       budgets[]
   categories    categories[]
