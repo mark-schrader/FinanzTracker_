@@ -85,11 +85,51 @@ Diese Struktur erleichtert die Wartbarkeit, Wiederverwendbarkeit und Skalierbark
 == Architektursichten (Views)
 //[Describe the architectural views that you will use to describe the software architecture. This illustrates the different perspectives that you will make available to review and to document architectural decisions.]
 
+@startuml
+!includeurl https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4.puml
+LAYOUT_WITH_LEGEND()
+
 === Kontextabgrenzung
 //Level 1 im C4-Modell
+Person(student, "Student", "Verwendet den Finanztracker, um Ausgaben & Einnahmen zu verwalten")
+System(finanztracker, "Finanztracker", "Webanwendung zur Verwaltung von Finanzen")
+System_Ext(oauth, "OAuth-Anbieter (Google)", "Authentifiziert Benutzer")
+System_Ext(notification, "Benachrichtigungsdienst", "Versendet Erinnerungen")
+
+Rel(student, finanztracker, "Verwendet")
+Rel(finanztracker, oauth, "OAuth Login")
+Rel(finanztracker, notification, "Sendet Benachrichtigungen")
+
+@enduml
 
 === Container
 //Level 2 im C4-Modell
+@startuml
+!includeurl https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+LAYOUT_WITH_LEGEND()
+
+Person(student, "Student")
+
+System_Boundary(finanzApp, "Finanztracker") {
+  Container(nuxt, "Web App", "Nuxt.js", "Frontend zur Verwaltung der Finanzen")
+  Container(api, "API-Backend", "Node.js (Express/NestJS/...)", "Geschäftslogik und Datenverarbeitung")
+  Container(db, "Datenbank", "PostgreSQL", "Speichert Transaktionen und Regeln")
+  Container(auth, "Auth-Service", "OAuth / Firebase", "Benutzerauthentifizierung")
+  Container(scheduler, "Scheduler", "z. B. CronJob / BullMQ", "Verarbeitet wiederkehrende Transaktionen")
+}
+
+System_Ext(oauth, "OAuth-Anbieter", "Google/Firebase")
+System_Ext(notification, "Benachrichtigungsdienst", "Versendet Erinnerungen")
+
+Rel(student, nuxt, "Verwendet über Browser")
+Rel(nuxt, api, "REST API")
+Rel(api, db, "Liest & schreibt")
+Rel(api, auth, "Validiert Token")
+Rel(api, scheduler, "Plant wiederkehrende Buchungen")
+Rel(api, notification, "Sendet Benachrichtigungen")
+Rel(api, oauth, "OAuth-Login")
+
+@enduml
 
 === Components
 //Level 3 im C4-Modell
