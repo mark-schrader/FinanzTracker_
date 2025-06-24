@@ -253,7 +253,8 @@ select {
 import AppFooter from "~/components/AppFooter.vue";
 import AppHeader from "~/components/AppHeader.vue";
 import { reactive, ref } from "vue";
-import { useRouter } from 'vue-router';
+//import { useRouter } from 'vue-router';
+import { navigateTo } from '#app';
 
 
 const showLogin = ref(false);
@@ -261,7 +262,7 @@ const showRegister = ref(false);
 
 //form und fetch für create user
 
-const router = useRouter();
+//const router = useRouter();
 const form = reactive({
   email: "",
   password: "",
@@ -287,7 +288,8 @@ const register = async () => {
 
     if (data.status === 'success') {
       console.log('Vor dem Push:', data.user.userid)
-      await router.push(`/dashboard/${data.user.userid}`)
+      //await router.push(`/dashboard/${data.user.userid}`)
+      await navigateTo(`/dashboard/${data.user.userid}`)
       console.log('Registrierung erfolgreich:', data);
       
     }
