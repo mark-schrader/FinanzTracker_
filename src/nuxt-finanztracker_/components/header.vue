@@ -19,7 +19,7 @@ const navItems = [
   <header class="fixed top-0 left-0 right-0 z-50 flex items-center justify-between h-40 px-6 bg-gray-100 border-b">
     <!-- Logo -->
     <NuxtLink to="/" class="flex-shrink-0 group"> <!-- flex-shrink for original Logo -->
-      <img src="/LoGo.png" alt="Logo" class="h-20 w-auto transition-transform duration-300 group-hover:rotate-12 group-hover:scale-105"/>
+      <img src="/Logo.png" alt="Logo" class="h-20 w-auto transition-transform duration-300 group-hover:rotate-12 group-hover:scale-105"/>
     <!-- Logo with Hover effect and animation rotate -->
     </NuxtLink>
 
