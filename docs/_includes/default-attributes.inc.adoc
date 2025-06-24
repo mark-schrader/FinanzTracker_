@@ -1,6 +1,6 @@
 // Meta
-:project-name: FinanzTracker_
-:project-system-name: Budget Buddies
+:project-name: Pleitegeier
+:project-system-name: Budget Buddies AG
 // Settings:
 :toc:
 :toc-title: Inhaltsverzeichnis

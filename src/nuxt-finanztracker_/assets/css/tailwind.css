@@ -1,0 +1,31 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*, ::before, ::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth; 
+}
+
+body {
+  color: #000000;  /*Dark gray text color*/
+  font-family: system-ui, sans-serif;
+}
+
+h1, h2, h3, h4 {
+  font-weight: 700;
+  color: #111827; /* Darker gray for headings */
+}
+
+
+button:focus, input:focus, textarea:focus { /* Focus styles for accessibility */
+  outline: 2px solid #2563eb; /* Blue outline for focus */
+  outline-offset: 2px; /* Offset to prevent overlap with other elements */
+}
+
+table {
+  border-collapse: collapse;
+}
