@@ -61,7 +61,7 @@
       <div class="form-container-wrapper">
         <div v-if="showRegister" class="registerPopup" id="registerPopup">
           <button class="closeBtn" type="button" @click="closeForm()">x</button>
-          <form action="..." class="form-container" method="post">
+          <form class="form-container" @submit.prevent="register">
             <h1 class="register-text">Register →</h1>
             <label for="fname">Vorname</label>
             <input type="text" name="fname" id="fname" v-model="form.firstname" />
@@ -269,8 +269,8 @@ const form = reactive({
   lastname: "",
   university: "",
   birthdate: "",
-  username: "",
-  startamount: ""
+  //username: "",
+  //startamount: ""
 })
 
 const register = async () => {
@@ -286,12 +286,16 @@ const register = async () => {
     const data = await res.json();
 
     if (data.status === 'success') {
-      router.push('/dashboard')
+      console.log('Vor dem Push:', data.user.userid)
+      await router.push(`/dashboard/${data.user.userid}`)
+      console.log('Registrierung erfolgreich:', data);
+      
     }
   } catch (err) {
     console.error('Fehler bei Registrierung:', err)
   }
 }
+
 
 function openLogin() {
   showLogin.value = true;

@@ -20,24 +20,30 @@ export default defineEventHandler(async (event) => {
   if (error || !data.user) {
     throw createError({ statusCode: 400, statusMessage: error?.message || 'Anmeldung fehlgeschlagen!' })
   }
+  console.log('Supabase user:', data.user)
 
   const user = await prisma.user.create({
     data: {
-      supabaseId: data.user.id,
+      supabaseid: data.user.id,
       firstname: body.firstname,
       lastname: body.lastname,
       university: body.university,
       birthdate: new Date(body.birthdate),
-      startamount: body.startamount,
-      username: body.username,
+      //startamount: body.startamount,
+      //username: body.username,
       email: body.email,
       
     
     }
   })
+  // BigInt zu String konvertieren
+const userSafe = {
+  ...user,
+  userid: user.userid.toString(),
+}
 
   return {
-    user, 
+    user: userSafe, 
     status: 'success', 
     message: 'Account erfolgreich erstellt' }
 })
