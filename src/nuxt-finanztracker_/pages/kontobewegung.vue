@@ -58,8 +58,8 @@
           </div>
 
           <div class="flex justify-end space-x-2 mt-4">
-            <button @click="showIncomeModal = false" class="text-gray-500 hover:text-red-600">Abbrechen</button>
-            <button @click="submitIncome" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">
+            <button @click="showIncomeModal = false" class="text-gray-500 hover:text-blue-700">Abbrechen</button>
+            <button @click="submitIncome" class="px-4 py-2 rounded bg-blue-100 hover:bg-blue-200 text-blue-700">
               Speichern
             </button>
           </div>
@@ -113,8 +113,8 @@
           </div>
 
           <div class="flex justify-end space-x-2 mt-4">
-            <button @click="showExpenseModal = false" class="text-gray-500 hover:text-red-600">Abbrechen</button>
-            <button @click="submitExpense" class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700">
+            <button @click="showExpenseModal = false" class="text-gray-500 hover:text-blue-700">Abbrechen</button>
+            <button @click="submitExpense" class="px-4 py-2 rounded bg-blue-100 hover:bg-blue-200 text-blue-700">
               Speichern
             </button>
           </div>
