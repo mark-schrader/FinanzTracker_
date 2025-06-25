@@ -35,15 +35,15 @@ model categories {
 /// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
 model expenses {
   id          Int           @id @default(autoincrement())
-  user_id     BigInt
+  user_id     BigInt?
   category_id Int
-  use         String?
+  use         String
   amount      Decimal       @db.Decimal(10, 2)
   date        DateTime      @db.Date
   interval    interval_type @default(once)
   note        String?
   categories  categories    @relation(fields: [category_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  user        user          @relation(fields: [user_id], references: [userid], onDelete: Cascade)
+  user        user?         @relation(fields: [user_id], references: [userid], onDelete: Cascade)
 }
 
 /// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
@@ -61,7 +61,7 @@ model goals {
 /// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
 model incomes {
   id          Int           @id @default(autoincrement())
-  user_id     BigInt
+  user_id     BigInt?
   category_id Int
   source      String?
   amount      Decimal       @db.Decimal(10, 2)
@@ -69,26 +69,26 @@ model incomes {
   interval    interval_type @default(once)
   note        String?
   categories  categories    @relation(fields: [category_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  user        user          @relation(fields: [user_id], references: [userid], onDelete: Cascade)
+  user        user?         @relation(fields: [user_id], references: [userid], onDelete: Cascade)
 }
 
 /// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
 model user {
-  userid        BigInt       @id(map: "User_pkey") @default(autoincrement())
-  firstname     String
-  lastname      String
-  university    String
-  birthdate     DateTime
-  createdAt     DateTime     @default(now())
-  username      String
-  email         String       @unique(map: "User_email_key")
-  password_hash String
-  startamount   Int
-  budgets       budgets[]
-  categories    categories[]
-  expenses      expenses[]
-  goals         goals[]
-  incomes       incomes[]
+  userid      BigInt       @id(map: "User_pkey") @default(autoincrement())
+  firstname   String
+  lastname    String
+  university  String
+  birthdate   DateTime     @db.Date
+  createdAt   DateTime     @default(now())
+  username    String
+  email       String       @unique(map: "User_email_key")
+  startamount Int
+  supabaseid  String       @unique
+  budgets     budgets[]
+  categories  categories[]
+  expenses    expenses[]
+  goals       goals[]
+  incomes     incomes[]
 }
 
 enum interval_type {
