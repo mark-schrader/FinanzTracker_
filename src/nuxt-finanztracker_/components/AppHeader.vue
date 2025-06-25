@@ -2,7 +2,7 @@
   <nav class="nav-container">
     <!-- right side-->
     <ul class="right-header">
-      <img src="/public/logoipsum-331.png" alt="Logo" class="logo" />
+      <img src="~/public/logoipsum-331.png" alt="Logo" class="logo" />
       <h1 class="nav-text">Pleitegeier – Deine FinanzApp</h1>
     </ul>
     <!-- left side -->
