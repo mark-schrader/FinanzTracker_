@@ -54,6 +54,12 @@ link:requiremenets/vision.adoc[Anforderungen für die Architektur]
 
 |===
 | Entscheidung | für | Begründung
+| Nuxt
+| Fullstack
+|
+- Empfelung von unserem Coach 
+
+- Einfaches Fullstack Framework
 | Vue.js 
 | Frontend 
 | 
