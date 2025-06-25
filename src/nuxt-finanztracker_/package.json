@@ -11,11 +11,11 @@
   },
   "dependencies": {
     "@nuxtjs/supabase": "^1.5.2",
-    "@prisma/client": "^6.9.0",
+    "@prisma/client": "^6.10.1",
     "animate.css": "^4.1.1",
     "chart.js": "^4.5.0",
     "nuxt": "^3.17.5",
-    "prisma": "^6.9.0",
+    "prisma": "^6.10.1",
     "vue": "^3.5.16",
     "vue-chartjs": "^5.3.2",
     "vue-router": "^4.5.1"
