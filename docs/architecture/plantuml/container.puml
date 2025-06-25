@@ -10,21 +10,18 @@ Person(student, "Student")
 
 System_Boundary(finanzApp, "Finanztracker") {
   Container(nuxt, "Web App", "Nuxt.js", "Frontend zur Verwaltung der Finanzen")
-  Container(api, "API-Backend", "Node.js (Express/NestJS/...)", "Geschäftslogik und Datenverarbeitung")
-  Container(db, "Datenbank", "PostgreSQL", "Speichert Transaktionen und Regeln")
-  Container(auth, "Auth-Service", "OAuth / Firebase", "Benutzerauthentifizierung")
-  Container(scheduler, "Scheduler", "z. B. CronJob / BullMQ", "Verarbeitet wiederkehrende Transaktionen")
+  Container(api, "API-Backend", "Node.js", "Geschäftslogik und Datenverarbeitung")
+  Container(db, "Datenbank", "Supabase/Prisma", "Speichert Transaktionen und Regeln")
+  Container(auth, "Auth-Service", "Keine Ahnung", "Benutzerauthentifizierung")
+  Container(scheduler, "Scheduler", "haben wir sowas überhaupt?", "Verarbeitet wiederkehrende Transaktionen")
 }
 
-System_Ext(oauth, "OAuth-Anbieter", "Google/Firebase")
-System_Ext(notification, "Benachrichtigungsdienst", "Versendet Erinnerungen")
 
 Rel(student, nuxt, "Verwendet über Browser")
 Rel(nuxt, api, "REST API")
 Rel(api, db, "Liest & schreibt")
 Rel(api, auth, "Validiert Token")
 Rel(api, scheduler, "Plant wiederkehrende Buchungen")
-Rel(api, notification, "Sendet Benachrichtigungen")
-Rel(api, oauth, "OAuth-Login")
+
 
 @enduml

@@ -7,12 +7,12 @@
 title Context für den Finanztracker
 
 Person(student, "Student", "Verwendet den Finanztracker, um Ausgaben & Einnahmen zu verwalten")
-System(finanztracker, "Finanztracker", "Webanwendung zur Verwaltung von Finanzen")
-System_Ext(oauth, "OAuth-Anbieter (Google)", "Authentifiziert Benutzer")
-System_Ext(notification, "Benachrichtigungsdienst", "Versendet Erinnerungen")
+System(finanztracker, "Finanztracker", "Webanwendung zur Verwaltung von Finanzen. Verwaltet User Daten")
+
+
 
 Rel(student, finanztracker, "Verwendet")
-Rel(finanztracker, oauth, "OAuth Login")
-Rel(finanztracker, notification, "Sendet Benachrichtigungen")
+
+
 
 @enduml
