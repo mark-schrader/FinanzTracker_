@@ -32,6 +32,10 @@
       <div class="left">
         <button class="signIn" @click="openLogin()">Sign In</button>
         <button class="signUp" @click="openRegister()">Sign Up</button>
+
+        <NuxtLink to="/kontobewegung">
+          <button class="skip">Überspringen</button>
+        </NuxtLink>
       </div>
       <!--Log in Button Box-->
       <div class="form-container-wrapper">
@@ -250,8 +254,12 @@ select {
 import AppFooter from "~/components/AppFooter.vue";
 import AppHeader from "~/components/AppHeader.vue";
 import { ref } from "vue";
+import { useRouter } from "vue-router";
+//npm install vue-router
+
 const showLogin = ref(false);
 const showRegister = ref(false);
+const router = useRouter();
 
 function openLogin() {
   showLogin.value = true;
@@ -262,5 +270,8 @@ function openRegister() {
 function closeForm() {
   showLogin.value = false;
   showRegister.value = false;
+}
+function skip() {
+  router.push("/kontobewegung.vue");
 }
 </script>
