@@ -126,5 +126,9 @@ In unserem Projekt verwenden wir eine angepasste Form des *agilen Scrum-Ansatzes
 - Herstellung der Schnittstelle von Nuxt zu Prisma (erste Verbindung von Frontend und Backend)
 | 21.06.2026
 |
--Anzeige von Bildern in .adoc Dateien
+- Anzeige von Bildern in .adoc Dateien
+
+| 25.06.2025
+|
+- Eine Zusammenarbeit mit Github funktioniert nur wenn alle regelmäßig pullen und pushen, um in einer möglichst aktuellen Version zu arbeiten.
 |===

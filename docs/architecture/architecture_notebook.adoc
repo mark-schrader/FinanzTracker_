@@ -38,11 +38,11 @@ Dieses Dokument beschreibt die Philosophie, Entscheidungen, Nebenbedingungen, Be
 == Annahmen und Abhängigkeiten
 //[List the assumptions and dependencies that drive architectural decisions. This could include sensitive or critical areas, dependencies on legacy interfaces, the skill and experience of the team, the availability of important resources, and so forth]
 
-* Front es Vue.js, Backende Node.js
-* Nuxt vereint unser Frontend und Backend in einem Ordner
+* Frontend: Vue.js mit den Frameworks Bootstrap Tailwind und Chart.js zur einfachen und sauberen Darstellung der Webseite
+* Nuxt vereint unser Frontend und Backend in einem System
 * Gruppenmitglieder sind mit JavaScript vertraut bzw. können sich das aneignen
-* Hosting erfolgt wahrscheinlich über Vercel
-* für die relationale Datenbank wird Supabase postgre sql genutzt
+* Hosting erfolgt wahrscheinlich über Supabase
+* für die relationale Datenbank wird Prisma genutzt
 
 == Architektur-relevante Anforderungen
 link:requiremenets/vision.adoc[Anforderungen für die Architektur]
@@ -73,6 +73,11 @@ Bietet vordefinierte Css Klassen zur schnellen und modernen HTML Entwicklung
 | Frontend Styling
 |
 Einfache Einbindung von fertigen Komponenten für ein responsiv Design
+
+| Chart.js
+| Frontend Styling
+|
+Darstellung von Diagrammen für unser Dashboard und Kontobewegung
 
 | Prisma 
 | ORM (Backend) 
