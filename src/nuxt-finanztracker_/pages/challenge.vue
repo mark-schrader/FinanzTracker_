@@ -1,5 +1,5 @@
 <template>
-  <div class="p-6">
+  <div class="p-6 max-w-screen-xl mx-auto">
     <!-- Titel -->
     <div class="flex items-center justify-between mb-6">
       <h1 class="text-3xl font-bold">Sparziele</h1>

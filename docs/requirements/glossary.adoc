@@ -76,19 +76,32 @@ In diesem Dokument werden die wesentlichen Begriffe aus dem Anwendungsgebiet (Fa
 // Objekte für das Domänemodell
 [%header]
 |===
-| Bezeichnung | Definition | Aliase | Attribut | Gültigkeitsregeln 
+| Bezeichnung | Definition | Aliase | Attribut | Format | Gültigkeitsregeln 
 
 | Benutzer 
 | Person die Pleitegeier benutzt
 | User
 a| 
 . Vorname 
-. Name 
+. Nachname 
+. Universität
+. Geburtstag
 . Email
+. Passwort
+a|
+. String
+. String
+. String
+. DateTime
+. email
+. String
 a| 
 . Vorname muss ein existierender Vorname sein ohne Zahlen oder Sonderzeichen
 . Nachname muss ein existierender Nachname sein ohne Zahlen oder Sonderzeichen
+. Universität muss eine existierende Universität, etc. sein
+. Geburtstag muss ein existierendes Datum sein
 . Emailadresse muss @-Zeichen und . Punkt enthalten.
+. Passwort muss 8 Stellen mit 
 
 | Transaktion 
 | Eine Transaktion ist ein finanzieller Vorgang zwischen zwei Parteien.
@@ -96,11 +109,21 @@ a|
 a| 
 . Typ
 . Betrag
-. Date
+. Datum
+. Wiederholung
+. Beleg
+a|
+. enum
+. decimal
+. DateTime
+. enum
+. String
 a| 
-. Typ hat ein Enum mit {Einnahme, Ausgabe} zur Auswahl
-. Betrag muss ein Decimal Zahl sein
+. Typ hat Einnahme oder Ausgabe zur Auswahl
+. Betrag muss ein Zahl sein
 . Datum muss ein existierendes Datum sein
+. Wiederholung hat einmalig, wöchentlich, monatlich, halbjährlich und jährlich zur Auswah
+. Beleg ist die URL zu dem Bild des Belegs
 
 | Kategorie 
 | In welcher Kategorie eine Trankation gespeichert wird 
@@ -108,19 +131,34 @@ a|
 a| 
 . Name
 . Typ
+. Symbol 
+. Farbe
+a|
+. String
+. enum
+. String
+. enum
 a| 
-. Name muss ein String sein
-. Typ hat ein Enum mit {Fixkosten, Variable Kosten} zur Auswahl
+. Name kann jegliche Buchstabenkombination haben 
+. Typ hat Fixkosten oder Variable Kosten zur Auswahl
+. Symbol ist die URL zu dem Bild der Kategorie
+. Farbe hat eine Auswahl von Farben zur Auswahl
 
-| Budgtet
-| Ein Budget ist ein geplanter finanzieller Rahmen für Ausgaben.
-| Finanzplan
+| Konto
+| Die Konten des Benutzers
+| Bankkonto
 a| 
-. Betrag
-. Zeitraum
+. IBAN
+. Typ
+. Saldo
+a|
+. String
+. enum
+. decimal
 a| 
-. betrag muss eine Decimal Zahl sein
-. Zeitraum hat in Enum mit {Monat, Woche, Tage} zur Auswahl
+. IBAN muss mit zwei Buchstaben beginnen und mindestens 20 Zeichen lang sein
+. Typ hat Girokonto oder Tagesgeldkonto zur Auswahl
+. Saldo muss ein Gültiger Betrag sein
 
 | Sparchallenge
 | Eine Sparchallenge ist eine motivierende Methode zum regelmäßigen Geldsparen.
@@ -131,25 +169,37 @@ a|
 . Zielbetrag
 . Startdatum
 . Enddatum
+a|
+. String
+. String
+. Decimal
+. DateTime
+. DateTime
 a| 
-. Titel muss ein String sein
-. Beschreibung muss ein String sein 
-. Zielbetrag muss eine Decimal Zahl sein
+. Titel kann jegliche Buchstabenkombination haben 
+. Beschreibung kann jegliche Wortkombination haben 
+. Zielbetrag muss ein gültiger Betrag sein
 . Startdatum muss ein existierendes Datum sein
 . Enddatum muss ein existierendes Datum sein und hinter dem Startdatum liegen 
 
-| xx
-| xx
-| xx
+| Budget
+| Ein Budget ist ein geplanter finanzieller Rahmen für Ausgaben
+| Finanzplan
 a| 
-. asd
-. asd
-. asd
+. Enddatum
+. Betrag
+. Erstellungsdatum
 a| 
-. asd
-. asd
-. asd
+. DateTime
+. decimal
+. DateTime
+a| 
+. Enddatum muss ein existierendes Datum sein
+. Betrag muss ein gültiger Betrag sein
+. Erstellungsdatum muss ein existierendes Datum sein
 |===
 
 == Domänenmodell
 // Fügen Sie hier eine Abbildung mit ihrem Domänenmodell ein
+
+image::Domänemodell.jpg[]
