@@ -124,4 +124,7 @@ In unserem Projekt verwenden wir eine angepasste Form des *agilen Scrum-Ansatzes
 | 10.06.2025
 |
 - Herstellung der Schnittstelle von Nuxt zu Prisma (erste Verbindung von Frontend und Backend)
+| 21.06.2026
+|
+-Anzeige von Bildern in .adoc Dateien
 |===
