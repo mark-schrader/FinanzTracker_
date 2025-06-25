@@ -109,6 +109,9 @@ In unserem Projekt verwenden wir eine angepasste Form des *agilen Scrum-Ansatzes
 | 07.05.2025
 |
 - Visualisierung von Tasks im Miro-Board erstellt
+| 21.05.2025
+|
+- Einbindung von Bootstrapvorlagen und Tailwind Css 
 | 08.06.2025
 |
 - Um Änderungen auf der Website anzuzeigen, muss man nicht comiten, speichern reicht aus
