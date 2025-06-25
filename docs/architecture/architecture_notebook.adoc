@@ -54,29 +54,43 @@ link:requiremenets/vision.adoc[Anforderungen für die Architektur]
 
 |===
 | Entscheidung | für | Begründung
-| Vue.js | Frontend | 
-* haben wir in EWA vor kurzem erst verwendet
+| Vue.js 
+| Frontend 
+| 
+- Nutzung von bereits vorhandenen Wissen aus dem Modul "Erweiterte Webbasierte Anwendungen"
+| Tailwind
+| Frontend Styling
+| 
+Bietet vordefinierte Css Klassen zur schnellen und modernen HTML Entwicklung
 
-* darin ist unser Wissen noch relativ frisch 
-| Node.js | Backend | 
-* um Frontend und Backend in Js einheitlich zu behalten
-* weil wir auch das in EWA bereits gehabt haben
-| MariaDB | Datenbank | 
-* um die Daten zu speichern
-* auch das haben wir in EWA bereits genutzt
-* wird von den Frameworks gut unterstützt
-* gute Performance
-* Open Source
-| Node mit Express.Js | Server | 
-* am meisten zusammen benutzt
-| Github | Host | 
-* kostenlos
-| Englisch | Variablen und Funktionsnamen | 
-* gängig
-* demokratische Einigung
-| Deutsch | Codekommentare | 
-* Verständnisprobleme vermeiden
-* für ausführliche Erläuterungen
+| Bootstarp
+| Frontend Styling
+|
+Einfache Einbindung von fertigen Komponenten für ein responsiv Design
+
+| Prisma 
+| ORM (Backend) 
+| 
+- einfache kommunikation zur Datenbank mittels JavaScript
+
+| Supabase 
+| Datenbank 
+| 
+- Empfelung von unserem Coach zu Speicherung und Verwaltung von Daten
+| Github 
+| Datenverwaltung 
+| 
+- Dient zur Znetralen Verwaltung aller Daten die zum Projekt gehören
+| Englisch 
+| Variablen und Funktionsnamen 
+| 
+- international verständlich
+| Deutsch 
+| Codekommentare 
+| 
+- Verständnisprobleme innerhalb des Teams vermeiden
+
+- für ausführliche Erläuterungen
 |===
 
 == Schichten oder Architektur-Framework
