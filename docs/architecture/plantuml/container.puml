@@ -9,11 +9,10 @@ title Container für den Finanztracker
 Person(student, "Student")
 
 System_Boundary(finanzApp, "Finanztracker") {
-  Container(nuxt, "Web App", "Nuxt.js", "Frontend zur Verwaltung der Finanzen")
+  Container(nuxt, "Web App", "vue.js", "Frontend zur Verwaltung der Finanzen")
   Container(api, "API-Backend", "Node.js", "Geschäftslogik und Datenverarbeitung")
-  Container(db, "Datenbank", "Supabase/Prisma", "Speichert Transaktionen und Regeln")
-  Container(auth, "Auth-Service", "Keine Ahnung", "Benutzerauthentifizierung")
-  Container(scheduler, "Scheduler", "haben wir sowas überhaupt?", "Verarbeitet wiederkehrende Transaktionen")
+  Container(db, "Datenbank", "Supabase", "Speichert Transaktionen und Kategorien")
+  Container(auth, "Auth-Service", "Supabase", "Benutzerauthentifizierung")
 }
 
 
@@ -21,7 +20,6 @@ Rel(student, nuxt, "Verwendet über Browser")
 Rel(nuxt, api, "REST API")
 Rel(api, db, "Liest & schreibt")
 Rel(api, auth, "Validiert Token")
-Rel(api, scheduler, "Plant wiederkehrende Buchungen")
 
 
 @enduml
