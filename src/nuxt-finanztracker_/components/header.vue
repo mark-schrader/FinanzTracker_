@@ -16,7 +16,7 @@ const navItems = [
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   
   <!-- Header is fixed -->
-  <header class="fixed top-0 left-0 right-0 z-50 flex items-center justify-between h-40 px-6 bg-gray-100 border-b">
+  <header class="fixed top-0 left-0 right-0 z-50 flex items-center justify-between h-40 px-6 bg-white border-b">
     <!-- Logo -->
     <NuxtLink to="/" class="flex-shrink-0 group"> <!-- flex-shrink for original Logo -->
       <img src="/Logo.png" alt="Logo" class="h-20 w-auto transition-transform duration-300 group-hover:rotate-12 group-hover:scale-105"/>

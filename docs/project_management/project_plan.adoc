@@ -109,7 +109,22 @@ In unserem Projekt verwenden wir eine angepasste Form des *agilen Scrum-Ansatzes
 | 07.05.2025
 |
 - Visualisierung von Tasks im Miro-Board erstellt
+| 21.05.2025
+|
+- Einbindung von Vue Frameworks (Bootstrap, Tailwind Css)
+| 28.05.2025
+|
+-Einrichtung von Prisma und Nuxt auf allen Developer Geräten
+| 01.06.2025
+|
+-Aufbau eines Prisma Datenbankschema
 | 08.06.2025
 |
 - Um Änderungen auf der Website anzuzeigen, muss man nicht comiten, speichern reicht aus
+| 10.06.2025
+|
+- Herstellung der Schnittstelle von Nuxt zu Prisma (erste Verbindung von Frontend und Backend)
+| 21.06.2026
+|
+-Anzeige von Bildern in .adoc Dateien
 |===
