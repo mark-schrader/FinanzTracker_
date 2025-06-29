@@ -89,7 +89,7 @@ Darstellung von Diagrammen für unser Dashboard und Kontobewegung
 | 
 - Empfelung von unserem Coach zu Speicherung und Verwaltung von Daten
 | Github 
-| Datenverwaltung 
+| Projektverwaltung 
 | 
 - Dient zur Znetralen Verwaltung aller Daten die zum Projekt gehören
 | Englisch 

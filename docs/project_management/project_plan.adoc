@@ -28,7 +28,7 @@ Wir sind die Budget Buddies AG. Ein Team, welches sich der finanziellen Misslage
 | Name | Email | Rolle
 | Til Guhlmann | til.guhlmann@stud.htw-dresden.de | Product Owner
 | Enna Ellen Scheer | ennaellen.scheer@stud.htw-dresden.de | Scrum Master, Ansprechpartner
-| Mark Schrader | mark.schrader@stud.htw-dresden.de | Repository Verantwortlicher
+| Mark Schrader | mark.schrader@stud.htw-dresden.de | Dev-Team, Repository Verantwortlicher
 | Emujin Uuganbayar | emujin.uuganbayar@stud.htw-dresden.de | Dev-Team
 | Erik Vogt | erik.vogt@stud.htw-dresden.de  | Dev-Team, Korrektor
 | Khanh Ly La | khanhly.la@stud.htw-dresden.de | Dev-Team
