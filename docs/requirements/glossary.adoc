@@ -49,7 +49,6 @@ In diesem Dokument werden die wesentlichen Begriffe aus dem Anwendungsgebiet (Fa
 | Variable Kosten | Ausgaben, die sich je nach Konsumverhalten verändern (z. B. Einkäufe, Restaurantbesuche) | flexible Ausgaben, konsumabhängige Kosten
 | Kategorie / Kategorisierung | Klassifizierung von Transaktionen nach Typ (z. B. Lebensmittel, Mobilität, Freizeit). | Ausgabenkategorie, Typenzuordnung, Sortierung
 | Finanzprognose | Eine Vorausschau basierend auf bisherigen Einnahmen/Ausgaben, z. B. wie viel am Monatsende übrig bleibt. | Budgetprognose
-| Saldo | Aktueller Kontostand, also der Betrag, der sich nach Abzug aller Ausgaben und Hinzurechnung aller Einnahmen auf dem Konto befindet. Ein positiver Saldo bedeutet Guthaben, ein negativer Saldo zeigt, dass das Konto überzogen ist.| Kontostand, Endbetrag, Finanzstatus
 | Dashboard  | Die zentrale Übersichtsseite der App. Es zeigt wichtige Finanzinformationen auf einen Blick – z. B. Kontostände, Ausgaben, Einnahmen, Sparziele oder Budgetwarnungen. | Übersicht, Finanzübersicht, Cockpit 
 |===
 
