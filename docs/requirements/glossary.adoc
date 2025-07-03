@@ -19,7 +19,7 @@ In diesem Dokument werden die wesentlichen Begriffe aus dem Anwendungsgebiet (Fa
 * Beteiligte
 | Product Owner| Sorgt für werthaltiges Produkt & entscheidet welche Anforderungen in welcher Reihenfolge umgesetzt werden. a|
 * Projekt Manager*
-| Scrum Master | Verantwortlich für die Teamproduktivität und sorgt für korrekte Anwendung der Prozessregeln. Sie/er moderiert die Meetings a| * Agiles Coach 
+| Scrum Master | Verantwortlich für die Teamproduktivität und sorgt für korrekte Anwendung der Prozessregeln. Sie/Er moderiert die Meetings a| * Agiles Coach 
 | Development-Team | Sorgt für die technische Umsetzung des Produkts a| 
 * Entwicklungsteam 
 * Programmierer
@@ -31,7 +31,7 @@ In diesem Dokument werden die wesentlichen Begriffe aus dem Anwendungsgebiet (Fa
 === Scrum Artefakte 
 |===
 | Begriff | Definition und Erläuterung 
-| Product Backlog | Eine geordnete Liste von allem, die als Anforderungsquelle für alle Änderungen am Produkt dient 
+| Product Backlog | Eine geordnete Liste von Allem und als Anforderungsquelle für alle Änderungen am Produkt
 | Sprint Backlog| Es wird vom DevTeam am Anfang eines Sprints erstellt (Angestrebtes Ergebnis und passende PBI und DoR). Es enthält TASKS, die zur Realisierung der Anforderungen dient. Die Aufgaben müssen im Laufe des Sprint abgearbeitet werden. 
 | Produkt Inkrement | Es ist das Ergebnis des jeweiligen Sprints. Aus den Inkrementen wird Schritt für Schritt das Produkt
 |===
@@ -135,22 +135,6 @@ a|
 . Symbol ist die URL zu dem Bild der Kategorie
 . Farbe hat eine Auswahl von Farben zur Auswahl
 
-| Konto
-| Die Konten des Benutzers
-| Bankkonto
-a| 
-. IBAN
-. Typ
-. Saldo
-a|
-. String
-. enum
-. decimal
-a| 
-. IBAN muss mit zwei Buchstaben beginnen und mindestens 20 Zeichen lang sein
-. Typ hat Girokonto oder Tagesgeldkonto zur Auswahl
-. Saldo muss ein Gültiger Betrag sein
-
 | Sparchallenge
 | Eine Sparchallenge ist eine motivierende Methode zum regelmäßigen Geldsparen.
 | Sparaktion
@@ -192,7 +176,7 @@ a|
 
 == Domänenmodell
 // Fügen Sie hier eine Abbildung mit ihrem Domänenmodell ein
-Im nachfolgenden sehen sie das Domänemodell des Finanztrackers "Pleitegeier". Es stellt die Zusammenhänge da.
+Im nachfolgenden sehen sie das Domänemodell des Finanztrackers "Pleitegeier". Es stellt die Zusammenhänge dar.
 
 .Domänenmodell
 image::Domänemodell.jpg[]
