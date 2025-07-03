@@ -178,4 +178,4 @@ a|
 Im nachfolgenden sehen sie das Domänemodell des Finanztrackers "Pleitegeier". Es stellt die Zusammenhänge dar.
 
 .Domänenmodell
-image::Domänemodell.jpg[]
+image::Domänemodell2.jpg[]
