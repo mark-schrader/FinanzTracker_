@@ -82,16 +82,16 @@ Darstellung von Diagrammen für unser Dashboard und Kontobewegung
 | Prisma 
 | ORM (Backend) 
 | 
-- einfache kommunikation zur Datenbank mittels JavaScript
+- einfache Kommunikation zur Datenbank mittels JavaScript
 
 | Supabase 
 | Datenbank 
 | 
-- Empfelung von unserem Coach zu Speicherung und Verwaltung von Daten
+- Empfehlung von unserem Coach zu Speicherung und Verwaltung von Daten
 | Github 
 | Projektverwaltung 
 | 
-- Dient zur Znetralen Verwaltung aller Daten die zum Projekt gehören
+- Dient zur Zentralen Verwaltung aller Daten die zum Projekt gehören
 | Englisch 
 | Variablen und Funktionsnamen 
 | 

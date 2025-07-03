@@ -218,7 +218,7 @@ a|
     
 *Welche Funktionen sind für sie besonders wichtig?*
 
-* dass der Student klar und übersichtlich seine Einnahmen und Ausgaben analysierenn und verstehen kann
+* dass der Student klar und übersichtlich seine Einnahmen und Ausgaben analysieren und verstehen kann
 * das jeder Student unsere Anwendung nutzen kann
 
 === Kontext der Nutzung
@@ -234,7 +234,7 @@ a|
 * zu viele Farben
 * zu viel Werbung
 * zu lange Ladezeiten
-* kein verständliches Intuitives Handeln 
+* kein verständliches, intuitives Handeln 
 * keine Anpassbarkeit an eigene Wünsche
 
 //_Hier können zudem bei Bedarf Teile des Unternehmensmodells (Prozesse, Organigramme, IT-Landschaft, ...) eingefügt werden, um die beteiligten Aufgaben und Rollen zu skizzieren._
