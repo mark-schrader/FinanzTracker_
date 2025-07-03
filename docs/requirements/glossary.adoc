@@ -1,15 +1,6 @@
-= Glossar: FinanzTracker_
-
-*Til Guhlmann* <til.guhlmann@stud.htw-dresden.de> +
-*Enna Scheer* <enna.scheer@stud.htw-dresden.de> +
-*Emujin Uuganbayar* <emujin.uuganbayar@stud.htw-dresden.de> +
-*Erik Vogt* <erik.vogt@stud.htw-dresden.de> +
-*Justus Müller* <justus.mueller@stud.htw-dresden.de> +
-*Mark Schrader* <mark.schrader@stud.htw-dresden.de> +
-*Khanh Ly La* <khanhly.la@stud.htw-dresden.de>
-
+= Glossar: {project-name}
+Til Guhlmann <til.guhlmann@stud.htw-dresden.de>; Enna Scheer <enna.scheer@stud.htw-dresden.de>; Emujin Uuganbayar <emujin.uuganbayar@stud.htw-dresden.de>; Erik Vogt <erik.vogt@stud.htw-dresden.de>; Justus Müller <justus.mueller@stud.htw-dresden.de>; Mark Schrader <smark.schrader@stud.htw-dresden.de>; Khanh Ly La <khanhly.la@stud.htw-dresden.de>
 {localdatetime} 
-
 include::../_includes/default-attributes.inc.adoc[]
 // Platzhalter für weitere Dokumenten-Attribute
 
@@ -42,7 +33,7 @@ In diesem Dokument werden die wesentlichen Begriffe aus dem Anwendungsgebiet (Fa
 | Begriff | Definition und Erläuterung 
 | Product Backlog | Eine geordnete Liste von allem, die als Anforderungsquelle für alle Änderungen am Produkt dient 
 | Sprint Backlog| Es wird vom DevTeam am Anfang eines Sprints erstellt (Angestrebtes Ergebnis und passende PBI und DoR). Es enthält TASKS, die zur Realisierung der Anforderungen dient. Die Aufgaben müssen im Laufe des Sprint abgearbeitet werden. 
-| Produkt Inkrement | Es ist das Ergebnis des jeweiligen Sprints. Aus den Inkrementen wird Schritt für Schritt das Produkt| 
+| Produkt Inkrement | Es ist das Ergebnis des jeweiligen Sprints. Aus den Inkrementen wird Schritt für Schritt das Produkt
 |===
 
 === Fachbegriffe, die im Projekt täglich benutzt werden
@@ -201,5 +192,7 @@ a|
 
 == Domänenmodell
 // Fügen Sie hier eine Abbildung mit ihrem Domänenmodell ein
+Im nachfolgenden sehen sie das Domänemodell des Finanztrackers "Pleitegeier". Es stellt die Zusammenhänge da.
 
+.Domänenmodell
 image::Domänemodell.jpg[]

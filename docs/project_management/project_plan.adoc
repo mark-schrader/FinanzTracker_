@@ -1,15 +1,6 @@
-= Projektplan: Pleitegeier
-
-*Til Guhlmann* <til.guhlmann@stud.htw-dresden.de> +
-*Enna Scheer* <enna.scheer@stud.htw-dresden.de> +
-*Emujin Uuganbayar* <emujin.uuganbayar@stud.htw-dresden.de> +
-*Erik Vogt* <erik.vogt@stud.htw-dresden.de> +
-*Justus Müller* <justus.mueller@stud.htw-dresden.de> +
-*Mark Schrader* <mark.schrader@stud.htw-dresden.de> +
-*Khanh Ly La* <khanhly.la@stud.htw-dresden.de>
-
+= Projektplan: {project-name}
+Til Guhlmann <til.guhlmann@stud.htw-dresden.de>; Enna Scheer <enna.scheer@stud.htw-dresden.de>; Emujin Uuganbayar <emujin.uuganbayar@stud.htw-dresden.de>; Erik Vogt <erik.vogt@stud.htw-dresden.de>; Justus Müller <justus.mueller@stud.htw-dresden.de>; Mark Schrader <smark.schrader@stud.htw-dresden.de>; Khanh Ly La <khanhly.la@stud.htw-dresden.de>
 {localdatetime} 
-
 include::../_includes/default-attributes.inc.adoc[]
 // Platzhalter für weitere Dokumenten-Attribute
 
@@ -132,3 +123,5 @@ In unserem Projekt verwenden wir eine angepasste Form des *agilen Scrum-Ansatzes
 |
 - Eine Zusammenarbeit mit Github funktioniert nur wenn alle regelmäßig pullen und pushen, um in einer möglichst aktuellen Version zu arbeiten.
 |===
+
+Insgesamt verlief unsere Gruppenarbeit sehr gut. Wir haben uns stets gut abgestimmt, und insbesondere die wöchentlichen persönlichen Treffen haben uns geholfen, kontinuierlich am Projekt zu arbeiten. Der einzige kleine Rückschlag war, dass die Login-Funktion nicht rechtzeitig fertiggestellt wurde. Dies stellte jedoch kein größeres Problem dar, da unser Prototyp auch ohne diese Funktion für die Live-Demo ausreichend war. Abgesehen davon war unsere Zusammenarbeit sehr koordiniert und produktiv.

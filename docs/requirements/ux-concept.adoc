@@ -1,15 +1,6 @@
-= UX-Konzept: Finanztracker_
-
-*Til Guhlmann* <til.guhlmann@stud.htw-dresden.de> +
-*Enna Scheer* <enna.scheer@stud.htw-dresden.de> +
-*Emujin Uuganbayar* <emujin.uuganbayar@stud.htw-dresden.de> +
-*Erik Vogt* <erik.vogt@stud.htw-dresden.de> +
-*Justus Müller* <justus.mueller@stud.htw-dresden.de> +
-*Mark Schrader* <mark.schrader@stud.htw-dresden.de> +
-*Khanh Ly La* <khanhly.la@stud.htw-dresden.de>
-
+= UX-Konzept: {project-name}
+Til Guhlmann <til.guhlmann@stud.htw-dresden.de>; Enna Scheer <enna.scheer@stud.htw-dresden.de>; Emujin Uuganbayar <emujin.uuganbayar@stud.htw-dresden.de>; Erik Vogt <erik.vogt@stud.htw-dresden.de>; Justus Müller <justus.mueller@stud.htw-dresden.de>; Mark Schrader <smark.schrader@stud.htw-dresden.de>; Khanh Ly La <khanhly.la@stud.htw-dresden.de>
 {localdatetime} 
-
 include::../_includes/default-attributes.inc.adoc[]
 // Platzhalter für weitere Dokumenten-Attribute
 
@@ -147,7 +138,7 @@ a|
 
 
 |===
-|Bild a| image::gil_tuhlmann.png[alt=gil_tuhlmann_personenbild,width=160,height=120]
+|Bild a| image::Gil_Tuhlmann.png[alt=Gil_Tuhlmann_personenbild,width=160,height=120]
 |Name | Gil Thulmann
 
 |Demografie 
@@ -179,7 +170,7 @@ a|
 
 
 |===
-|Bild a| image::wuce_brillis.png[alt=wuce_brillis_personenbild,width=160,height=120]
+|Bild a| image::Wuce_Brillis.png[alt=Wuce_Brillis_personenbild,width=160,height=120]
 |Name | Wuce Brillis
 
 |Demografie 
