@@ -132,3 +132,5 @@ In unserem Projekt verwenden wir eine angepasste Form des *agilen Scrum-Ansatzes
 |
 - Eine Zusammenarbeit mit Github funktioniert nur wenn alle regelmäßig pullen und pushen, um in einer möglichst aktuellen Version zu arbeiten.
 |===
+
+Insgesamt verlief unsere Gruppenarbeit sehr gut. Wir haben uns stets gut abgestimmt, und insbesondere die wöchentlichen persönlichen Treffen haben uns geholfen, kontinuierlich am Projekt zu arbeiten. Der einzige kleine Rückschlag war, dass die Login-Funktion nicht rechtzeitig fertiggestellt wurde. Dies stellte jedoch kein größeres Problem dar, da unser Prototyp auch ohne diese Funktion für die Live-Demo ausreichend war. Abgesehen davon war unsere Zusammenarbeit sehr koordiniert und produktiv.
