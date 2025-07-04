@@ -18,8 +18,9 @@ In diesem Dokument werden die wesentlichen Begriffe aus dem Anwendungsgebiet (Fa
 * Anteilseigner  
 * Beteiligte
 | Product Owner| Sorgt für werthaltiges Produkt & entscheidet welche Anforderungen in welcher Reihenfolge umgesetzt werden. a|
-* Projekt Manager*
-| Scrum Master | Verantwortlich für die Teamproduktivität und sorgt für korrekte Anwendung der Prozessregeln. Sie/Er moderiert die Meetings a| * Agiles Coach 
+* Projekt Manager
+| Scrum Master | Verantwortlich für die Teamproduktivität und sorgt für korrekte Anwendung der Prozessregeln. Sie/Er moderiert die Meetings a| * Agiles Projektbegleiter 
+* Team Coach
 | Development-Team | Sorgt für die technische Umsetzung des Produkts a| 
 * Entwicklungsteam 
 * Programmierer
