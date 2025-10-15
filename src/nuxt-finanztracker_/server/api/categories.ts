@@ -1,6 +1,6 @@
-import { PrismaClient } from '@prisma/client'
+import { PrismaClient } from "@prisma/client";
 
-const prisma = new PrismaClient()
+const prisma = new PrismaClient();
 
 export default defineEventHandler(async (event) => {
   // Optional: user_id aus Query lesen, z.B. /api/categories?user_id=123

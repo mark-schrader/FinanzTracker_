@@ -1,5 +1,5 @@
 <template>
-  <div class="p-6 max-w-screen-xl mx-auto space-y-6">
+  <div class="max-w-screen-xl p-6 mx-auto space-y-6">
 
     <!-- Header -->
     <div class="flex items-center justify-between mb-6">
@@ -8,16 +8,16 @@
     </div>
 
     <!-- Grid -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
       <!-- Verlauf des Kontostands -->
-    <div class="col-span-1 md:col-span-2 bg-gray-200 rounded-md p-6 min-h-[180px]">
-      <p class="text-base font-medium mb-4">Verlauf des Kontostands</p>
-      <verlaufChart :transactions="transactions" />
-    </div>
+      <div class="col-span-1 md:col-span-2 bg-gray-200 rounded-md p-6 min-h-[180px]">
+        <p class="mb-4 text-base font-medium">Verlauf des Kontostands</p>
+        <verlaufChart :transactions="transactions" />
+      </div>
 
       <!-- Einnahme nächste 7 Tage -->
       <div class="bg-gray-100 rounded-lg p-6 flex flex-col items-center justify-center min-h-[150px]">
-        <p class="font-medium mb-2">Einnahme nächste 7 Tage</p>
+        <p class="mb-2 font-medium">Einnahme nächste 7 Tage</p>
         <svg class="w-10 h-10 text-gray-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" d="M5 10l7-7m0 0l7 7m-7-7v18" />
         </svg>
@@ -25,7 +25,7 @@
 
       <!-- Ausgaben nächste 7 Tage -->
       <div class="bg-gray-100 rounded-lg p-6 flex flex-col items-center justify-center min-h-[150px]">
-        <p class="font-medium mb-2">Ausgabe nächste 7 Tage</p>
+        <p class="mb-2 font-medium">Ausgabe nächste 7 Tage</p>
         <svg class="w-10 h-10 text-gray-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
         </svg>
@@ -33,7 +33,7 @@
 
       <!-- Ausgaben pro Kategorie -->
       <div class="bg-gray-100 rounded-lg p-6 flex flex-col items-center justify-center min-h-[150px]">
-        <p class="font-medium mb-2">Ausgaben pro Kategorie</p>
+        <p class="mb-2 font-medium">Ausgaben pro Kategorie</p>
         <svg class="w-10 h-10 text-gray-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" d="M11 3v18m4-14h6M5 9h6m4 10h6M5 19h6" />
         </svg>
@@ -41,7 +41,7 @@
 
       <!-- Individuelles Dashboard -->
       <div class="bg-gray-100 rounded-lg p-6 flex flex-col items-center justify-center min-h-[150px]">
-        <p class="font-medium mb-2">Individuelles Dashboard</p>
+        <p class="mb-2 font-medium">Individuelles Dashboard</p>
         <svg class="w-10 h-10 text-gray-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
         </svg>
@@ -49,7 +49,7 @@
     </div>
 
     <!-- Kontobewegungstabelle -->
-    <bewegungstabelle :transactions="transactions" /> 
+    <bewegungstabelle :transactions="transactions" />
 
   </div>
 </template>
@@ -58,11 +58,16 @@
 import { ref, computed, onMounted } from 'vue'
 import { useFetch } from '#app'
 
+definePageMeta({
+  middleware: "auth"
+})
+
 const transactions = ref([])
 const search = ref('')
 
+const { data, error } = await useFetch('/api/transactions')
+
 onMounted(async () => {
-  const { data, error } = await useFetch('/api/transactions')
   if (data.value) transactions.value = data.value
 })
 
