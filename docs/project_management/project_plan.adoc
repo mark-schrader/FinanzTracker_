@@ -31,12 +31,12 @@ Wir sind die Budget Buddies AG. Ein Team, welches sich der finanziellen Misslage
 //Describe or reference which management and technical practices will be used in the project, such as iterative development, continuous integration, independent testing and list any changes or particular configuration to the project. Specify how you will track progress in each practice. As an example, for iterative development the team may decide to use iteration assessments and iteration burndown reports and collect metrics such as velocity (completed work item points/ iteration).
 === Verwendete Management- und technische Praktiken im Projekt
 
-In unserem Projekt verwenden wir eine angepasste Form des *agilen Scrum-Ansatzes*, die auf unsere verfügbaren Kapazitäten (ca. 5 Stunden pro Woche pro Teammitglied, inkl. 1,5 Stunden Teammeeting) zugeschnitten ist. Die wichtigsten management- und technischen Praktiken, sowie die Fortschrittsverfolgung sind wie folgt organisiert:
+In unserem Projekt verwenden wir eine angepasste Form des *agilen Scrum-Ansatzes*, die auf unsere verfügbaren Kapazitäten (ca. 5 Stunden pro Woche pro Teammitglied, inkl. 1,5 Stunden Teammeeting alle zwei Wochen) zugeschnitten ist. Die wichtigsten management- und technischen Praktiken, sowie die Fortschrittsverfolgung sind wie folgt organisiert:
 
 ==== Iterative Entwicklung (Scrum-Sprints)
 
-* Wir arbeiten in *einwöchigen Sprints*, die in 1,5-stündigen Meeting geplant, überprüft und reflektiert werden.
-* Jede Woche werden wenige, priorisierte Aufgaben (z. B. 1–2 Story Points pro Mitglied) umgesetzt.
+* Im letzten Semester haben wir in *einwöchigen Sprints* gearbeitet, die in 1,5-stündigen Meeting geplant, überprüft und reflektiert wurden.
+* Jede Woche wurden wenige, priorisierte Aufgaben (z. B. 1–2 Story Points pro Mitglied) umgesetzt.
 
 * Wir haben unsere Arbeitsstrategie im 2. Semester abgeändert. Es finden *einwöchige Meetings* innerhalb des Dev-Teams und des Orga-Teams statt und *zweiwöchige Meetings* mit dem gesamten Team statt. In den großen Meetings wird der Plan für den nächsten Sprint besprochen und in den kleinen Meetings dann die Umsetztung in den zwei Wochen bis zum nächsten Woche.
 
