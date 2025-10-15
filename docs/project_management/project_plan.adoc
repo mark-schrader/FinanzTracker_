@@ -38,6 +38,8 @@ In unserem Projekt verwenden wir eine angepasste Form des *agilen Scrum-Ansatzes
 * Wir arbeiten in *einwöchigen Sprints*, die in 1,5-stündigen Meeting geplant, überprüft und reflektiert werden.
 * Jede Woche werden wenige, priorisierte Aufgaben (z. B. 1–2 Story Points pro Mitglied) umgesetzt.
 
+* Wir haben unsere Arbeitsstrategie im 2. Semester abgeändert. Es finden *einwöchige Meetings* innerhalb des Dev-Teams und des Orga-Teams statt und *zweiwöchige Meetings* mit dem gesamten Team statt. In den großen Meetings wird der Plan für den nächsten Sprint besprochen und in den kleinen Meetings dann die Umsetztung in den zwei Wochen bis zum nächsten Woche.
+
 ==== Continuous Integration (CI)
 
 * Code wird regelmäßig in ein gemeinsames Repository gepusht.
