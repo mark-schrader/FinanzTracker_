@@ -36,7 +36,7 @@ a|
 a|
 * reist leidenschaftlich gerne in verschiedene Länder, vor allem auf Städtetrips
 * führt eine eigene Reisekasse: jede Woche wandert ein fixer Betrag in ihre Spardose
-* möchte ihr Reisebudget übersichtlich im Dashboard sehen – inklusive Ausgaben, Sparfortschritt und Prognose
+* möchte ihr Reisebudget übersichtlich im Dashboard sehen – vor allem ihren Sparfortschritt
 * legt großen Wert auf klare Visualisierungen: sie möchte Trends und Veränderungen auf einen Blick erkennen
 * möchte über Diagramme nachvollziehen, wie sich ihre Ersparnisse im Laufe der Zeit entwickeln
 
@@ -108,7 +108,7 @@ a|
 
 |Hindernisse / Frustration
 a|
-* ist frisch nach Deutschland gezogen und hat noch Schwierigkeiten, den Wert des Euro richtig einzuschätzen (gewohnt an Lira) 
+* ist frisch nach Deutschland gezogen und hat noch Schwierigkeiten, den Wert des Euro richtig einzuschätzen (gewöhnt an Lira) 
 * bevorzugt die Englische Sprache, wenn möglich, kommt mit deutschsprachigen Apps manchmal nicht zurecht, besonders bei Fachbegriffen
 * sieht seinen Urlaub in der Heimat in Gefahr, weil ihm aktuell die Sparstruktur fehlt
 * tendiert dazu, spontan und unüberlegt Geld auszugeben, vor allem beim Online-Shopping nach Partynächten (z. B. Sonnenbrillen, „Gucci Caps“)
@@ -134,14 +134,14 @@ a|
 |Bedürfnisse / Ziele
 a|
 * spielt gerne Videospiele, bei denen man für ein Ziel verschieden Missionen erledigien muss
-* möchte in einem Diagramm visualisiert sehen, wie sich ihr Sparfortschritt über die Zeit entwickelt
 * sucht nach einem einfachen, motivierenden Weg, um ihr Budget im Alltag zu behalten, ohne viel Aufwand
+* möchte in einem Diagramm visualisiert sehen, wie sich ihr Sparfortschritt über die Zeit entwickelt
 * wünscht sich eine klare Übersicht über Einnahmen und Ausgaben
 
 |Hindernisse / Frustration
 a|
 * hat kein großes Interesse daran, ihre Finanzen im Detail zu analysieren
-* muss sich spielerisch motivieren – etwa durch Spar-Challenges, um regelmäßig kleine Beträge für ihren Sommerurlaub zurückzulegen 
+* muss sich spielerisch motivieren – wie bei Videospielen mit verschiedenen Goals, um regelmäßig kleine Beträge für ihren Sommerurlaub zurückzulegen 
 * braucht ein festgelegtes Ziel, sonst verliert sie schnell den Drang durchzuziehen 
 |===
 
