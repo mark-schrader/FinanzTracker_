@@ -55,6 +55,11 @@
 </template>
 
 <script setup lang="ts">
+definePageMeta({
+  middleware: 'auth' // Auth-Middleware für diese Seite
+})
+
+
 import { ref, computed, onMounted } from 'vue'
 import { useFetch } from '#app'
 
@@ -70,22 +75,22 @@ const userid = route.params.userid
 
 
 
-onMounted(async () => {
-  const { data, error } = await useFetch(`/api/transactions?userid=${userid}`)
+//onMounted(async () => {
+  // { data, error } = await useFetch(`/api/transactions?userid=${userid}`)
   
-  console.log('FETCH DATA:', data.value)
-  console.log('FETCH ERROR:', error)
+ // console.log('FETCH DATA:', data.value)
+  //console.log('FETCH ERROR:', error)
   
-  if (data.value) transactions.value = data.value
+  //if (data.value) transactions.value = data.value
 
-})
+//})
 
 // Search filter
-const filteredTransactions = computed(() =>
-  transactions.value.filter(t =>
-    Object.values(t).some(field =>
-      String(field).toLowerCase().includes(search.value.toLowerCase())
-    )
-  )
-)
+//const filteredTransactions = computed(() =>
+  //transactions.value.filter(t =>
+    //Object.values(t).some(field =>
+      //String(field).toLowerCase().includes(search.value.toLowerCase())
+    //)
+  //)
+//)
 </script>
