@@ -256,6 +256,7 @@ import { reactive, ref } from "vue";
 //import { useRouter } from 'vue-router';
 import { navigateTo } from '#app';
 
+const supabase = useSupabaseClient();
 
 const showLogin = ref(false);
 const showRegister = ref(false);
@@ -286,13 +287,41 @@ const register = async () => {
 
     const data = await res.json();
 
-    if (data.status === 'success') {
-      console.log('Vor dem Push:', data.user.userid)
-      //await router.push(`/dashboard/${data.user.userid}`)
-      await navigateTo(`/dashboard/${data.user.userid}`)
-      console.log('Registrierung erfolgreich:', data);
-      
+    if (data.status !== 'success') {
+      console.error('Registrierung fehlgeschlagen:', data.message);
+      return;
     }
+
+    console.log('Registrierung erfolgreich:', data);
+    
+    const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+    console.log("Warte 1000ms");
+    await sleep(1000);
+
+    console.log('Versuche jetzt Login mit:', form.email)
+    const { data: loginData, error: loginError } = await supabase.auth.signInWithPassword({
+      email: form.email,
+      password: form.password
+  });
+
+  if (loginError) {
+      console.error('Login nach Pause fehlgeschlagen:', loginError.message);
+     return;
+    }
+
+   
+    console.log('Login erfolgreich');
+    return navigateTo(`/dashboard/${data.user.userid}`);
+
+    //if (loginError) {
+      //console.error('Login fehlgeschlagen:', loginError.message);
+      //return;
+    //}
+
+    //console.log('Registrierung und Login erfolgreich:', loginData.data);
+
+    //return navigateTo('/dashboard/$data.user.userid');
+
   } catch (err) {
     console.error('Fehler bei Registrierung:', err)
   }
