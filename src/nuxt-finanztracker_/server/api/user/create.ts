@@ -38,7 +38,6 @@ export default defineEventHandler(async (event) => {
   })
   // BigInt zu String konvertieren
 const userSafe = {
-  ...user,
   userid: user.userid.toString(),
 }
 
