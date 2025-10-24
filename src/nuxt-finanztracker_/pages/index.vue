@@ -62,6 +62,7 @@
         <div v-if="showRegister" class="registerPopup" id="registerPopup">
           <button class="closeBtn" type="button" @click="closeForm()">x</button>
           <form class="form-container" @submit.prevent="register">
+          <form class="form-container" @submit.prevent="register">
             <h1 class="register-text">Register →</h1>
             <label for="fname">Vorname</label>
             <input type="text" name="fname" id="fname" v-model="form.firstname" />
@@ -271,6 +272,8 @@ const form = reactive({
   lastname: "",
   university: "",
   birthdate: "",
+  //username: "",
+  //startamount: ""
   //username: "",
   //startamount: ""
 })
