@@ -147,6 +147,7 @@
 <script setup>
 //Imports
 import { ref, computed, onMounted } from 'vue'
+import { z } from 'zod'
 import { useFetch } from '#app' // Nuxt-eigene Fetch-Funktion für SSR/CSR-Anfragen
 
 //Reaktive Daten
@@ -183,6 +184,29 @@ const expenseForm = ref({
   note: '',
   interval: ''
 })
+
+// Validierungsschemas
+const incomeSchema = z.object({
+  amount: z.string().min(1, 'Bitte Betrag eingeben'),
+  date: z.string().min(1, 'Datum darf nicht leer sein'),
+  source: z.string().min(2, 'Quelle zu kurz'),
+  category: z.string().min(1, 'Kategorie auswählen'),
+  note: z.string().optional(),
+  interval: z.string().min(1, 'Intervall auswählen')
+})
+
+const expenseSchema = z.object({
+  amount: z.string().min(1, 'Bitte Betrag eingeben'),
+  date: z.string().min(1, 'Datum darf nicht leer sein'),
+  use: z.string().min(2, 'Verwendungszweck angeben'),
+  category: z.string().min(1, 'Kategorie auswählen'),
+  note: z.string().optional(),
+  interval: z.string().min(1, 'Intervall auswählen')
+})
+
+// Fehlerzustände
+const incomeErrors = ref([])
+const expenseErrors = ref([])
 
 //Lifecycle Hook zum Laden von Kategorien & Transaktionen
 
@@ -245,36 +269,46 @@ const currentBalance = computed(() => {
 
 // Einnahme speichern
 async function submitIncome() {
+  incomeErrors.value = [] // alte Fehler löschen
+
+  // Lokale Validierung mit Zod
+  const parsed = incomeSchema.safeParse(incomeForm.value)
+  if (!parsed.success) {
+    incomeErrors.value = parsed.error?.errors?.map(e => e.message) || ['Unbekannter Validierungsfehler']
+    return
+  }
+
   try {
+    // Request an Backend
     const res = await $fetch('/api/income', {
       method: 'POST',
-      body: {
-        amount: incomeForm.value.amount,
-        date: incomeForm.value.date,
-        source: incomeForm.value.source,
-        category: incomeForm.value.category,
-        note: incomeForm.value.note,
-        interval: incomeForm.value.interval
-      }
+      body: parsed.data
     })
 
-    console.log('Erfolgreich gespeichert:', res)
+    // Backend-Fehler abfangen (wenn res.error vorhanden)
+    if (res?.error) {
+      incomeErrors.value = Array.isArray(res.details)
+        ? res.details.map(e => e.message)
+        : [res.error || 'Fehler beim Speichern im Backend']
+      return
+    }
 
-    // Anzeige aktualisieren
+    console.log('Einnahme gespeichert:', res)
+
+    // Lokale Anzeige aktualisieren
     transactions.value.push({
       type: 'Einnahme',
-      date: incomeForm.value.date,
-      time: '—',
-      amount: `+${parseFloat(incomeForm.value.amount).toFixed(2)} €`,
-      interval: incomeForm.value.interval,
+      date: parsed.data.date,
+      amount: `+${parseFloat(parsed.data.amount).toFixed(2)} €`,
+      interval: parsed.data.interval,
       owner: 'Du',
-      source: incomeForm.value.source,
-      purpose: incomeForm.value.source,
-      category_id: incomeForm.value.category,
-      comment: incomeForm.value.note
+      source: parsed.data.source,
+      purpose: parsed.data.source,
+      category_id: parsed.data.category,
+      comment: parsed.data.note
     })
 
-    // Reset + Modal schließen
+    // Formular zurücksetzen & Modal schließen
     incomeForm.value = {
       amount: '',
       date: '',
@@ -286,6 +320,7 @@ async function submitIncome() {
     showIncomeModal.value = false
   } catch (err) {
     console.error('Fehler beim Speichern:', err)
+    incomeErrors.value = ['Serverfehler – bitte später erneut versuchen.']
   }
 }
 
@@ -293,17 +328,19 @@ async function submitIncome() {
 
 // Ausgabe speichern
 async function submitExpense() {
+  expenseErrors.value = [] // alte Fehler löschen
+
+  // Validierung
+  const parsed = expenseSchema.safeParse(expenseForm.value)
+  if (!parsed.success) {
+    expenseErrors.value = parsed.error.errors.map(e => e.message) || ['Unbekannter Validierungsfehler']
+    return
+  }
+
   try {
     const res = await $fetch('/api/expense', {
       method: 'POST',
-      body: {
-        amount: expenseForm.value.amount,
-        date: expenseForm.value.date,
-        use: expenseForm.value.use,
-        category: expenseForm.value.category,
-        note: expenseForm.value.note,
-        interval: expenseForm.value.interval
-      }
+      body: parsed.data
     })
 
     console.log('Ausgabe erfolgreich gespeichert:', res)
@@ -311,17 +348,17 @@ async function submitExpense() {
     // Anzeige aktualisieren
     transactions.value.push({
       type: 'Ausgabe',
-      date: expenseForm.value.date,
+      date: parsed.data.date,
       time: '—',
-      amount: `-${parseFloat(expenseForm.value.amount).toFixed(2)} €`,
-      interval: expenseForm.value.interval,
-      owner: 'Null',
-      use: expenseForm.value.use,
-      category_id: expenseForm.value.category,
-      comment: expenseForm.value.note
+      amount: `-${parseFloat(parsed.data.amount).toFixed(2)} €`,
+      interval: parsed.data.interval,
+      owner: 'Du',
+      use: parsed.data.use,
+      category_id: parsed.data.category,
+      comment: parsed.data.note
     })
 
-    // Reset + Modal schließen
+    // Formular zurücksetzen
     expenseForm.value = {
       amount: '',
       date: '',
@@ -333,6 +370,7 @@ async function submitExpense() {
     showExpenseModal.value = false
   } catch (err) {
     console.error('Fehler beim Speichern der Ausgabe:', err)
+    expenseErrors.value = ['Serverfehler: Bitte später erneut versuchen.']
   }
 }
 
