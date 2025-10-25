@@ -55,15 +55,35 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { useFetch } from '#app'
 
 const transactions = ref([])
 const search = ref('')
 
+// Funktion, um Daten von der API zu holen
+const fetchTransactions = async () => {
+  const { data, error, status } = await useFetch('/api/transactions', {
+    server: false,
+  })
+
+  if (status.value === 'success' && data.value) {
+    transactions.value = data.value
+  } else if (error.value) {
+    console.error('Fehler beim Laden der Transaktionen:', error.value)
+  }
+}
+
+// Intervall-ID speichern, um es beim Verlassen der Seite zu stoppen
+let interval = null
+
 onMounted(async () => {
-  const { data, error } = await useFetch('/api/transactions')
-  if (data.value) transactions.value = data.value
+  await fetchTransactions()                    // Daten direkt beim Laden
+  interval = setInterval(fetchTransactions, 5000) // alle 5 Sekunden aktualisieren
+})
+
+onUnmounted(() => {
+  clearInterval(interval)                      // Intervall sauber stoppen
 })
 
 // Search filter
@@ -75,3 +95,4 @@ const filteredTransactions = computed(() =>
   )
 )
 </script>
+
