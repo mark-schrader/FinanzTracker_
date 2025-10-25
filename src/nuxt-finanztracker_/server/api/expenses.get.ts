@@ -1,35 +1,31 @@
-// server/api/expenses.get.ts
 import { PrismaClient } from '@prisma/client'
 
-const prisma = new PrismaClient()
+const prisma = globalThis.prisma || new PrismaClient()
+if (!globalThis.prisma) globalThis.prisma = prisma
 
 export default defineEventHandler(async (event) => {
-  const userId = Number(getQuery(event).user_id) // oder später per Auth
-
+  const userId = Number(getQuery(event).user_id)
   if (!userId) {
-    throw createError({
-      statusCode: 400,
-      statusMessage: 'Missing user_id'
-    })
+    return sendError(event, { statusCode: 400, statusMessage: 'Missing user_id' })
   }
 
-  const expenses = await prisma.expenses.findMany({
-    where: { user_id: BigInt(userId) },
-    include: {
-      categories: true,
-      user: true
-    },
-    orderBy: {
-      date: 'desc'
-    }
-  })
+  try {
+    const expenses = await prisma.expenses.findMany({
+      where: { user_id: BigInt(userId) },
+      include: { categories: true, user: true },
+      orderBy: { date: 'desc' }
+    })
 
-  return expenses.map(exp => ({
-    date: exp.date.toISOString().split('T')[0],
-    time: '—', // Zeit ist nicht im Schema, ggf. aus `created_at` extrahieren
-    amount: `-${exp.amount.toFixed(2)} €`,
-    owner: exp.user.username,
-    category: exp.categories.name,
-    comment: exp.note || ''
-  }))
+    return expenses.map(exp => ({
+      date: exp.date.toISOString().split('T')[0],
+      time: '—',
+      amount: `-${exp.amount.toFixed(2)} €`,
+      owner: exp.user.username,
+      category: exp.categories.name,
+      comment: exp.note || ''
+    }))
+  } catch (error) {
+    console.error('Expenses fetch error:', error)
+    return sendError(event, { statusCode: 500, statusMessage: 'Failed to fetch expenses' })
+  }
 })

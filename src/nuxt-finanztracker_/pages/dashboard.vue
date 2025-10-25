@@ -62,8 +62,15 @@ const transactions = ref([])
 const search = ref('')
 
 onMounted(async () => {
-  const { data, error } = await useFetch('/api/transactions')
-  if (data.value) transactions.value = data.value
+  const { data, error, status } = await useFetch('/api/transactions', {
+    server: false, // wichtig: sonst versucht Nuxt es beim SSR auszuführen
+  })
+
+  if (status.value === 'success' && data.value) {
+    transactions.value = data.value
+  } else if (error.value) {
+    console.error('Fehler beim Laden der Transaktionen:', error.value)
+  }
 })
 
 // Search filter
