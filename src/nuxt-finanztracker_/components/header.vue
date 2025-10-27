@@ -35,7 +35,7 @@ const navItems = [
     ]"
   >
     <!-- Left: Logo -->
-    <NuxtLink to="/" class="group flex-shrink-0">
+    <NuxtLink to="/" class="group flex-shrink-0"> 
       <img
         src="/Logo.png"
         alt="Logo"
