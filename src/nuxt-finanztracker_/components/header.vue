@@ -58,7 +58,7 @@ const navItems = [
                 'pb-1 border-b-2 transition-colors duration-200',
                 route.path === item.href
                   ? 'border-red-600 text-red-600'
-                  : 'border-transparent text-gray-700 dark:text-gray-300 hover:text-blue-700 dark:hover:text-blue-400'
+                  : 'link-primary border-transparent '
               ]"
             >
               {{ item.label }}

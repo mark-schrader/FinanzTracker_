@@ -21,6 +21,10 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* Reusable Components */
+/* Allgemein:  
+text-gray-700 dark:text-gray-300
+dark:text-brand-300 dark:hover:text-brand-200*/ 
+
 @layer components {
 
   /* --- Layout --- */
@@ -32,12 +36,15 @@ h1, h2, h3, h4, h5, h6 {
     @apply flex-1 max-w-7xl mx-auto w-full p-4 sm:p-6 lg:p-8;
   }
 
-  /* --- Header & Footer --- */
-
-
   .footer {
-    @apply text-center text-sm text-gray-600 dark:text-gray-400 
-           py-4 border-t border-gray-300 dark:border-gray-700;
+  @apply text-center text-sm text-gray-700 dark:text-gray-300 
+         py-4 border-t border-gray-300 dark:border-gray-700
+         bg-gray-100 dark:bg-gray-900 mt-12;
+}
+
+  .link-primary {
+    @apply text-brand-600 hover:text-brand-400 
+           dark:text-brand-300 dark:hover:text-brand-200 transition-colors;
   }
 
   /* --- Navigation --- */
