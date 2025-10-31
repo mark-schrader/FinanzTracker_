@@ -3,11 +3,12 @@ import { useRoute } from 'vue-router'
 import DarkMode from '~/components/darkMode.vue' // Dark mode toggle component
 import { ref, onMounted, onUnmounted } from 'vue' 
 
+//Reaktive Referenzen
 const route = useRoute() //hightlight current nav item
 const isScrolled = ref(false) // pruef scroll zustand
 
 onMounted(() => {
-  const onScroll = () => (isScrolled.value = window.scrollY > 80)
+  const onScroll = () => (isScrolled.value = window.scrollY > 80) // wenn mehr als 80px gescrollt, setze isScrolled auf true
   window.addEventListener('scroll', onScroll)
   onUnmounted(() => window.removeEventListener('scroll', onScroll))
 })
@@ -27,11 +28,8 @@ const navItems = [
 />
   <!-- Header -->
   <header
-     :class="[
-      'sticky top-0 z-50 flex items-center justify-between px-8 border-b transition-all duration-300',
-      isScrolled // wenn gescrollt, kleinere header
-        ? 'h-28 bg-white/90 dark:bg-gray-900/80 shadow-md'
-        : 'h-40 bg-white dark:bg-gray-900'
+     :class="['header',
+      isScrolled ? 'header-scrolled' : '' //wenn sroll, header wird kleiner
     ]"
   >
     <!-- Left: Logo -->
@@ -49,23 +47,7 @@ const navItems = [
         Pleitegeier
       </h1>
 
-      <nav>
-        <ul class="flex gap-6 text-sm font-semibold">
-          <li v-for="(item, i) in navItems" :key="i">
-            <NuxtLink
-              :to="item.href"
-              :class="[
-                'pb-1 border-b-2 transition-colors duration-200',
-                route.path === item.href
-                  ? 'border-red-600 text-red-600'
-                  : 'link-primary border-transparent '
-              ]"
-            >
-              {{ item.label }}
-            </NuxtLink>
-          </li>
-        </ul>
-      </nav>
+      <Navigation :nav-items="navItems" :active-path="route.path" layout="header" /> <!-- Navigation Komponente -->
     </div>
 
     <!-- Right: Actions -->
@@ -89,9 +71,7 @@ const navItems = [
       </div>
 
       <!-- Avatar-->
-      <div
-        class="w-10 h-10 rounded-full bg-gray-800 dark:bg-gray-200 flex items-center justify-center text-white dark:text-gray-800"
-      >
+      <div class="avatar">
         <i class="fas fa-user"></i>
       </div>
     </div>

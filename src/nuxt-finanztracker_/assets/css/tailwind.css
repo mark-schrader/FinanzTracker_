@@ -23,7 +23,9 @@ h1, h2, h3, h4, h5, h6 {
 /* Reusable Components */
 /* Allgemein:  
 text-gray-700 dark:text-gray-300
-dark:text-brand-300 dark:hover:text-brand-200*/ 
+
+text-brand-600 hover:text-brand-400
+for links: dark:text-brand-300 dark:hover:text-brand-200*/ 
 
 @layer components {
 
@@ -35,6 +37,16 @@ dark:text-brand-300 dark:hover:text-brand-200*/
   .content-wrapper {
     @apply flex-1 max-w-7xl mx-auto w-full p-4 sm:p-6 lg:p-8;
   }
+  /*header und footer*/
+
+  .header {
+  @apply sticky top-0 z-50 flex items-center justify-between px-8 
+         h-40 border-b bg-white dark:bg-gray-900 transition-all duration-300;
+}
+
+  .header-scrolled {
+  @apply h-28 bg-white/90 dark:bg-gray-900/80 shadow-md;
+}
 
   .footer {
   @apply text-center text-sm text-gray-700 dark:text-gray-300 
@@ -43,16 +55,25 @@ dark:text-brand-300 dark:hover:text-brand-200*/
 }
 
   .link-primary {
-    @apply text-brand-600 hover:text-brand-400 
-           dark:text-brand-300 dark:hover:text-brand-200 transition-colors;
-  }
+  @apply px-2 py-1 rounded-md font-medium
+         text-brand-600 hover:text-brand-400
+         dark:text-brand-300 dark:hover:text-brand-200
+         hover:bg-gray-100 dark:hover:bg-gray-800
+         transition-colors duration-200;
+}
 
   /* --- Navigation --- */
   .nav-link {
-    @apply px-3 py-2 rounded-md text-sm font-medium text-gray-700 dark:text-gray-200 
-           hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors;
+  @apply px-3 py-2 rounded-md text-sm font-medium
+         text-brand-600 hover:text-brand-400
+         dark:text-brand-300 dark:hover:text-brand-200
+         hover:bg-gray-100 dark:hover:bg-gray-800
+         transition-colors duration-200;
   }
 
+  .nav-link-active {
+    @apply text-brand-600 border-b-2 border-brand-600 font-semibold;
+  }
   /* --- Cards: for box, chart --- */
   .card {
     @apply bg-white dark:bg-gray-800 shadow-md rounded-xl p-4 sm:p-6 transition-colors duration-300;
@@ -79,25 +100,12 @@ dark:text-brand-300 dark:hover:text-brand-200*/
     @apply px-4 py-2 border-t border-gray-200 dark:border-gray-700;
   }
 
-  /* --- Buttons --- */
-  .btn {
-    @apply inline-flex items-center justify-center font-medium rounded-lg 
-           px-4 py-2 transition-colors duration-200;
+  /* --- Avatar --- */
+  .avatar {
+  @apply w-10 h-10 rounded-full bg-gray-800 dark:bg-gray-200 
+         flex items-center justify-center text-white dark:text-gray-800;
   }
-
-  .btn-primary {
-    @apply btn bg-blue-600 hover:bg-blue-700 text-white;
-  }
-
-  .btn-secondary {
-    @apply btn bg-gray-200 hover:bg-gray-300 text-gray-900 
-           dark:bg-gray-700 dark:hover:bg-gray-600 dark:text-gray-100;
-  }
-
-  .btn-danger {
-    @apply btn bg-red-500 hover:bg-red-600 text-white;
-  }
-
+  
   /* --- Chart container --- */
   .chart-box {
     @apply card h-[400px];
