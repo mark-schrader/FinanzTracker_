@@ -101,10 +101,11 @@ for links: dark:text-brand-300 dark:hover:text-brand-200*/
   }
 
   /* --- Avatar --- */
-  .avatar {
-  @apply w-10 h-10 rounded-full bg-gray-800 dark:bg-gray-200 
-         flex items-center justify-center text-white dark:text-gray-800;
-  }
+ .avatar {
+  @apply w-10 h-10 rounded-full bg-teal-500 dark:bg-teal-400 flex items-center justify-center 
+         text-white dark:text-gray-900 shadow-sm transition-colors duration-300;
+        }
+
   
   /* --- Chart container --- */
   .chart-box {

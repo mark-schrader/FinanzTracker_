@@ -103,7 +103,6 @@
             </select>
             
 
-
             <label class="block text-sm font-medium">Kommentar</label>
             <textarea v-model="expenseForm.note" class="border px-2 py-1 rounded w-full"></textarea>
 
