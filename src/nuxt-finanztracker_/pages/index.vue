@@ -37,12 +37,13 @@
       <div class="form-container-wrapper">
         <div v-if="showLogin" class="loginPopup" id="loginPopup">
           <button class="closeBtn" type="button" @click="closeForm()">x</button>
-          <form action="..." class="form-container" method="post">
+          <form @submit.prevent="login" class="form-container" id="login">
             <h1 class="login-text">Login →</h1>
             <label for="email">Email</label>
             <input
               type="email"
               name="email"
+              v-model="email"
               placeholder="Enter Email"
               required
             />
@@ -51,6 +52,7 @@
               type="password"
               placeholder="Enter Password"
               name="psw"
+              v-model="password"  
               required
             />
             <button class="submitBtn" type="submit">Login</button>
@@ -61,7 +63,6 @@
       <div class="form-container-wrapper">
         <div v-if="showRegister" class="registerPopup" id="registerPopup">
           <button class="closeBtn" type="button" @click="closeForm()">x</button>
-          <form class="form-container" @submit.prevent="register">
           <form class="form-container" @submit.prevent="register">
             <h1 class="register-text">Register →</h1>
             <label for="fname">Vorname</label>
@@ -256,6 +257,7 @@ import AppHeader from "~/components/AppHeader.vue";
 import { reactive, ref } from "vue";
 //import { useRouter } from 'vue-router';
 import { navigateTo } from '#app';
+import { useFetch } from "nuxt/app";
 
 const supabase = useSupabaseClient();
 
@@ -277,6 +279,8 @@ const form = reactive({
   //username: "",
   //startamount: ""
 })
+
+
 
 const register = async () => {
   try {
@@ -327,6 +331,64 @@ const register = async () => {
 
   } catch (err) {
     console.error('Fehler bei Registrierung:', err)
+  }
+}
+
+// Refs für die Formular-Eingabefelder
+const email = ref('')
+const password = ref('')
+
+// Ref für Fehlermeldungen an den User
+const errorMessage = ref<string | null>(null)
+
+// Den Supabase-Client holen (auto-importiert)
+
+
+const login = async () => {
+  errorMessage.value = null // Fehler zurücksetzen
+
+  try {
+    // SCHRITT 1: Authentifizierung bei Supabase
+    // Wir holen uns nur den Fehler, da die Sitzung im Cookie gespeichert wird.
+    const { error: authError } = await supabase.auth.signInWithPassword({
+      email: email.value,
+      password: password.value,
+    })
+
+    if (authError) {
+      // Zeigt dem User einen Anmeldefehler an
+      errorMessage.value = authError.message
+      console.error('Login-Fehler:', authError.message)
+      return
+    }
+
+    const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+    console.log("Warte 1000ms");
+    await sleep(1000);
+
+    // Auth war erfolgreich, das Cookie ist gesetzt.
+
+    // SCHRITT 2: Hole das zugehörige Prisma-User-Profil
+    // (Wir brauchen eine API-Route dafür, siehe Teil 2 unten)
+    const { data: profileData, error: profileError } = await useFetch('/api/user/me')
+
+    if (profileError || !profileData.value) {
+      // Fehler: Der User ist zwar eingeloggt, aber sein Prisma-Profil fehlt?
+      errorMessage.value = "Anmeldung erfolgreich, aber Profil konnte nicht geladen werden."
+      console.error('Profil-Fehler:', profileError.value)
+      return
+    }
+
+    // ERFOLG! Wir haben die Prisma-UserID (z.B. "123")
+    const prismaUserId = profileData.value.userid
+    console.log('Login und Profilabruf erfolgreich. UserID:', prismaUserId)
+
+    // SCHRITT 3: Weiterleitung zur Dashboard-Seite mit der Prisma-ID
+    return navigateTo(`/dashboard/${prismaUserId}`)
+
+  } catch (err: any) {
+    errorMessage.value = err.message || "Ein unerwarteter Fehler ist aufgetreten."
+    console.error('Unerwarteter Fehler:', err)
   }
 }
 
