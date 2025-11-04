@@ -18,25 +18,24 @@ const navItems = [
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
     />
-
     <!-- Header is fixed -->
     <header
-      class="fixed top-0 left-0 right-0 z-50 flex items-center justify-between h-40 px-6 bg-white border-b"
+      class="fixed top-0 left-0 right-0 z-50 flex items-center justify-between h-35 px-6 bg-white shadow-lg"
     >
       <!-- Logo -->
-      <NuxtLink to="/" class="flex-shrink-0 group">
+      <NuxtLink to="/" class="shrink-0 group">
         <!-- flex-shrink for original Logo -->
         <img
           src="/Logo.png"
           alt="Logo"
-          class="h-20 w-auto transition-transform duration-300 group-hover:rotate-12 group-hover:scale-105"
+          class="h-20 w-auto transition-transform duration-300 group-hover:rotate-5 group-hover:scale-105"
         />
         <!-- Logo with Hover effect and animation rotate -->
       </NuxtLink>
 
       <!-- Center: Title + Navigation -->
       <div class="flex flex-col items-center justify-center">
-        <h1 class="font-bold text-5xl py-5">Pleitegeier</h1>
+        <h1 class="font-bold text-4xl py-5">Pleitegeier</h1>
         <nav class="mt-1">
           <!-- Navigation -->
           <ul class="flex space-x-6 text-sm font-semibold">
@@ -45,8 +44,9 @@ const navItems = [
                 :to="item.href"
                 :class="[
                   route.path === item.href // check if the current route matches the href
-                    ? 'pb-1 border-b-2 text-red-600 border-red-600' //highlight active link
-                    : 'text-gray-700 hover:text-blue-700 pb-1 border-b-2 border-transparent', // default style for inactive links
+                    ? 'pb-1 border-b-2 text-red-500 border-red-500' //highlight active link
+                    : 'border-transparent text-gray-600 hover:text-sky-600 pb-1 border-b-2 hover:border-indigo-600', // default style for inactive links
+                  'transition-colors duration-200 ease-out',
                 ]"
               >
                 {{ item.label }}
