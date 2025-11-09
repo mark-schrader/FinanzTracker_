@@ -28,20 +28,20 @@
       <!-- Modal -->
       <div v-if="showIncomeModal" class="fixed inset-0 backdrop-blur-sm flex items-center justify-center z-50">
         <div class="bg-white p-6 rounded-lg shadow-lg max-w-md w-full space-y-4 relative">
-          <h2 class="text-xl font-bold">Neue Einnahme</h2>
+          <h2 class="text-2xl font-bold text-brand-600 dark:text-brand-600">Neue Einnahme</h2>
 
           <div class="grid gap-2">
-            <label class="block text-sm font-medium">Betrag (€)</label>
-            <input v-model="incomeForm.amount" type="number" step="0.01" class="border px-2 py-1 rounded w-full" />
+            <label>Betrag (€)</label>
+            <input v-model="incomeForm.amount" type="number" step="0.01" class="form-input" />
 
-            <label class="block text-sm font-medium">Datum</label>
-            <input v-model="incomeForm.date" type="date" class="border px-2 py-1 rounded w-full" />
+            <label>Datum</label>
+            <input v-model="incomeForm.date" type="date" class="form-input" />
 
-            <label class="block text-sm font-medium">Quelle</label>
-            <input v-model="incomeForm.source" type="text" class="border px-2 py-1 rounded w-full" />
+            <label>Quelle</label>
+            <input v-model="incomeForm.source" type="text" class="form-input" />
 
-            <label class="block text-sm font-medium">Kategorie</label>
-            <select v-model="incomeForm.category" class="border px-2 py-1 rounded w-full">
+            <label>Kategorie</label>
+            <select v-model="incomeForm.category" class="form-input">
               <option disabled value="">Bitte wählen</option>
               <option v-for="cat in categories.filter(c => c.type === 'income')" :key="cat.id" :value="cat.id">
                 {{ cat.name }}
@@ -49,11 +49,11 @@
             </select>
 
 
-            <label class="block text-sm font-medium">Kommentar</label>
-            <textarea v-model="incomeForm.note" class="border px-2 py-1 rounded w-full"></textarea>
+            <label>Kommentar</label>
+            <textarea v-model="incomeForm.note" class="form-textarea"></textarea>
 
-            <label class="block text-sm font-medium">Zyklus</label>
-            <select v-model="incomeForm.interval" class="border px-2 py-1 rounded w-full">
+            <label>Zyklus</label>
+            <select v-model="incomeForm.interval" class="form-select">
               <option value="once">Einmalig</option>
               <option value="weekly">Wöchendlich</option>
               <option value="monthly">Monatlich</option>
@@ -63,8 +63,8 @@
           </div>
 
           <div class="flex justify-end space-x-2 mt-4">
-            <button @click="showIncomeModal = false" class="text-gray-500 hover:text-blue-700">Abbrechen</button>
-            <button @click="submitIncome" class="px-4 py-2 rounded bg-blue-100 hover:bg-blue-200 text-blue-700">
+            <button @click="showIncomeModal = false" class="btn btn-secondary">Abbrechen</button>
+            <button @click="submitIncome" class="btn btn-primary">
               Speichern
             </button>
           </div>
@@ -82,20 +82,20 @@
       <!-- Modal für Ausgabe -->
       <div v-if="showExpenseModal" class="fixed inset-0 backdrop-blur-sm flex items-center justify-center z-50">
         <div class="bg-white p-6 rounded-lg shadow-lg max-w-md w-full space-y-4 relative">
-          <h2 class="text-xl font-bold">Neue Ausgabe</h2>
+          <h2 class="text-2xl font-bold text-brand-600 dark:text-brand-600">Neue Ausgabe</h2>
 
           <div class="grid gap-2">
-            <label class="block text-sm font-medium">Betrag (€)</label>
-            <input v-model="expenseForm.amount" type="number" step="0.01" class="border px-2 py-1 rounded w-full" />
+            <label>Betrag (€)</label>
+            <input v-model="expenseForm.amount" type="number" step="0.01" class="form-input" />
 
-            <label class="block text-sm font-medium">Datum</label>
-            <input v-model="expenseForm.date" type="date" class="border px-2 py-1 rounded w-full" />
+            <label>Datum</label>
+            <input v-model="expenseForm.date" type="date" class="form-input" />
 
-            <label class="block text-sm font-medium">Zweck</label>
-            <input v-model="expenseForm.use" type="text" class="border px-2 py-1 rounded w-full" />
+            <label>Zweck</label>
+            <input v-model="expenseForm.use" type="text" class="form-input" />
 
-            <label class="block text-sm font-medium">Kategorie</label>
-            <select v-model="expenseForm.category" class="border px-2 py-1 rounded w-full">
+            <label>Kategorie</label>
+            <select v-model="expenseForm.category" class="form-select">
               <option disabled value="">Bitte wählen</option>
               <option v-for="cat in categories.filter(c => c.type === 'expense')" :key="cat.id" :value="cat.id">
                 {{ cat.name }}
@@ -103,11 +103,11 @@
             </select>
             
 
-            <label class="block text-sm font-medium">Kommentar</label>
-            <textarea v-model="expenseForm.note" class="border px-2 py-1 rounded w-full"></textarea>
+            <label>Kommentar</label>
+            <textarea v-model="expenseForm.note" class="form-textarea"></textarea>
 
-            <label class="block text-sm font-medium">Zyklus</label>
-            <select v-model="expenseForm.interval" class="border px-2 py-1 rounded w-full">
+            <label>Zyklus</label>
+            <select v-model="expenseForm.interval" class="form-select">
               <option value="once">Einmalig</option>
               <option value="weekly">Wöchendlich</option>
               <option value="monthly">Monatlich</option>
@@ -117,8 +117,8 @@
           </div>
 
           <div class="flex justify-end space-x-2 mt-4">
-            <button @click="showExpenseModal = false" class="text-gray-500 hover:text-blue-700">Abbrechen</button>
-            <button @click="submitExpense" class="px-4 py-2 rounded bg-blue-100 hover:bg-blue-200 text-blue-700">
+            <button @click="showExpenseModal = false" class="btn btn-secondary">Abbrechen</button>
+            <button @click="submitExpense" class="btn btn-primary">
               Speichern
             </button>
           </div>
