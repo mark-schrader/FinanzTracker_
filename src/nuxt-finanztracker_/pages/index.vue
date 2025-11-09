@@ -43,7 +43,7 @@
       <i class="fas fa-times"></i>
       </button>
         <form class="flex flex-col gap-4">
-          <h1 class="text-2xl font-bold text-brand-600 dark:text-brand-300">Login →</h1>
+          <h1 class="text-2xl font-bold text-brand-600 dark:text-brand-600">Login →</h1>
           <label for="email">Email</label>
           <input type="email" name="email" placeholder="Enter Email" required class="form-input" />
 
@@ -61,7 +61,7 @@
       <i class="fas fa-times"></i>
       </button>
         <form class="flex flex-col gap-4">
-          <h1 class="text-2xl font-bold text-brand-600 dark:text-brand-300">Register →</h1>
+          <h1 class="text-2xl font-bold text-brand-600 dark:text-brand-600">Register →</h1>
 
           <label for="fname">Vorname</label>
           <input type="text" name="fname" id="fname" class="form-input" /> <!-- form-input schon definiert in tailwind.css -->

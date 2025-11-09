@@ -10,9 +10,7 @@
         type="text"
         v-model="search"
         placeholder="Suchen..."
-        class="border border-gray-300 dark:border-gray-600 rounded px-2 py-1 text-sm
-               bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200
-               focus:ring-2 focus:ring-teal-400 focus:outline-none transition-colors"
+        class="form-input w-1/3 dark:bg-gray-800"
       />
     </div>
 
