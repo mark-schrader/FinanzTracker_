@@ -37,6 +37,11 @@ for links: dark:text-brand-300 dark:hover:text-brand-200*/
   .content-wrapper {
     @apply flex-1 max-w-7xl mx-auto w-full p-4 sm:p-6 lg:p-8;
   }
+
+  label {
+  @apply text-gray-700 font-medium;
+  }
+
   /*header und footer*/
 
   .header {
@@ -105,7 +110,29 @@ for links: dark:text-brand-300 dark:hover:text-brand-200*/
   @apply w-10 h-10 rounded-full bg-teal-500 dark:bg-teal-400 flex items-center justify-center 
          text-white dark:text-gray-900 shadow-sm transition-colors duration-300;
         }
+  /* --- Form Elements --- */
+  .form-input, .form-select{
+    @apply border border-gray-300 dark:border-gray-600 rounded 
+           px-3 py-2 text-sm w-full
+           bg-white/90 dark:text-gray-700
+           focus:ring-2 focus:ring-teal-400 focus:outline-none 
+           transition-colors duration-200;
+  }
 
+  /* --- Buttons --- */
+  .btn {
+    @apply inline-flex items-center justify-center font-medium rounded-lg 
+           px-4 py-2 transition-all duration-200 focus:outline-none;
+  }
+
+  .btn-primary {
+    @apply btn bg-teal-500 hover:bg-teal-600 text-white shadow-sm;
+  }
+
+  .btn-secondary {
+    @apply btn bg-gray-200 hover:bg-gray-300 text-gray-900 
+           dark:bg-gray-700 dark:hover:bg-gray-600 dark:text-gray-100;
+  }
   
   /* --- Chart container --- */
   .chart-box {
