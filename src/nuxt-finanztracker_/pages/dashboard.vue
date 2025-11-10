@@ -94,18 +94,19 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed } from 'vue'
 import { useFetch } from '#app'
 
-const transactions = ref([])
+// fetch direkt aufrufen
+const { data: transactionsData, error } = await useFetch('/api/transactions?user_id=1')
+
+// reaktiver Wert
+const transactions = ref(transactionsData.value || [])
 const search = ref('')
 
-onMounted(async () => {
-  const { data, error } = await useFetch('/api/transactions')
-  if (data.value) transactions.value = data.value
-})
+//Optional Debug:
+console.log('TRANSACTIONS:', transactions.value)
 
-// Search filter
 const filteredTransactions = computed(() =>
   transactions.value.filter(t =>
     Object.values(t).some(field =>
@@ -114,3 +115,4 @@ const filteredTransactions = computed(() =>
   )
 )
 </script>
+
