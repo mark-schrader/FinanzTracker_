@@ -71,7 +71,7 @@
         </div>
       </div>
 
-      <!-- Ausgabe Button ersetzt NuxtLink -->
+      <!-- Ausgabe Button -->
       <button @click="showExpenseModal = true"
         class="bg-red-100 hover:bg-red-200 text-red-700 font-semibold py-12 rounded shadow
          text-center flex flex-col items-center justify-center space-y-2 transform hover:scale-105 transition-transform duration-200">
@@ -132,17 +132,84 @@
         <span class="text-lg">Kategorien verwalten</span>
       </NuxtLink>
 
-      <!-- Daueraufträge -->
-      <NuxtLink to="/dauerauftraege"
+      <!-- Daueraufträge Button -->
+      <button @click="showRecurringModal = true"
         class="bg-yellow-100 hover:bg-yellow-200 text-yellow-700 font-semibold py-4 rounded shadow
            text-center flex flex-col items-center justify-center space-y-2 transform hover:scale-105 transition-transform duration-200">
+        <i class="fas fa-plus text-4xl"></i>
         <span class="text-lg">Daueraufträge verwalten</span>
-      </NuxtLink>
+      </button>
+       <!-- Modal Verwaltung Dauerauftrag -->
+      <div v-if="showRecurringModal" class="fixed inset-0 backdrop-blur-sm flex items-center justify-center z-50">
+        <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg w-[90%] max-w-4xl space-y-4 relative transition-theme">
+          <h2 class="text-2xl font-bold text-brand-600 dark:text-brand-600">Daueraufträge verwalten</h2>
+          <p class="text-gray-700 dark:text-gray-700">Diese Funktion wird in Kürze verfügbar sein.</p>
+
+          <!-- Tabelle:-->
+          <div class="table-container">
+            <table class="table">
+              <thead class="bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200">
+                <tr class="bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-100">
+                  <th class="border p-2">Name</th>
+                  <th class="border p-2">Kategorie</th>
+                  <th class="border p-2">Betrag</th>
+                  <th class="border p-2">Intervall</th>
+                  <th class="border p-2">Aktionen</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr
+                  v-for="(auftrag, i) in placeholderAuftraege"
+                  :key="i"
+                  class="hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+                >
+                  <td class="p-2 border-b dark:border-gray-700">{{ auftrag.name }}</td>
+                  <td class="p-2 border-b dark:border-gray-700">{{ auftrag.kategorie }}</td>
+                  <td
+                    class="p-2 border-b dark:border-gray-700 text-right"
+                    :class="auftrag.betrag < 0 ? 'text-red-600' : 'text-green-600'"
+                  >
+                    {{ auftrag.betrag.toFixed(2) }}€
+                  </td>
+                  <td class="p-2 border-b dark:border-gray-700">{{ auftrag.intervall }}</td>
+                  <td class="p-2 border-b dark:border-gray-700 text-center space-x-2">
+                    <button
+                      class="text-teal-600 hover:text-teal-400 dark:text-teal-400 dark:hover:text-teal-300 transition"
+                    >
+                      <i class="fas fa-pen"></i>
+                    </button>
+                    <button
+                      class="text-gray-500 hover:text-red-500 transition"
+                    >
+                      <i class="fas fa-trash"></i>
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!--Button: Kategorie hinzufügen -->
+          <div class="flex justify-center mt-2">
+            <button class="btn btn-secondary flex items-center space-x-2">
+              <i class="fas fa-plus-circle text-lg"></i> <!-- Icon -->
+              <span>Kategorie hinzufügen</span>
+            </button>
+          </div>
+
+          <!-- Button: schließen // danach vllt auch Button: Speichern dazu?-->
+          <div class="flex justify-end mt-6">
+            <button @click="showRecurringModal = false" class="btn btn-primary">
+              Schließen
+            </button>
+          </div>
+        </div>
+      </div> 
     </div>
 
     <!-- Übersicht der Kontobewegung -->
-    <bewegungstabelle :transactions="transactions" /> <!-- Importiere die Komponente bewegungstabelle.vue -->
-  </div>
+    <bewegungstabelle :transactions="transactions" />
+  </div> <!-- Ende von content-wrapper -->
 </template>
 
 
@@ -165,6 +232,9 @@ const categories = ref([])
 // Modalsteuerung für Einnahme & Ausgabe
 const showIncomeModal = ref(false)
 const showExpenseModal = ref(false)
+
+// Modalsteuerung für Daueraufträge  ----NEU----
+const showRecurringModal = ref(false)
 
 // Formular-Daten für Einnahmen
 const incomeForm = ref({
@@ -337,6 +407,15 @@ async function submitExpense() {
     console.error('Fehler beim Speichern der Ausgabe:', err)
   }
 }
+
+// Khanhly: Backend bitte bearbeiten, da hier nur platzholder
+// Platzhalter-Daten für Daueraufträge 
+const placeholderAuftraege = ref([
+  { name: "Miete", kategorie: "Wohnung", betrag: -500, intervall: "M" },
+  { name: "Handyvertrag", kategorie: "Wohnung", betrag: -20, intervall: "M" },
+  { name: "Vereinsbeitrag", kategorie: "Sport", betrag: -52, intervall: "Q" },
+  { name: "Versicherung XY", kategorie: "Versicherung", betrag: -65.67, intervall: "Y" },
+])
 
 </script>
 
