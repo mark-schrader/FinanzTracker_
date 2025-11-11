@@ -127,27 +127,30 @@
       <NuxtLink to="/kategorien"
         class="bg-blue-100 hover:bg-blue-200 text-blue-700 font-semibold py-4 rounded shadow
            text-center flex flex-col items-center justify-center space-y-2 transform hover:scale-105 transition-transform duration-200">
-        <span class="text-lg">Kategorien verwalten</span>
+          <i class="fas fa-tags text-4xl"></i>
+          <span class="text-lg">Kategorien verwalten</span>
       </NuxtLink>
 
       <!-- Daueraufträge Button -->
       <button @click="showRecurringModal = true"
         class="bg-yellow-100 hover:bg-yellow-200 text-yellow-700 font-semibold py-4 rounded shadow
            text-center flex flex-col items-center justify-center space-y-2 transform hover:scale-105 transition-transform duration-200">
-        <i class="fas fa-plus text-4xl"></i>
+        <i class="fas fa-sync-alt text-4xl"></i>
         <span class="text-lg">Daueraufträge verwalten</span>
       </button>
        <!-- Modal Verwaltung Dauerauftrag -->
       <div v-if="showRecurringModal" class="fixed inset-0 backdrop-blur-sm flex items-center justify-center z-50">
-        <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg w-[90%] max-w-4xl space-y-4 relative transition-theme">
+        <div class="bg-white p-6 rounded-lg shadow-lg w-[90%] max-w-4xl space-y-4 relative transition-theme">
           <h2 class="text-2xl font-bold text-brand-600 dark:text-brand-600">Daueraufträge verwalten</h2>
-          <p class="text-gray-700 dark:text-gray-700">Diese Funktion wird in Kürze verfügbar sein.</p>
+          <p class="text-gray-700">Diese Funktion wird in Kürze verfügbar sein.</p>
 
           <!-- Tabelle:-->
+                <!-- css: text-teal-600 dark:text-teal-400': t.type === 'Einnahme',
+                'text-red-500 dark:text-red-400': t.type === 'Ausgabe' -->
           <div class="table-container">
-            <table class="table">
+            <table class="table text-gray-700 dark:text-gray-700">
               <thead class="bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200">
-                <tr class="bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-100">
+                <tr>
                   <th class="border p-2">Name</th>
                   <th class="border p-2">Kategorie</th>
                   <th class="border p-2">Betrag</th>
@@ -159,29 +162,86 @@
                 <tr
                   v-for="(auftrag, i) in placeholderAuftraege"
                   :key="i"
-                  class="hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+                  class="hover:bg-gray-100 dark:hover:bg-gray-100 transition-colors"
                 >
                   <td class="p-2 border-b dark:border-gray-700">{{ auftrag.name }}</td>
                   <td class="p-2 border-b dark:border-gray-700">{{ auftrag.kategorie }}</td>
                   <td
-                    class="p-2 border-b dark:border-gray-700 text-right"
-                    :class="auftrag.betrag < 0 ? 'text-red-600' : 'text-green-600'"
+                    class="p-2 border-b dark:border-gray-700 text-center"
+                    :class="auftrag.betrag < 0 ? 'text-red-500 dark:text-red-400' : 'text-teal-600 dark:text-teal-400'"
                   >
-                    {{ auftrag.betrag.toFixed(2) }}€
+                    {{ auftrag.betrag.toFixed(2) }}€  <!--Anzeige mit 2 Dezimalstellen-->
                   </td>
-                  <td class="p-2 border-b dark:border-gray-700">{{ auftrag.intervall }}</td>
-                  <td class="p-2 border-b dark:border-gray-700 text-center space-x-2">
+                  <td class="p-2 border-b dark:border-gray-700 text-center">{{ auftrag.intervall }}</td>
+                  <td class="p-2 border-b dark:border-gray-700 text-center space-x-6">
                     <button
-                      class="text-teal-600 hover:text-teal-400 dark:text-teal-400 dark:hover:text-teal-300 transition"
-                    >
-                      <i class="fas fa-pen"></i>
+                      class="text-teal-600 hover:text-teal-400 dark:text-teal-400 dark:hover:text-teal-300 transform hover:scale-150 transition"
+                      @click="selectedAuftrag = { ...auftrag }; showEditModal = true" 
+                      >
+                      <i class="fas fa-pen"></i> <!-- Edit-Icon -->
                     </button>
                     <button
-                      class="text-gray-500 hover:text-red-500 transition"
+                      class="text-gray-300 hover:text-red-500 transform hover:scale-150 transition"
+                      @click="selectedAuftrag = auftrag; showDeleteConfirm = true"
                     >
-                      <i class="fas fa-trash"></i>
+                      <i class="fas fa-trash"></i> <!-- Lösch-Icon -->
                     </button>
                   </td>
+
+                    <!-- Modal: Dauerauftrag bearbeiten -->
+                      <div v-if="showEditModal" class="fixed inset-0 backdrop-blur-sm flex items-center justify-center z-50">
+                        <div class="bg-white dark:bg-gray-800 p-8 rounded-lg shadow-lg w-[90%] max-w-md space-y-4 relative">
+                          <h2 class="text-2xl font-bold text-brand-600 dark:text-brand-400">Dauerauftrag bearbeiten</h2>
+
+                          <div class="grid gap-2">
+                            <label>Name</label>
+                            <input v-model="selectedAuftrag.name" type="text" class="form-input" placeholder="Name / Beschreibung" />
+
+                            <label>Betrag (€)</label>
+                            <input v-model="selectedAuftrag.betrag" type="number" step="0.50" class="form-input" /> 
+
+                            <label>Kategorie</label>
+                            <select v-model="selectedAuftrag.kategorie" class="form-select">
+                              <option disabled value="">Bitte wählen</option>
+                              <option>Miete</option>
+                              <option>Einnahme</option>
+                              <option>Versicherung</option>
+                            </select>
+
+                            <label>Intervall</label>
+                            <select v-model="selectedAuftrag.intervall" class="form-select">
+                              <option value="weekly">W - Wöchentlich</option>
+                              <option value="monthly">M - Monatlich</option>
+                              <option value="semesterly">Q - Quartal</option>
+                              <option value="annual">Y - Jährlich</option>
+                            </select>
+                          </div>
+
+                          <div class="flex justify-end space-x-2 mt-4">
+                            <button @click="showEditModal = false" class="btn btn-secondary">Abbrechen</button>
+                            <button @click="saveEdit" class="btn btn-primary">Speichern</button>
+                          </div>
+                        </div>
+                      </div>
+
+                  
+                    <!-- Bestätigungs-Popup: Dauerauftrag löschen -->
+                    <div v-if="showDeleteConfirm"
+                    class="fixed inset-0 backdrop-blur-sm flex items-center justify-center z-50">
+                      <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg w-[90%] max-w-4xl space-y-4 relative transition-theme">
+                        <h2 class="text-2xl font-bold text-brand-600 dark:text-brand-600">Verwaltung Dauerauftrag</h2>
+                        <p class="text-lg text-gray-800 dark:text-gray-200 leading-relaxed">
+                          Wollen Sie den Dauerauftrag
+                          <span class="font-semibold text-brand-600 dark:text-brand-400">
+                            {{ selectedAuftrag?.name }}
+                          </span> wirklich löschen?
+                        </p>
+                        <div class="flex justify-center space-x-4">
+                          <button @click="deleteAuftrag" class="btn btn-danger">Löschen</button>
+                          <button @click="showDeleteConfirm = false"class="btn btn-secondary">Zurück</button>
+                        </div>
+                      </div>
+                    </div>
                 </tr>
               </tbody>
             </table>
@@ -233,6 +293,9 @@ const showExpenseModal = ref(false)
 
 // Modalsteuerung für Daueraufträge  ----NEU----
 const showRecurringModal = ref(false)
+const showEditModal = ref(false) // Modal zum Bearbeiten eines Dauerauftrags
+const showDeleteConfirm = ref(false) // Bestätigungsmodal für das Löschen eines Dauerauftrags
+const selectedAuftrag = ref(null) // Der aktuell ausgewählte Dauerauftrag zum Bearbeiten/Löschen
 
 // Formular-Daten für Einnahmen
 const incomeForm = ref({
@@ -403,5 +466,22 @@ async function submitExpense() {
   } catch (err) {
     console.error('Fehler beim Speichern der Ausgabe:', err)
   }
+}
+
+// Khanhly: Backend bitte bearbeiten, da hier nur platzholder
+// Platzhalter-Daten für Daueraufträge 
+const placeholderAuftraege = ref([
+  { name: "Miete", kategorie: "Wohnung", betrag: -500, intervall: "M" },
+  { name: "Handyvertrag", kategorie: "Wohnung", betrag: -20, intervall: "M" },
+  { name: "BAföG", kategorie: "BAföG", betrag: +855, intervall: "M" },
+  { name: "Vereinsbeitrag", kategorie: "Sport", betrag: -52, intervall: "Q" },
+  { name: "Versicherung XY", kategorie: "Versicherung", betrag: -65.67, intervall: "Y" },
+])
+
+function deleteAuftrag() {
+  // Logic to delete the selectedAuftrag
+  placeholderAuftraege.value = placeholderAuftraege.value.filter(auftrag => auftrag !== selectedAuftrag.value)
+  showDeleteConfirm.value = false
+  selectedAuftrag.value = null
 }
 </script>
