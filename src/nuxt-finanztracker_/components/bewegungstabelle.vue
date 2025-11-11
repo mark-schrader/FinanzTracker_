@@ -33,7 +33,7 @@
           <tr
             v-for="(t, index) in filteredTransactions"
             :key="index"
-            class="hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
+            class="hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
           >
             <td class="border p-2">{{ t.date }}</td>
 
