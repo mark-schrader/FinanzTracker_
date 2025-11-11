@@ -212,7 +212,7 @@
                             <select v-model="selectedAuftrag.intervall" class="form-select">
                               <option value="weekly">W - Wöchentlich</option>
                               <option value="monthly">M - Monatlich</option>
-                              <option value="semesterly">Q - Quartal</option>
+                              <option value="semesterly">S - Semesterlich</option>
                               <option value="annual">Y - Jährlich</option>
                             </select>
                           </div>
