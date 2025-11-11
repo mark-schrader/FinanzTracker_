@@ -10,7 +10,7 @@
         type="text"
         v-model="search"
         placeholder="Suchen..."
-        class="form-input w-1/3 dark:bg-gray-800"
+        class="form-input w-1/3 dark:border-gray-500 dark:bg-gray-800" 
       />
     </div>
 
