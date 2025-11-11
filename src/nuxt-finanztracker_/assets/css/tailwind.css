@@ -133,6 +133,10 @@ for links: dark:text-brand-300 dark:hover:text-brand-200*/
     @apply btn bg-gray-200 hover:bg-gray-300 text-gray-900 
            dark:bg-gray-700 dark:hover:bg-gray-600 dark:text-gray-100;
   }
+
+  .btn-danger {
+  @apply btn bg-red-500 hover:bg-red-600 text-white shadow-sm;
+ }
   
   /* --- Chart container --- */
   .chart-box {
