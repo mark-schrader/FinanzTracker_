@@ -3,6 +3,7 @@ import { ref } from "vue";
 
 const showLogin = ref(false);
 const showRegister = ref(false);
+const showUserIcon = ref(false);
 
 function openLogin() {
   showLogin.value = true;

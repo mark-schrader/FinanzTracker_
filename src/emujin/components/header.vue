@@ -1,15 +1,26 @@
 <script setup>
-import { useRoute } from "vue-router";
+import { useRoute } from "vue-router"; //was useRoute
 import darkMode from "~/components/darkMode.vue"; // Darkmode will be later implemented
+import { navigateTo } from "#app";
 
 const route = useRoute(); // Get the current route to highlight active navigation item
-
 const navItems = [
   { label: "DASHBOARD", href: "/dashboard" },
   { label: "KONTOBEWEGUNG", href: "/kontobewegung" },
   { label: "CHALLENGE", href: "/challenge" },
   { label: "EXPORT", href: "/export" },
 ];
+
+//*******Alert wird nicht angezeigt!!! Bug aufheben******
+const showLogoutAlert = () => {
+  //funktioniert soweit nicht
+  const confirm = confirm("Möchtest du wirklich abmelden?");
+
+  if (confirm) {
+    alert("Du hast dich erfolgreich abgemeldet!");
+    navigateTo("/");
+  }
+};
 </script>
 
 <template>
@@ -74,11 +85,21 @@ const navItems = [
         </div>
 
         <!-- Avatar -->
-        <!-- will be later implemented-->
         <div
-          class="w-10 h-10 rounded-full bg-black flex items-center justify-center text-white"
+          @click="$router.push('/profile')"
+          class="w-10 h-10 rounded-full bg-black flex items-center justify-center text-white hover:bg-sky-900 transition-all duration-600"
         >
           <i class="fas fa-user"></i>
+        </div>
+
+        <!-- Log Out -->
+        <div class="group flex items-center hover: transition-all duration-200">
+          <button
+            @click="showLogoutAlert"
+            class="focus:outline-none transition-all duration-200 transform hover:translate-x-1"
+          >
+            <i class="fas fa-sign-out-alt transition-transform"></i>
+          </button>
         </div>
       </div>
     </header>
