@@ -18,17 +18,17 @@
       <!-- Einnahme nächste 7 Tage -->
       <div class="bg-gray-100 rounded-lg p-6 flex flex-col items-center justify-center min-h-[150px]">
         <p class="font-medium mb-2">Einnahme nächste 7 Tage</p>
-        <svg class="w-10 h-10 text-gray-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M5 10l7-7m0 0l7 7m-7-7v18" />
-        </svg>
+          <div class="w-full h-[260px]">
+            <incomenext7days :transactions="transactions" />
+          </div>
       </div>
 
       <!-- Ausgaben nächste 7 Tage -->
       <div class="bg-gray-100 rounded-lg p-6 flex flex-col items-center justify-center min-h-[150px]">
         <p class="font-medium mb-2">Ausgabe nächste 7 Tage</p>
-        <svg class="w-10 h-10 text-gray-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-        </svg>
+          <div class="w-full h-[260px]">
+            <expansesnext7days :transactions="transactions" />
+          </div>
       </div>
 
       <!-- Ausgaben pro Kategorie -->
@@ -57,6 +57,7 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue'
 import { useFetch } from '#app'
+import Expansesnext7days from '../components/expansesnext7days.vue'
 
 const transactions = ref([])
 const search = ref('')
