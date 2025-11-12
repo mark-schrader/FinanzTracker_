@@ -15,21 +15,23 @@
       <verlaufChart :transactions="transactions" />
     </div>
 
-      <!-- Einnahme nächste 7 Tage -->
-      <div class="bg-gray-100 rounded-lg p-6 flex flex-col items-center justify-center min-h-[150px]">
-        <p class="font-medium mb-2">Einnahme nächste 7 Tage</p>
-          <div class="w-full h-[260px]">
-            <incomenext7days :transactions="transactions" />
-          </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <!-- Ausgaben -->
+      <div class="bg-gray-100 rounded-xl p-6 flex flex-col items-center justify-center shadow-sm hover:shadow-md transition-shadow duration-200">
+        <p class="font-medium mb-2 text-center">Ausgaben nächste 7 Tage</p>
+        <div class="w-full h-[260px]">
+          <expensesnext7days :transactions="transactions" />
+        </div>
       </div>
 
-      <!-- Ausgaben nächste 7 Tage -->
-      <div class="bg-gray-100 rounded-lg p-6 flex flex-col items-center justify-center min-h-[150px]">
-        <p class="font-medium mb-2">Ausgabe nächste 7 Tage</p>
-          <div class="w-full h-[260px]">
-            <expansesnext7days :transactions="transactions" />
-          </div>
+      <!-- Einnahmen -->
+      <div class="bg-gray-100 rounded-xl p-6 flex flex-col items-center justify-center shadow-sm hover:shadow-md transition-shadow duration-200">
+        <p class="font-medium mb-2 text-center">Einnahmen nächste 7 Tage</p>
+        <div class="w-full h-[260px]">
+          <incomenext7days :transactions="transactions" />
+        </div>
       </div>
+    </div>
 
       <!-- Ausgaben pro Kategorie -->
       <div class="bg-gray-100 rounded-lg p-6 flex flex-col items-center justify-center min-h-[150px]">
@@ -57,7 +59,8 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue'
 import { useFetch } from '#app'
-import Expansesnext7days from '../components/expansesnext7days.vue'
+import expensesnext7days from '../components/expensesnext7days.vue'
+import incomenext7days from '../components/incomenext7days.vue'
 
 const transactions = ref([])
 const search = ref('')
