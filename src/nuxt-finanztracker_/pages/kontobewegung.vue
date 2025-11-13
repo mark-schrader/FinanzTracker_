@@ -1,19 +1,17 @@
 <template>
-  <div class="content-wrapper">
+  <div class="p-6 max-w-screen-xl mx-auto">
     <!-- Header -->
     <div class="flex items-center justify-between mb-6">
-      <h1 class="text-3xl font-bold text-brand-600 dark:text-brand-300">Kontobewegung</h1>
+      <h1 class="text-3xl font-bold">Kontobewegung</h1>
       <CurrentTime />
     </div>
 
-    <!-- Aktueller Kontostand -->
-    <div class="card text-center text-xl font-semibold mb-6 bg-teal-50 dark:bg-gray-800">
-      Aktueller Kontostand:
-      <strong class="text-teal-600 dark:text-teal-400">{{ currentBalance }}</strong>
+    <!-- Kontostand -->
+    <div class="bg-gray-100 text-center text-xl p-4 rounded shadow mb-6">
+      Aktueller Kontostand: <strong>{{ currentBalance }}</strong>
     </div>
 
-    <!-- Aktionen: Einnahmen / Ausgaben / Verwaltung -->
-
+    <!-- Einnahmen -->
     <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
       <!-- Einnahme hinzufügen -->
       <button @click="showIncomeModal = true"
@@ -101,6 +99,7 @@
             </select>
 
 
+
             <label class="block text-sm font-medium">Kommentar</label>
             <textarea v-model="expenseForm.note" class="border px-2 py-1 rounded w-full"></textarea>
 
@@ -122,6 +121,8 @@
           </div>
         </div>
       </div>
+
+
 
       <!-- Kategorien -->
       <NuxtLink to="/kategorien"

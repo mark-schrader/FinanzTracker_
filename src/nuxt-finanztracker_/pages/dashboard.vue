@@ -1,87 +1,48 @@
 <template>
-  <div class="content-wrapper space-y-8">
+  <div class="p-6 max-w-screen-xl mx-auto space-y-6">
 
     <!-- Header -->
     <div class="flex items-center justify-between mb-6">
-      <h1 class="text-3xl font-bold text-brand-600 dark:text-brand-300">
-        Dashboard: Account Balance</h1>
+      <h1 class="text-3xl font-bold">Dashboard: Account Balance</h1>
       <CurrentTime /> <!-- Current time component -->
     </div>
 
     <!-- Grid -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
       <!-- Verlauf des Kontostands -->
-      <div class="chart-box col-span-1 md:col-span-2">
-        <h2 class="card-title text-brand-600 dark:text-brand-300 mb-4">
-          Verlauf des Kontostands
-        </h2>
-        <verlaufChart :transactions="transactions" />
-      </div>
+    <div class="col-span-1 md:col-span-2 bg-gray-200 rounded-md p-6 min-h-[180px]">
+      <p class="text-base font-medium mb-4">Verlauf des Kontostands</p>
+      <verlaufChart :transactions="transactions" />
+    </div>
 
       <!-- Einnahme nächste 7 Tage -->
-      <div class="card flex flex-col items-center justify-center text-center">
-        <p class="font-medium text-gray-800 dark:text-gray-200 mb-2">
-          Einnahme nächste 7 Tage
-        </p>
-        <svg
-          class="w-10 h-10 text-teal-500 dark:text-teal-300"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          viewBox="0 0 24 24"
-        >
+      <div class="bg-gray-100 rounded-lg p-6 flex flex-col items-center justify-center min-h-[150px]">
+        <p class="font-medium mb-2">Einnahme nächste 7 Tage</p>
+        <svg class="w-10 h-10 text-gray-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" d="M5 10l7-7m0 0l7 7m-7-7v18" />
         </svg>
       </div>
 
-      <!-- Ausgabe nächste 7 Tage -->
-      <div class="card flex flex-col items-center justify-center text-center">
-        <p class="font-medium text-gray-800 dark:text-gray-200 mb-2">
-          Ausgabe nächste 7 Tage
-        </p>
-        <svg
-          class="w-10 h-10 text-red-500 dark:text-red-400"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          viewBox="0 0 24 24"
-        >
+      <!-- Ausgaben nächste 7 Tage -->
+      <div class="bg-gray-100 rounded-lg p-6 flex flex-col items-center justify-center min-h-[150px]">
+        <p class="font-medium mb-2">Ausgabe nächste 7 Tage</p>
+        <svg class="w-10 h-10 text-gray-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
         </svg>
       </div>
 
       <!-- Ausgaben pro Kategorie -->
-      <div class="card flex flex-col items-center justify-center text-center">
-        <p class="font-medium text-gray-800 dark:text-gray-200 mb-2">
-          Ausgaben pro Kategorie
-        </p>
-        <svg
-          class="w-10 h-10 text-yellow-500 dark:text-yellow-400"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          viewBox="0 0 24 24"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M11 3v18m4-14h6M5 9h6m4 10h6M5 19h6"
-          />
+      <div class="bg-gray-100 rounded-lg p-6 flex flex-col items-center justify-center min-h-[150px]">
+        <p class="font-medium mb-2">Ausgaben pro Kategorie</p>
+        <svg class="w-10 h-10 text-gray-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M11 3v18m4-14h6M5 9h6m4 10h6M5 19h6" />
         </svg>
       </div>
 
       <!-- Individuelles Dashboard -->
-      <div class="card flex flex-col items-center justify-center text-center">
-        <p class="font-medium text-gray-800 dark:text-gray-200 mb-2">
-          Individuelles Dashboard
-        </p>
-        <svg
-          class="w-10 h-10 text-blue-500 dark:text-blue-400"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          viewBox="0 0 24 24"
-        >
+      <div class="bg-gray-100 rounded-lg p-6 flex flex-col items-center justify-center min-h-[150px]">
+        <p class="font-medium mb-2">Individuelles Dashboard</p>
+        <svg class="w-10 h-10 text-gray-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
         </svg>
       </div>
