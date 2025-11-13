@@ -60,12 +60,9 @@ const chartData = computed(() => {
         label: 'Kontostand (€)',
         data,
         fill: true,
-        borderColor: '#2dd4bf', // teal-400
-        backgroundColor: 'rgba(45, 212, 191, 0.15)', // teal-400 transparent
-        pointBackgroundColor: '#2dd4bf',
-        pointBorderColor: '#ffffff',
-        pointHoverBackgroundColor: '#14b8a6', // teal-500
-        tension: 0.35, // sanfte Kurven
+        borderColor: '#7dd3fc', //line color
+        backgroundColor: 'rgba(125, 211, 252, 0.2)', //punkte color
+        tension: 0.3, //kurvenform
         pointRadius: 3,
         pointHoverRadius: 5,
       }
