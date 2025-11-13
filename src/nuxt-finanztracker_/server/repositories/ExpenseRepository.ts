@@ -1,39 +1,66 @@
 import { PrismaClient } from '@prisma/client'
-import Expense from '../domain/Expense'
 
 const prisma = new PrismaClient()
 
-export default class ExpenseRepository {
-  static async findByUserId(userId: number) {
-    const results = await prisma.expenses.findMany({
-      where: { user_id: BigInt(userId) },
-      include: { categories: true, user: true },
-      orderBy: { date: 'desc' }
-    })
-    return results.map(Expense.fromPrisma)
-  }
+function toBigInt(value: any): bigint | undefined {
+  if (value === undefined || value === null) return undefined
+  return typeof value === 'bigint' ? value : BigInt(value)
+}
 
-  static async create(data: {
-    userId: number
-    categoryId: number
-    use: string
-    amount: number
-    date: Date
-    interval: string
-    note?: string
-  }) {
-    const newExpense = await prisma.expenses.create({
-      data: {
-        user_id: BigInt(data.userId),
-        category_id: data.categoryId,
-        use: data.use,
-        amount: data.amount,
-        date: data.date,
-        interval: data.interval,
-        note: data.note ?? null
-      },
+export default class ExpenseRepository {
+  /**
+   *  Finde alle Ausgaben eines Nutzers
+   */
+  async findByUserId(userId: number) {
+    return prisma.expenses.findMany({
+      where: { user_id: toBigInt(userId) },
+      orderBy: { date: 'desc' },
       include: { categories: true, user: true }
     })
-    return Expense.fromPrisma(newExpense)
+  }
+
+  /**
+   * Finde eine Ausgabe per ID
+   */
+  async findById(id: number) {
+    return prisma.expenses.findUnique({
+      where: { id },
+      include: { categories: true, user: true }
+    })
+  }
+
+  /**   
+   * Neue Ausgabe erstellen
+   */
+  async create(data: any) {
+    const payload: any = {
+      ...data,
+      user_id: toBigInt(data.user_id),
+      // Prisma handles Decimal/number for amount; ensure Date for date
+      amount: data.amount,
+      date: data.date ? new Date(data.date) : undefined
+    }
+
+    return prisma.expenses.create({ data: payload, include: { categories: true, user: true } })
+  }
+
+  /**   
+   * Ausgabe aktualisieren
+   */
+  async update(id: number, data: any) {
+    const payload: any = { ...data }
+    if (data.user_id !== undefined) payload.user_id = toBigInt(data.user_id)
+    if (data.date !== undefined) payload.date = new Date(data.date)
+    if (data.amount !== undefined) payload.amount = data.amount
+
+    return prisma.expenses.update({ where: { id }, data: payload, include: { categories: true, user: true } })
+  }
+
+  /**   
+   * Ausgabe löschen
+   */
+  async remove(id: number) {
+    await prisma.expenses.delete({ where: { id } })
+    return true
   }
 }

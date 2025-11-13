@@ -55,14 +55,20 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, watchEffect } from 'vue'
 import { useFetch } from '#app'
 
-// fetch direkt aufrufen
-const { data: transactionsData, error } = await useFetch('/api/transactions?user_id=1')
+// fetch direkt aufrufen — benutze userId query (camelCase) wie im Backend
+const { data: transactionsData, error } = await useFetch('/api/transactions', {
+  params: { userId: 1 } // <-- anpassen auf echten User
+})
 
-// reaktiver Wert
+// reaktiver Wert, mit automatischer Aktualisierung wenn useFetch updated
 const transactions = ref(transactionsData.value || [])
+watchEffect(() => {
+  transactions.value = transactionsData.value || []
+})
+
 const search = ref('')
 
 //Optional Debug:

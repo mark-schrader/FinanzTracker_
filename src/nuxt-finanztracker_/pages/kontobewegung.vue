@@ -147,7 +147,7 @@
 <script setup>
 //Imports
 import { ref, computed, onMounted } from 'vue'
-import { useFetch } from '#app' // Nuxt-eigene Fetch-Funktion für SSR/CSR-Anfragen
+import { useFetch } from '#app' // optional
 
 //Reaktive Daten
 
@@ -188,12 +188,12 @@ const expenseForm = ref({
 
 onMounted(async () => {
   try {
-    // Lade Kategorien
-    const catData = await $fetch('/api/categories')
+    // Kategorien (falls backend userId braucht, ergänzen)
+    const catData = await $fetch('/api/categories?userId=1')
     categories.value = catData || []
 
-    // Lade Transaktionen
-    const transData = await $fetch('/api/transactions')
+    // Lade kombinierte Transaktionen mit userId query (wichtig für Backend)
+    const transData = await $fetch('/api/transactions?userId=1')
     transactions.value = transData || []
   } catch (err) {
     console.error('Fehler beim Laden der Daten:', err)
@@ -243,24 +243,23 @@ const currentBalance = computed(() => {
 
 //Modal-Handling & Form-Submit
 
-// Einnahme speichern
+// Einnahme speichern — POST an /api/incomes (plural)
 async function submitIncome() {
   try {
-    const res = await $fetch('/api/income', {
+    const res = await $fetch('/api/incomes', {
       method: 'POST',
       body: {
         amount: incomeForm.value.amount,
         date: incomeForm.value.date,
         source: incomeForm.value.source,
-        category: incomeForm.value.category,
+        categoryId: incomeForm.value.category,
         note: incomeForm.value.note,
-        interval: incomeForm.value.interval
+        interval: incomeForm.value.interval,
+        userId: 1
       }
     })
 
-    console.log('Erfolgreich gespeichert:', res)
-
-    // Anzeige aktualisieren
+    // Push im Frontend im selben Format wie TransactionService liefert
     transactions.value.push({
       type: 'Einnahme',
       date: incomeForm.value.date,
@@ -268,9 +267,8 @@ async function submitIncome() {
       amount: `+${parseFloat(incomeForm.value.amount).toFixed(2)} €`,
       interval: incomeForm.value.interval,
       owner: 'Du',
-      source: incomeForm.value.source,
+      category: categories.value.find(c => c.id == incomeForm.value.category)?.name ?? '',
       purpose: incomeForm.value.source,
-      category_id: incomeForm.value.category,
       comment: incomeForm.value.note
     })
 
@@ -289,35 +287,31 @@ async function submitIncome() {
   }
 }
 
-
-
-// Ausgabe speichern
+// Ausgabe speichern — POST an /api/expenses (plural)
 async function submitExpense() {
   try {
-    const res = await $fetch('/api/expense', {
+    const res = await $fetch('/api/expenses', {
       method: 'POST',
       body: {
         amount: expenseForm.value.amount,
         date: expenseForm.value.date,
         use: expenseForm.value.use,
-        category: expenseForm.value.category,
+        categoryId: expenseForm.value.category,
         note: expenseForm.value.note,
-        interval: expenseForm.value.interval
+        interval: expenseForm.value.interval,
+        userId: 1
       }
     })
 
-    console.log('Ausgabe erfolgreich gespeichert:', res)
-
-    // Anzeige aktualisieren
     transactions.value.push({
       type: 'Ausgabe',
       date: expenseForm.value.date,
       time: '—',
       amount: `-${parseFloat(expenseForm.value.amount).toFixed(2)} €`,
       interval: expenseForm.value.interval,
-      owner: 'Null',
-      use: expenseForm.value.use,
-      category_id: expenseForm.value.category,
+      owner: 'Du',
+      category: categories.value.find(c => c.id == expenseForm.value.category)?.name ?? '',
+      purpose: expenseForm.value.use,
       comment: expenseForm.value.note
     })
 
@@ -335,6 +329,5 @@ async function submitExpense() {
     console.error('Fehler beim Speichern der Ausgabe:', err)
   }
 }
-
 </script>
 
