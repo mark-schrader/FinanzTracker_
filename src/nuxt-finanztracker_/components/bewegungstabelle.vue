@@ -18,14 +18,14 @@
     <div class="table-container">
       <table class="table">
         <thead>
-          <tr class="bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-100">
-            <th class="border p-2">Datum</th>
-            <th class="border p-2 text-right">Betrag</th>
-            <th class="border p-2">Zyklus</th>
-            <th class="border p-2">Kontoinhaber</th>
-            <th class="border p-2">Notiz</th>
-            <th class="border p-2">Kategorie</th>
-            <th class="border p-2">Kommentar</th>
+          <tr class>
+            <th>Datum</th>
+            <th class="text-right">Betrag</th>
+            <th>Zyklus</th>
+            <th>Kontoinhaber</th>
+            <th>Notiz</th>
+            <th>Kategorie</th>
+            <th>Kommentar</th>
           </tr>
         </thead>
 
@@ -33,12 +33,12 @@
           <tr
             v-for="(t, index) in filteredTransactions"
             :key="index"
-            class="hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+            class="hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
           >
-            <td class="border p-2">{{ t.date }}</td>
+            <td>{{ t.date }}</td> 
 
             <td
-              class="border p-2 text-right font-medium"
+              class="text-right font-medium"
               :class="{
                 'text-teal-600 dark:text-teal-400': t.type === 'Einnahme',
                 'text-red-500 dark:text-red-400': t.type === 'Ausgabe'
@@ -47,11 +47,11 @@
               {{ t.amount }}
             </td>
 
-            <td class="border p-2">{{ t.interval }}</td>
-            <td class="border p-2">{{ t.owner }}</td>
-            <td class="border p-2">{{ t.purpose }}</td>
-            <td class="border p-2">{{ t.category }}</td>
-            <td class="border p-2">{{ t.comment }}</td>
+            <td>{{ t.interval }}</td>
+            <td>{{ t.owner }}</td>
+            <td>{{ t.purpose }}</td>
+            <td>{{ t.category }}</td>
+            <td>{{ t.comment }}</td>
           </tr>
         </tbody>
       </table>
