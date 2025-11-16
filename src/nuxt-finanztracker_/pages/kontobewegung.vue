@@ -144,38 +144,32 @@
       <div v-if="showRecurringModal" class="fixed inset-0 backdrop-blur-sm flex items-center justify-center z-50">
         <div class="bg-white p-6 rounded-lg shadow-lg w-[90%] max-w-4xl space-y-4 relative transition-theme">
           <h2 class="text-2xl font-bold text-brand-600 dark:text-brand-600">Daueraufträge verwalten</h2>
-          <p class="text-gray-700">Diese Funktion wird in Kürze verfügbar sein.</p>
-
           <!-- Tabelle:-->
                 <!-- css: text-teal-600 dark:text-teal-400': t.type === 'Einnahme',
                 'text-red-500 dark:text-red-400': t.type === 'Ausgabe' -->
           <div class="table-container">
-            <table class="table text-gray-700 dark:text-gray-700">
+            <table v-if="auftraege.length" class="table text-gray-700 dark:text-gray-700">
               <thead class="bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200">
                 <tr>
-                  <th class="border p-2">Name</th>
-                  <th class="border p-2">Kategorie</th>
-                  <th class="border p-2">Betrag</th>
-                  <th class="border p-2">Intervall</th>
-                  <th class="border p-2">Aktionen</th>
+                  <th>Name</th>
+                  <th>Kategorie</th>
+                  <th>Betrag</th>
+                  <th>Intervall</th>
+                  <th>Aktionen</th>
                 </tr>
               </thead>
               <tbody>
-                <tr
-                  v-for="(auftrag, i) in placeholderAuftraege"
-                  :key="i"
-                  class="hover:bg-gray-100 dark:hover:bg-gray-100 transition-colors"
-                >
-                  <td class="p-2 border-b dark:border-gray-700">{{ auftrag.name }}</td>
-                  <td class="p-2 border-b dark:border-gray-700">{{ auftrag.kategorie }}</td>
+                <tr v-for="auftrag in auftraege" :key="auftrag.id">
+                  <td class="dark:border-gray-700">{{ auftrag.name }}</td>
+                  <td class="dark:border-gray-700">{{ auftrag.kategorie }}</td>
                   <td
-                    class="p-2 border-b dark:border-gray-700 text-center"
+                    class="dark:border-gray-700 text-center"
                     :class="auftrag.betrag < 0 ? 'text-red-500 dark:text-red-400' : 'text-teal-600 dark:text-teal-400'"
                   >
                     {{ auftrag.betrag.toFixed(2) }}€  <!--Anzeige mit 2 Dezimalstellen-->
                   </td>
-                  <td class="p-2 border-b dark:border-gray-700 text-center">{{ auftrag.intervall }}</td>
-                  <td class="p-2 border-b dark:border-gray-700 text-center space-x-6">
+                  <td class="dark:border-gray-700 text-center">{{ auftrag.intervall }}</td>
+                  <td class="dark:border-gray-700 text-center space-x-6">
                     <button
                       class="text-teal-600 hover:text-teal-400 dark:text-teal-400 dark:hover:text-teal-300 transform hover:scale-150 transition"
                       @click="selectedAuftrag = { ...auftrag }; showEditModal = true" 
@@ -247,6 +241,11 @@
                 </tr>
               </tbody>
             </table>
+
+            <!-- Fallback anzeigen, wenn keine Einträge -->
+            <div v-else class="p-6 text-center text-gray-600">
+              Keine Daueraufträge vorhanden.
+            </div>
           </div>
 
           <!--Button: Kategorie hinzufügen -->
@@ -289,6 +288,9 @@ const transactions = ref([])
 // Kategorien für Einnahmen & Ausgaben
 const categories = ref([])
 
+// Daueraufträge (echte Daten von DB)
+const auftraege = ref([])
+
 // Modalsteuerung für Einnahme & Ausgabe
 const showIncomeModal = ref(false)
 const showExpenseModal = ref(false)
@@ -330,6 +332,11 @@ onMounted(async () => {
     // Lade Transaktionen
     const transData = await $fetch('/api/transactions')
     transactions.value = transData || []
+
+    // Lade Daueraufträge (echt aus DB)
+    const recurringData = await $fetch('/api/recurring') // Neu
+    auftraege.value = recurringData || []
+
   } catch (err) {
     console.error('Fehler beim Laden der Daten:', err)
   }
@@ -471,21 +478,12 @@ async function submitExpense() {
   }
 }
 
-// Khanhly: Backend bitte bearbeiten, da hier nur platzholder
-// Platzhalter-Daten für Daueraufträge 
-const placeholderAuftraege = ref([
-  { name: "Miete", kategorie: "Wohnung", betrag: -500, intervall: "M" },
-  { name: "Handyvertrag", kategorie: "Wohnung", betrag: -20, intervall: "M" },
-  { name: "BAföG", kategorie: "BAföG", betrag: +855, intervall: "M" },
-  { name: "Vereinsbeitrag", kategorie: "Sport", betrag: -52, intervall: "Q" },
-  { name: "Versicherung XY", kategorie: "Versicherung", betrag: -65.67, intervall: "Y" },
-])
-
+// löscht den ausgewählten Dauerauftrag
 function deleteAuftrag() {
-  // Logic to delete the selectedAuftrag
-  placeholderAuftraege.value = placeholderAuftraege.value.filter(auftrag => auftrag !== selectedAuftrag.value)
+  auftraege.value = auftraege.value.filter(a => a.id !== selectedAuftrag.value.id)
   showDeleteConfirm.value = false
   selectedAuftrag.value = null
 }
+
 </script>
 
