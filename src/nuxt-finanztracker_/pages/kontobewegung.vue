@@ -137,6 +137,10 @@
 import { ref, computed, onMounted } from 'vue'
 import { useFetch } from '#app'
 
+definePageMeta({
+  middleware: 'auth' // Auth-Middleware für diese Seite
+})
+
 const search = ref('')
 const transactions = ref([])
 

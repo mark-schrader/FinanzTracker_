@@ -70,7 +70,11 @@
 </template>
 
 <script setup>
-// kein Script-Teil nötig momentan
+
+  definePageMeta({
+  middleware: 'auth' // Auth-Middleware für diese Seite
+})
+
 </script>
 
 <style scoped>
