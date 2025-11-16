@@ -5,7 +5,7 @@ import { PrismaClient } from '@prisma/client'
 // Erstelle Prisma-Instanz
 const prisma = new PrismaClient()
 
-export default defineEventHandler(async () => {
+export default defineEventHandler(async (event) => {
   // Zukünftig: Benutzer-ID aus der Anfrage lesen
   // const userId = Number(getQuery(event).user_id)
   // if (!userId) {
@@ -14,6 +14,9 @@ export default defineEventHandler(async () => {
   //     statusMessage: 'Missing user_id'
   //   })
   // }
+
+  // Query-Parameter lesen (z.B. /api/transactions?type=recurring)
+  const query = getQuery(event)
 
   // Einnahmen und Ausgaben gleichzeitig abfragen
   const [expenses, incomes] = await Promise.all([
@@ -56,7 +59,16 @@ export default defineEventHandler(async () => {
   }))
 
   // Beide zusammen zurückgeben, nach Datum sortiert
-  return [...formattedExpenses, ...formattedIncomes].sort((a, b) =>
-    new Date(b.date).getTime() - new Date(a.date).getTime()
+  const combined = [...formattedExpenses, ...formattedIncomes].sort(
+    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
   )
+  // Nur wiederkehrende Zahlungen zurückgeben (Dauerauftrag) ---
+  if (query.type === 'recurring') {
+    return combined.filter(t =>
+      t.interval && t.interval !== 'once'
+    )
+  }
+
+  // Standard: alles zurückgeben ---
+  return combined
 })

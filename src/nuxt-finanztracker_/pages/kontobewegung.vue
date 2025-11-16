@@ -148,9 +148,9 @@
                 <!-- css: text-teal-600 dark:text-teal-400': t.type === 'Einnahme',
                 'text-red-500 dark:text-red-400': t.type === 'Ausgabe' -->
           <div class="table-container">
-            <table v-if="auftraege.length" class="table text-gray-700 dark:text-gray-700">
-              <thead class="bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200">
-                <tr>
+            <table v-if="formattedAuftraege.length" class="table dark:text-gray-700">
+              <thead class="text-center">
+                <tr class="dark:text-gray-100">
                   <th>Name</th>
                   <th>Kategorie</th>
                   <th>Betrag</th>
@@ -159,25 +159,25 @@
                 </tr>
               </thead>
               <tbody>
-                <tr v-for="auftrag in auftraege" :key="auftrag.id">
-                  <td class="dark:border-gray-700">{{ auftrag.name }}</td>
-                  <td class="dark:border-gray-700">{{ auftrag.kategorie }}</td>
+                <tr v-for="auftrag in formattedAuftraege" :key="auftrag.id" class="hover:bg-gray-100">
+                  <td>{{ auftrag.name }}</td>
+                  <td>{{ auftrag.kategorie }}</td>
                   <td
-                    class="dark:border-gray-700 text-center"
+                    class="text-left"
                     :class="auftrag.betrag < 0 ? 'text-red-500 dark:text-red-400' : 'text-teal-600 dark:text-teal-400'"
                   >
                     {{ auftrag.betrag.toFixed(2) }}€  <!--Anzeige mit 2 Dezimalstellen-->
                   </td>
-                  <td class="dark:border-gray-700 text-center">{{ auftrag.intervall }}</td>
-                  <td class="dark:border-gray-700 text-center space-x-6">
+                  <td>{{ auftrag.intervall }}</td>
+                  <td class="space-x-6">
                     <button
-                      class="text-teal-600 hover:text-teal-400 dark:text-teal-400 dark:hover:text-teal-300 transform hover:scale-150 transition"
+                      class="text-teal-600 hover:text-teal-400 transform hover:scale-150 transition"
                       @click="selectedAuftrag = { ...auftrag }; showEditModal = true" 
                       >
                       <i class="fas fa-pen"></i> <!-- Edit-Icon -->
                     </button>
                     <button
-                      class="text-gray-300 hover:text-red-500 transform hover:scale-150 transition"
+                      class="text-gray-700 hover:text-red-500 transform hover:scale-150 transition"
                       @click="selectedAuftrag = auftrag; showDeleteConfirm = true"
                     >
                       <i class="fas fa-trash"></i> <!-- Lösch-Icon -->
@@ -196,7 +196,7 @@
                             <label>Betrag (€)</label>
                             <input v-model="selectedAuftrag.betrag" type="number" step="0.50" class="form-input" /> 
 
-                            <label>Kategorie</label>
+                            <label>Kategorie</label> 
                             <select v-model="selectedAuftrag.kategorie" class="form-select">
                               <option disabled value="">Bitte wählen</option>
                               <option>Miete</option>
@@ -334,7 +334,7 @@ onMounted(async () => {
     transactions.value = transData || []
 
     // Lade Daueraufträge (echt aus DB)
-    const recurringData = await $fetch('/api/recurring') // Neu
+    const recurringData = await $fetch('/api/transactions?type=recurring')
     auftraege.value = recurringData || []
 
   } catch (err) {
@@ -353,6 +353,34 @@ const filteredTransactions = computed(() => {
     )
   )
 })
+
+// Mapping für Daueraufträge (nur Anzeige in Tabelle)
+const formattedAuftraege = computed(() => {
+  if (!auftraege.value.length) return []
+
+  return auftraege.value.map(a => ({
+    id: a.id,
+    
+    // Name: Einnahme → a.source | Ausgabe → a.use | fallback
+    name: a.purpose || a.source || a.use || '—',
+
+    // Kategorie
+    kategorie: a.category || '—',
+
+    // Betrag: chuyển "+120.00 €" | "-80.00 €" → số
+    betrag: Number(
+      (a.amount || '0')
+        .replace('€', '')
+        .replace('+', '')
+        .replace('-', '')
+        .replace(',', '.')
+    ) * (a.type === 'Ausgabe' ? -1 : 1),
+
+    // Interval 
+    intervall: a.interval
+  }))
+})
+
 
 // Konvertiert einen Euro-String ("1.234,56 €") in eine Float-Zahl (1234.56)
 function parseEuro(euroString) {
