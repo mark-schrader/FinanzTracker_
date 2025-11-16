@@ -11,7 +11,7 @@ export class CategoryRepository {
     return await prisma.categories.findMany({
       where: {
         OR: [
-          { user_id: BigInt(userId) },
+          { user_id: Number(userId) },
           { user_id: null } // globale Kategorien (systemweit)
         ]
       },

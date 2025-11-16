@@ -2,18 +2,13 @@ import { PrismaClient } from '@prisma/client'
 
 const prisma = new PrismaClient()
 
-function toBigInt(value: any): bigint | undefined {
-  if (value === undefined || value === null) return undefined
-  return typeof value === 'bigint' ? value : BigInt(value)
-}
-
 export default class ExpenseRepository {
   /**
    *  Finde alle Ausgaben eines Nutzers
    */
   async findByUserId(userId: number) {
     return prisma.expenses.findMany({
-      where: { user_id: toBigInt(userId) },
+      where: { user_id: Number(userId) },
       orderBy: { date: 'desc' },
       include: { categories: true, user: true }
     })
@@ -35,7 +30,7 @@ export default class ExpenseRepository {
   async create(data: any) {
     const payload: any = {
       ...data,
-      user_id: toBigInt(data.user_id),
+      user_id: Number(data.user_id),
       // Prisma handles Decimal/number for amount; ensure Date for date
       amount: data.amount,
       date: data.date ? new Date(data.date) : undefined
@@ -49,7 +44,7 @@ export default class ExpenseRepository {
    */
   async update(id: number, data: any) {
     const payload: any = { ...data }
-    if (data.user_id !== undefined) payload.user_id = toBigInt(data.user_id)
+    if (data.user_id !== undefined) payload.user_id = Number(data.user_id)
     if (data.date !== undefined) payload.date = new Date(data.date)
     if (data.amount !== undefined) payload.amount = data.amount
 

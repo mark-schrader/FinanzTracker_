@@ -18,7 +18,7 @@ export default class IncomeService {
   static async createIncome(data: any) {
     const repo = new IncomeRepository()
     const created = await repo.create({
-      user_id: data.userId !== undefined ? BigInt(data.userId) : undefined,
+      user_id: data.userId !== undefined ? Number(data.userId) : undefined,
       category_id: data.categoryId,
       source: data.source,
       amount: parseFloat(String(data.amount)),
@@ -36,7 +36,7 @@ export default class IncomeService {
     const repo = new IncomeRepository()
     const updateData: any = {}
 
-    if (data.userId !== undefined) updateData.user_id = BigInt(data.userId)
+    if (data.userId !== undefined) updateData.user_id = Number(data.userId)
     if (data.categoryId !== undefined) updateData.category_id = data.categoryId
     if (data.source !== undefined) updateData.source = data.source
     if (data.amount !== undefined) updateData.amount = parseFloat(String(data.amount))

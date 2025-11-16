@@ -1,7 +1,7 @@
 export default class Income {
   constructor(
     public id: number,
-    public userId: bigint,
+    public userId: number,
     public categoryId: number,
     public source: string,
     public amount: number,

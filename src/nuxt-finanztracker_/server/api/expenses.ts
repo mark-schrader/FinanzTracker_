@@ -21,7 +21,15 @@ export default defineEventHandler(async (event) => {
       case 'POST': { // Anlegen einer neuen Ausgabe
         // POST /api/expenses
         const body = await readBody(event)
-        return await ExpenseService.createExpense(body)
+        return await ExpenseService.createExpense({
+          userId: Number(body.userId), 
+          categoryId: body.categoryId,
+          use: body.use,
+          amount: body.amount,
+          date: body.date,
+          interval: body.interval,
+          note: body.note,
+        })
       }
 
       case 'PUT': { // Verändern einer Ausgabe

@@ -20,7 +20,15 @@ export default defineEventHandler(async (event) => {
       case 'POST': { // Anlegen einer neuen Einnahme
         // POST /api/incomes
         const body = await readBody(event)
-        return await IncomeService.createIncome(body)
+        return await IncomeService.createIncome({
+          userId: Number(body.userId),
+          categoryId: Number(body.categoryId),
+          source: body.source,
+          amount: Number(body.amount),
+          date: body.date,
+          interval: body.interval,
+          note: body.note,
+        })
       }
 
       case 'PUT': { // Verändern einer Einnahme

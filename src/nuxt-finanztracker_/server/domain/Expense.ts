@@ -1,7 +1,7 @@
 export default class Expense {
   constructor(
     public id: number,
-    public userId: bigint,
+    public userId: number,
     public categoryId: number,
     public use: string,
     public amount: number,

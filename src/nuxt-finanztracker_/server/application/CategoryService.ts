@@ -36,7 +36,7 @@ export default class CategoryService {
     const payload = {
       name: data.name,
       type: data.type,
-      user_id: data.userId !== undefined ? BigInt(data.userId) : (data.user_id ?? undefined),
+      user_id: data.userId !== undefined ? Number(data.userId) : (data.user_id ?? undefined),
       icon: data.icon ?? null,
       color: data.color ?? null
     }
@@ -57,7 +57,7 @@ export default class CategoryService {
     if (data.type !== undefined) updateData.type = data.type
     if (data.icon !== undefined) updateData.icon = data.icon
     if (data.color !== undefined) updateData.color = data.color
-    if (data.userId !== undefined) updateData.user_id = BigInt(data.userId)
+    if (data.userId !== undefined) updateData.user_id = Number(data.userId)
 
     const updated = await repo.update(id, updateData)
     return {

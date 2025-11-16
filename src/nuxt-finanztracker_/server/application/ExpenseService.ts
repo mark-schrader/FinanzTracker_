@@ -18,7 +18,7 @@ export default class ExpenseService {
   static async createExpense(data: any) {
     const repo = new ExpenseRepository()
     const created = await repo.create({
-      user_id: data.userId !== undefined ? BigInt(data.userId) : undefined,
+      user_id: data.userId !== undefined ? Number(data.userId) : undefined,
       category_id: data.categoryId,
       use: data.use,
       amount: parseFloat(String(data.amount)),
@@ -36,7 +36,7 @@ export default class ExpenseService {
     const repo = new ExpenseRepository()
     const updateData: any = {}
 
-    if (data.userId !== undefined) updateData.user_id = BigInt(data.userId)
+    if (data.userId !== undefined) updateData.user_id = Number(data.userId)
     if (data.categoryId !== undefined) updateData.category_id = data.categoryId
     if (data.use !== undefined) updateData.use = data.use
     if (data.amount !== undefined) updateData.amount = parseFloat(String(data.amount))
