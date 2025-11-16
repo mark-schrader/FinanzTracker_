@@ -18,7 +18,7 @@
     <div class="table-container">
       <table class="table">
         <thead>
-          <tr class>
+          <tr>
             <th>Datum</th>
             <th class="text-right">Betrag</th>
             <th>Zyklus</th>
