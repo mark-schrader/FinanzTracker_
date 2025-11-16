@@ -206,10 +206,10 @@
 
                             <label>Intervall</label>
                             <select v-model="selectedAuftrag.intervall" class="form-select">
-                              <option value="weekly">W - Wöchentlich</option>
-                              <option value="monthly">M - Monatlich</option>
-                              <option value="semesterly">S - Semesterlich</option>
-                              <option value="annual">Y - Jährlich</option>
+                              <option value="weekly">Wöchentlich</option>
+                              <option value="monthly">Monatlich</option>
+                              <option value="semesterly">Semesterlich</option>
+                              <option value="annual">Jährlich</option>
                             </select>
                           </div>
 
@@ -354,32 +354,38 @@ const filteredTransactions = computed(() => {
   )
 })
 
-// Mapping für Daueraufträge (nur Anzeige in Tabelle)
+// Mapping für Daueraufträge (nur Anzeige in Tabelle + Basis für Edit/Delete)
 const formattedAuftraege = computed(() => {
   if (!auftraege.value.length) return []
 
-  return auftraege.value.map(a => ({
-    id: a.id,
-    
-    // Name: Einnahme → a.source | Ausgabe → a.use | fallback
-    name: a.purpose || a.source || a.use || '—',
+  return auftraege.value.map(a => {
+    // Betrag als Zahl aus dem String "-1200.00 €" / "+400.00 €" holen
+    const rawAmount = (a.amount || '0')
+      .replace('€', '')
+      .replace('+', '')
+      .replace(',', '.')
+      .trim()
 
-    // Kategorie
-    kategorie: a.category || '—',
+    let betrag = Number(rawAmount)
+    if (a.type === 'Ausgabe') {
+      betrag = -Math.abs(betrag)
+    } else {
+      betrag = Math.abs(betrag)
+    }
 
-    // Betrag: chuyển "+120.00 €" | "-80.00 €" → số
-    betrag: Number(
-      (a.amount || '0')
-        .replace('€', '')
-        .replace('+', '')
-        .replace('-', '')
-        .replace(',', '.')
-    ) * (a.type === 'Ausgabe' ? -1 : 1),
+    return {
+      id: a.id,
+      type: a.type,                 // Einnahme, Ausgabe (UI-Zwecke)
+      recordType: a.recordType,     // income  expense (API-Zwecke, backend)
 
-    // Interval 
-    intervall: a.interval
-  }))
+      name: a.purpose || a.source || a.use || '—',
+      kategorie: a.category || '—',
+      betrag,                       // Number, positiv oder negativ
+      intervall: a.interval
+    }
+  })
 })
+
 
 
 // Konvertiert einen Euro-String ("1.234,56 €") in eine Float-Zahl (1234.56)
@@ -506,12 +512,63 @@ async function submitExpense() {
   }
 }
 
-// löscht den ausgewählten Dauerauftrag
-function deleteAuftrag() {
-  auftraege.value = auftraege.value.filter(a => a.id !== selectedAuftrag.value.id)
-  showDeleteConfirm.value = false
-  selectedAuftrag.value = null
+// Dauerauftrag bearbeiten & in DB speichern
+async function saveEdit() {
+  if (!selectedAuftrag.value) return
+
+  try {
+    const auftrag = selectedAuftrag.value
+
+    // Betrag als positive Zahl für DB
+    const amount = Math.abs(Number(auftrag.betrag))
+
+    await $fetch(`/api/transactions/${auftrag.id}`, {
+      method: 'PUT',
+      body: {
+        recordType: auftrag.recordType,   // income, expense
+        type: auftrag.type,               // Einnahme, Ausgabe
+        amount,
+        interval: auftrag.intervall,
+        name: auftrag.name,
+        category: auftrag.kategorie
+      }
+    })
+
+    // Danach aktuelle Daueraufträge neu laden, damit UI stimmt
+    const recurringData = await $fetch('/api/transactions?type=recurring')
+    auftraege.value = recurringData || []
+
+    showEditModal.value = false
+    selectedAuftrag.value = null
+  } catch (err) {
+    console.error('Fehler beim Aktualisieren des Dauerauftrags:', err)
+  }
 }
+
+
+// löscht den ausgewählten Dauerauftrag (auch in DB)
+async function deleteAuftrag() {
+  if (!selectedAuftrag.value) return
+
+  try {
+    const auftrag = selectedAuftrag.value
+
+    await $fetch(`/api/transactions/${auftrag.id}`, {
+      method: 'DELETE',
+      body: {
+        recordType: auftrag.recordType   // income,expense
+      }
+    })
+    // Lokal aus der Liste entfernen
+    auftraege.value = auftraege.value.filter(a => a.id !== auftrag.id)
+
+    showDeleteConfirm.value = false
+    selectedAuftrag.value = null
+  } catch (err) {
+    console.error('Fehler beim Löschen des Dauerauftrags:', err)
+  }
+}
+
 
 </script>
 

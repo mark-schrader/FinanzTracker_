@@ -32,6 +32,8 @@ export default defineEventHandler(async (event) => {
 
   // Ausgaben formatieren
   const formattedExpenses = expenses.map(exp => ({
+    id: exp.id,                     // neu: hilft beim Bearbeiten/Löschen Dauerauftrag
+    recordType: 'expense',          // neu: hilft beim Bearbeiten/Löschen Dauerauftrag
     type: 'Ausgabe',
     date: exp.date.toISOString().split('T')[0],
     time: '—',
@@ -46,6 +48,8 @@ export default defineEventHandler(async (event) => {
 
   // Einnahmen formatieren
   const formattedIncomes = incomes.map(inc => ({
+    id: inc.id,                     //neu, hilft beim Bearbeiten/Löschen Dauerauftrag
+    recordType: 'income',           //neu, hilft beim Bearbeiten/Löschen Dauerauftrag
     type: 'Einnahme',
     date: inc.date.toISOString().split('T')[0],
     time: '—',
