@@ -1,11 +1,34 @@
 // server/api/transactions.get.ts
 // Importiere Prisma ORM
 import { PrismaClient } from '@prisma/client'
+import { serverSupabaseUser } from '#supabase/server'
 
 // Erstelle Prisma-Instanz
 const prisma = new PrismaClient()
 
-export default defineEventHandler(async () => {
+export default defineEventHandler(async (event) => {
+  
+  const supabaseUser = await serverSupabaseUser(event)
+  if (!supabaseUser) {
+    throw createError({
+      statusCode: 401,
+      statusMessage: 'Nicht authorisiert!'
+    })
+  }
+
+  const prismaUser = await prisma.user.findUnique({
+    where: { supabaseid: supabaseUser.id }
+  })
+
+  if (!prismaUser) {
+    throw createError({
+      statusCode: 401,
+      statusMessage: 'Benutzer nicht gefunden!'
+    })
+  }
+
+  const userId = prismaUser.userid
+
   // Zukünftig: Benutzer-ID aus der Anfrage lesen
   // const userId = Number(getQuery(event).user_id)
   // if (!userId) {
@@ -16,13 +39,15 @@ export default defineEventHandler(async () => {
   // }
 
   // Einnahmen und Ausgaben gleichzeitig abfragen
+
+  try {
   const [expenses, incomes] = await Promise.all([
     prisma.expenses.findMany({
-      // where: { user_id: BigInt(userId) },
+       where: { user_id: userId },
       include: { categories: true, user: true }
     }),
     prisma.incomes.findMany({
-      // where: { user_id: BigInt(userId) },
+       where: { user_id: userId },
       include: { categories: true, user: true }
     })
   ])
@@ -59,4 +84,9 @@ export default defineEventHandler(async () => {
   return [...formattedExpenses, ...formattedIncomes].sort((a, b) =>
     new Date(b.date).getTime() - new Date(a.date).getTime()
   )
+}catch (error) {
+    throw createError({
+      statusCode: 500, statusMessage: 'Fehler beim Abrufen der Transaktionen'
+    })
+  }
 })
