@@ -1,0 +1,1 @@
+export { default } from "file:///Users/macbookair/Desktop/Uni/Sem%204/Software%20Engineering%201/Projekt/Projektgit/FinanzTracker_/src/emujin/node_modules/@nuxt/vite-builder/dist/runtime/vite-node.mjs"

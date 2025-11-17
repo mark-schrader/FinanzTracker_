@@ -4,6 +4,14 @@ import darkMode from "~/components/darkMode.vue"; // Darkmode will be later impl
 import { navigateTo } from "#app";
 
 const route = useRoute(); // Get the current route to highlight active navigation item
+const isScrolled = ref(false); // pruef scroll zustand
+
+onMounted(() => {
+  const onScroll = () => (isScrolled.value = window.scrollY > 80);
+  window.addEventListener("scroll", onScroll);
+  onUnmounted(() => window.removeEventListener("scroll", onScroll));
+});
+
 const navItems = [
   { label: "DASHBOARD", href: "/dashboard" },
   { label: "KONTOBEWEGUNG", href: "/kontobewegung" },
@@ -31,7 +39,10 @@ const showLogoutAlert = () => {
     />
     <!-- Header is fixed -->
     <header
-      class="fixed top-0 left-0 right-0 z-50 flex items-center justify-between h-35 px-6 bg-white shadow-lg"
+      :class="[
+        'header',
+        isScrolled ? 'header-scrolled' : '', //wenn sroll, header wird kleiner
+      ]"
     >
       <!-- Logo -->
       <NuxtLink to="/" class="shrink-0 group">
@@ -47,24 +58,12 @@ const showLogoutAlert = () => {
       <!-- Center: Title + Navigation -->
       <div class="flex flex-col items-center justify-center">
         <h1 class="font-bold text-4xl py-5">Pleitegeier</h1>
-        <nav class="mt-1">
-          <!-- Navigation -->
-          <ul class="flex space-x-6 text-sm font-semibold">
-            <li v-for="(item, i) in navItems" :key="i">
-              <NuxtLink
-                :to="item.href"
-                :class="[
-                  route.path === item.href // check if the current route matches the href
-                    ? 'pb-1 border-b-2 text-red-500 border-red-500' //highlight active link
-                    : 'border-transparent text-gray-600 hover:text-sky-600 pb-1 border-b-2 hover:border-indigo-600', // default style for inactive links
-                  'transition-colors duration-200 ease-out',
-                ]"
-              >
-                {{ item.label }}
-              </NuxtLink>
-            </li>
-          </ul>
-        </nav>
+        <Navigation
+          :nav-items="navItems"
+          :active-path="route.path"
+          layout="header"
+        />
+        <!-- Navigation Komponente -->
       </div>
 
       <!-- Right actions -->
