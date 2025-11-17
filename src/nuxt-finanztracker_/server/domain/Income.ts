@@ -35,3 +35,14 @@ export default class Income {
     )
   }
 }
+
+export interface CreateIncometoU {
+  userId: number
+  categoryId: number
+  source: string
+  amount: number | string
+  date: string | Date
+  interval?: string
+  note?: string
+}
+

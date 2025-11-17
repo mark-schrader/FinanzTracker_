@@ -94,8 +94,6 @@
 </template>
 
 <script setup>
-import { ref, computed, watchEffect } from 'vue'
-import { useFetch } from '#app'
 
 // fetch direkt aufrufen — benutze userId query (camelCase) wie im Backend
 const { data: transactionsData, error } = await useFetch('/api/transactions', {

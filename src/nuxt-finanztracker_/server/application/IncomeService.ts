@@ -1,5 +1,6 @@
 import IncomeRepository from '../repositories/IncomeRepository'
 import Income from '../domain/Income'
+import type  CreateIncometoU from '../domain/Income'
 
 export default class IncomeService {
   static async getIncomesByUserId(userId: number) {
@@ -15,7 +16,7 @@ export default class IncomeService {
     return Income.fromPrisma(income)
   }
 
-  static async createIncome(data: any) {
+  static async createIncome(data: CreateIncometoU) {
     const repo = new IncomeRepository()
     const created = await repo.create({
       user_id: data.userId !== undefined ? Number(data.userId) : undefined,
