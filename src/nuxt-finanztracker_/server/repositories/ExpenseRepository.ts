@@ -8,7 +8,7 @@ export default class ExpenseRepository {
    */
   async findByUserId(userId: number) {
     return prisma.expenses.findMany({
-      where: { user_id: Number(userId) },
+      where: { user_id: (userId) },
       orderBy: { date: 'desc' },
       include: { categories: true, user: true }
     })
