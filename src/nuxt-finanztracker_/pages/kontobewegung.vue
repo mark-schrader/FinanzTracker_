@@ -16,11 +16,9 @@
 
     <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
       <!-- Einnahme hinzufügen -->
-      <button
-        @click="showIncomeModal = true"
+      <button @click="showIncomeModal = true"
         class="bg-teal-100 hover:bg-teal-200 text-teal-700 font-semibold py-12 rounded shadow
-               text-center flex flex-col items-center justify-center space-y-2 transform hover:scale-105 transition-transform duration-200"
-      >
+               text-center flex flex-col items-center justify-center space-y-2 transform hover:scale-105 transition-transform duration-200">
         <i class="fas fa-plus text-4xl"></i>
         <span class="text-lg">Einnahme hinzufügen</span>
       </button>
@@ -101,7 +99,7 @@
                 {{ cat.name }}
               </option>
             </select>
-            
+
 
             <label class="block text-sm font-medium">Kommentar</label>
             <textarea v-model="expenseForm.note" class="border px-2 py-1 rounded w-full"></textarea>
@@ -261,8 +259,7 @@ async function submitIncome() {
       }
     })
 
-    // Push im Frontend im selben Format wie TransactionService liefert
-    transactions.value.push({
+    const newTransaction = {
       type: 'Einnahme',
       date: incomeForm.value.date,
       time: '—',
@@ -270,9 +267,12 @@ async function submitIncome() {
       interval: incomeForm.value.interval,
       owner: 'Du',
       category: categories.value.find(c => c.id == incomeForm.value.category)?.name ?? '',
-      purpose: incomeForm.value.source,
-      comment: incomeForm.value.note
-    })
+      source: incomeForm.value.source,
+      note: incomeForm.value.note
+    }
+
+    //  Immutable Update, kein push mehr
+    transactions.value = [...transactions.value, newTransaction]
 
     // Reset + Modal schließen
     incomeForm.value = {
@@ -305,7 +305,7 @@ async function submitExpense() {
       }
     })
 
-    transactions.value.push({
+    const newTransaction = {
       type: 'Ausgabe',
       date: expenseForm.value.date,
       time: '—',
@@ -313,9 +313,12 @@ async function submitExpense() {
       interval: expenseForm.value.interval,
       owner: 'Du',
       category: categories.value.find(c => c.id == expenseForm.value.category)?.name ?? '',
-      purpose: expenseForm.value.use,
-      comment: expenseForm.value.note
-    })
+      use: expenseForm.value.use,
+      note: expenseForm.value.note
+    }
+
+    // Immutable Update, kein push mehr
+    transactions.value = [...transactions.value, newTransaction]
 
     // Reset + Modal schließen
     expenseForm.value = {
@@ -332,4 +335,3 @@ async function submitExpense() {
   }
 }
 </script>
-

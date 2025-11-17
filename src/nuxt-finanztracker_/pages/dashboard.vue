@@ -96,14 +96,8 @@
 <script setup>
 
 // fetch direkt aufrufen — benutze userId query (camelCase) wie im Backend
-const { data: transactionsData, error } = await useFetch('/api/transactions', {
+const { data: transactions, error } = await useFetch('/api/transactions', {
   params: { userId: 1 } // <-- anpassen auf echten User
-})
-
-// reaktiver Wert, mit automatischer Aktualisierung wenn useFetch updated
-const transactions = ref(transactionsData.value || [])
-watchEffect(() => {
-  transactions.value = transactionsData.value || []
 })
 
 const search = ref('')

@@ -1,3 +1,5 @@
+import { formatAmount, formatDate } from '../utility/transactionFormatUtility'
+
 export default class Income {
   constructor(
     public id: number,
@@ -13,11 +15,11 @@ export default class Income {
   ) {}
 
   get formattedAmount(): string {
-    return `+${this.amount.toFixed(2)} €`
+    return formatAmount(this.amount, 'income')
   }
 
   get formattedDate(): string {
-    return this.date.toISOString().split('T')[0]
+    return formatDate(this.date)
   }
 
   static fromPrisma(prismaIncome: any): Income {
