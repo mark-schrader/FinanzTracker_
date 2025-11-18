@@ -1,3 +1,4 @@
+/** @type {import('tailwindcss').Config} */
 module.exports = {
   darkMode: 'class', // Enable dark mode with 'class' strategy
   content: [
@@ -8,7 +9,15 @@ module.exports = {
     './assets/**/*.{css,scss}',
   ],
   theme: {
-    extend: {},
+    extend: {
+      screens: {
+        custom: '500px', // eigener Breakpoint Challenge Dashboard
+        sm: '640px',
+        md: '768px',
+        lg: '1024px',
+        xl: '1280px',
+      },
+    },
   },
   plugins: [],
 }
