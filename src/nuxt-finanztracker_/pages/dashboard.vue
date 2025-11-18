@@ -94,18 +94,17 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue'
-import { useFetch } from '#app'
 
-const transactions = ref([])
-const search = ref('')
-
-onMounted(async () => {
-  const { data, error } = await useFetch('/api/transactions')
-  if (data.value) transactions.value = data.value
+// fetch direkt aufrufen — benutze userId query (camelCase) wie im Backend
+const { data: transactions, error } = await useFetch('/api/transactions', {
+  params: { userId: 1 } // <-- anpassen auf echten User
 })
 
-// Search filter
+const search = ref('')
+
+//Optional Debug:
+console.log('TRANSACTIONS:', transactions.value)
+
 const filteredTransactions = computed(() =>
   transactions.value.filter(t =>
     Object.values(t).some(field =>
@@ -114,3 +113,4 @@ const filteredTransactions = computed(() =>
   )
 )
 </script>
+
