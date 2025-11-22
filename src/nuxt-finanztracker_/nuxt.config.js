@@ -5,11 +5,11 @@ export default defineNuxtConfig({
     '~/assets/css/tailwind.css',
     'animate.css',
   ],
-  modules: ['@nuxtjs/tailwindcss'],
+  modules: [],
   // Configure PostCSS via Nuxt options (do NOT use postcss.config.js with Nuxt)
   postcss: {
     plugins: {
-      '@tailwindcss/postcss': {},
+      tailwindcss: {},
       autoprefixer: {},
     },
   },
