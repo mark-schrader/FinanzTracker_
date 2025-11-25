@@ -10,7 +10,7 @@
     <Header />
 
     <!-- Main Content -->
-    <main class="flex-grow mt-[160px] content-wrapper">
+    <main class="grow mt-[160px] content-wrapper">
       <NuxtPage />
     </main>
 
@@ -21,6 +21,6 @@
 
 <script setup>
 // Import the components
-import Header from '~/components/header.vue'
-import Footer from '~/components/footer.vue'
+import Header from "~/components/header.vue";
+import Footer from "~/components/footer.vue";
 </script>

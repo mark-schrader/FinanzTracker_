@@ -1,20 +1,58 @@
 <script setup>
 useHead({
-  title: 'Authors · Pleitegeier',
+  title: "Authors · Pleitegeier",
   meta: [
-    { name: 'description', content: 'Lerne das Team hinter Pleitegeier kennen' }
-  ]
-})
+    {
+      name: "description",
+      content: "Lerne das Team hinter Pleitegeier kennen",
+    },
+  ],
+});
 
 const team = [
-  { name: 'Til Guhlmann', email: 'til.guhlmann@stud.htw-dresden.de', role: 'Product Owner', fun: 'Ist schneller im Discord als der Ping ⚡' },
-  { name: 'Enna Scheer', email: 'enna.scheer@stud.htw-dresden.de', role: 'Scrum Master', fun: 'Hat immer den vollen Überblick und erinnert dich ans Meeting, bevor du es vergisst 🎯' },
-  { name: 'Khanh Ly La', email: 'khanhly.la@stud.htw-dresden.de', role: 'Dev-Team, Frontend', fun: 'Wenn ein Button nicht rund ist, weine ich 😢' },
-  { name: 'Emujin Uuganbayar', email: 'emujin.uuganbayar@stud.htw-dresden.de', role: 'Dev-Team, Frontend', fun: 'Hat das Protokoll meistens schon geschrieben, bevor das Meeting vorbei ist 😉' },
-  { name: 'Mark Schrader', email: 'mark.schrader@stud.htw-dresden.de', role: 'Dev-Team, Backend', fun: 'Sorgt dafür, dass alles funktioniert – auch wenn es keiner sieht ✨' },
-  { name: 'Erik Vogt', email: 'erik.vogt@stud.htw-dresden.de', role: 'Dev-Team, Backend', fun: 'Findet Bugs, bevor sie entstehen 🐞' },
-  { name: 'Justus Müller', email: 'justus.mueller@stud.htw-dresden.de', role: 'Dev-Team, Backend', fun: 'Kein Bug zu groß, kein Bier zu kalt 🍺' },
-]
+  {
+    name: "Til Guhlmann",
+    email: "til.guhlmann@stud.htw-dresden.de",
+    role: "Product Owner",
+    fun: "Ist schneller im Discord als der Ping ⚡",
+  },
+  {
+    name: "Enna Scheer",
+    email: "enna.scheer@stud.htw-dresden.de",
+    role: "Scrum Master",
+    fun: "Hat immer den vollen Überblick und erinnert dich ans Meeting, bevor du es vergisst 🎯",
+  },
+  {
+    name: "Khanh Ly La",
+    email: "khanhly.la@stud.htw-dresden.de",
+    role: "Dev-Team, Frontend",
+    fun: "Wenn ein Button nicht rund ist, weine ich 😢",
+  },
+  {
+    name: "Emujin Uuganbayar",
+    email: "emujin.uuganbayar@stud.htw-dresden.de",
+    role: "Dev-Team, Frontend",
+    fun: "Hat das Protokoll meistens schon geschrieben, bevor das Meeting vorbei ist 😉",
+  },
+  {
+    name: "Mark Schrader",
+    email: "mark.schrader@stud.htw-dresden.de",
+    role: "Dev-Team, Backend",
+    fun: "Sorgt dafür, dass alles funktioniert – auch wenn es keiner sieht ✨",
+  },
+  {
+    name: "Erik Vogt",
+    email: "erik.vogt@stud.htw-dresden.de",
+    role: "Dev-Team, Backend",
+    fun: "Findet Bugs, bevor sie entstehen 🐞",
+  },
+  {
+    name: "Justus Müller",
+    email: "justus.mueller@stud.htw-dresden.de",
+    role: "Dev-Team, Backend",
+    fun: "Kein Bug zu groß, kein Bier zu kalt 🍺",
+  },
+];
 </script>
 
 <template>
@@ -24,11 +62,11 @@ const team = [
     </h1>
 
     <p class="text-lg mb-8 leading-relaxed">
-      <strong class="text-brand-600 dark:text-brand-300">Pleitegeier</strong> ist eine smarte Plattform,
-      die Studierenden hilft, ihre Finanzen im Griff zu behalten.
-      Unser Ziel ist es, das Finanzmanagement für junge Menschen
-      einfacher, transparenter und nachhaltiger zu gestalten –
-      mit praktischen Tools, smarten Empfehlungen und einem starken Team im Hintergrund.
+      <strong class="text-brand-600 dark:text-brand-300">Pleitegeier</strong>
+      ist eine smarte Plattform, die Studierenden hilft, ihre Finanzen im Griff
+      zu behalten. Unser Ziel ist es, das Finanzmanagement für junge Menschen
+      einfacher, transparenter und nachhaltiger zu gestalten – mit praktischen
+      Tools, smarten Empfehlungen und einem starken Team im Hintergrund.
     </p>
 
     <ul class="space-y-4">
@@ -41,7 +79,7 @@ const team = [
         <div
           class="avatar bg-brand-600 dark:bg-brand-400 text-white dark:text-gray-900 font-semibold text-sm mt-1"
         >
-          {{ member.name.split(' ')[0][0] }}{{ member.name.split(' ')[1][0] }}
+          {{ member.name.split(" ")[0][0] }}{{ member.name.split(" ")[1][0] }}
         </div>
 
         <!-- Info -->

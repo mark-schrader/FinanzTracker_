@@ -12,13 +12,13 @@
 </template>
 
 <script setup>
-import { useRoute } from 'vue-router'
-const route = useRoute()
+import { useRoute } from "vue-router";
+const route = useRoute();
 
 defineProps({
   navItems: {
     type: Array,
-    required: true
-  }
-})
+    required: true,
+  },
+});
 </script>

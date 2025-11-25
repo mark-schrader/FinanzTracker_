@@ -1,11 +1,12 @@
 <template>
   <div class="content-wrapper space-y-8">
-
     <!-- Header -->
     <div class="flex items-center justify-between mb-6">
       <h1 class="text-3xl font-bold text-brand-600 dark:text-brand-300">
-        Dashboard: Account Balance</h1>
-      <CurrentTime /> <!-- Current time component -->
+        Dashboard: Account Balance
+      </h1>
+      <CurrentTime />
+      <!-- Current time component -->
     </div>
 
     <!-- Grid -->
@@ -30,7 +31,11 @@
           stroke-width="2"
           viewBox="0 0 24 24"
         >
-          <path stroke-linecap="round" stroke-linejoin="round" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M5 10l7-7m0 0l7 7m-7-7v18"
+          />
         </svg>
       </div>
 
@@ -46,7 +51,11 @@
           stroke-width="2"
           viewBox="0 0 24 24"
         >
-          <path stroke-linecap="round" stroke-linejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M19 14l-7 7m0 0l-7-7m7 7V3"
+          />
         </svg>
       </div>
 
@@ -82,14 +91,17 @@
           stroke-width="2"
           viewBox="0 0 24 24"
         >
-          <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M12 4v16m8-8H4"
+          />
         </svg>
       </div>
     </div>
 
     <!-- Kontobewegungstabelle -->
-    <bewegungstabelle :transactions="transactions" /> 
-
+    <bewegungstabelle :transactions="transactions" />
   </div>
 </template>
 
@@ -106,11 +118,11 @@ const search = ref('')
 console.log('TRANSACTIONS:', transactions.value)
 
 const filteredTransactions = computed(() =>
-  transactions.value.filter(t =>
-    Object.values(t).some(field =>
+  transactions.value.filter((t) =>
+    Object.values(t).some((field) =>
       String(field).toLowerCase().includes(search.value.toLowerCase())
     )
   )
-)
+);
 </script>
 
