@@ -100,10 +100,16 @@
               </option>
             </select>
 
+<<<<<<< HEAD
 
             <label>Kommentar</label>
             <textarea v-model="expenseForm.note" class="form-textarea"></textarea>
 
+=======
+            <label>Kommentar</label>
+            <textarea v-model="expenseForm.note" class="form-textarea"></textarea>
+
+>>>>>>> 2a423d8ca94f14168d52d8b63d47d8467ce7088b
             <label>Zyklus</label>
             <select v-model="expenseForm.interval" class="form-select">
               <option value="once">Einmalig</option>
