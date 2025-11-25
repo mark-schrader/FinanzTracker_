@@ -3,7 +3,7 @@
 // --- 2. Teammitglieder -----------------------
 Til Guhlmann <til.guhlmann@stud.htw-dresden.de>; Enna Scheer <enna.scheer@stud.htw-dresden.de>; Emujin Uuganbayar <emujin.uuganbayar@stud.htw-dresden.de>; Erik Vogt <erik.vogt@stud.htw-dresden.de>; Justus Müller <justus.mueller@stud.htw-dresden.de>; Mark Schrader <smark.schrader@stud.htw-dresden.de>; Khanh Ly La <khanhly.la@stud.htw-dresden.de>
 // --- 3. Abgabedatum --------------------------
-01. Januar 2025
+04. Juli 2025
 // ---------------------------------------------
 :docs: ../docs
 include::{docs}/_includes/default-attributes.inc.adoc[]
@@ -37,47 +37,64 @@ include::{docs}/_includes/default-attributes.inc.adoc[]
 
 // --- 4. include Pfade anpassen ---------------
 
+
 // --- Projektdokumentation ---
-//== Projektdokumentation
+
+
+= Projektdokumentation
+* Projektplan
+* Backlogs
 
 :imagesdir: {docs-project-management}/images
 
 // Projektplan
-include::{docs-project-management}/project_plan.adoc[lines=1;12..-1,leveloffset=+1]
+include::{docs-project-management}/project_plan.adoc[lines=1..1;4..-1,leveloffset=+1]
+<<<
+
+// Backlogs
+include::{docs-project-management}/backlogs.adoc[lines=1..1;4..-1,leveloffset=+1]
 <<<
 
 // --- Technische Spezifikation ---
-== Technische Spezifikation
-
-=== Produktvision
-include::{docs-requirements}/vision.adoc[lines=12..-1,leveloffset=+2]
-<<<
-
-=== Glossar und Domänenmodel
-[#glossary]
-include::{docs-requirements}/glossary.adoc[lines=12..-1,leveloffset=+2]
-<<<
-
-=== UX-Konzept
-include::{docs-requirements}/ux-concept.adoc[lines=12..-1,leveloffset=+2]
-<<<
+= Technische Spezifikation
+* Produktvision
+* Glossar und Domänenmodel
+* UX-Konzept
 
 :imagesdir: {docs-requirements}/images
 
+// Produktvision
+[#vision]
+include::{docs-requirements}/vision.adoc[lines=1..1;4..-1,leveloffset=+1]
+<<<
+
+// Glossar und Domänenmodel
+[#glossary]
+include::{docs-requirements}/glossary.adoc[lines=1..1;4..-1,leveloffset=+1]
+<<<
+
+// UX-Konzept
+include::{docs-requirements}/ux-concept.adoc[lines=1..1;4..-1,leveloffset=+1]
+<<<
+
 
 // --- Entwurfsdokumentation ---
-== Entwurfsdokumentation
+= Entwurfsdokumentation
+* Architektur-Notizbuch
+* Test Cases
 
-=== Architektur-Notizbuch
-
+// Architektur-Notizbuch
 :imagesdir: {docs-architecture}/images
-include::{docs-architecture}/architecture_notebook.adoc[lines=12..-1,leveloffset=+2]
+include::{docs-architecture}/architecture_notebook.adoc[lines=1..1;4..-1,leveloffset=+1]
 <<<
 
-=== Test Cases
+// Test Cases
 :imagesdir: {docs-test}/images
-include::{docs-test}/test_cases.adoc[lines=4..-1,leveloffset=+2]
+include::{docs-test}/test_cases.adoc[lines=1..1;4..-1,leveloffset=+1]
 <<<
+
+
+
 
 
 // ---------------------------------------------

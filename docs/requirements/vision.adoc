@@ -1,16 +1,7 @@
-= Vision: Finanztracker_
-
-*Til Guhlmann* <til.guhlmann@stud.htw-dresden.de> +
-*Enna Scheer* <enna.scheer@stud.htw-dresden.de> +
-*Emujin Uuganbayar* <emujin.uuganbayar@stud.htw-dresden.de> +
-*Erik Vogt* <erik.vogt@stud.htw-dresden.de> +
-*Justus Müller* <justus.mueller@stud.htw-dresden.de> +
-*Mark Schrader* <mark.schrader@stud.htw-dresden.de> +
-*Khanh Ly La* <khanhly.la@stud.htw-dresden.de>
-
-{localdatetime} 
-
 include::../_includes/default-attributes.inc.adoc[]
+= Vision: {project-name}
+Til Guhlmann <til.guhlmann@stud.htw-dresden.de>; Enna Scheer <enna.scheer@stud.htw-dresden.de>; Emujin Uuganbayar <emujin.uuganbayar@stud.htw-dresden.de>; Erik Vogt <erik.vogt@stud.htw-dresden.de>; Justus Müller <justus.mueller@stud.htw-dresden.de>; Mark Schrader <smark.schrader@stud.htw-dresden.de>; Khanh Ly La <khanhly.la@stud.htw-dresden.de>
+{localdatetime} 
 // Platzhalter für weitere Dokumenten-Attribute
 
 
@@ -111,20 +102,20 @@ Die Verfeinerung der Stakeholder, die das System benutzen, wird in der "ux-conze
 [%header, cols="4,1,4,1"]
 |===
 | Bedarf | Priorität | Features / Funktionen | Geplantes Release
-| Eintragen von Finanzeinnahmen | sehr wichtig | Möglichkeit zur manuellen Eingabe von Einnahmen inkl. Datum, Betrag, Kategorie | xx
-| Anmelden und Ausloggen | sehr wichtig | Authentifizierung durch Username und Password | xx
-| Eintragen von Finanzausgaben | sehr wichtig | Erfassung aller Ausgaben mit Tags/Kategorien und Wiederholungseinstellungen | xx
-| Kategorisierung von Einnahmen und Ausgaben | wichtig | System zur Verwaltung und Anpassung von Kategorien | xx
-| Übersicht über aktuelle Finanzen | sehr wichtig | Dashboard mit grafischer und tabellarischer Darstellung aktueller Finanzlage | xx
-| Prognosen | nicht wichtig | Vorhersage zukünftiger Finanzentwicklungen basierend auf bisherigen Daten | xx
-| Spar-challenges | wichtig | Vordefinierte oder benutzerdefinierte Challenges mit Fortschrittsanzeige | xx
-| Wiederkehrende Ausgaben automatisch ins nächste Semester übernehmen | wichtig | Automatisches Kopieren der wiederkehrenden Ausgaben ins neue Semester (Grundkonzept) | xx
-| Finanzdaten-Export | nicht wichtig | Export als CSV, Excel oder PDF zur Archivierung oder Analyse | xx
-| Simples Layout | sehr wichtig | Intuitives und minimalistisches UI für einfache Bedienung | xx
-| Zweite Sprache (Englisch) | wichtig |  Umschaltfunktion zwischen Deutsch und Englisch | xx
-| Dark-Mode | nicht wichtig | Dunkles Farbschema für angenehme Nutzung bei wenig Licht | xx
-| Individuelle anpassbare Elemente | nicht wichtig | Benutzerdefinierte Gestaltung von Farben, Diagrammen und Zeitraumfiltern | xx
-| Modulares Layout (Entfernen von Modulen möglich) |  nicht wichtig | Frei anpassbares Interface, bei dem einzelne Module ein-/ausblendbar sind | xx
+| Eintragen von Finanzeinnahmen | hoch | Möglichkeit zur manuellen Eingabe von Einnahmen inkl. Datum, Betrag, Kategorie | SE1
+| Anmelden und Ausloggen | hoch | Authentifizierung durch Username und Password | SE2
+| Eintragen von Finanzausgaben | hoch |  Erfassung aller Ausgaben mit Tags/Kategorien und Wiederholungseinstellungen | SE1
+| Kategorisierung von Einnahmen und Ausgaben | mittel | System zur Verwaltung und Anpassung von Kategorien | SE1
+| Übersicht über aktuelle Finanzen | hoch | Dashboard mit grafischer und tabellarischer Darstellung aktueller Finanzlage | SE1
+| Prognosen | gering | Vorhersage zukünftiger Finanzentwicklungen basierend auf bisherigen Daten | SE2
+| Spar-challenges | mittel | Vordefinierte oder benutzerdefinierte Challenges mit Fortschrittsanzeige |  SE2
+| Wiederkehrende Ausgaben automatisch ins nächste Semester übernehmen | mittel | Automatisches Kopieren der wiederkehrenden Ausgaben ins neue Semester (Grundkonzept) |  SE2
+| Finanzdaten-Export |  gering | Export als CSV, Excel oder PDF zur Archivierung oder Analyse |  SE2
+| Simples Layout | hoch | Intuitives und minimalistisches UI für einfache Bedienung |  SE1
+| Zweite Sprache (Englisch) | mittel |  Umschaltfunktion zwischen Deutsch und Englisch |  SE2
+| Dark-Mode | gering | Dunkles Farbschema für angenehme Nutzung bei wenig Licht |  SE2
+| Individuelle anpassbare Elemente | gering | Benutzerdefinierte Gestaltung von Farben, Diagrammen und Zeitraumfiltern |  SE2
+| Modulares Layout (Entfernen von Modulen möglich) | gering | Frei anpassbares Interface, bei dem einzelne Module ein-/ausblendbar sind |  SE2
 
 
 |===

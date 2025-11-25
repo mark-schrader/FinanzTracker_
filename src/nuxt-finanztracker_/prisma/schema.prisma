@@ -11,7 +11,7 @@ datasource db {
 /// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
 model budgets {
   id         Int       @id @default(autoincrement())
-  user_id    BigInt
+  user_id    Int
   period     String
   amount     Decimal   @db.Decimal(10, 2)
   created_at DateTime? @default(now()) @db.Timestamp(6)
@@ -24,7 +24,7 @@ model categories {
   id       Int        @id @default(autoincrement())
   name     String
   type     String
-  user_id  BigInt?
+  user_id  Int?
   icon     String?
   color    String?
   user     user?      @relation(fields: [user_id], references: [userid], onDelete: Cascade)
@@ -35,7 +35,7 @@ model categories {
 /// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
 model expenses {
   id          Int           @id @default(autoincrement())
-  user_id     BigInt
+  user_id     Int
   category_id Int
   use         String?
   amount      Decimal       @db.Decimal(10, 2)
@@ -49,7 +49,7 @@ model expenses {
 /// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
 model goals {
   id         Int       @id @default(autoincrement())
-  user_id    BigInt
+  user_id    Int
   name       String
   target     Decimal   @db.Decimal(10, 2)
   saved      Decimal?  @default(0) @db.Decimal(10, 2)
@@ -61,7 +61,7 @@ model goals {
 /// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
 model incomes {
   id          Int           @id @default(autoincrement())
-  user_id     BigInt
+  user_id     Int
   category_id Int
   source      String?
   amount      Decimal       @db.Decimal(10, 2)

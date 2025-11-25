@@ -1,16 +1,7 @@
-= Glossar: FinanzTracker_
-
-*Til Guhlmann* <til.guhlmann@stud.htw-dresden.de> +
-*Enna Scheer* <enna.scheer@stud.htw-dresden.de> +
-*Emujin Uuganbayar* <emujin.uuganbayar@stud.htw-dresden.de> +
-*Erik Vogt* <erik.vogt@stud.htw-dresden.de> +
-*Justus Müller* <justus.mueller@stud.htw-dresden.de> +
-*Mark Schrader* <mark.schrader@stud.htw-dresden.de> +
-*Khanh Ly La* <khanhly.la@stud.htw-dresden.de>
-
-{localdatetime} 
-
 include::../_includes/default-attributes.inc.adoc[]
+= Glossar: {project-name}
+Til Guhlmann <til.guhlmann@stud.htw-dresden.de>; Enna Scheer <enna.scheer@stud.htw-dresden.de>; Emujin Uuganbayar <emujin.uuganbayar@stud.htw-dresden.de>; Erik Vogt <erik.vogt@stud.htw-dresden.de>; Justus Müller <justus.mueller@stud.htw-dresden.de>; Mark Schrader <smark.schrader@stud.htw-dresden.de>; Khanh Ly La <khanhly.la@stud.htw-dresden.de>
+{localdatetime} 
 // Platzhalter für weitere Dokumenten-Attribute
 
 
@@ -18,6 +9,7 @@ include::../_includes/default-attributes.inc.adoc[]
 In diesem Dokument werden die wesentlichen Begriffe aus dem Anwendungsgebiet (Fachdomäne) der {project-name} definiert. Zur besseren Übersichtlichkeit sind Begriffe, Abkürzungen und Datendefinitionen gesondert aufgeführt.
 
 == Begriffe
+////
 === Rollen im Projekt (Scrum Edition)
 |===
 | Begriff | Definition und Erläuterung | Synonyme
@@ -27,8 +19,9 @@ In diesem Dokument werden die wesentlichen Begriffe aus dem Anwendungsgebiet (Fa
 * Anteilseigner  
 * Beteiligte
 | Product Owner| Sorgt für werthaltiges Produkt & entscheidet welche Anforderungen in welcher Reihenfolge umgesetzt werden. a|
-* Projekt Manager*
-| Scrum Master | Verantwortlich für die Teamproduktivität und sorgt für korrekte Anwendung der Prozessregeln. Sie/er moderiert die Meetings a| * Agiles Coach 
+* Projekt Manager
+| Scrum Master | Verantwortlich für die Teamproduktivität und sorgt für korrekte Anwendung der Prozessregeln. Sie/Er moderiert die Meetings a| * Agiles Projektbegleiter 
+* Team Coach
 | Development-Team | Sorgt für die technische Umsetzung des Produkts a| 
 * Entwicklungsteam 
 * Programmierer
@@ -40,10 +33,11 @@ In diesem Dokument werden die wesentlichen Begriffe aus dem Anwendungsgebiet (Fa
 === Scrum Artefakte 
 |===
 | Begriff | Definition und Erläuterung 
-| Product Backlog | Eine geordnete Liste von allem, die als Anforderungsquelle für alle Änderungen am Produkt dient 
+| Product Backlog | Eine geordnete Liste von Allem und als Anforderungsquelle für alle Änderungen am Produkt
 | Sprint Backlog| Es wird vom DevTeam am Anfang eines Sprints erstellt (Angestrebtes Ergebnis und passende PBI und DoR). Es enthält TASKS, die zur Realisierung der Anforderungen dient. Die Aufgaben müssen im Laufe des Sprint abgearbeitet werden. 
-| Produkt Inkrement | Es ist das Ergebnis des jeweiligen Sprints. Aus den Inkrementen wird Schritt für Schritt das Produkt| 
+| Produkt Inkrement | Es ist das Ergebnis des jeweiligen Sprints. Aus den Inkrementen wird Schritt für Schritt das Produkt
 |===
+////
 
 === Fachbegriffe, die im Projekt täglich benutzt werden
 |===
@@ -58,7 +52,6 @@ In diesem Dokument werden die wesentlichen Begriffe aus dem Anwendungsgebiet (Fa
 | Variable Kosten | Ausgaben, die sich je nach Konsumverhalten verändern (z. B. Einkäufe, Restaurantbesuche) | flexible Ausgaben, konsumabhängige Kosten
 | Kategorie / Kategorisierung | Klassifizierung von Transaktionen nach Typ (z. B. Lebensmittel, Mobilität, Freizeit). | Ausgabenkategorie, Typenzuordnung, Sortierung
 | Finanzprognose | Eine Vorausschau basierend auf bisherigen Einnahmen/Ausgaben, z. B. wie viel am Monatsende übrig bleibt. | Budgetprognose
-| Saldo | Aktueller Kontostand, also der Betrag, der sich nach Abzug aller Ausgaben und Hinzurechnung aller Einnahmen auf dem Konto befindet. Ein positiver Saldo bedeutet Guthaben, ein negativer Saldo zeigt, dass das Konto überzogen ist.| Kontostand, Endbetrag, Finanzstatus
 | Dashboard  | Die zentrale Übersichtsseite der App. Es zeigt wichtige Finanzinformationen auf einen Blick – z. B. Kontostände, Ausgaben, Einnahmen, Sparziele oder Budgetwarnungen. | Übersicht, Finanzübersicht, Cockpit 
 |===
 
@@ -76,20 +69,116 @@ In diesem Dokument werden die wesentlichen Begriffe aus dem Anwendungsgebiet (Fa
 // Objekte für das Domänemodell
 [%header]
 |===
-| Bezeichnung | Definition | Format | Gültigkeitsregeln | Aliase
+| Bezeichnung | Definition | Aliase | Attribut | Format | Gültigkeitsregeln 
 
-| Anmeldedaten
-| Zusammensetzung von Benutzername und Passwort.
-| String
-| Emailadresse muss `@`-Zeichen und `.` Punkt enthalten.
-| Login
+| Benutzer 
+| Person die Pleitegeier benutzt
+| User
+a| 
+. Vorname 
+. Nachname 
+. Universität
+. Geburtstag
+. Email
+. Passwort
+a|
+. String
+. String
+. String
+. DateTime
+. email
+. String
+a| 
+. Vorname muss ein existierender Vorname sein ohne Zahlen oder Sonderzeichen
+. Nachname muss ein existierender Nachname sein ohne Zahlen oder Sonderzeichen
+. Universität muss eine existierende Universität, etc. sein
+. Geburtstag muss ein existierendes Datum sein
+. Emailadresse muss @-Zeichen und . Punkt enthalten.
+. Passwort muss 8 Stellen mit 
 
-| xx
-| xx
-| xx
-| xx
-| xx
+| Transaktion 
+| Eine Transaktion ist ein finanzieller Vorgang zwischen zwei Parteien.
+| Zahlungsvorgang
+a| 
+. Typ
+. Betrag
+. Datum
+. Wiederholung
+. Beleg
+a|
+. enum
+. decimal
+. DateTime
+. enum
+. String
+a| 
+. Typ hat Einnahme oder Ausgabe zur Auswahl
+. Betrag muss ein Zahl sein
+. Datum muss ein existierendes Datum sein
+. Wiederholung hat einmalig, wöchentlich, monatlich, halbjährlich und jährlich zur Auswah
+. Beleg ist die URL zu dem Bild des Belegs
+
+| Kategorie 
+| In welcher Kategorie eine Trankation gespeichert wird 
+| Gruppe
+a| 
+. Name
+. Typ
+. Symbol 
+. Farbe
+a|
+. String
+. enum
+. String
+. enum
+a| 
+. Name kann jegliche Buchstabenkombination haben 
+. Typ hat Fixkosten oder Variable Kosten zur Auswahl
+. Symbol ist die URL zu dem Bild der Kategorie
+. Farbe hat eine Auswahl von Farben zur Auswahl
+
+| Sparchallenge
+| Eine Sparchallenge ist eine motivierende Methode zum regelmäßigen Geldsparen.
+| Sparaktion
+a| 
+. Titel
+. Beschreibung
+. Zielbetrag
+. Startdatum
+. Enddatum
+a|
+. String
+. String
+. Decimal
+. DateTime
+. DateTime
+a| 
+. Titel kann jegliche Buchstabenkombination haben 
+. Beschreibung kann jegliche Wortkombination haben 
+. Zielbetrag muss ein gültiger Betrag sein
+. Startdatum muss ein existierendes Datum sein
+. Enddatum muss ein existierendes Datum sein und hinter dem Startdatum liegen 
+
+| Budget
+| Ein Budget ist ein geplanter finanzieller Rahmen für Ausgaben
+| Finanzplan
+a| 
+. Enddatum
+. Betrag
+. Erstellungsdatum
+a| 
+. DateTime
+. decimal
+. DateTime
+a| 
+. Enddatum muss ein existierendes Datum sein
+. Betrag muss ein gültiger Betrag sein
+. Erstellungsdatum muss ein existierendes Datum sein
 |===
 
 == Domänenmodell
 // Fügen Sie hier eine Abbildung mit ihrem Domänenmodell ein
+Im nachfolgenden sehen sie das Domänemodell des Finanztrackers "Pleitegeier". Es stellt die Zusammenhänge dar.
+
+.Domänenmodell
+image::Domänemodell2.jpg[]

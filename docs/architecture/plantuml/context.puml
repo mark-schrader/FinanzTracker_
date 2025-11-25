@@ -1,0 +1,18 @@
+!include <c4/C4_Context.puml>
+
+'ref http://plantuml.com/stdlib
+!include <office/Users/user.puml>
+!include <office/Users/mobile_user.puml>
+
+title Context für den Finanztracker
+
+Person(student, "Student", "Verwendet den Finanztracker, um Ausgaben & Einnahmen zu verwalten")
+System(finanztracker, "Finanztracker", "Webanwendung zur Verwaltung von Finanzen. Verwaltet User Daten")
+
+
+
+Rel(student, finanztracker, "Verwendet")
+
+
+
+@enduml
