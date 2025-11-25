@@ -38,7 +38,7 @@ const chartData = computed(() => {
     const d = new Date(today)
     d.setDate(today.getDate() - i)
     return d
-  })
+  }).reverse()
 
   // Tagesweise Ausgaben berechnen
   const dailyExpenses = next7Days.map(date => {

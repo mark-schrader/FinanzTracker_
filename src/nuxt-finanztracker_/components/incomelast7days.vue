@@ -39,7 +39,7 @@ const chartData = computed(() => {
     const d = new Date(today)
     d.setDate(today.getDate() - i)
     return d
-  })
+  }).reverse()
 
   const dailyIncome = next7Days.map(date => {
     const dayStr = date.toISOString().split('T')[0] // yyyy-mm-dd
