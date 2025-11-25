@@ -80,8 +80,21 @@ const navItems = [
         </div>
 
         <!-- Avatar-->
-        <div class="avatar">
+        <div
+          @click="$router.push('/profile')"
+          class="w-10 h-10 rounded-full bg-black flex items-center justify-center text-white hover:bg-sky-900 transition-all duration-600"
+        >
           <i class="fas fa-user"></i>
+        </div>
+
+        <!-- Log Out -->
+        <div class="group flex items-center hover: transition-all duration-200">
+          <button
+            @click="showLogoutAlert"
+            class="focus:outline-none transition-all duration-200 transform hover:translate-x-1"
+          >
+            <i class="fas fa-sign-out-alt transition-transform"></i>
+          </button>
         </div>
       </div>
     </header>
