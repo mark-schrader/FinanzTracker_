@@ -17,7 +17,7 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <div class="text-sm dark:text-gray-300">
+  <div class="text-sm dark:text-gray-200">
     🕒 {{ now }}
   </div>
 </template>
