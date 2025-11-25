@@ -100,16 +100,9 @@
               </option>
             </select>
 
-<<<<<<< HEAD
-
             <label>Kommentar</label>
             <textarea v-model="expenseForm.note" class="form-textarea"></textarea>
 
-=======
-            <label>Kommentar</label>
-            <textarea v-model="expenseForm.note" class="form-textarea"></textarea>
-
->>>>>>> 2a423d8ca94f14168d52d8b63d47d8467ce7088b
             <label>Zyklus</label>
             <select v-model="expenseForm.interval" class="form-select">
               <option value="once">Einmalig</option>
@@ -338,8 +331,8 @@ onMounted(async () => {
     transactions.value = transData || []
 
     // Lade Daueraufträge (echt aus DB)
-    const recurringData = await $fetch('/api/transactions?type=recurring')
-    auftraege.value = recurringData || []
+    //const recurringData = await $fetch('/api/transactions?type=recurring')
+    // auftraege.value = recurringData || []
 
   } catch (err) {
     console.error('Fehler beim Laden der Daten:', err)
@@ -538,7 +531,7 @@ async function saveEdit() {
     })
 
     // Danach aktuelle Daueraufträge neu laden, damit UI stimmt
-    const recurringData = await $fetch('/api/transactions?type=recurring')
+    const recurringData = await $fetch('/api/transactions?userId=1&type=recurring')
     auftraege.value = recurringData || []
 
     showEditModal.value = false
