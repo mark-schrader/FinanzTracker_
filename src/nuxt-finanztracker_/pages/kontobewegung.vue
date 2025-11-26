@@ -147,9 +147,11 @@
 <script setup>
 //Imports
 import { ref, computed, onMounted } from 'vue'
-import { useFetch } from '#app' // optional
+import { useFetch } from '#app'
 
-//Reaktive Daten
+definePageMeta({
+  middleware: 'auth' // Auth-Middleware für diese Seite
+})
 
 // Suchfeld für die Tabelle (nicht sichtbar in Template, aber vorbereitet)
 const search = ref('')

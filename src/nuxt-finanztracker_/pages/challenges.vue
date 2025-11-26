@@ -67,6 +67,10 @@
 <script setup>
 import { ref } from 'vue'
 
+definePageMeta({
+  middleware: 'auth' // Auth-Middleware für diese Seite
+})
+
 const showChallengeModal = ref(false)
 
 const challenges = ref([

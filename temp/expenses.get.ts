@@ -1,20 +1,34 @@
 // server/api/expenses.get.ts
 import { PrismaClient } from '@prisma/client'
+import { serverSupabaseUser } from '#supabase/server'
 
 const prisma = new PrismaClient()
 
 export default defineEventHandler(async (event) => {
-  const userId = Number(getQuery(event).user_id) // oder später per Auth
+  
+  const supabaseUser = await serverSupabaseUser(event)
 
-  if (!userId) {
+  if (!supabaseUser) {
     throw createError({
-      statusCode: 400,
-      statusMessage: 'Missing user_id'
+      statusCode: 401,
+      statusMessage: 'Nicht authorisiert!'
+    })
+  }
+  const prismaUser = await prisma.user.findUnique({
+    where: { supabaseid: supabaseUser.id }
+  })
+  if (!prismaUser) {
+    throw createError({
+      statusCode: 401,
+      statusMessage: 'Benutzer nicht gefunden!'
     })
   }
 
+  const userId = prismaUser.userid
+
+
   const expenses = await prisma.expenses.findMany({
-    where: { user_id: BigInt(userId) },
+    where: { user_id: userId },
     include: {
       categories: true,
       user: true

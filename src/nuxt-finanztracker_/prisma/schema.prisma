@@ -74,21 +74,21 @@ model incomes {
 
 /// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
 model user {
-  userid      Int          @id(map: "User_pkey") @default(autoincrement())
-  firstname   String
-  lastname    String
-  university  String
-  birthdate   DateTime
-  createdAt   DateTime     @default(now())
-  username    String?
-  email       String       @unique(map: "User_email_key")
-  startamount Int?
-  supabaseid  String       @unique
-  budgets     budgets[]
-  categories  categories[]
-  expenses    expenses[]
-  goals       goals[]
-  incomes     incomes[]
+  userid        BigInt      @id(map: "User_pkey") @default(autoincrement())
+  supabaseid    String      @unique
+  firstname     String
+  lastname      String
+  university    String
+  birthdate     DateTime
+  createdAt     DateTime     @default(now())
+  username      String?
+  email         String       @unique(map: "User_email_key")
+  startamount   Int?
+  budgets       budgets[]
+  categories    categories[]
+  expenses      expenses[]
+  goals         goals[]
+  incomes       incomes[]
 }
 
 enum interval_type {
