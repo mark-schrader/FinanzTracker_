@@ -23,6 +23,13 @@ export default defineEventHandler(async (event) => {
         // DELETE /api/expenses/5
         if (!id) throw createError({ statusCode: 400, message: 'Missing ID' })
         return await ExpenseService.deleteExpense(Number(id))
+        /*
+        * fetch('http://localhost:3000/api/expenses/5', {
+        * method: 'DELETE'
+        * })
+        * .then(data => console.log('Antwort:', data))
+        * .catch(err => console.error('Fehler:', err));
+        */
 
       default:
         throw createError({ statusCode: 405, message: `Method ${method} not allowed` })
