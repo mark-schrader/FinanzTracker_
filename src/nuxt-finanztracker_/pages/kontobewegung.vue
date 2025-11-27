@@ -1,21 +1,24 @@
 <template>
-  <div class="p-6 max-w-screen-xl mx-auto">
+  <div class="content-wrapper">
     <!-- Header -->
     <div class="flex items-center justify-between mb-6">
-      <h1 class="text-3xl font-bold">Kontobewegung</h1>
+      <h1 class="text-3xl font-bold text-brand-600 dark:text-brand-300">Kontobewegung</h1>
       <CurrentTime />
     </div>
 
-    <!-- Kontostand -->
-    <div class="bg-gray-100 text-center text-xl p-4 rounded shadow mb-6">
-      Aktueller Kontostand: <strong>{{ currentBalance }}</strong>
+    <!-- Aktueller Kontostand -->
+    <div class="card text-center text-xl font-semibold mb-6 bg-teal-50 dark:bg-gray-800">
+      Aktueller Kontostand:
+      <strong class="text-teal-600 dark:text-teal-400">{{ currentBalance }}</strong>
     </div>
 
-    <!-- Einnahmen -->
+    <!-- Aktionen: Einnahmen / Ausgaben / Verwaltung -->
+
     <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+      <!-- Einnahme hinzufügen -->
       <button @click="showIncomeModal = true"
-        class="bg-green-100 hover:bg-green-200 text-green-700 font-semibold py-12 rounded shadow
-         text-center flex flex-col items-center justify-center space-y-2 transform hover:scale-105 transition-transform duration-200">
+        class="bg-teal-100 hover:bg-teal-200 text-teal-700 font-semibold py-12 rounded shadow
+               text-center flex flex-col items-center justify-center space-y-2 transform hover:scale-105 transition-transform duration-200">
         <i class="fas fa-plus text-4xl"></i>
         <span class="text-lg">Einnahme hinzufügen</span>
       </button>
@@ -96,7 +99,6 @@
                 {{ cat.name }}
               </option>
             </select>
-            
 
 
             <label class="block text-sm font-medium">Kommentar</label>
@@ -120,8 +122,6 @@
           </div>
         </div>
       </div>
-
-
 
       <!-- Kategorien -->
       <NuxtLink to="/kategorien"
@@ -147,7 +147,7 @@
 <script setup>
 //Imports
 import { ref, computed, onMounted } from 'vue'
-import { useFetch } from '#app' // Nuxt-eigene Fetch-Funktion für SSR/CSR-Anfragen
+import { useFetch } from '#app' // optional
 
 //Reaktive Daten
 
@@ -188,12 +188,12 @@ const expenseForm = ref({
 
 onMounted(async () => {
   try {
-    // Lade Kategorien
-    const catData = await $fetch('/api/categories')
+    // Kategorien (falls backend userId braucht, ergänzen)
+    const catData = await $fetch('/api/categories?userId=1')
     categories.value = catData || []
 
-    // Lade Transaktionen
-    const transData = await $fetch('/api/transactions')
+    // Lade kombinierte Transaktionen mit userId query (wichtig für Backend)
+    const transData = await $fetch('/api/transactions?userId=1')
     transactions.value = transData || []
   } catch (err) {
     console.error('Fehler beim Laden der Daten:', err)
@@ -243,36 +243,36 @@ const currentBalance = computed(() => {
 
 //Modal-Handling & Form-Submit
 
-// Einnahme speichern
+// Einnahme speichern — POST an /api/incomes (plural)
 async function submitIncome() {
   try {
-    const res = await $fetch('/api/income', {
+    const res = await $fetch('/api/incomes', {
       method: 'POST',
       body: {
         amount: incomeForm.value.amount,
         date: incomeForm.value.date,
         source: incomeForm.value.source,
-        category: incomeForm.value.category,
+        categoryId: incomeForm.value.category,
         note: incomeForm.value.note,
-        interval: incomeForm.value.interval
+        interval: incomeForm.value.interval,
+        userId: 1
       }
     })
 
-    console.log('Erfolgreich gespeichert:', res)
-
-    // Anzeige aktualisieren
-    transactions.value.push({
+    const newTransaction = {
       type: 'Einnahme',
       date: incomeForm.value.date,
       time: '—',
       amount: `+${parseFloat(incomeForm.value.amount).toFixed(2)} €`,
       interval: incomeForm.value.interval,
       owner: 'Du',
+      category: categories.value.find(c => c.id == incomeForm.value.category)?.name ?? '',
       source: incomeForm.value.source,
-      purpose: incomeForm.value.source,
-      category_id: incomeForm.value.category,
-      comment: incomeForm.value.note
-    })
+      note: incomeForm.value.note
+    }
+
+    //  Immutable Update, kein push mehr
+    transactions.value = [...transactions.value, newTransaction]
 
     // Reset + Modal schließen
     incomeForm.value = {
@@ -289,37 +289,36 @@ async function submitIncome() {
   }
 }
 
-
-
-// Ausgabe speichern
+// Ausgabe speichern — POST an /api/expenses (plural)
 async function submitExpense() {
   try {
-    const res = await $fetch('/api/expense', {
+    const res = await $fetch('/api/expenses', {
       method: 'POST',
       body: {
         amount: expenseForm.value.amount,
         date: expenseForm.value.date,
         use: expenseForm.value.use,
-        category: expenseForm.value.category,
+        categoryId: expenseForm.value.category,
         note: expenseForm.value.note,
-        interval: expenseForm.value.interval
+        interval: expenseForm.value.interval,
+        userId: 1
       }
     })
 
-    console.log('Ausgabe erfolgreich gespeichert:', res)
-
-    // Anzeige aktualisieren
-    transactions.value.push({
+    const newTransaction = {
       type: 'Ausgabe',
       date: expenseForm.value.date,
       time: '—',
       amount: `-${parseFloat(expenseForm.value.amount).toFixed(2)} €`,
       interval: expenseForm.value.interval,
-      owner: 'Null',
+      owner: 'Du',
+      category: categories.value.find(c => c.id == expenseForm.value.category)?.name ?? '',
       use: expenseForm.value.use,
-      category_id: expenseForm.value.category,
-      comment: expenseForm.value.note
-    })
+      note: expenseForm.value.note
+    }
+
+    // Immutable Update, kein push mehr
+    transactions.value = [...transactions.value, newTransaction]
 
     // Reset + Modal schließen
     expenseForm.value = {
@@ -335,6 +334,4 @@ async function submitExpense() {
     console.error('Fehler beim Speichern der Ausgabe:', err)
   }
 }
-
 </script>
-
