@@ -35,85 +35,85 @@
           Sign Up
         </button>
       </div>
-      <!--Log in Button Box-->
-      <div class="form-container-wrapper">
-        <div v-if="showLogin" class="loginPopup" id="loginPopup">
-          <button class="closeBtn" type="button" @click="closeForm()">x</button>
-          <form action="..." class="form-container" method="post">
-            <h1 class="login-text">Login →</h1>
-            <label for="email">Email</label>
-            <input
-              type="email"
-              name="email"
-              placeholder="Enter Email"
-              required
-            />
-            <label for="psw">Password</label>
-            <input
-              type="password"
-              placeholder="Enter Password"
-              name="psw"
-              required
-            />
-            <button class="submitBtn" type="submit">Login</button>
-          </form>
-        </div>
+
+      <!-- Login Form -->
+      <div v-if="showLogin" class="fixed top-1/2 right-10 transform -translate-y-1/2 bg-white p-8 rounded-lg shadow-lg w-[400px] z-50">
+      <button class="absolute top-3 right-4 text-xl hover:text-blue-700 hover:scale-125 transition-all duration-200 ease-in-out cursor-pointer"
+      @click="closeForm">     
+      <i class="fas fa-times"></i>
+      </button>
+        <form class="flex flex-col gap-4">
+          <h1 class="text-2xl font-bold mb-4">Login →</h1>
+          <label for="email">Email</label>
+          <input type="email" name="email" placeholder="Enter Email" required class="border p-2 rounded" />
+
+          <label for="psw">Password</label>
+          <input type="password" name="psw" placeholder="Enter Password" required class="border p-2 rounded" />
+
+          <button type="submit" class="bg-blue-100 text-blue-700 hover:bg-blue-200 px-4 py-2 rounded w-1/2 self-end cursor-pointer">Login</button>
+        </form>
       </div>
-      <!--Sign in Button box -->
-      <div class="form-container-wrapper">
-        <div v-if="showRegister" class="registerPopup" id="registerPopup">
-          <button class="closeBtn" type="button" @click="closeForm()">x</button>
-          <form action="..." class="form-container" method="post">
-            <h1 class="register-text">Register →</h1>
-            <label for="fname">Vorname</label>
-            <input type="text" name="fname" id="fname" />
 
-            <label for="lname">Nachname</label>
-            <input type="text" name="lname" id="lname" />
+      <!-- Register Form -->
+      <div v-if="showRegister" class="fixed top-1/2 right-10 transform -translate-y-1/2 bg-white p-8 rounded-lg shadow-lg w-[500px] z-50">
+      <button class="absolute top-3 right-4 text-xl hover:text-blue-700 hover:scale-125 transition-all duration-200 ease-in-out cursor-pointer"
+      @click="closeForm">     
+      <i class="fas fa-times"></i>
+      </button>
+        <form class="flex flex-col gap-4">
+          <h1 class="text-2xl font-bold mb-4">Register →</h1>
 
-            <label for="uni">Universität</label>
-            <select id="uni" name="uni">
-              <option value="htw">HTW Dresden</option>
-              <option value="tu">TU Dresden</option>
-              <option value="fh">Fachhochschule Dresden</option>
-              <option value="hm">
-                Hochschule für Musik Carl Maria von Weber Dresden
-              </option>
-            </select>
+          <label for="fname">Vorname</label>
+          <input type="text" name="fname" id="fname" class="border p-2 rounded" />
 
-            <label for="bday">Geburtstag</label>
-            <input type="date" name="bday" id="bday" />
+          <label for="lname">Nachname</label>
+          <input type="text" name="lname" id="lname" class="border p-2 rounded" />
 
-            <label for="email">Email</label>
-            <input
-              type="email"
-              name="email"
-              placeholder="Enter Email"
-              required
-            />
+          <label for="uni">Universität</label>
+          <select id="uni" name="uni" class="border p-2 rounded">
+            <option value="htw">HTW Dresden</option>
+            <option value="tu">TU Dresden</option>
+            <option value="fh">Fachhochschule Dresden</option>
+            <option value="hm">Hochschule für Musik Carl Maria von Weber Dresden</option>
+          </select>
 
-            <label for="psw">Password</label>
-            <input
-              type="password"
-              placeholder="Enter Password"
-              name="psw"
-              pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
-              title="Muss mindestens eine Zahl und einen Groß- und Kleinbuchstaben sowie mindestens 8 oder mehr Zeichen enthalten"
-              required
-            />
-            <button class="registerBtn" type="submit">Register</button>
-          </form>
-        </div>
+          <label for="bday">Geburtstag</label>
+          <input type="date" name="bday" id="bday" class="border p-2 rounded" />
+
+          <label for="email">Email</label>
+          <input type="email" name="email" placeholder="Enter Email" required class="border p-2 rounded" />
+
+          <label for="psw">Password</label>
+          <input
+            type="password"
+            name="psw"
+            placeholder="Enter Password"
+            required
+            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+            title="Muss mindestens eine Zahl und einen Groß- und Kleinbuchstaben sowie mindestens 8 oder mehr Zeichen enthalten"
+            class="border p-2 rounded"
+          />
+
+          <button type="submit" class="bg-blue-100 text-blue-700 hover:bg-blue-200 px-4 py-2 rounded w-1/2 self-end cursor-pointer">Register</button>
+        </form>
       </div>
     </main>
 </template>
 
 <script setup lang="ts">
-import AppFooter from "~/components/AppFooter.vue";
-import AppHeader from "~/components/AppHeader.vue";
-import { ref, reactive } from "vue";
-import { useSupabaseClient } from "#supabase";
+
+import { reactive, ref } from "vue";
+
+//import { useRouter } from 'vue-router';
+import { navigateTo } from '#app';
+import { useFetch } from "nuxt/app";
+
 const supabase = useSupabaseClient();
+=========
+<script setup>
+import { ref } from "vue";
+>>>>>>>>> Temporary merge branch 2
+
 const showLogin = ref(false);
 const showRegister = ref(false);
 
