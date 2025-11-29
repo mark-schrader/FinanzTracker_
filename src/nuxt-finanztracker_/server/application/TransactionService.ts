@@ -18,6 +18,8 @@ export default class TransactionService {
 
     // Ausgaben in das einheitliche Response-Format transformieren
     const formattedExpenses = (expenses || []).map((exp: any) => ({
+      id: exp.id, // ID der Ausgabe, um ggf. darauf zugreifen zu können                            
+      recordType: 'expense',  // Kennzeichnung als Ausgabe
       // type hilft dem Frontend, Einträge zu unterscheiden
       type: 'Ausgabe',
       // formattedDate / formattedAmount sind Getter in den Domain-Objekten
@@ -42,6 +44,8 @@ export default class TransactionService {
 
     // Einnahmen in das gleiche Format transformieren
     const formattedIncomes = (incomes || []).map((inc: any) => ({
+      id: inc.id, // ID der Einnahme, um ggf. darauf zugreifen zu können
+      recordType: 'income', // Kennzeichnung als Einnahme
       type: 'Einnahme',
       date: inc.formattedDate,
       time: '—',
