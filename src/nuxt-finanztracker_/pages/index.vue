@@ -45,12 +45,12 @@
         <form class="flex flex-col gap-4">
           <h1 class="text-2xl font-bold mb-4">Login →</h1>
           <label for="email">Email</label>
-          <input type="email" name="email" placeholder="Enter Email" required class="border p-2 rounded" />
+          <input v-model="email" type="email" name="email" placeholder="Enter Email" required class="border p-2 rounded" />
 
           <label for="psw">Password</label>
-          <input type="password" name="psw" placeholder="Enter Password" required class="border p-2 rounded" />
+          <input v-model="password" type="password" name="psw" placeholder="Enter Password" required class="border p-2 rounded" />
 
-          <button type="submit" class="bg-blue-100 text-blue-700 hover:bg-blue-200 px-4 py-2 rounded w-1/2 self-end cursor-pointer">Login</button>
+          <button type="button" @click="login" class="bg-blue-100 text-blue-700 hover:bg-blue-200 px-4 py-2 rounded w-1/2 self-end cursor-pointer">Login</button>
         </form>
       </div>
 
@@ -60,17 +60,17 @@
       @click="closeForm">     
       <i class="fas fa-times"></i>
       </button>
-        <form class="flex flex-col gap-4">
+        <form class="flex flex-col gap-4" @submit.prevent="register">
           <h1 class="text-2xl font-bold mb-4">Register →</h1>
 
           <label for="fname">Vorname</label>
-          <input type="text" name="fname" id="fname" class="border p-2 rounded" />
+          <input v-model="form.firstname" type="text" name="fname" id="fname" class="border p-2 rounded" />
 
           <label for="lname">Nachname</label>
-          <input type="text" name="lname" id="lname" class="border p-2 rounded" />
+          <input v-model="form.lastname" type="text" name="lname" id="lname" class="border p-2 rounded" />
 
           <label for="uni">Universität</label>
-          <select id="uni" name="uni" class="border p-2 rounded">
+          <select v-model="form.university" id="uni" name="uni" class="border p-2 rounded">
             <option value="htw">HTW Dresden</option>
             <option value="tu">TU Dresden</option>
             <option value="fh">Fachhochschule Dresden</option>
@@ -78,18 +78,19 @@
           </select>
 
           <label for="bday">Geburtstag</label>
-          <input type="date" name="bday" id="bday" class="border p-2 rounded" />
+          <input v-model="form.birthdate" type="date" name="bday" id="bday" class="border p-2 rounded" />
 
           <label for="email">Email</label>
-          <input type="email" name="email" placeholder="Enter Email" required class="border p-2 rounded" />
+          <input v-model="form.email" type="email" name="email" placeholder="Enter Email" required class="border p-2 rounded" />
 
           <label for="psw">Password</label>
           <input
+            v-model="form.password"
             type="password"
             name="psw"
             placeholder="Enter Password"
             required
-            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+            pattern="(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
             title="Muss mindestens eine Zahl und einen Groß- und Kleinbuchstaben sowie mindestens 8 oder mehr Zeichen enthalten"
             class="border p-2 rounded"
           />
@@ -103,45 +104,37 @@
 <script setup lang="ts">
 
 import { reactive, ref } from "vue";
-
-//import { useRouter } from 'vue-router';
-import { navigateTo } from '#app';
-import { useFetch } from "nuxt/app";
+import { navigateTo, useFetch } from '#app';
 
 const supabase = useSupabaseClient();
-=========
-<script setup>
-import { ref } from "vue";
->>>>>>>>> Temporary merge branch 2
 
+// UI state
 const showLogin = ref(false);
 const showRegister = ref(false);
 
-//form und fetch für create user
-
-//const router = useRouter();
+// form state
 const form = reactive({
   email: "",
   password: "",
   firstname: "",
   lastname: "",
-  university: "",
+  university: "htw",
   birthdate: "",
-  //username: "",
-  //startamount: ""
-  //username: "",
-  //startamount: ""
-})
+});
 
+const email = ref('');
+const password = ref('');
 
+const errorMessage = ref<string | null>(null);
+
+// helper sleep
+const sleep = (ms: number) => new Promise<void>(resolve => setTimeout(resolve, ms));
 
 const register = async () => {
   try {
     const res = await fetch('/api/user/create', {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(form)
     });
 
@@ -152,115 +145,65 @@ const register = async () => {
       return;
     }
 
-    console.log('Registrierung erfolgreich:', data);
-    
-    const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
-    console.log("Warte 1000ms");
     await sleep(1000);
 
-    console.log('Versuche jetzt Login mit:', form.email)
     const { data: loginData, error: loginError } = await supabase.auth.signInWithPassword({
       email: form.email,
       password: form.password
-  });
+    });
 
-  if (loginError) {
+    if (loginError) {
       console.error('Login nach Pause fehlgeschlagen:', loginError.message);
-     return;
+      return;
     }
 
-   
-    console.log('Login erfolgreich');
     return navigateTo(`/dashboard/${data.user.userid}`);
-
-    //if (loginError) {
-      //console.error('Login fehlgeschlagen:', loginError.message);
-      //return;
-    //}
-
-    //console.log('Registrierung und Login erfolgreich:', loginData.data);
-
-    //return navigateTo('/dashboard/$data.user.userid');
-
   } catch (err) {
-    console.error('Fehler bei Registrierung:', err)
+    console.error('Fehler bei Registrierung:', err);
   }
 }
 
-// Refs für die Formular-Eingabefelder
-const email = ref('')
-const password = ref('')
-
-// Ref für Fehlermeldungen an den User
-const errorMessage = ref<string | null>(null)
-
-
-
-
 const login = async () => {
-  errorMessage.value = null // Fehler zurücksetzen
+  errorMessage.value = null;
 
   try {
-   
     const { error: authError } = await supabase.auth.signInWithPassword({
       email: email.value,
       password: password.value,
-    })
+    });
 
     if (authError) {
-      
-      errorMessage.value = authError.message
-      console.error('Login-Fehler:', authError.message)
-      return
+      errorMessage.value = authError.message;
+      return;
     }
 
-    const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
-    console.log("Warte 1000ms");
     await sleep(1000);
 
-    
-    const { data: profileData, error: profileError } = await useFetch('/api/user/me')
+    const { data: profileData, error: profileError } = await useFetch('/api/user/me');
 
     if (profileError || !profileData.value) {
-      
-      errorMessage.value = "Anmeldung erfolgreich, aber Profil konnte nicht geladen werden."
-      console.error('Profil-Fehler:', profileError.value)
-      return
+      errorMessage.value = "Anmeldung erfolgreich, aber Profil konnte nicht geladen werden.";
+      return;
     }
 
-    
-    const prismaUserId = profileData.value.userid
-    console.log('Login und Profilabruf erfolgreich. UserID:', prismaUserId)
-
-    
-    return navigateTo(`/dashboard/${prismaUserId}`)
-
+    const prismaUserId = profileData.value.userid;
+    return navigateTo(`/dashboard/${prismaUserId}`);
   } catch (err: any) {
-    errorMessage.value = err.message || "Ein unerwarteter Fehler ist aufgetreten."
-    console.error('Unerwarteter Fehler:', err)
+    errorMessage.value = err.message || "Ein unerwarteter Fehler ist aufgetreten.";
+    console.error('Unerwarteter Fehler:', err);
   }
 }
 
 const logout = async () => {
-  const { error } = await supabase.auth.signOut()
+  const { error } = await supabase.auth.signOut();
   if (error) {
-    console.error('Logout-Fehler:', error.message)
+    console.error('Logout-Fehler:', error.message);
   } else {
-    console.log('Erfolgreich ausgeloggt')
-    return navigateTo('/')
+    return navigateTo('/');
   }
 }
 
-
-
-function openLogin() {
-  showLogin.value = true;
-}
-function openRegister() {
-  showRegister.value = true;
-}
-function closeForm() {
-  showLogin.value = false;
-  showRegister.value = false;
-}
+function openLogin() { showLogin.value = true; }
+function openRegister() { showRegister.value = true; }
+function closeForm() { showLogin.value = false; showRegister.value = false; }
 </script>
