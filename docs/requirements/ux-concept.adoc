@@ -1,16 +1,7 @@
-= UX-Konzept: Finanztracker_
-
-*Til Guhlmann* <til.guhlmann@stud.htw-dresden.de> +
-*Enna Scheer* <enna.scheer@stud.htw-dresden.de> +
-*Emujin Uuganbayar* <emujin.uuganbayar@stud.htw-dresden.de> +
-*Erik Vogt* <erik.vogt@stud.htw-dresden.de> +
-*Justus Müller* <justus.mueller@stud.htw-dresden.de> +
-*Mark Schrader* <mark.schrader@stud.htw-dresden.de> +
-*Khanh Ly La* <khanhly.la@stud.htw-dresden.de>
-
-{localdatetime} 
-
 include::../_includes/default-attributes.inc.adoc[]
+= UX-Konzept: {project-name}
+Til Guhlmann <til.guhlmann@stud.htw-dresden.de>; Enna Scheer <enna.scheer@stud.htw-dresden.de>; Emujin Uuganbayar <emujin.uuganbayar@stud.htw-dresden.de>; Erik Vogt <erik.vogt@stud.htw-dresden.de>; Justus Müller <justus.mueller@stud.htw-dresden.de>; Mark Schrader <smark.schrader@stud.htw-dresden.de>; Khanh Ly La <khanhly.la@stud.htw-dresden.de>
+{localdatetime} 
 // Platzhalter für weitere Dokumenten-Attribute
 
 
@@ -37,56 +28,29 @@ a|
 
 |Technische Fähigkeiten
 a|
-* nicht technikfremd, nicht der größte Computerfan, nutzt lieber das Handy
+* nicht technikfremd, aber kein ausgesprochener Computerfan, nutzt lieber das Handy
 * kann gut mit Excel umgehen, aufgrund der ganzen Datenanalysen in ihrem Studiengang
-* zeichnet gerne auf ihrem Tablet
+* zeichnet und skizziert gerne auf ihrem Tablet – besonders Diagramme oder Infografiken zur besseren Veranschaulichung
 
 |Bedürfnisse / Ziele
 a|
-* Reist gerne in verschiedene Länder, liebt Städtetrips
-* hat eine Spardose, in die sie jede Woche eine bestimmte Summe an Bargeld reinwürft, für geplannte Reisen
-* braucht einen monatlichen Puffer für Ramsch, der sie aber glücklich macht
+* reist leidenschaftlich gerne in verschiedene Länder, vor allem auf Städtetrips
+* führt eine eigene Reisekasse: jede Woche wandert ein fixer Betrag in ihre Spardose
+* möchte ihr Reisebudget übersichtlich im Dashboard sehen – vor allem ihren Sparfortschritt
+* legt großen Wert auf klare Visualisierungen: sie möchte Trends und Veränderungen auf einen Blick erkennen
+* möchte über Diagramme nachvollziehen, wie sich ihre Ersparnisse im Laufe der Zeit entwickeln
 
 |Hindernisse / Frustration
 a|
-* schnell ungeduldig
-* Opfer von Girl-Math
+* kann trockene Tabellen schwer überblicken – sie verliert dort leicht den roten Faden
+* reine Listen oder Textdarstellungen wirken auf sie überladen und wenig motivierend
+* braucht eine grafische Aufbereitung ihrer Daten, um Zusammenhänge intuitiv zu verstehen
+* in der Uni merkt sie oft, dass sie Informationen nur dann gut behält, wenn sie sie visuell strukturieren kann
 |===
 
 
 |===
-|Bild a| image::Laura_Weber.jpg[alt=Laura_Weber_personenbild,width=160,height=120]
-|Name | Laura Weber
-
-|Demografie 
-a| 
-* Alter: 24
-* Geschlecht: Weiblich
-* Wohnort: Dresden
-* Studienfach: BWL
-
-|Technische Fähigkeiten
-a|
-* IOS Nutzerin
-* viel auf TikTok, Instagram und YouTube
-* nutzt Apps / Webseiten für Rabatte oder Sonderangebote  
-
-|Bedürfnisse / Ziele
-a|
-* nutzt zu häufig Online-Shopping und muss ihre Ausgaben überwachen                            
-* braucht Zahlungserinnerungen für regelmäßige Zahlungen wie Miete oder Strom
-* nutzt sehr gerne Ratenkäufe und "in 30 Tagen bezahlen"
-
-|Hindernisse / Frustration
-a|
-* impulsive Ausgaben, vor allem bei Online-Shopping
-* hat Schwierigkeiten ihre Ausgaben zu kontrollieren aufgrund spontaner Ausgaben
-* verliert schnell die Übersicht, wann sie "Was" noch bezahlen muss
-|===
-
-
-|===
-|Bild a| image::../images/Lukas_Miffländer.png[alt=lukas_miffländer_personenbild,width=160,height=120]
+|Bild a| image::Lukas_Miffländer.png[alt=lukas_miffländer_personenbild,width=160,height=120]
 |Name | Lukas Miffländer
 
 |Demografie 
@@ -98,24 +62,28 @@ a|
 
 |Technische Fähigkeiten
 a|
-* hohe Technikaffinität 
-* nutzt sehr gerne Tool wie Notion, Excel und Banking-Apps
+* sehr hohe Technikaffinität – probiert gerne neue digitale Tools aus
+* nutzt regelmäßig Tools wie Notion, Excel und Banking-Apps, um seinen Alltag zu strukturieren
+* hat ein gutes Verständnis für Finanzplanung und Dateninterpretation
 
 |Bedürfnisse / Ziele
 a|
-* liebt Struktur in seinem Leben und analysiert gerne Statistiken und Diagramme
-* wohnt in einer WG und muss gelegentlich für seine Mitbewohner einkaufen gehen
-* braucht automatische Kategorisierung
+* liebt Struktur und Ordnung in seinem Leben – seine Finanzen will er ebenso klar im Griff haben
+* möchte auf einen Blick erkennen, wie sein aktuelles Budget aussieht und wie sich dieses voraussichtlich entwickeln wird
+* interessiert sich besonders für Prognosen zukünftiger Finanzen, um besser planen zu können 
+* wünscht sich eine Budgetübersicht im Dashboard, die Einnahmen, Ausgaben und Sparziele verknüpft und grafisch darstellt
 
 |Hindernisse / Frustration
 a|
-* ist zwar gut strukturiert, aber gelegentlich etwas schusselig und vergisst Dinge
-* findet unübersichtliche Apps und Webseiten sehr abstoßend
+* ist zwar gut strukturiert, aber gelegentlich etwas schusselig und vergisst Termine oder Budgetgrenzen
+* unübersichtliche Apps oder schlecht visualisierte Finanzdaten frustrieren ihn schnell
+* verliert bei überladenen Oberflächen die Lust, sich mit der App zu beschäftigen
+* stört sich an Tools, die keine automatischen Finanzprognosen oder Zusammenhänge zwischen Ausgaben und Ersparnissen zeigen
 |===
 
 
 |===
-|Bild a| image::Mustus_Iueller.png[alt=Mustus_Iueller_personenbild,width=100,height=150]
+|Bild a| image::Mustus_Iueller.png[width=100,height=150]
 |Name | Mustus Iüller 
 
 |Demografie 
@@ -127,27 +95,28 @@ a|
 
 |Technische Fähigkeiten
 a|
-* Gut 
-* nutzt seinen PC täglich 
-* kennt sich mit den meisten Sachen sehr gut aus
+* nutzt seinen PC täglich und kennt sich mit den meisten digitalen Tools gut aus
+* vertraut mit gängigen Anwendungen
 
 |Bedürfnisse / Ziele
 a|
-* braucht die Sicherheit, dass er am  Monatsende nicht ins Minus geht, trozt seines Stipendiums
-* muss seine Nebenkosten immer pünktlich abgeben, somit muss Miete und Verpflegung abgesichert sein
-* geht gerne Feiern und will sich das auch nicht nehmen lassen
-* Will unbedingt seinen Unisportkurs gern weiter machen
+* braucht die Sicherheit, dass er am Monatsende nicht ins Minus gerät, trotz seines Stipendiums
+* möchte seine Nebenkosten und Miete zuverlässig einplanen, um pünktlich zahlen zu können
+* möchte seine Ausgaben erfassen und kategorisieren, um zu verstehen, wo sein Geld hingeht (z. B. Miete, Lebensmittel, Freizeit, Feiern)
+* würde gerne seine App auf Englisch umstellen, um sich wohler zu fühlen und Missverständnisse zu vermeiden
+* will langfristig für einen Heimaturlaub sparen, ohne auf seine Lebensfreude zu verzichten
 
 |Hindernisse / Frustration
 a|
-* Ist frisch nach Deutschland (Dresden) gezogen und hat Probleme Euronen richtig einzuschätzen (Lira ist eine tote Währung)
-* Sieht den Urlaub in der Heimat in Gefahr, wenn er nicht langsam anfängt zu sparen
-* Wenn er betrunken ist, shoppt er gern sehr viel auf AliExpress neue Sonnenbrillen und „Gucci Caps“, wovon er durchaus schon genug hat
+* ist frisch nach Deutschland gezogen und hat noch Schwierigkeiten, den Wert des Euro richtig einzuschätzen (gewöhnt an Lira) 
+* bevorzugt die Englische Sprache, wenn möglich, kommt mit deutschsprachigen Apps manchmal nicht zurecht, besonders bei Fachbegriffen
+* sieht seinen Urlaub in der Heimat in Gefahr, weil ihm aktuell die Sparstruktur fehlt
+* tendiert dazu, spontan und unüberlegt Geld auszugeben, vor allem beim Online-Shopping nach Partynächten (z. B. Sonnenbrillen, „Gucci Caps“)
 |===
 
 
 |===
-|Bild a| image::gil_tuhlmann.png[alt=gil_tuhlmann_personenbild,width=160,height=120]
+|Bild a| image::Gil_Tuhlmann.png[alt=Gil_Tuhlmann_personenbild,width=160,height=120]
 |Name | Gil Thulmann
 
 |Demografie 
@@ -159,27 +128,26 @@ a|
 
 |Technische Fähigkeiten
 a|
-* Durchschnittlich 
-* nutzt regelmäßig ihr Smartphone für Social Media und Uni-Organisation
+* Durchschnittliche Technikkenntnisse – nutzt ihr Smartphone regelmäßig für Social Media, Kommunikation und Uni-Organisation
+* hat wenig Interesse an komplexen Finanztools oder Tabellen
 
 |Bedürfnisse / Ziele
 a|
-* braucht eine klare Übersicht über Einnahmen & Ausgaben mit Prognosen für eingehende Ausgaben 
-* Frühwarnsystem bei drohendem Geldmangel
-* Automatische Erinnerungen für feste Ausgaben wie Miete & Semesterbeiträge
-* Motivation durch einen Sparspiel damit sie regelmäßig etwas für den Sommerurlaub zurück legt
-
+* spielt gerne Videospiele, bei denen man für ein Ziel verschieden Missionen erledigien muss
+* sucht nach einem einfachen, motivierenden Weg, um ihr Budget im Alltag zu behalten, ohne viel Aufwand
+* möchte in einem Diagramm visualisiert sehen, wie sich ihr Sparfortschritt über die Zeit entwickelt
+* wünscht sich eine klare Übersicht über Einnahmen und Ausgaben
 
 |Hindernisse / Frustration
 a|
-* hat kein großes Interesse ihre Finanzen ins kleinste Detail zu tracken
-* verliert sehr schnell den Überblick über ihre Ausgaben, da sie gerne hier und da sich mal was gönnt
-* hatte schon häufig das Problem, dass am Monatsende kein Geld mehr übrig war
+* hat kein großes Interesse daran, ihre Finanzen im Detail zu analysieren
+* muss sich spielerisch motivieren – wie bei Videospielen mit verschiedenen Goals, um regelmäßig kleine Beträge für ihren Sommerurlaub zurückzulegen 
+* braucht ein festgelegtes Ziel, sonst verliert sie schnell den Drang durchzuziehen 
 |===
 
 
 |===
-|Bild a| image::wuce_brillis.png[alt=wuce_brillis_personenbild,width=160,height=120]
+|Bild a| image::Wuce_Brillis.png[alt=Wuce_Brillis_personenbild,width=160,height=120]
 |Name | Wuce Brillis
 
 |Demografie 
@@ -191,19 +159,24 @@ a|
 
 |Technische Fähigkeiten
 a|
-* kennt sich Grundlegen mit Webseiten, Apps und ähnlichen aus
-* ist aber nicht der größte Technikfreak
+* kennt sich grundlegend mit Webseiten, Apps und digitalen Tools aus
+* kein ausgesprochener Technikfan, nutzt digitale Anwendungen aber regelmäßig und zielgerichtet
+* bevorzugt übersichtliche und logisch aufgebaute Oberflächen
+* interessiert sich weniger für Design, sondern mehr für präzise, nachvollziehbare Daten
 
 |Bedürfnisse / Ziele
 a|
-* hat großes Interesse an Sparzielen, z. B. für sein neues Fahrrad oder neue LED-Lampe
-* will alles genau detailliert dargestellt haben, um seinen Wissendurst zu stillen
-* muss Ein-& Ausnahmen gut übersichtlich einsehen können 
+* möchte Ein- und Ausgaben detailliert analysieren und vergleichen können
+* legt Wert auf transparente Darstellungen, die ihm helfen, seine finanziellen Entscheidungen zu optimieren
+* möchte eine Prognose zukünftiger Finanzen, um genau zu wissen, wie sich sein Budget über die nächsten Wochen oder Monate entwickelt
+* will Trends erkennen – etwa, wann er genug gespart hat oder wann Engpässe drohen
 
 |Hindernisse / Frustration
 a|
-* notorischer Besserwisser, der sich gerne in Details verliert
-* wird manchmal ungeduldig, wenn andere nicht sofort auf seinem Wissensstand sind
+* neigt dazu, sich in Details zu verlieren und überanalysiert Daten
+* ist ein notorischer Besserwisser, was bei unpräzisen Informationen zu Frustration führt
+* wird ungeduldig, wenn Systeme oder Personen nicht auf seinem Wissensstand sind oder wenn Prognosen ungenau wirken
+* misstraut Tools, die zu oberflächlich oder zu verspielt aufgebaut sindnd
 |===
 
 == Nutzungskontext
@@ -218,7 +191,7 @@ a|
     
 *Welche Funktionen sind für sie besonders wichtig?*
 
-* dass der Student klar und übersichtlich seine Einnahmen und Ausgaben analysierenn und verstehen kann
+* dass der Student klar und übersichtlich seine Einnahmen und Ausgaben analysieren und verstehen kann
 * das jeder Student unsere Anwendung nutzen kann
 
 === Kontext der Nutzung
@@ -234,7 +207,7 @@ a|
 * zu viele Farben
 * zu viel Werbung
 * zu lange Ladezeiten
-* kein verständliches Intuitives Handeln 
+* kein verständliches, intuitives Handeln 
 * keine Anpassbarkeit an eigene Wünsche
 
 //_Hier können zudem bei Bedarf Teile des Unternehmensmodells (Prozesse, Organigramme, IT-Landschaft, ...) eingefügt werden, um die beteiligten Aufgaben und Rollen zu skizzieren._

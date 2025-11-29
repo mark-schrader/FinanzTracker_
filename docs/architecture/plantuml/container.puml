@@ -1,0 +1,25 @@
+!include <c4/C4_Container.puml>
+
+'ref http://plantuml.com/stdlib
+!include <office/Users/user.puml>
+!include <office/Users/mobile_user.puml>
+
+title Container für den Finanztracker
+
+Person(student, "Student")
+
+System_Boundary(finanzApp, "Finanztracker") {
+  Container(nuxt, "Web App", "vue.js", "Frontend zur Verwaltung der Finanzen")
+  Container(api, "API-Backend", "Node.js", "Geschäftslogik und Datenverarbeitung")
+  Container(db, "Datenbank", "Supabase", "Speichert Transaktionen und Kategorien")
+  Container(auth, "Auth-Service", "Supabase", "Benutzerauthentifizierung")
+}
+
+
+Rel(student, nuxt, "Verwendet über Browser")
+Rel(nuxt, api, "REST API")
+Rel(api, db, "Liest & schreibt")
+Rel(api, auth, "Validiert Token")
+
+
+@enduml

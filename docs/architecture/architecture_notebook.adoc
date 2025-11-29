@@ -1,16 +1,8 @@
-= Architecture Notebook: Finanztracker_
-
-*Til Guhlmann* <til.guhlmann@stud.htw-dresden.de> +
-*Enna Scheer* <enna.scheer@stud.htw-dresden.de> +
-*Emujin Uuganbayar* <emujin.uuganbayar@stud.htw-dresden.de> +
-*Erik Vogt* <erik.vogt@stud.htw-dresden.de> +
-*Justus Müller* <justus.mueller@stud.htw-dresden.de> +
-*Mark Schrader* <mark.schrader@stud.htw-dresden.de> +
-*Khanh Ly La* <khanhly.la@stud.htw-dresden.de>
-
+include::../_includes/default-attributes.inc.adoc[]
+= Architecture Notebook: {project-name}
+Til Guhlmann <til.guhlmann@stud.htw-dresden.de>; Enna Scheer <enna.scheer@stud.htw-dresden.de>; Emujin Uuganbayar <emujin.uuganbayar@stud.htw-dresden.de>; Erik Vogt <erik.vogt@stud.htw-dresden.de>; Justus Müller <justus.mueller@stud.htw-dresden.de>; Mark Schrader <smark.schrader@stud.htw-dresden.de>; Khanh Ly La <khanhly.la@stud.htw-dresden.de>
 {localdatetime} 
 
-include::../_includes/default-attributes.inc.adoc[]
 // Platzhalter für weitere Dokumenten-Attribute
 
 
@@ -38,14 +30,15 @@ Dieses Dokument beschreibt die Philosophie, Entscheidungen, Nebenbedingungen, Be
 == Annahmen und Abhängigkeiten
 //[List the assumptions and dependencies that drive architectural decisions. This could include sensitive or critical areas, dependencies on legacy interfaces, the skill and experience of the team, the availability of important resources, and so forth]
 
-* Front es Vue.js, Backende Node.js
-* Nuxt vereint unser Frontend und Backend in einem Ordner
+* Frontend: Vue.js mit den Frameworks Bootstrap Tailwind und Chart.js zur einfachen und sauberen Darstellung der Webseite
+* Nuxt vereint unser Frontend und Backend in einem System
 * Gruppenmitglieder sind mit JavaScript vertraut bzw. können sich das aneignen
-* Hosting erfolgt wahrscheinlich über Vercel
-* für die relationale Datenbank wird Supabase postgre sql genutzt
+* Hosting erfolgt wahrscheinlich über Supabase
+* für die relationale Datenbank wird Prisma genutzt
 
 == Architektur-relevante Anforderungen
-link:requiremenets/vision.adoc[Anforderungen für die Architektur]
+//link:requiremenets/vision.adoc[Anforderungen für die Architektur]
+<<#vision, Anforderungen für die Architektur>>
 //Fügen Sie eine Referenz / Link zu den Anforderungen ein, die implementiert werden müssen, um die Architektur zu erzeugen.
 
 
@@ -54,29 +47,54 @@ link:requiremenets/vision.adoc[Anforderungen für die Architektur]
 
 |===
 | Entscheidung | für | Begründung
-| Vue.js | Frontend | 
-* haben wir in EWA vor kurzem erst verwendet
+| Nuxt
+| Fullstack
+|
+- Empfelung von unserem Coach 
 
-* darin ist unser Wissen noch relativ frisch 
-| Node.js | Backend | 
-* um Frontend und Backend in Js einheitlich zu behalten
-* weil wir auch das in EWA bereits gehabt haben
-| MariaDB | Datenbank | 
-* um die Daten zu speichern
-* auch das haben wir in EWA bereits genutzt
-* wird von den Frameworks gut unterstützt
-* gute Performance
-* Open Source
-| Node mit Express.Js | Server | 
-* am meisten zusammen benutzt
-| Github | Host | 
-* kostenlos
-| Englisch | Variablen und Funktionsnamen | 
-* gängig
-* demokratische Einigung
-| Deutsch | Codekommentare | 
-* Verständnisprobleme vermeiden
-* für ausführliche Erläuterungen
+- Einfaches Fullstack Framework
+| Vue.js 
+| Frontend 
+| 
+- Nutzung von bereits vorhandenen Wissen aus dem Modul "Erweiterte Webbasierte Anwendungen"
+| Tailwind
+| Frontend Styling
+| 
+- Bietet vordefinierte Css Klassen zur schnellen und modernen HTML Entwicklung
+
+| Bootstrap
+| Frontend Styling
+|
+- Einfache Einbindung von fertigen Komponenten für ein responsiv Design
+
+| Chart.js
+| Frontend Styling
+|
+- Darstellung von Diagrammen für unser Dashboard und Kontobewegung
+
+| Prisma 
+| ORM (Backend) 
+| 
+- einfache Kommunikation zur Datenbank mittels JavaScript
+
+| Supabase 
+| Datenbank 
+| 
+- Empfehlung von unserem Coach zu Speicherung und Verwaltung von Daten
+| Github 
+| Projektverwaltung 
+| 
+- Dient zur Zentralen Verwaltung aller Daten die zum Projekt gehören
+| Englisch 
+| Variablen und Funktionsnamen 
+| 
+- international verständlich
+| Deutsch 
+| Codekommentare 
+| 
+- Verständnisprobleme innerhalb des Teams vermeiden
+
+- für ausführliche Erläuterungen
 |===
 
 == Schichten oder Architektur-Framework
@@ -90,16 +108,29 @@ Diese Struktur erleichtert die Wartbarkeit, Wiederverwendbarkeit und Skalierbark
 == Architektursichten (Views)
 //[Describe the architectural views that you will use to describe the software architecture. This illustrates the different perspectives that you will make available to review and to document architectural decisions.]
 
+
+
 === Kontextabgrenzung
+include::{plantumlsdir}/context.puml[]
 //Level 1 im C4-Modell
+.C4-Model Level 1
+[plantuml, "{diagramsdir}/c4", svg]
+....
+....
 
 === Container
+include::{plantumlsdir}/container.puml[]
 //Level 2 im C4-Modell
+.C4-Model Level 2
+[plantuml, "{diagramsdir}/c4", svg]
+....
+....
 
 === Components
 //Level 3 im C4-Modell
-
+Das C4-Modell Level 3 ist noch nicht ertsellt worden.
 
 === Verteilungsdiagramm (Deployment Diagramm)
 //Beschreibt die physischen Knoten (Rechner) des Systems und Komponenten, die in diesen Knoten ausgeführt werden. Diese Sicht wird nicht benötigt, wenn das System in einem einzelnen Prozess oder Thread ausgeführt wird.
 
+Das Verteilungsdiagramm ist noch nicht ertsellt worden.
