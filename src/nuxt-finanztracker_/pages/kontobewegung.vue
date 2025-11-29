@@ -169,13 +169,13 @@
                   <td class="space-x-6">
                     <button
                       class="text-teal-600 hover:text-teal-400 transform hover:scale-150 transition"
-                      @click="selectedAuftrag = { ...auftrag }; showEditModal = true" 
+                      @click="openEdit(auftrag)" 
                       >
                       <i class="fas fa-pen"></i> <!-- Edit-Icon -->
                     </button>
                     <button
                       class="text-gray-700 hover:text-red-500 transform hover:scale-150 transition"
-                      @click="selectedAuftrag = auftrag; showDeleteConfirm = true"
+                      @click="selectedAuftrag = { ...auftrag }; showDeleteConfirm = true"
                     >
                       <i class="fas fa-trash"></i> <!-- Lösch-Icon -->
                     </button>
@@ -216,31 +216,29 @@
                           </div>
                         </div>
                       </div>
-
-                  
-                    <!-- Bestätigungs-Popup: Dauerauftrag löschen -->
-                    <div v-if="showDeleteConfirm"
-                    class="fixed inset-0 backdrop-blur-sm flex items-center justify-center z-50">
-                      <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg w-[90%] max-w-4xl space-y-4 relative transition-theme">
-                        <h2 class="text-2xl font-bold text-brand-600 dark:text-brand-600">Verwaltung Dauerauftrag</h2>
-                        <p class="text-lg text-gray-800 dark:text-gray-200 leading-relaxed">
-                          Wollen Sie den Dauerauftrag
-                          <span class="font-semibold text-brand-600 dark:text-brand-400">
-                            {{ selectedAuftrag?.name }}
-                          </span> wirklich löschen?
-                        </p>
-                        <div class="flex justify-center space-x-4">
-                          <button @click="deleteAuftrag" class="btn btn-danger">Löschen</button>
-                          <button @click="showDeleteConfirm = false"class="btn btn-secondary">Zurück</button>
-                        </div>
-                      </div>
-                    </div>
                 </tr>
               </tbody>
             </table>
 
+            <!-- Bestätigungs-Popup: Dauerauftrag löschen -->
+            <div v-if="showDeleteConfirm" class="fixed inset-0 backdrop-blur-sm flex items-center justify-center z-50">
+              <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg w-[90%] max-w-4xl space-y-4 relative transition-theme">
+                <h2 class="text-2xl font-bold text-brand-600 dark:text-brand-600">Verwaltung Dauerauftrag</h2>
+                <p class="text-lg text-gray-800 dark:text-gray-200 leading-relaxed">
+                  Wollen Sie den Dauerauftrag
+                  <span class="font-semibold text-brand-600 dark:text-brand-400">
+                    {{ selectedAuftrag?.name }}
+                  </span> wirklich löschen?
+                </p>
+                <div class="flex justify-center space-x-4">
+                  <button @click="deleteAuftrag" class="btn btn-danger">Löschen</button>
+                  <button @click="showDeleteConfirm = false"class="btn btn-secondary">Zurück</button>
+                </div>
+              </div>
+            </div>
+
             <!-- Fallback anzeigen, wenn keine Einträge -->
-            <div v-else class="p-6 text-center text-gray-600">
+            <div v-if="!formattedAuftraege.length" class="p-6 text-center text-gray-600">
               Keine Daueraufträge vorhanden.
             </div>
           </div>
@@ -249,7 +247,7 @@
           <div class="flex justify-center mt-2">
             <button class="btn btn-secondary flex items-center space-x-2">
               <i class="fas fa-plus-circle text-lg"></i> <!-- Icon -->
-              <span>Kategorie hinzufügen</span>
+              <span>Daueraufträge hinzufügen</span>
             </button>
           </div>
 
@@ -285,9 +283,6 @@ const transactions = ref([])
 // Kategorien für Einnahmen & Ausgaben
 const categories = ref([])
 
-// Daueraufträge (echte Daten von DB)
-const auftraege = ref([])
-
 // Modalsteuerung für Einnahme & Ausgabe
 const showIncomeModal = ref(false)
 const showExpenseModal = ref(false)
@@ -297,6 +292,21 @@ const showRecurringModal = ref(false)
 const showEditModal = ref(false) // Modal zum Bearbeiten eines Dauerauftrags
 const showDeleteConfirm = ref(false) // Bestätigungsmodal für das Löschen eines Dauerauftrags
 const selectedAuftrag = ref(null) // Der aktuell ausgewählte Dauerauftrag zum Bearbeiten/Löschen
+
+function openEdit(auftrag) { // Funktion zum Öffnen des Edit-Modals mit den Daten des ausgewählten Auftrags
+  selectedAuftrag.value = {
+    id: auftrag.id,
+    recordType: auftrag.recordType,     // income | expense
+    name: auftrag.name,
+    betrag: Math.abs(auftrag.betrag),
+    intervall: auftrag.intervall,
+    kategorie: auftrag.kategorie,
+    note: auftrag.note ?? ''
+  }
+
+  showEditModal.value = true
+}
+
 
 // Formular-Daten für Einnahmen
 const incomeForm = ref({
@@ -330,10 +340,6 @@ onMounted(async () => {
     const transData = await $fetch('/api/transactions?userId=1')
     transactions.value = transData || []
 
-    // Lade Daueraufträge (echt aus DB)
-    //const recurringData = await $fetch('/api/transactions?type=recurring')
-    // auftraege.value = recurringData || []
-
   } catch (err) {
     console.error('Fehler beim Laden der Daten:', err)
   }
@@ -351,39 +357,33 @@ const filteredTransactions = computed(() => {
   )
 })
 
-// Mapping für Daueraufträge (nur Anzeige in Tabelle + Basis für Edit/Delete)
-const formattedAuftraege = computed(() => {
-  if (!auftraege.value.length) return []
+// Daueraufträge = alle Transaktionen, deren Intervall NICHT "once" ist
+const auftraege = computed(() => {
+  return transactions.value.filter(t => 
+    t.interval && t.interval !== 'once'
+  )
+})
 
-  return auftraege.value.map(a => {
-    // Betrag als Zahl aus dem String "-1200.00 €" / "+400.00 €" holen
-    const rawAmount = (a.amount || '0')
-      .replace('€', '')
-      .replace('+', '')
-      .replace(',', '.')
-      .trim()
-
-    let betrag = Number(rawAmount)
-    if (a.type === 'Ausgabe') {
-      betrag = -Math.abs(betrag)
-    } else {
-      betrag = Math.abs(betrag)
-    }
+// Formatiert Daueraufträge für die Tabelle
+const formattedAuftraege = computed(() =>
+  auftraege.value.map(a => {
+    // Betrag korrekt parsen & Vorzeichen setzen
+    const raw = a.amount
+    const val = typeof raw === 'number' ? raw : parseFloat(String(raw).replace(/[^0-9-.,]/g, '').replace(',', '.')) || 0
+    const betrag = a.type === 'Ausgabe' ? -Math.abs(val) : Math.abs(val)
 
     return {
       id: a.id,
-      type: a.type,                 // Einnahme, Ausgabe (UI-Zwecke)
-      recordType: a.recordType,     // income  expense (API-Zwecke, backend)
-
+      recordType: a.recordType ?? (a.type === 'Einnahme' ? 'income' : 'expense'),
+      type: a.type,
       name: a.purpose || a.source || a.use || '—',
       kategorie: a.category || '—',
-      betrag,                       // Number, positiv oder negativ
-      intervall: a.interval
+      intervall: a.interval,
+      betrag,
+      note: a.note || ''  
     }
   })
-})
-
-
+)
 
 // Konvertiert einen Euro-String ("1.234,56 €") in eine Float-Zahl (1234.56)
 function parseEuro(euroString) {
@@ -513,26 +513,33 @@ async function saveEdit() {
   if (!selectedAuftrag.value) return
 
   try {
-    const auftrag = selectedAuftrag.value
+    const a = selectedAuftrag.value
 
     // Betrag als positive Zahl für DB
-    const amount = Math.abs(Number(auftrag.betrag))
+    const amount = Math.abs(Number(a.betrag))
 
-    await $fetch(`/api/transactions/${auftrag.id}`, {
+    // Bestimme den API-Endpunkt basierend auf dem recordType
+    const baseUrl =
+      a.recordType === 'income' // oder expense
+        ? `/api/incomes/${a.id}`
+        : `/api/expenses/${a.id}`
+
+    await $fetch(baseUrl, {
       method: 'PUT',
       body: {
-        recordType: auftrag.recordType,   // income, expense
-        type: auftrag.type,               // Einnahme, Ausgabe
         amount,
-        interval: auftrag.intervall,
-        name: auftrag.name,
-        category: auftrag.kategorie
+        interval: a.intervall,
+        note: a.note || '',
+        // Je nach Typ den richtigen Namen setzen
+        source: a.recordType === 'income' ? a.name : undefined,
+        use: a.recordType === 'expense' ? a.name : undefined,
+        categoryId: categories.value.find(c => c.name === a.kategorie)?.id || null
       }
     })
 
-    // Danach aktuelle Daueraufträge neu laden, damit UI stimmt
-    const recurringData = await $fetch('/api/transactions?userId=1&type=recurring')
-    auftraege.value = recurringData || []
+    // reload transactions
+    const transData = await $fetch('/api/transactions?userId=1')
+    transactions.value = transData || []
 
     showEditModal.value = false
     selectedAuftrag.value = null
@@ -547,21 +554,25 @@ async function deleteAuftrag() {
   if (!selectedAuftrag.value) return
 
   try {
-    const auftrag = selectedAuftrag.value
+    const a = selectedAuftrag.value
 
-    await $fetch(`/api/transactions/${auftrag.id}`, {
-      method: 'DELETE',
-      body: {
-        recordType: auftrag.recordType   // income,expense
-      }
+    const baseUrl =
+      a.recordType === 'income'
+        ? `/api/incomes/${a.id}`
+        : `/api/expenses/${a.id}`
+
+    await $fetch(baseUrl, {
+      method: 'DELETE'
     })
-    // Lokal aus der Liste entfernen
-    auftraege.value = auftraege.value.filter(a => a.id !== auftrag.id)
+
+    const updated = await $fetch('/api/transactions?userId=1')
+    transactions.value = updated || []
 
     showDeleteConfirm.value = false
     selectedAuftrag.value = null
+
   } catch (err) {
-    console.error('Fehler beim Löschen des Dauerauftrags:', err)
+    console.error('Fehler beim Löschen:', err)
   }
 }
 
