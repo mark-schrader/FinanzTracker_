@@ -103,7 +103,7 @@
   <div v-if="showEdit" class="fixed inset-0 backdrop-blur-sm flex items-center justify-center z-50">
     <div class="bg-white dark:bg-gray-800 p-6 rounded-lg w-[90%] max-w-md space-y-4">
 
-      <h2 class="text-2xl font-bold text-brand-600 dark:text-brand-600">Kategorie bearbeiten</h2>
+      <h2 class="text-2xl font-bold text-brand-600 dark:text-brand-400">Kategorie bearbeiten</h2>
 
       <div class="grid gap-2">
         <label>Name</label>

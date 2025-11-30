@@ -127,12 +127,7 @@
       </div>
 
       <!-- Kategorien -->
-      <NuxtLink to="/kategorien"
-        class="bg-blue-100 hover:bg-blue-200 text-blue-700 font-semibold py-4 rounded shadow
-           text-center flex flex-col items-center justify-center space-y-2 transform hover:scale-105 transition-transform duration-200">
-          <i class="fas fa-tags text-4xl"></i>
-          <span class="text-lg">Kategorien verwalten</span>
-      </NuxtLink>
+      <categoryManager />
 
       <!-- Daueraufträge Button -->
       <button @click="showRecurringModal = true"
@@ -274,7 +269,6 @@
 //Imports
 import { ref, computed, onMounted } from 'vue'
 import { useFetch } from '#app' // optional
-
 
 //Reaktive Daten
 
