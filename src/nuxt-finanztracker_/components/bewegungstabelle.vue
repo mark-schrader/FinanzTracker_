@@ -50,7 +50,7 @@
             <td>{{ t.interval }}</td>
             <td>{{ t.owner }}</td>
             <td>{{ t.purpose }}</td>
-            <td>{{ t.category }}</td>
+            <td>{{ t.categoryName }}</td>
             <td>{{ t.comment }}</td>
           </tr>
         </tbody>
