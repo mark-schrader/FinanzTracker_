@@ -1,5 +1,9 @@
 <template>
   <div class="content-wrapper">
+
+    <!-- Inline Alert -->
+    <InlineAlert :message="alertMessage" :type="alertType" />
+
     <!-- Header -->
     <div class="flex items-center justify-between mb-6">
       <h1 class="text-3xl font-bold text-brand-600 dark:text-brand-300">Kontobewegung</h1>
@@ -161,7 +165,7 @@
                   <td>{{ auftrag.kategorie }}</td>
                   <td
                     class="text-left"
-                    :class="auftrag.betrag < 0 ? 'text-red-500 dark:text-red-400' : 'text-teal-600 dark:text-teal-400'"
+                    :class="auftrag.betrag < 0 ? 'text-red-500 dark:text-red-400' : 'text-teal-600'"
                   >
                     {{ auftrag.betrag.toFixed(2) }}€  <!--Anzeige mit 2 Dezimalstellen-->
                   </td>
@@ -194,11 +198,10 @@
                             <input v-model="selectedAuftrag.betrag" type="number" step="0.50" class="form-input" /> 
 
                             <label>Kategorie</label> 
-                            <select v-model="selectedAuftrag.kategorie" class="form-select">
+                            <select v-model="selectedAuftrag.categoryId" class="form-select">
                               <option disabled value="">Bitte wählen</option>
-                              <option>Miete</option>
-                              <option>Einnahme</option>
-                              <option>Versicherung</option>
+                              <option v-for="cat in categories":value="cat.id":key="cat.id">
+                              {{ cat.name }}</option>
                             </select>
 
                             <label>Intervall</label>
@@ -243,9 +246,9 @@
             </div>
           </div>
 
-          <!--Button: Kategorie hinzufügen -->
+          <!--Button: Daueraufträge hinzufügen -->
           <div class="flex justify-center mt-2">
-            <button class="btn btn-secondary flex items-center space-x-2">
+            <button class="btn btn-primary flex items-center space-x-2">
               <i class="fas fa-plus-circle text-lg"></i> <!-- Icon -->
               <span>Daueraufträge hinzufügen</span>
             </button>
@@ -253,7 +256,7 @@
 
           <!-- Button: schließen // danach vllt auch Button: Speichern dazu?-->
           <div class="flex justify-end mt-6">
-            <button @click="showRecurringModal = false" class="btn btn-primary">
+            <button @click="showRecurringModal = false" class="btn btn-secondary">
               Schließen
             </button>
           </div>
@@ -271,6 +274,7 @@
 //Imports
 import { ref, computed, onMounted } from 'vue'
 import { useFetch } from '#app' // optional
+
 
 //Reaktive Daten
 
@@ -293,18 +297,21 @@ const showEditModal = ref(false) // Modal zum Bearbeiten eines Dauerauftrags
 const showDeleteConfirm = ref(false) // Bestätigungsmodal für das Löschen eines Dauerauftrags
 const selectedAuftrag = ref(null) // Der aktuell ausgewählte Dauerauftrag zum Bearbeiten/Löschen
 
-function openEdit(auftrag) { // Funktion zum Öffnen des Edit-Modals mit den Daten des ausgewählten Auftrags
+// Funktion zum Öffnen des Edit-Modals mit den Daten des ausgewählten Auftrags
+function openEdit(auftrag) {
   selectedAuftrag.value = {
     id: auftrag.id,
-    recordType: auftrag.recordType,     // income | expense
+    recordType: auftrag.recordType,
     name: auftrag.name,
     betrag: Math.abs(auftrag.betrag),
     intervall: auftrag.intervall,
-    kategorie: auftrag.kategorie,
-    note: auftrag.note ?? ''
-  }
+    categoryId: auftrag.categoryId,   //  ID der Kategorie von ausgewähltem Auftrag
+    categoryName: auftrag.categoryName,
+    note: auftrag.note ?? "",
+    date: auftrag.date                //  Datum des Auftrags
+  };
 
-  showEditModal.value = true
+  showEditModal.value = true;
 }
 
 
@@ -348,6 +355,20 @@ onMounted(async () => {
 
 //Hilfsfunktionen & Computed Properties
 
+// Alert-Handling (Nachrichten: Erfolg oder Fehler)
+const alertMessage = ref("")
+const alertType = ref("success")
+
+function showAlert(msg, type = "success") {
+  alertMessage.value = msg
+  alertType.value = type
+  
+  setTimeout(() => {
+    alertMessage.value = ""
+  }, 3000)
+}
+
+
 // Filtert die Transaktionen anhand der Suchanfrage
 const filteredTransactions = computed(() => {
   return transactions.value.filter(t =>
@@ -367,23 +388,27 @@ const auftraege = computed(() => {
 // Formatiert Daueraufträge für die Tabelle
 const formattedAuftraege = computed(() =>
   auftraege.value.map(a => {
-    // Betrag korrekt parsen & Vorzeichen setzen
-    const raw = a.amount
-    const val = typeof raw === 'number' ? raw : parseFloat(String(raw).replace(/[^0-9-.,]/g, '').replace(',', '.')) || 0
-    const betrag = a.type === 'Ausgabe' ? -Math.abs(val) : Math.abs(val)
+    // Parse amount string to float
+    const val = parseFloat(String(a.amount).replace(/[^0-9.-]/g, "")) || 0;
+
+    // Finde die Kategorie basierend auf dem Namen
+    const cat = categories.value.find(c => c.name === a.category);
 
     return {
       id: a.id,
-      recordType: a.recordType ?? (a.type === 'Einnahme' ? 'income' : 'expense'),
-      type: a.type,
-      name: a.purpose || a.source || a.use || '—',
-      kategorie: a.category || '—',
+      recordType: a.recordType,        // income oder expense 
+      type: a.type,                    // Einnahme oder Ausgabe
+      name: a.purpose || a.source || a.use || "—",
+      categoryName: a.category, 
+      categoryId: cat ? cat.id : null, // Kategorie-ID
       intervall: a.interval,
-      betrag,
-      note: a.note || ''  
-    }
+      betrag: val,
+      note: a.note || "",
+      date: a.date
+    };
   })
-)
+);
+
 
 // Konvertiert einen Euro-String ("1.234,56 €") in eine Float-Zahl (1234.56)
 function parseEuro(euroString) {
@@ -457,8 +482,10 @@ async function submitIncome() {
       interval: ''
     }
     showIncomeModal.value = false
+    showAlert("Einnahme gespeichert", "success")
   } catch (err) {
-    console.error('Fehler beim Speichern:', err)
+    console.error('Fehler beim Speichern der Einnahme:', err)
+    showAlert('Fehler beim Speichern der Einnahme', 'error')
   }
 }
 
@@ -503,48 +530,72 @@ async function submitExpense() {
       interval: ''
     }
     showExpenseModal.value = false
+    showAlert('Ausgabe gespeichert', 'success')
   } catch (err) {
     console.error('Fehler beim Speichern der Ausgabe:', err)
+    showAlert('Fehler beim Speichern der Ausgabe', 'error')
   }
 }
 
 // Dauerauftrag bearbeiten & in DB speichern
 async function saveEdit() {
-  if (!selectedAuftrag.value) return
+  if (!selectedAuftrag.value) return;
 
   try {
-    const a = selectedAuftrag.value
+    const a = selectedAuftrag.value;
 
-    // Betrag als positive Zahl für DB
-    const amount = Math.abs(Number(a.betrag))
+    // Kategorie anhand des Namens suchen
+    const cat = categories.value.find(c => c.id === a.categoryId);
+    if (!cat) {
+      showAlert("Kategorie nicht gefunden", "error");
+    return;
+}
 
-    // Bestimme den API-Endpunkt basierend auf dem recordType
+
+    // API Endpunkt bestimmen
     const baseUrl =
-      a.recordType === 'income' // oder expense
+      a.recordType === "income"
         ? `/api/incomes/${a.id}`
-        : `/api/expenses/${a.id}`
+        : `/api/expenses/${a.id}`;
 
+    // Payload korrekt bauen
+    const payload =
+      a.recordType === "income"
+        ? { // für Einnahme
+            amount: Number(a.betrag),
+            interval: a.intervall,
+            note: a.note || "",
+            categoryId: cat.id,
+            date: a.date,
+            source: a.name
+          }
+        : { // für Ausgabe
+            amount: Number(a.betrag),
+            interval: a.intervall,
+            note: a.note || "",
+            categoryId: cat.id,
+            date: a.date,
+            use: a.name
+          };
+
+    // 4) Sende PUT Anfrage
     await $fetch(baseUrl, {
-      method: 'PUT',
-      body: {
-        amount,
-        interval: a.intervall,
-        note: a.note || '',
-        // Je nach Typ den richtigen Namen setzen
-        source: a.recordType === 'income' ? a.name : undefined,
-        use: a.recordType === 'expense' ? a.name : undefined,
-        categoryId: categories.value.find(c => c.name === a.kategorie)?.id || null
-      }
-    })
+      method: "PUT",
+      body: payload
+    });
 
-    // reload transactions
-    const transData = await $fetch('/api/transactions?userId=1')
-    transactions.value = transData || []
+    // Aktualisierte Transaktionen neu laden
+    const transData = await $fetch("/api/transactions?userId=1");
+    transactions.value = transData || [];
 
-    showEditModal.value = false
-    selectedAuftrag.value = null
+    // schließen & reset
+    showEditModal.value = false;
+    selectedAuftrag.value = null;
+
+    showAlert("Dauerauftrag gespeichert", "success");
   } catch (err) {
-    console.error('Fehler beim Aktualisieren des Dauerauftrags:', err)
+    console.error(err);
+    showAlert("Fehler beim Aktualisieren des Dauerauftrags", "error");
   }
 }
 
@@ -570,6 +621,7 @@ async function deleteAuftrag() {
 
     showDeleteConfirm.value = false
     selectedAuftrag.value = null
+    showAlert("Dauerauftrag gelöscht", "success")
 
   } catch (err) {
     console.error('Fehler beim Löschen:', err)
