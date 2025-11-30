@@ -19,9 +19,9 @@ export default class TransactionService {
     // Ausgaben in das einheitliche Response-Format transformieren
     const formattedExpenses = (expenses || []).map((exp: any) => ({
       id: exp.id, // ID der Ausgabe, um ggf. darauf zugreifen zu können                            
-      recordType: 'expense',  // Kennzeichnung als Ausgabe
+      recordType: 'expense',  // Kennzeichnung als Ausgabe 
       // type hilft dem Frontend, Einträge zu unterscheiden
-      type: 'Ausgabe',
+      type: 'Ausgabe', 
       // formattedDate / formattedAmount sind Getter in den Domain-Objekten
       date: exp.formattedDate,
       // Zeit ist aktuell nicht separat vorhanden => Platzhalter
@@ -33,7 +33,11 @@ export default class TransactionService {
       // Besitzer / Benutzername falls geladen, sonst Fallback
       owner: exp.user?.username ?? 'Unbekannt',
       // Kategorie-Name, falls Relation geladen
-      category: exp.categories?.name ?? '',
+      // alt: category: exp.categories?.name ?? '',
+      categoryName: exp.categories?.name ?? "—",
+      categoryId: exp.categories?.id ?? null,
+
+      
       // Zweck/Verwendungsfeld der Ausgabe
       purpose: exp.use,
       // Kommentar / Notiz
@@ -52,7 +56,10 @@ export default class TransactionService {
       amount: inc.formattedAmount,
       interval: inc.interval,
       owner: inc.user?.username ?? 'Unbekannt',
-      category: inc.categories?.name ?? '',
+      //alt: category: inc.categories?.name ?? '',
+      categoryName: inc.categories?.name ?? "—",
+      categoryId: inc.categories?.id ?? null,
+
       // Quelle der Einnahme
       purpose: inc.source,
       comment: inc.note ?? '',
