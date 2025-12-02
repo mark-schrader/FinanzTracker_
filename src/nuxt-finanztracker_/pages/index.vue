@@ -90,7 +90,7 @@
             name="psw"
             placeholder="Enter Password"
             required
-            pattern="(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
             title="Muss mindestens eine Zahl und einen Groß- und Kleinbuchstaben sowie mindestens 8 oder mehr Zeichen enthalten"
             class="border p-2 rounded"
           />
@@ -105,6 +105,7 @@
 
 import { reactive, ref } from "vue";
 import { navigateTo, useFetch } from '#app';
+//import { useSupabaseClient } from '@supabase/auth-helpers-vuejs';
 
 const supabase = useSupabaseClient();
 
@@ -118,7 +119,7 @@ const form = reactive({
   password: "",
   firstname: "",
   lastname: "",
-  university: "htw",
+  university: "",
   birthdate: "",
 });
 
@@ -137,6 +138,7 @@ const register = async () => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(form)
     });
+
 
     const data = await res.json();
 
