@@ -33,8 +33,8 @@ Dieses Dokument beschreibt die Philosophie, Entscheidungen, Nebenbedingungen, Be
 * Frontend: Vue.js mit den Frameworks Bootstrap Tailwind und Chart.js zur einfachen und sauberen Darstellung der Webseite
 * Nuxt vereint unser Frontend und Backend in einem System
 * Gruppenmitglieder sind mit JavaScript vertraut bzw. können sich das aneignen
-* Hosting erfolgt wahrscheinlich über Supabase
-* für die relationale Datenbank wird Prisma genutzt
+* für die relationale Datenbank wird Supabase genutzt
+* Prisma ist unser ORM
 
 == Architektur-relevante Anforderungen
 //link:requiremenets/vision.adoc[Anforderungen für die Architektur]
