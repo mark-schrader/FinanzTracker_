@@ -8,14 +8,10 @@ export default defineEventHandler(async (event) => {
   try {
     switch (method) {
       case 'GET':
-        if (id) { // Anzeige einer einzelnen Einnahme
-          // GET /api/incomes/5
-          return await IncomeService.getIncomeById(Number(id))
-        } else {  // Anzeige aller Einnahmen eines Benutzers
+        // Anzeige aller Einnahmen eines Benutzers
           // GET /api/incomes?userId=123
           if (!userId) throw createError({ statusCode: 400, message: 'Missing userId' })
           return await IncomeService.getIncomesByUserId(Number(userId))
-        }
 
       case 'POST': { // Anlegen einer neuen Einnahme
         // POST /api/incomes
@@ -30,18 +26,6 @@ export default defineEventHandler(async (event) => {
           note: body.note,
         })
       }
-
-      case 'PUT': { // Verändern einer Einnahme
-        // PUT /api/incomes/5
-        if (!id) throw createError({ statusCode: 400, message: 'Missing ID' })
-        const body = await readBody(event)
-        return await IncomeService.updateIncome(Number(id), body)
-      }
-
-      case 'DELETE': // Löschen einer Einnahme
-        // DELETE /api/incomes/5
-        if (!id) throw createError({ statusCode: 400, message: 'Missing ID' })
-        return await IncomeService.deleteIncome(Number(id))
 
       default:
         throw createError({ statusCode: 405, message: `Method ${method} not allowed` })

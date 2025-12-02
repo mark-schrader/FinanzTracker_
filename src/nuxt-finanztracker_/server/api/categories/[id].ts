@@ -14,6 +14,24 @@ export default defineEventHandler(async (event) => {
         const body = await readBody(event)
         return await CategoryService.updateCategory(Number(id), body)   // Aktualisierung einer Kategorie
       }
+      /*
+      fetch('/api/categories/5', { 
+        method: 'PUT',               
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          name: "Neue Kategorie",
+          type: "expense",
+          icon: "🔥",
+          color: "#FF9900",
+          userId: 1
+      })
+    })
+    .then(res => res.json())
+    .then(data => console.log("Kategorie aktualisiert:", data))
+    .catch(err => console.error("Update error:", err))
+      */
 
       case 'DELETE':  // DELETE /api/categories/5
         return await CategoryService.deleteCategory(Number(id))     // Löschen einer Kategorie
