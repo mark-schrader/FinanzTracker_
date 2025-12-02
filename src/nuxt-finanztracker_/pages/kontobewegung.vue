@@ -149,16 +149,16 @@
 import { ref, computed, onMounted } from 'vue'
 import { useFetch } from '#app'
 
-<<<<<<<<< Temporary merge branch 1
+
 definePageMeta({
   middleware: 'auth' // Auth-Middleware für diese Seite
 })
 
-=========
+
 //Reaktive Daten
 
 // Suchfeld für die Tabelle (nicht sichtbar in Template, aber vorbereitet)
->>>>>>>>> Temporary merge branch 2
+
 const search = ref('')
 
 // Alle Transaktionen (Einnahmen & Ausgaben)
