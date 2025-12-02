@@ -45,9 +45,14 @@
             <label>Kategorie</label>
             <select v-model="incomeForm.category" class="form-input">
               <option disabled value="">Bitte wählen</option>
-              <option v-for="cat in categories.filter(c => c.type === 'income')" :key="cat.id" :value="cat.id">
+              <option
+                v-for="cat in categories"
+                :value="cat.id"
+                :key="cat.id"
+              >
                 {{ cat.name }}
               </option>
+
             </select>
 
 
@@ -157,7 +162,7 @@
               <tbody>
                 <tr v-for="auftrag in formattedAuftraege" :key="auftrag.id" class="hover:bg-gray-100">
                   <td>{{ auftrag.name }}</td>
-                  <td>{{ auftrag.kategorie }}</td>
+                  <td>{{ auftrag.categoryName }}</td>
                   <td
                     class="text-left"
                     :class="auftrag.betrag < 0 ? 'text-red-500 dark:text-red-400' : 'text-teal-600'"
@@ -359,7 +364,7 @@ function showAlert(msg, type = "success") {
   
   setTimeout(() => {
     alertMessage.value = ""
-  }, 3000)
+  }, 2000)
 }
 
 
@@ -385,16 +390,13 @@ const formattedAuftraege = computed(() =>
     // Parse amount string to float
     const val = parseFloat(String(a.amount).replace(/[^0-9.-]/g, "")) || 0;
 
-    // Finde die Kategorie basierend auf dem Namen
-    const cat = categories.value.find(c => c.name === a.category);
-
     return {
       id: a.id,
       recordType: a.recordType,        // income oder expense 
       type: a.type,                    // Einnahme oder Ausgabe
       name: a.purpose || a.source || a.use || "—",
-      categoryName: a.category, 
-      categoryId: cat ? cat.id : null, // Kategorie-ID
+      categoryName: a.categoryName || "—",
+      categoryId: a.categoryId ?? null, // Kategorie-ID
       intervall: a.interval,
       betrag: val,
       note: a.note || "",
@@ -458,7 +460,10 @@ async function submitIncome() {
       amount: `+${parseFloat(incomeForm.value.amount).toFixed(2)} €`,
       interval: incomeForm.value.interval,
       owner: 'Du',
-      category: categories.value.find(c => c.id == incomeForm.value.category)?.name ?? '',
+      //alt: category: categories.value.find(c => c.id == incomeForm.value.category)?.name ?? '',
+      categoryName: categories.value.find(c => c.id == incomeForm.value.category)?.name ?? "",
+      categoryId: Number(incomeForm.value.category),
+      //
       source: incomeForm.value.source,
       note: incomeForm.value.note
     }
@@ -506,7 +511,10 @@ async function submitExpense() {
       amount: `-${parseFloat(expenseForm.value.amount).toFixed(2)} €`,
       interval: expenseForm.value.interval,
       owner: 'Du',
-      category: categories.value.find(c => c.id == expenseForm.value.category)?.name ?? '',
+      //alt: category: categories.value.find(c => c.id == expenseForm.value.category)?.name ?? '',
+      categoryName: categories.value.find(c => c.id == expenseForm.value.category)?.name ?? "",
+      categoryId: Number(expenseForm.value.category),
+      //
       use: expenseForm.value.use,
       note: expenseForm.value.note
     }
@@ -538,13 +546,12 @@ async function saveEdit() {
   try {
     const a = selectedAuftrag.value;
 
-    // Kategorie anhand des Namens suchen
+    // Kategorie anhand ID suchen
     const cat = categories.value.find(c => c.id === a.categoryId);
-    if (!cat) {
-      showAlert("Kategorie nicht gefunden", "error");
-    return;
-}
-
+    if (!a.categoryId) {
+      showAlert("Kategorie fehlt", "error")
+      return
+    }
 
     // API Endpunkt bestimmen
     const baseUrl =
