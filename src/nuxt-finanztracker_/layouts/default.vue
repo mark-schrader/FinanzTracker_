@@ -21,6 +21,6 @@
 
 <script setup>
 // Import the components
-import Header from '~/components/header.vue'
-import Footer from '~/components/footer.vue'
+import Header from "~/components/header.vue";
+import Footer from "~/components/footer.vue";
 </script>
