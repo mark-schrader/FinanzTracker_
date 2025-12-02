@@ -84,12 +84,14 @@ import expenseslast7days from '../components/expenseslast7days.vue'
 import incomelast7days from '../components/incomelast7days.vue'
 import verlaufChart from '../components/verlaufChart.vue'
 import bewegungstabelle from '../components/bewegungstabelle.vue'
-import CurrentTime from '../components/CurrentTime.vue'
+import CurrentTime from '../components/currentTime.vue'
+import GraphCatagories from '../components/graph_catagories.vue'
 
 const transactions = ref([])
 
 onMounted(async () => {
-  const { data } = await useFetch('/api/transactions')
+  //User-ID (?userId=1) hardcodiert für Demo-Zwecke
+  const { data } = await useFetch('/api/transactions?userId=1')
   if (data.value) transactions.value = data.value
 })
 </script>
