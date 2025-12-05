@@ -107,7 +107,7 @@ import { reactive, ref } from "vue";
 import { navigateTo, useFetch } from '#app';
 //import { useSupabaseClient } from '@supabase/auth-helpers-vuejs';
 
-const supabase = useSupabaseClient();
+//const supabase = useSupabaseClient();
 
 // UI state
 const showLogin = ref(false);
@@ -123,14 +123,15 @@ const form = reactive({
   birthdate: "",
 });
 
+// login state
 const email = ref('');
 const password = ref('');
-
 const errorMessage = ref<string | null>(null);
 
 // helper sleep
 const sleep = (ms: number) => new Promise<void>(resolve => setTimeout(resolve, ms));
 
+// Registration function
 const register = async () => {
   try {
     const res = await fetch('/api/user/create', {
@@ -165,6 +166,8 @@ const register = async () => {
   }
 }
 
+
+// Login function
 const login = async () => {
   errorMessage.value = null;
 
