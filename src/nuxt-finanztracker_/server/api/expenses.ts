@@ -1,9 +1,28 @@
+
+import { serverSupabaseUser } from '#supabase/server'
+import { PrismaClient } from '@prisma/client'
 import ExpenseService from '../application/ExpenseService'
+
+const prisma = new PrismaClient()
 
 export default defineEventHandler(async (event) => {
   const method = getMethod(event)
   const id = getRouterParam(event, 'id')
-  const userId = getQuery(event).userId // GET /api/expenses?userId=123
+
+  const supabaseUser = serverSupabaseUser(event)
+
+  if (!supabaseUser) {
+    throw createError({ statusCode: 401, message: 'Nicht Authorisiert!' })
+  } 
+
+  const prismaUser = await prisma.user.findUnique({ 
+    where: { supabaseid: supabaseUser.id }
+  })
+  if (!prismaUser) {
+    throw createError({ statusCode: 401, message: 'Benutzer nicht gefunden!' })
+  }
+
+  const userId = prismaUser.userid
 
   try {
     switch (method) {

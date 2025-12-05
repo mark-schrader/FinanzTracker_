@@ -1,13 +1,33 @@
+
+import { serverSupabaseUser } from '#supabase/server'
+import { PrismaClient } from '@prisma/client'
 import CategoryService from '../application/CategoryService'
 
+const prisma = new PrismaClient()
+
 export default defineEventHandler(async (event) => {
+  
   const method = getMethod(event)
-  const userId = getQuery(event).userId // /api/categories?userId=1
+
+  const supabaseUser = serverSupabaseUser(event)
+
+  if (!supabaseUser) {
+    throw createError({ statusCode: 401, message: 'Nicht Authorisiert!' })
+  } 
+
+  const prismaUser = await prisma.user.findUnique({
+    where: { supabaseid: supabaseUser.id }
+  })  
+  if (!prismaUser) {
+    throw createError({ statusCode: 401, message: 'Benutzer nicht gefunden!' })
+  }
+
+  const userId = prismaUser.userid
 
   try {
     switch (method) {
       case 'GET': // GET /api/categories?userId=1
-        if (!userId) throw createError({ statusCode: 400, message: 'Missing userId' })
+        
         return await CategoryService.getCategoryByUserId(Number(userId)) // Ausgabe der Kategorien für den angegebenen Benutzer
 
       case 'POST': { // POST /api/categories
