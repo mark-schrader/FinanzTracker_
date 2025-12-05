@@ -105,9 +105,9 @@
 
 import { reactive, ref } from "vue";
 import { navigateTo, useFetch } from '#app';
-//import { useSupabaseClient } from '@supabase/auth-helpers-vuejs';
+import { useSupabaseClient } from '#supabase/server'
 
-//const supabase = useSupabaseClient();
+const supabase = useSupabaseClient();
 
 // UI state
 const showLogin = ref(false);
@@ -134,7 +134,7 @@ const sleep = (ms: number) => new Promise<void>(resolve => setTimeout(resolve, m
 // Registration function
 const register = async () => {
   try {
-    const res = await fetch('/api/user/create', {
+    const res = await fetch('/api/UserController', {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(form)
