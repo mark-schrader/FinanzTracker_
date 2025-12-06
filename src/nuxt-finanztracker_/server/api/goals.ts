@@ -6,13 +6,13 @@ export default defineEventHandler(async (event) => {
 
   try {
     switch (method) {
-      case 'GET':
-        if (!userId) throw createError({ statusCode: 400, message: 'Missing userId' })
-        return await GoalService.getGoalsByUserId(Number(userId))
+      case 'GET': // GET /api/goals?userId=1
+        if (!userId) throw createError({ statusCode: 400, message: 'Missing userId' }) 
+        return await GoalService.getGoalsByUserId(Number(userId))   // Ausgabe aller Ziele für den angegebenen Benutzer
 
-      case 'POST': {
-        const body = await readBody(event)
-        return await GoalService.createGoal({
+      case 'POST': { // POST /api/goals
+        const body = await readBody(event)      
+        return await GoalService.createGoal({   // Erstellen eines neuen Ziels mit den im Body angegebenen Daten
           userId: Number(body.userId),
           name: body.name,
           target: Number(body.target),

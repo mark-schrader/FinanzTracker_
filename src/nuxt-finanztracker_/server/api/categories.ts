@@ -14,24 +14,7 @@ export default defineEventHandler(async (event) => {
         const body = await readBody(event)
         return await CategoryService.createCategory(body) // Erstellen einer neuen Kategorie mit den im Body angegebenen Daten
       }
-      /*
-      fetch('/api/categories', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          name: "Essen",
-          type: "expense",    // z.B. "expense" oder "income"
-          userId: 1,          // oder user_id
-          icon: "🍔",
-          color: "#FF5733"
-        })
-    })
-        .then(res => res.json())
-        .then(data => console.log("Kategorie erstellt:", data))
-        .catch(err => console.error("Error:", err))
-      */
+
       default:
         throw createError({ statusCode: 405, message: `Method ${method} not allowed` })
     }
