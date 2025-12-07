@@ -35,7 +35,7 @@
       </div>
     </div>
 
-     <!-- Ausgaben & Einnahmen nebeneinander -->
+     <!-- Kategorien Blockcharts -->
     <div class="grid grid-cols-2 gap-6">
       <!-- Ausgaben -->
       <div
@@ -43,7 +43,7 @@
       >
         <p class="font-medium mb-2 text-center">Ausgaben je Kategorie</p>
         <div class="w-full h-[260px]">
-          <graph_catagories :transactions="transactions" />
+          <graph_catagories_expenses :transactions="transactions" />
         </div>
       </div>
 
@@ -51,9 +51,9 @@
       <div
         class="bg-gray-100 rounded-xl p-6 flex flex-col items-center justify-center shadow-sm hover:shadow-md transition-shadow duration-200 dark:bg-gray-800"
       >
-        <p class="font-medium mb-2 text-center">Einnahmen – letzte 7 Tage</p>
+        <p class="font-medium mb-2 text-center">Einnahmen je Kategorie</p>
         <div class="w-full h-[260px]">
-          <incomelast7days :transactions="transactions" />
+          <graph_catagories :transactions="transactions" />
         </div>
       </div>
     </div>
@@ -103,11 +103,13 @@ import { ref, onMounted } from 'vue'
 import { useFetch } from '#app'
 
 // Komponenten
+import verlaufChart from '../components/verlaufChart.vue'
+import CurrentTime from '../components/currentTime.vue'
 import expenseslast7days from '../components/expenseslast7days.vue'
 import incomelast7days from '../components/incomelast7days.vue'
-import verlaufChart from '../components/verlaufChart.vue'
+import graph_catagories_expenses from '../components/graph_catagories_expenses.vue'
+import graph_catagories_incomes from '../components/graph_catagories_incomes.vue'
 import bewegungstabelle from '../components/bewegungstabelle.vue'
-import CurrentTime from '../components/currentTime.vue'
 
 const transactions = ref([])
 
