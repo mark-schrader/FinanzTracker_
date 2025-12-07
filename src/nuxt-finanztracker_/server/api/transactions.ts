@@ -1,12 +1,5 @@
 import TransactionService from '../application/TransactionService'
-import { z } from 'zod'
-
-// Validierung
-// Schema zum Validieren des userId-Query-Params
-const QueryUserIdSchema = z.preprocess((val) => {
-  if (val === undefined || val === null) return undefined
-  return Number(val)
-}, z.number().int().positive())
+import { QueryUserIdSchema } from '../utility/validationUtility'
 
 // Handler für die API-Endpunkte
 export default defineEventHandler(async (event) => {

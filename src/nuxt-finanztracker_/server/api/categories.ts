@@ -1,12 +1,6 @@
 import CategoryService from '../application/CategoryService'
+import { QueryUserIdSchema } from '../utility/validationUtility'
 import { z } from 'zod'
-
-//Validierung
-// Schema zum Validieren des userId-Query-Parameters
-const QueryUserIdSchema = z.preprocess((val) => {
-  if (val === undefined || val === null) return undefined
-  return Number(val)
-}, z.number().int().positive())
 
 // Schema zum Validieren des Request-Bodys für das Erstellen einer Kategorie
 const CreateCategorySchema = z.object({
@@ -34,7 +28,7 @@ export default defineEventHandler(async (event) => {
         if (!parsed.success || parsed.data === undefined) {
           throw createError({ statusCode: 400, message: 'Missing or invalid userId' })
         }
-        return await CategoryService.getCategoryByUserId(Number(parsed.data)) // Ausgabe aller Kategorien eines Benutzers (mit allen, wo userID null ist)
+        return await CategoryService.getCategoryByUserId(Number(parsed.data)) // Ausgabe aller Kategorien eines Benutzers
       }
 
       case 'POST': { // POST /api/categories

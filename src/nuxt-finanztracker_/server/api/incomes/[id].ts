@@ -1,22 +1,6 @@
 import IncomeService from '../../application/IncomeService'
 import { z } from 'zod'
-
-// Validierung
-// Schema zum Validieren des id-Routen-Params
-const IdParamSchema = z.preprocess((val) => {
-  if (val === undefined || val === null) return undefined
-  return Number(val)
-}, z.number().int().positive())
-
-// Hilfsfunktion zum Vorverarbeiten von Datumswerten
-const toDatePreprocess = (val: any) => {
-  if (val === undefined || val === null) return undefined
-  const d = val instanceof Date ? val : new Date(val)
-  return d
-}
-
-// Enum für Intervallwerte
-const IntervalEnum = z.enum(['once', 'weekly', 'monthly', 'semesterly', 'annual'])
+import { IdParamSchema, toDatePreprocess, IntervalEnum } from '../../utility/validationUtility'
 
 // Schema zum Validieren des Request-Bodys für das Aktualisieren eines Einkommens
 const UpdateIncomeSchema = z.object({

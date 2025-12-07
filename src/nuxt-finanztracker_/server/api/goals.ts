@@ -1,19 +1,6 @@
 import GoalService from '../application/GoalService'
 import { z } from 'zod'
-
-// Validierung
-// Schema zum Validieren des userId-Query-Params
-const QueryUserIdSchema = z.preprocess((val) => {
-  if (val === undefined || val === null) return undefined
-  return Number(val)
-}, z.number().int().positive())
-
-// Hilfsfunktion zum Vorverarbeiten von Datumswerten
-const toDatePreprocess = (val: any) => {
-  if (val === undefined || val === null) return undefined
-  const d = val instanceof Date ? val : new Date(val)
-  return d
-}
+import { QueryUserIdSchema, toDatePreprocess } from '../utility/validationUtility'
 
 // Schema zum Validieren des Request-Bodys für das Erstellen eines neuen Ziels
 const CreateGoalSchema = z.object({

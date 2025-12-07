@@ -1,21 +1,7 @@
 import IncomeService from '../application/IncomeService'
 import { z } from 'zod'
+import { QueryUserIdSchema, toDatePreprocess, IntervalEnum } from '../utility/validationUtility'
 
-// Validierung
-// Schema zum Validieren des userId-Query-Params
-const QueryUserIdSchema = z.preprocess((val) => {
-  if (val === undefined || val === null) return undefined
-  return Number(val)
-}, z.number().int().positive())
-
-// Hilfsfunktion zum Vorverarbeiten von Datumswerten
-const toDatePreprocess = (val: any) => {
-  if (val === undefined || val === null) return undefined
-  const d = val instanceof Date ? val : new Date(val)
-  return d
-}
-
-const IntervalEnum = z.enum(['once', 'weekly', 'monthly', 'semesterly', 'annual'])
 
 // Schema zum Validieren des Request-Bodys für das Erstellen eines neuen Einkommens
 const CreateIncomeSchema = z.object({

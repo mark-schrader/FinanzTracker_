@@ -1,12 +1,6 @@
 import CategoryService from '../../application/CategoryService'
+import { IdParamSchema } from '../../utility/validationUtility'
 import { z } from 'zod'
-
-//Validierung 
-// Schema zum Validieren des id-Params in der URL
-const IdParamSchema = z.preprocess((val) => {   
-  if (val === undefined || val === null) return undefined
-  return Number(val)
-}, z.number().int().positive())
 
 // Schema zum Validieren des Request-Bodys für das Aktualisieren einer Kategorie
 const UpdateCategorySchema = z.object({

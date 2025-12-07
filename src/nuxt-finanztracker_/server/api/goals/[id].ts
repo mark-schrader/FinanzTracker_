@@ -1,19 +1,6 @@
 import GoalService from '../../application/GoalService'
 import { z } from 'zod'
-
-// Validierung
-// Schema zum Validieren des id-Params in der URL
-const IdParamSchema = z.preprocess((val) => {
-  if (val === undefined || val === null) return undefined
-  return Number(val)
-}, z.number().int().positive())
-
-// Hilfsfunktion zum Vorverarbeiten von Datumswerten
-const toDatePreprocess = (val: any) => {
-  if (val === undefined || val === null) return undefined
-  const d = val instanceof Date ? val : new Date(val)
-  return d
-}
+import { IdParamSchema, toDatePreprocess } from '../../utility/validationUtility'
 
 // Schema zum Validieren des Request-Bodys für das Aktualisieren eines Ziels
 const UpdateGoalSchema = z.object({
