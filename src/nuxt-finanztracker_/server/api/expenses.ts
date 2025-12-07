@@ -7,7 +7,7 @@ const CreateExpenseSchema = z.object({
   userId: z.preprocess((val) => (val === undefined || val === null ? undefined : Number(val)), z.number().int().positive()),
   categoryId: z.preprocess((val) => (val === undefined || val === null ? undefined : Number(val)), z.number().int().positive()),
   use: z.string().min(1).optional(),
-  amount: z.preprocess((val) => (val === undefined || val === null ? undefined : Number(val)), z.number().nonnegative()),
+  amount: z.preprocess((val) => (val === undefined || val === null ? undefined : Number(val)), z.number().positive()),
   date: z.preprocess(toDatePreprocess, z.instanceof(Date).refine((d: Date) => !isNaN(d.getTime()), { message: 'Invalid date' })),
   interval: IntervalEnum.optional(),
   note: z.string().optional().nullable()

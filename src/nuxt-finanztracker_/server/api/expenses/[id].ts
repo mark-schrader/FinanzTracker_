@@ -7,7 +7,7 @@ const UpdateExpenseSchema = z.object({
   userId: z.preprocess((val) => (val === undefined || val === null ? undefined : Number(val)), z.number().int().positive().optional()),
   categoryId: z.preprocess((val) => (val === undefined || val === null ? undefined : Number(val)), z.number().int().positive().optional()),
   use: z.string().min(1).optional(),
-  amount: z.preprocess((val) => (val === undefined || val === null ? undefined : Number(val)), z.number().nonnegative().optional()),
+  amount: z.preprocess((val) => (val === undefined || val === null ? undefined : Number(val)), z.number().positive().optional()),
   date: z.preprocess(toDatePreprocess, z.instanceof(Date).refine((d: Date) => !isNaN(d.getTime()), { message: 'Invalid date' }).optional()),
   interval: IntervalEnum.optional(),
   note: z.string().optional().nullable()

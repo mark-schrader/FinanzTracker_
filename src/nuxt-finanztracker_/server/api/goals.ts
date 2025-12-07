@@ -12,7 +12,7 @@ const CreateGoalSchema = z.object({
   target: z.preprocess((val) => {
     if (val === undefined || val === null) return undefined
     return Number(val)
-  }, z.number().nonnegative()),
+  }, z.number().positive()),
   saved: z.preprocess((val) => {
     if (val === undefined || val === null) return undefined
     return Number(val)
