@@ -5,5 +5,7 @@ export default defineNuxtConfig({
     '~/assets/css/tailwind.css',
     'animate.css',
   ],
-  modules: ['@nuxtjs/tailwindcss']
+  modules: [
+    '@nuxtjs/tailwindcss',
+    '@nuxt/test-utils/module',]
   })

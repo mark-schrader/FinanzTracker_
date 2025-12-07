@@ -107,7 +107,7 @@
             <label class="block text-sm font-medium">Zyklus</label>
             <select v-model="expenseForm.interval" class="border px-2 py-1 rounded w-full">
               <option value="once">Einmalig</option>
-              <option value="weekly">Wöchendlich</option>
+              <option value="weekly">Wöchentlich</option>
               <option value="monthly">Monatlich</option>
               <option value="semesterly">Semester</option>
               <option value="annual">Jährlich</option>
