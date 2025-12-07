@@ -8,7 +8,9 @@ const CreateGoalSchema = z.object({
     if (val === undefined || val === null) return undefined
     return Number(val)
   }, z.number().int().positive()),
-  name: z.string().min(1),
+  name: z.string().min(1).refine((val) => !val.startsWith(' '), {
+      message: "Name darf nicht mit einem Leerzeichen beginnen"
+    }),
   target: z.preprocess((val) => {
     if (val === undefined || val === null) return undefined
     return Number(val)
