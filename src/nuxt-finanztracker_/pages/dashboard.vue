@@ -35,6 +35,29 @@
       </div>
     </div>
 
+     <!-- Ausgaben & Einnahmen nebeneinander -->
+    <div class="grid grid-cols-2 gap-6">
+      <!-- Ausgaben -->
+      <div
+        class="bg-gray-100 rounded-xl p-6 flex flex-col items-center justify-center shadow-sm hover:shadow-md transition-shadow duration-200"
+      >
+        <p class="font-medium mb-2 text-center">Ausgaben je Kategorie</p>
+        <div class="w-full h-[260px]">
+          <graph_catagories :transactions="transactions" />
+        </div>
+      </div>
+
+      <!-- Zeile 3 rechts -->
+      <div
+        class="bg-gray-100 rounded-xl p-6 flex flex-col items-center justify-center shadow-sm hover:shadow-md transition-shadow duration-200"
+      >
+        <p class="font-medium mb-2 text-center">Einnahmen – letzte 7 Tage</p>
+        <div class="w-full h-[260px]">
+          <incomelast7days :transactions="transactions" />
+        </div>
+      </div>
+    </div>
+
     <!--Weitere Kacheln -->
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
       <!-- Ausgaben pro Kategorie -->
@@ -85,7 +108,6 @@ import incomelast7days from '../components/incomelast7days.vue'
 import verlaufChart from '../components/verlaufChart.vue'
 import bewegungstabelle from '../components/bewegungstabelle.vue'
 import CurrentTime from '../components/currentTime.vue'
-import GraphCatagories from '../components/graph_catagories.vue'
 
 const transactions = ref([])
 
