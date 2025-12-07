@@ -43,7 +43,7 @@
       >
         <p class="font-medium mb-2 text-center">Ausgaben je Kategorie</p>
         <div class="w-full h-[260px]">
-          <graph_catagories_expenses :transactions="transactions" />
+          <graph_categories_expenses :transactions="transactions" />
         </div>
       </div>
 
@@ -53,7 +53,7 @@
       >
         <p class="font-medium mb-2 text-center">Einnahmen je Kategorie</p>
         <div class="w-full h-[260px]">
-          <graph_catagories :transactions="transactions" />
+          <graph_categories_incomes :transactions="transactions" />
         </div>
       </div>
     </div>
@@ -107,8 +107,8 @@ import verlaufChart from '../components/verlaufChart.vue'
 import CurrentTime from '../components/currentTime.vue'
 import expenseslast7days from '../components/expenseslast7days.vue'
 import incomelast7days from '../components/incomelast7days.vue'
-import graph_catagories_expenses from '../components/graph_catagories_expenses.vue'
-import graph_catagories_incomes from '../components/graph_catagories_incomes.vue'
+import graph_categories_expenses from '../components/graph_categories_expenses.vue'
+import graph_categories_incomes from '../components/graph_categories_incomes.vue'
 import bewegungstabelle from '../components/bewegungstabelle.vue'
 
 const transactions = ref([])
