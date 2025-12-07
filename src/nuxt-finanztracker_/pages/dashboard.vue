@@ -7,7 +7,7 @@
     </div>
 
     <!-- Verlauf des letzten Jahres -->
-    <div class="bg-gray-200 rounded-md p-6 min-h-[220px] shadow-sm hover:shadow-md transition-shadow duration-200">
+    <div class="bg-gray-200 rounded-md p-6 min-h-[220px] shadow-sm hover:shadow-md transition-shadow duration-200 dark:bg-gray-800">
       <p class="text-base font-medium mb-4 text-center">Verlauf des Kontostands (letztes Jahr)</p>
       <verlaufChart :transactions="transactions" />
     </div>
@@ -16,7 +16,7 @@
     <div class="grid grid-cols-2 gap-6">
       <!-- Ausgaben -->
       <div
-        class="bg-gray-100 rounded-xl p-6 flex flex-col items-center justify-center shadow-sm hover:shadow-md transition-shadow duration-200"
+        class="bg-gray-100 rounded-xl p-6 flex flex-col items-center justify-center shadow-sm hover:shadow-md transition-shadow duration-200 dark:bg-gray-800"
       >
         <p class="font-medium mb-2 text-center">Ausgaben – letzte 7 Tage</p>
         <div class="w-full h-[260px]">
@@ -26,7 +26,7 @@
 
       <!-- Einnahmen -->
       <div
-        class="bg-gray-100 rounded-xl p-6 flex flex-col items-center justify-center shadow-sm hover:shadow-md transition-shadow duration-200"
+        class="bg-gray-100 rounded-xl p-6 flex flex-col items-center justify-center shadow-sm hover:shadow-md transition-shadow duration-200 dark:bg-gray-800"
       >
         <p class="font-medium mb-2 text-center">Einnahmen – letzte 7 Tage</p>
         <div class="w-full h-[260px]">
@@ -39,7 +39,7 @@
     <div class="grid grid-cols-2 gap-6">
       <!-- Ausgaben -->
       <div
-        class="bg-gray-100 rounded-xl p-6 flex flex-col items-center justify-center shadow-sm hover:shadow-md transition-shadow duration-200"
+        class="bg-gray-100 rounded-xl p-6 flex flex-col items-center justify-center shadow-sm hover:shadow-md transition-shadow duration-200 dark:bg-gray-800"
       >
         <p class="font-medium mb-2 text-center">Ausgaben je Kategorie</p>
         <div class="w-full h-[260px]">
@@ -49,7 +49,7 @@
 
       <!-- Zeile 3 rechts -->
       <div
-        class="bg-gray-100 rounded-xl p-6 flex flex-col items-center justify-center shadow-sm hover:shadow-md transition-shadow duration-200"
+        class="bg-gray-100 rounded-xl p-6 flex flex-col items-center justify-center shadow-sm hover:shadow-md transition-shadow duration-200 dark:bg-gray-800"
       >
         <p class="font-medium mb-2 text-center">Einnahmen – letzte 7 Tage</p>
         <div class="w-full h-[260px]">
@@ -62,7 +62,7 @@
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
       <!-- Ausgaben pro Kategorie -->
       <div
-        class="bg-gray-100 rounded-lg p-6 flex flex-col items-center justify-center min-h-[150px] shadow-sm hover:shadow-md transition-shadow duration-200"
+        class="bg-gray-100 rounded-lg p-6 flex flex-col items-center justify-center min-h-[150px] shadow-sm hover:shadow-md transition-shadow duration-200 dark:bg-gray-800"
       >
         <p class="font-medium mb-2">Ausgaben pro Kategorie</p>
         <svg
@@ -78,7 +78,7 @@
 
       <!-- Individuelles Dashboard -->
       <div
-        class="bg-gray-100 rounded-lg p-6 flex flex-col items-center justify-center min-h-[150px] shadow-sm hover:shadow-md transition-shadow duration-200"
+        class="bg-gray-100 rounded-lg p-6 flex flex-col items-center justify-center min-h-[150px] shadow-sm hover:shadow-md transition-shadow duration-200 dark:bg-gray-800"
       >
         <p class="font-medium mb-2">Individuelles Dashboard</p>
         <svg
