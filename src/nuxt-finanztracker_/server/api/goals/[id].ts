@@ -1,12 +1,19 @@
 import GoalService from '../../application/GoalService'
 import { z } from 'zod'
 
-//Validierung
-// Schema zum Validieren des id-Route-Parameters
+// Validierung
+// Schema zum Validieren des id-Params in der URL
 const IdParamSchema = z.preprocess((val) => {
   if (val === undefined || val === null) return undefined
   return Number(val)
 }, z.number().int().positive())
+
+// Hilfsfunktion zum Vorverarbeiten von Datumswerten
+const toDatePreprocess = (val: any) => {
+  if (val === undefined || val === null) return undefined
+  const d = val instanceof Date ? val : new Date(val)
+  return d
+}
 
 // Schema zum Validieren des Request-Bodys für das Aktualisieren eines Ziels
 const UpdateGoalSchema = z.object({
@@ -23,10 +30,7 @@ const UpdateGoalSchema = z.object({
     if (val === undefined || val === null) return undefined
     return Number(val)
   }, z.number().nonnegative().optional()),
-  dueDate: z.preprocess((val) => {
-    if (val === undefined) return undefined
-    return typeof val === 'string' ? val : undefined
-  }, z.union([z.string().nullable(), z.undefined()]).optional())
+  dueDate: z.preprocess(toDatePreprocess, z.instanceof(Date).refine((d: Date) => !isNaN(d.getTime()), { message: 'Invalid date' }).optional())
 })
 
 // Handler für die API-Endpunkte

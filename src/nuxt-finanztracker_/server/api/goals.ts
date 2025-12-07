@@ -1,19 +1,26 @@
 import GoalService from '../application/GoalService'
 import { z } from 'zod'
 
-//Validierung
-// Schema zum Validieren des userId-Query-Parameters
+// Validierung
+// Schema zum Validieren des userId-Query-Params
 const QueryUserIdSchema = z.preprocess((val) => {
   if (val === undefined || val === null) return undefined
   return Number(val)
 }, z.number().int().positive())
+
+// Hilfsfunktion zum Vorverarbeiten von Datumswerten
+const toDatePreprocess = (val: any) => {
+  if (val === undefined || val === null) return undefined
+  const d = val instanceof Date ? val : new Date(val)
+  return d
+}
 
 // Schema zum Validieren des Request-Bodys für das Erstellen eines neuen Ziels
 const CreateGoalSchema = z.object({
   userId: z.preprocess((val) => {
     if (val === undefined || val === null) return undefined
     return Number(val)
-  }, z.number().int().positive().optional()),
+  }, z.number().int().positive()),
   name: z.string().min(1),
   target: z.preprocess((val) => {
     if (val === undefined || val === null) return undefined
@@ -23,10 +30,7 @@ const CreateGoalSchema = z.object({
     if (val === undefined || val === null) return undefined
     return Number(val)
   }, z.number().nonnegative().optional()),
-  dueDate: z.preprocess((val) => {
-    if (val === undefined || val === null) return undefined
-    return typeof val === 'string' ? val : undefined
-  }, z.string().optional()) // accepts date string or undefined
+  dueDate: z.preprocess(toDatePreprocess, z.instanceof(Date).refine((d: Date) => !isNaN(d.getTime()), { message: 'Invalid date' }))
 })
 
 // Handler für die API-Endpunkte
@@ -35,7 +39,6 @@ export default defineEventHandler(async (event) => {
   const query = getQuery(event)
 
   try {
-    // Behandeln der verschiedenen Anfragen-Methoden
     switch (method) {
       case 'GET': { // GET /api/goals?userId=5
         const rawUserId = query.userId ?? query.user_id
@@ -57,8 +60,8 @@ export default defineEventHandler(async (event) => {
           userId: parsed.data.userId,
           name: parsed.data.name,
           target: parsed.data.target,
-          saved: parsed.data.saved,
-          dueDate: parsed.data.dueDate ?? undefined 
+          saved: parsed.data.saved !== undefined ? parsed.data.saved : 0,
+          dueDate: parsed.data.dueDate
         }
 
         return await GoalService.createGoal(payload) // Erstellen eines neuen Ziels
