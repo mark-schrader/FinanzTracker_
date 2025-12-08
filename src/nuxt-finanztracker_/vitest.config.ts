@@ -1,23 +1,21 @@
 import { defineConfig } from 'vitest/config'
-import { defineVitestProject } from '@nuxt/test-utils/config'
+import Vue from '@vitejs/plugin-vue'
 
 export default defineConfig({
+  plugins: [Vue()],
   test: {
-    projects: [
-      {
-        test: {
-          name: 'unit',
-          include: ['test/{e2e,unit}/*.{test,spec}.ts'],
-          environment: 'node',
-        },
-      },
-      await defineVitestProject({
-        test: {
-          name: 'nuxt',
-          include: ['test/nuxt/*.{test,spec}.ts'],
-          environment: 'nuxt',
-        },
-      }),
-    ],
+    globals: true,
+    environment: 'nuxt',  // WICHTIG!!!
+    server: {
+      deps: {
+        inline: [/^@nuxt\/test-utils/]
+      }
+    }
   },
+  resolve: {
+    alias: {
+      '~': './',
+      '@': './'
+    }
+  }
 })
