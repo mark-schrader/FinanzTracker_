@@ -235,7 +235,7 @@
                 </p>
                 <div class="flex justify-center space-x-4">
                   <button @click="deleteAuftrag" class="btn btn-danger">Löschen</button>
-                  <button @click="showDeleteConfirm = false"class="btn btn-secondary">Zurück</button>
+                  <button @click="showDeleteConfirm = false"class="btn btn-secondary">Abbrechen</button>
                 </div>
               </div>
             </div>
