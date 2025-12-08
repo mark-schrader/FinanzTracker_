@@ -37,7 +37,7 @@
             class="hover:bg-gray-100 dark:hover:bg-gray-700 transition"
           >
             <td>{{ cat.name }}</td>
-            <td>{{ cat.type }}</td>
+            <td>{{ displayType(cat.type) }}</td> <!--displayType Funktion: zeigt Ausnahme/Einnnahme -->
             <td class="space-x-4">
               <button
                 class="text-teal-600 hover:text-teal-400"
@@ -166,6 +166,14 @@ async function loadCategories() {
 }
 
 onMounted(loadCategories);
+
+// Damit zeigt es "Einnahme" oder "Ausgabe" anstatt "income" oder "expense", für besesere Lesbarkeit
+function displayType(type) {
+  if (type === "income") return "Einnahme"   
+  if (type === "expense") return "Ausgabe"
+  return type
+}
+
 
 // ---- Modal Controls ----
 function openEdit(cat) {
