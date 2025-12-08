@@ -2,8 +2,14 @@
   <div class="p-6 max-w-screen-xl mx-auto space-y-6">
     <!-- Header -->
     <div class="flex items-center justify-between mb-6">
-      <h1 class="text-3xl font-bold">Dashboard: Account Balance</h1>
+      <h1 class="text-3xl font-bold">Dashboard:</h1>
       <CurrentTime />
+    </div>
+    
+    <!-- Aktueller Kontostand -->
+    <div class="card text-center text-xl font-semibold mb-6 bg-teal-50 dark:bg-gray-800">
+      Aktueller Kontostand:
+      <strong class="text-teal-600 dark:text-teal-400">{{ currentBalance }}</strong>
     </div>
 
     <!-- Verlauf des letzten Jahres -->
@@ -111,12 +117,52 @@ import graph_categories_expenses from '../components/graph_categories_expenses.v
 import graph_categories_incomes from '../components/graph_categories_incomes.vue'
 import bewegungstabelle from '../components/bewegungstabelle.vue'
 
+// Alle Transaktionen (Einnahmen & Ausgaben)
 const transactions = ref([])
 
+// Kategorien für Einnahmen & Ausgaben
+const categories = ref([])
+
 onMounted(async () => {
-  //User-ID (?userId=1) hardcodiert für Demo-Zwecke
-  const { data } = await useFetch('/api/transactions?userId=1')
-  if (data.value) transactions.value = data.value
+  try {
+    // Kategorien (falls backend userId braucht, ergänzen)
+    const catData = await $fetch('/api/categories?userId=1')
+    categories.value = catData || []
+
+    // Lade kombinierte Transaktionen mit userId query (wichtig für Backend)
+    const transData = await $fetch('/api/transactions?userId=1')
+    transactions.value = transData || []
+  } catch (err) {
+    console.error('Fehler beim Laden der Daten:', err)
+  }
+})
+// Konvertiert einen Euro-String ("1.234,56 €") in eine Float-Zahl (1234.56)
+function parseEuro(euroString) {
+  if (!euroString) return 0
+
+  let cleaned = euroString.replace(/[^0-9.,]/g, '') // Entfernt Symbole
+  if (cleaned.includes('.') && cleaned.includes(',')) {
+    cleaned = cleaned.replace(/\./g, '') // Punkt = Tausendertrennzeichen → entfernen
+    cleaned = cleaned.replace(',', '.') // Komma = Dezimaltrennzeichen → umwandeln
+  } else if (cleaned.includes(',')) {
+    cleaned = cleaned.replace(',', '.')
+  }
+
+  const value = parseFloat(cleaned)
+  return isNaN(value) ? 0 : value
+}
+
+// Berechnet den aktuellen Kontostand auf Basis der Transaktionen
+const currentBalance = computed(() => {
+  const sum = transactions.value.reduce((total, t) => {
+    const amount = parseEuro(t.amount)
+    if (t.type === 'Ausgabe') return total - amount
+    if (t.type === 'Einnahme') return total + amount
+    return total // fallback
+  }, 0)
+
+  // Gibt Wert formatiert als z.B. "123,45 €" zurück
+  return sum.toFixed(2).replace('.', ',') + ' €'
 })
 </script>
 

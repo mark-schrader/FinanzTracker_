@@ -60,7 +60,7 @@ const chartData = computed(() => {
       {
         label: 'Einnahmen (€)',
         data,
-        backgroundColor: '#ef4444', // red-500
+        backgroundColor: 'rgba(59, 130, 246, 0.3)', // blue-500
         borderRadius: 6,
         barThickness: 'flex'
       }
