@@ -16,7 +16,7 @@ export default defineEventHandler(async (event) => {
   }
 
   const prismaUser = await prisma.user.findUnique({
-    where: { supabaseid: supabaseUser.id },
+    where: { supabaseid: supabaseUser.id }
   })
   if (!prismaUser) {
     throw createError({ statusCode: 401, message: 'Benutzer nicht gefunden!' })
