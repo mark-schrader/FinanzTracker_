@@ -9,7 +9,12 @@ export default defineEventHandler(async (event) => {
   
   const method = getMethod(event)
 
-  const supabaseUser = serverSupabaseUser(event)
+  const supabaseUser = await serverSupabaseUser(event)
+
+  console.log('--- DEBUG START ---')
+  console.log('Ganzer User:', supabaseUser)
+  console.log('Die ID ist:', supabaseUser?.id)
+  console.log('--- DEBUG END ---')
 
   if (!supabaseUser) {
     throw createError({ statusCode: 401, message: 'Nicht Authorisiert!' })

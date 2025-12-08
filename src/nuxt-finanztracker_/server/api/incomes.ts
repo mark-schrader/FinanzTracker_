@@ -8,7 +8,7 @@ const prisma = new PrismaClient()
 export default defineEventHandler(async (event) => {
   const method = getMethod(event)
 
-  const supabaseUser = serverSupabaseUser(event)
+  const supabaseUser = await serverSupabaseUser(event)
 
   if (!supabaseUser) {
     throw createError({ statusCode: 401, message: 'Nicht Authorisiert!' })
