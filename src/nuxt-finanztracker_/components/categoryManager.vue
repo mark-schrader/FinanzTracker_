@@ -99,7 +99,7 @@
     </div>
   </div>
 
-  <!-- Modal: Edit Category -->
+  <!-- Modal: Edit Category - Bearbeiten -->
   <div v-if="showEdit" class="fixed inset-0 backdrop-blur-sm flex items-center justify-center z-50">
     <div class="bg-white dark:bg-gray-800 p-6 rounded-lg w-[90%] max-w-md space-y-4">
 
@@ -127,8 +127,8 @@
   <div v-if="showDelete" class="fixed inset-0 backdrop-blur-sm flex items-center justify-center z-50">
     <div class="bg-white dark:bg-gray-800 p-6 rounded-lg w-[90%] max-w-md space-y-4">
 
-      <h2 class="text-xl font-semibold text-red-600">Kategorie löschen</h2>
-      <p class="dark:text-gray-300">
+      <h2 class="text-2xl font-bold text-brand-600 dark:text-brand-400">Kategorie löschen</h2>
+      <p class="dark:text-gray-100">
         Möchtest du die Kategorie
         <span class="font-semibold">{{ selected?.name }}</span>
         wirklich löschen?

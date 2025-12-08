@@ -39,7 +39,7 @@ for links: dark:text-brand-300 dark:hover:text-brand-200*/
   }
 
   label {
-  @apply text-gray-700 text-sm font-medium;
+  @apply text-gray-700 dark:text-gray-100 text-sm font-medium;
   }
 
   /*header und footer*/
