@@ -105,7 +105,7 @@
 
 import { reactive, ref } from "vue";
 import { navigateTo, useFetch } from '#app';
-import { useSupabaseClient } from '#supabase/server'
+//import { useSupabaseClient } from '#supabase/server'
 
 const supabase = useSupabaseClient();
 
@@ -184,15 +184,16 @@ const login = async () => {
 
     await sleep(1000);
 
-    const { data: profileData, error: profileError } = await useFetch('/api/user/me');
+    const profileData = await $fetch('/api/user/me');
 
-    if (profileError || !profileData.value) {
-      errorMessage.value = "Anmeldung erfolgreich, aber Profil konnte nicht geladen werden.";
-      return;
+    if (!profileData) {
+      throw new Error('Benutzerprofil nicht gefunden nach dem Login.');
     }
 
-    const prismaUserId = profileData.value.userid;
+    const prismaUserId = profileData.userid;
+    
     return navigateTo(`/dashboard/${prismaUserId}`);
+
   } catch (err: any) {
     errorMessage.value = err.message || "Ein unerwarteter Fehler ist aufgetreten.";
     console.error('Unerwarteter Fehler:', err);
