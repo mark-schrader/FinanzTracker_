@@ -191,17 +191,35 @@ const expenseForm = ref({
   interval: ''
 })
 
+// user wird über Supabase Auth bereitgestellt
+const user = await useSupabaseUser()
+
 //Lifecycle Hook zum Laden von Kategorien & Transaktionen
 
 onMounted(async () => {
+    
+    // Sicherstellen, dass ein Benutzer angemeldet ist
+  if (!user.value) {
+    console.warn('Kein angemeldeter Benutzer gefunden.')
+    return
+    }
+
   try {
-    // Kategorien (falls backend userId braucht, ergänzen)
-    const catData = await $fetch('/api/categories?userId=1')
+    
+    // userId aus dem angemeldeten Benutzer abrufen
+    const userId = user.value.id
+
+    // catData mit userId query laden
+    const catData = await $fetch(`/api/categories?userId=${userId}`)
+    
+    // categories setzen
     categories.value = catData || []
 
     // Lade kombinierte Transaktionen mit userId query (wichtig für Backend)
-    const transData = await $fetch('/api/transactions?userId=1')
+    const transData = await $fetch(`/api/transactions?userId=${userId}`)
+    
     transactions.value = transData || []
+
   } catch (err) {
     console.error('Fehler beim Laden der Daten:', err)
   }
