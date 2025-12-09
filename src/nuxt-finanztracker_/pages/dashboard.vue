@@ -13,11 +13,11 @@
     </div>
     <!-- FILTERBEREICH -->
     <div class="bg-gray-100 dark:bg-gray-900 p-4 rounded-lg shadow-sm mb-6 space-y-4">
-
+      <p class="font-medium text-lg">Filter:</p>
       <!-- Checkbox zum Umschalten -->
       <label class="flex items-center gap-2 cursor-pointer">
         <input type="checkbox" v-model="manualRange" class="w-4 h-4" />
-        <span class="font-medium">Daten genauer eingrenzen</span>
+        <span class="font-medium">Zeitraum genau bestimmen</span>
       </label>
 
       <!-- Intervall-Auswahl -->
