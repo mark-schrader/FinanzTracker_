@@ -11,11 +11,53 @@
       Aktueller Kontostand:
       <strong class="text-teal-600 dark:text-teal-400">{{ currentBalance }}</strong>
     </div>
+    <!-- FILTERBEREICH -->
+    <div class="bg-gray-100 dark:bg-gray-900 p-4 rounded-lg shadow-sm mb-6 space-y-4">
 
+      <!-- Checkbox zum Umschalten -->
+      <label class="flex items-center gap-2 cursor-pointer">
+        <input type="checkbox" v-model="manualRange" class="w-4 h-4" />
+        <span class="font-medium">Daten genauer eingrenzen</span>
+      </label>
+
+      <!-- Intervall-Auswahl -->
+      <div v-if="!manualRange" class="flex flex-wrap items-center gap-3">
+        <select v-model="selectedInterval"
+                class="border rounded px-3 py-2 bg-white dark:bg-gray-800">
+          <option value="all">Alle Daten</option>
+          <option value="week">Wöchentlich</option>
+          <option value="month">Monatlich</option>
+          <option value="semester">Semester</option>
+          <option value="year">Jahr</option>
+        </select>
+      </div>
+
+      <!-- Manuelle Datumsauswahl -->
+      <div v-else class="flex flex-wrap items-center gap-4">
+
+        <div class="flex flex-col">
+          <label class="text-sm font-medium mb-1">Startdatum</label>
+          <input type="date" v-model="startDate"
+                class="border rounded px-3 py-2 bg-white dark:bg-gray-800">
+        </div>
+
+        <div class="flex flex-col">
+          <label class="text-sm font-medium mb-1">Enddatum</label>
+          <input type="date" v-model="endDate"
+                class="border rounded px-3 py-2 bg-white dark:bg-gray-800">
+        </div>
+
+        <button @click="clearManualDates"
+                class="px-4 py-2 bg-gray-300 hover:bg-gray-400 dark:bg-gray-700 dark:hover:bg-gray-600 rounded">
+          Reset
+        </button>
+
+      </div>
+    </div>
     <!-- Verlauf des letzten Jahres -->
     <div class="bg-gray-200 rounded-md p-6 min-h-[220px] shadow-sm hover:shadow-md transition-shadow duration-200 dark:bg-gray-800">
       <p class="text-base font-medium mb-4 text-center">Verlauf des Kontostands (letztes Jahr)</p>
-      <verlaufChart :transactions="transactions" />
+      <verlaufChart :transactions="filteredTransactions" />
     </div>
 
     <!-- Ausgaben & Einnahmen nebeneinander -->
@@ -24,9 +66,9 @@
       <div
         class="bg-gray-100 rounded-xl p-6 flex flex-col items-center justify-center shadow-sm hover:shadow-md transition-shadow duration-200 dark:bg-gray-800"
       >
-        <p class="font-medium mb-2 text-center">Ausgaben – letzte 7 Tage</p>
+        <p class="font-medium mb-2 text-center">Ausgaben</p>
         <div class="w-full h-[260px]">
-          <expenseslast7days :transactions="transactions" />
+          <expenseslast7days :transactions="filteredTransactions" />
         </div>
       </div>
 
@@ -34,9 +76,9 @@
       <div
         class="bg-gray-100 rounded-xl p-6 flex flex-col items-center justify-center shadow-sm hover:shadow-md transition-shadow duration-200 dark:bg-gray-800"
       >
-        <p class="font-medium mb-2 text-center">Einnahmen – letzte 7 Tage</p>
+        <p class="font-medium mb-2 text-center">Einnahmen</p>
         <div class="w-full h-[260px]">
-          <incomelast7days :transactions="transactions" />
+          <incomelast7days :transactions="filteredTransactions" />
         </div>
       </div>
     </div>
@@ -49,7 +91,7 @@
       >
         <p class="font-medium mb-2 text-center">Ausgaben je Kategorie</p>
         <div class="w-full h-[260px]">
-          <graph_categories_expenses :transactions="transactions" />
+          <graph_categories_expenses :transactions="filteredTransactions" />
         </div>
       </div>
 
@@ -59,7 +101,7 @@
       >
         <p class="font-medium mb-2 text-center">Einnahmen je Kategorie</p>
         <div class="w-full h-[260px]">
-          <graph_categories_incomes :transactions="transactions" />
+          <graph_categories_incomes :transactions="filteredTransactions" />
         </div>
       </div>
     </div>
@@ -111,11 +153,23 @@ import { useFetch } from '#app'
 // Komponenten
 import verlaufChart from '../components/verlaufChart.vue'
 import CurrentTime from '../components/currentTime.vue'
-import expenseslast7days from '../components/expenseslast7days.vue'
-import incomelast7days from '../components/incomelast7days.vue'
+import expenseslast7days from '../components/expenseintervall.vue'
+import incomelast7days from '../components/incomeintervall.vue'
 import graph_categories_expenses from '../components/graph_categories_expenses.vue'
 import graph_categories_incomes from '../components/graph_categories_incomes.vue'
 import bewegungstabelle from '../components/bewegungstabelle.vue'
+
+// FILTER STATES
+const manualRange = ref(false) // Checkbox
+const selectedInterval = ref("all")
+
+const startDate = ref(null)
+const endDate = ref(null)
+
+function clearManualDates() {
+  startDate.value = null
+  endDate.value = null
+}
 
 // Alle Transaktionen (Einnahmen & Ausgaben)
 const transactions = ref([])
@@ -163,6 +217,50 @@ const currentBalance = computed(() => {
 
   // Gibt Wert formatiert als z.B. "123,45 €" zurück
   return sum.toFixed(2).replace('.', ',') + ' €'
+})
+
+// GEFILTERTE TRANSAKTIONEN
+const filteredTransactions = computed(() => {
+  const all = transactions.value
+
+  // 🔹 Modus: manuelle Datumsrange
+  if (manualRange.value) {
+    return all.filter(t => {
+      const d = new Date(t.date)
+
+      if (startDate.value && d < new Date(startDate.value)) return false
+      if (endDate.value && d > new Date(endDate.value)) return false
+      return true
+    })
+  }
+
+  // 🔹 Modus: vordefinierte Intervalle
+  const now = new Date()
+  let cutoff = null
+
+  switch (selectedInterval.value) {
+    case "week":
+      cutoff = new Date(now)
+      cutoff.setDate(now.getDate() - 7)
+      break
+    case "month":
+      cutoff = new Date(now)
+      cutoff.setMonth(now.getMonth() - 1)
+      break
+    case "semester":
+      cutoff = new Date(now)
+      cutoff.setMonth(now.getMonth() - 6)
+      break
+    case "year":
+      cutoff = new Date(now)
+      cutoff.setFullYear(now.getFullYear() - 1)
+      break
+    case "all":
+    default:
+      return all
+  }
+
+  return all.filter(t => new Date(t.date) >= cutoff)
 })
 </script>
 
