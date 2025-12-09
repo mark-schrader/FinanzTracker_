@@ -105,7 +105,7 @@
 
 import { reactive, ref } from "vue";
 import { navigateTo, useFetch } from '#app';
-import { useSupabaseClient } from '#supabase/server'
+//import { useSupabaseClient } from '#supabase/server'
 
 const supabase = useSupabaseClient();
 
@@ -172,7 +172,7 @@ const login = async () => {
   errorMessage.value = null;
 
   try {
-    const { error: authError } = await supabase.auth.signInWithPassword({
+    const data { error: authError } = await supabase.auth.signInWithPassword({
       email: email.value,
       password: password.value,
     });
@@ -184,7 +184,7 @@ const login = async () => {
 
     await sleep(1000);
 
-    const { data: profileData, error: profileError } = await useFetch('/api/user/me');
+    const { data: profileData, error: profileError } = await $fetch('/api/user/me');
 
     if (profileError || !profileData.value) {
       errorMessage.value = "Anmeldung erfolgreich, aber Profil konnte nicht geladen werden.";
