@@ -25,8 +25,8 @@
         <select v-model="selectedInterval"
                 class="border rounded px-3 py-2 bg-white dark:bg-gray-800">
           <option value="all">Alle Daten</option>
-          <option value="week">Wöchentlich</option>
-          <option value="month">Monatlich</option>
+          <option value="week">Woche</option>
+          <option value="month">Monat</option>
           <option value="semester">Semester</option>
           <option value="year">Jahr</option>
         </select>
@@ -107,7 +107,7 @@
     </div>
 
     <!-- Tabelle -->
-    <bewegungstabelle :transactions="transactions" />
+    <bewegungstabelle :transactions="filteredTransactions" />
   </div>
 </template>
 
