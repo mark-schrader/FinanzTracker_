@@ -3,7 +3,7 @@
 // --- 2. Teammitglieder -----------------------
 Til Guhlmann <til.guhlmann@stud.htw-dresden.de>; Enna Scheer <enna.scheer@stud.htw-dresden.de>; Emujin Uuganbayar <emujin.uuganbayar@stud.htw-dresden.de>; Erik Vogt <erik.vogt@stud.htw-dresden.de>; Justus Müller <justus.mueller@stud.htw-dresden.de>; Mark Schrader <smark.schrader@stud.htw-dresden.de>; Khanh Ly La <khanhly.la@stud.htw-dresden.de>
 // --- 3. Abgabedatum --------------------------
-04. Juli 2025
+30. Januar 2026
 // ---------------------------------------------
 :docs: ../docs
 include::{docs}/_includes/default-attributes.inc.adoc[]
@@ -27,76 +27,24 @@ include::{docs}/_includes/default-attributes.inc.adoc[]
 :experimental:
 // Folders
 :imagesdir-reset: {imagesdir}
-:docs-test2: {docs}/test2
-:docs-requirements: {docs}/requirements
-:docs-project-management: {docs}/project_management
-:docs-architecture: {docs}/architecture
-:docs-test: {docs}/test
-:docs-development: {docs}/development
+:docs-Abgabedokumente: {docs}/Abgabedokumente
 
-
-// --- 4. include Pfade anpassen ---------------
-
-
-// --- Projektdokumentation ---
-
-
-= Projektdokumentation
-* Projektplan
-* Backlogs
-
-:imagesdir: {docs-project-management}/images
-
-// Projektplan
-include::{docs-project-management}/project_plan.adoc[lines=1..1;4..-1,leveloffset=+1]
+== Betriebsdokumentation
+include::{docs-Abgabedokumente}/Betriebsdokumentation.adoc[]
 <<<
 
-// Backlogs
-include::{docs-project-management}/backlogs.adoc[lines=1..1;4..-1,leveloffset=+1]
+== Anwenderdokumentation
+include::{docs-Abgabedokumente}/Anwenderdokumentation.adoc[]
 <<<
 
-// --- Technische Spezifikation ---
-= Technische Spezifikation
-* Produktvision
-* Glossar und Domänenmodel
-* UX-Konzept
-
-:imagesdir: {docs-requirements}/images
-
-// Produktvision
-[#vision]
-include::{docs-requirements}/vision.adoc[lines=1..1;4..-1,leveloffset=+1]
+== Entwicklerdokumentation
+include::{docs-Abgabedokumente}/Entwicklerdokumentation.adoc[]
 <<<
 
-// Glossar und Domänenmodel
-[#glossary]
-include::{docs-requirements}/glossary.adoc[lines=1..1;4..-1,leveloffset=+1]
+== Testdokumentation
+include::{docs-Abgabedokumente}/Testdokumentation.adoc[]
 <<<
 
-// UX-Konzept
-include::{docs-requirements}/ux-concept.adoc[lines=1..1;4..-1,leveloffset=+1]
+== Gruppenreflexion
+include::{docs-Abgabedokumente}/Gruppenleistung.adoc[]
 <<<
-
-
-// --- Entwurfsdokumentation ---
-= Entwurfsdokumentation
-* Architektur-Notizbuch
-* Test Cases
-
-// Architektur-Notizbuch
-:imagesdir: {docs-architecture}/images
-include::{docs-architecture}/architecture_notebook.adoc[lines=1..1;4..-1,leveloffset=+1]
-<<<
-
-// Test Cases
-:imagesdir: {docs-test}/images
-include::{docs-test}/test_cases.adoc[lines=1..1;4..-1,leveloffset=+1]
-<<<
-
-
-
-
-
-// ---------------------------------------------
-
-:imagesdir: {imagesdir-reset}/images
