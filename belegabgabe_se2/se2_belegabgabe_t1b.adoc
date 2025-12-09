@@ -1,0 +1,50 @@
+// --- 1. Projektthema -------------------------
+= SE I - Belegabgabe: {project-name}
+// --- 2. Teammitglieder -----------------------
+Til Guhlmann <til.guhlmann@stud.htw-dresden.de>; Enna Scheer <enna.scheer@stud.htw-dresden.de>; Emujin Uuganbayar <emujin.uuganbayar@stud.htw-dresden.de>; Erik Vogt <erik.vogt@stud.htw-dresden.de>; Justus Müller <justus.mueller@stud.htw-dresden.de>; Mark Schrader <smark.schrader@stud.htw-dresden.de>; Khanh Ly La <khanhly.la@stud.htw-dresden.de>
+// --- 3. Abgabedatum --------------------------
+30. Januar 2026
+// ---------------------------------------------
+:docs: ../docs
+include::{docs}/_includes/default-attributes.inc.adoc[]
+// ---
+:doctype: book
+:toc:
+:toclevels: 2
+:toc-title: Inhaltsverzeichnis
+:sectnums:
+:icons: font
+//:source-highlighter: highlightjs
+:source-highlighter: rouge
+:rouge-style: github
+:xrefstyle: full
+:experimental:
+:chapter-signifier:
+:figure-caption: Abbildung
+:table-caption: Tabelle
+:listing-caption: Listing
+:!example-caption:
+:experimental:
+// Folders
+:imagesdir-reset: {imagesdir}
+:docs-Abgabedokumente: {docs}/Abgabedokumente
+
+== Betriebsdokumentation
+include::{docs-Abgabedokumente}/Betriebsdokumentation.adoc[]
+<<<
+
+== Anwenderdokumentation
+include::{docs-Abgabedokumente}/Anwenderdokumentation.adoc[]
+<<<
+
+== Entwicklerdokumentation
+include::{docs-Abgabedokumente}/Entwicklerdokumentation.adoc[]
+<<<
+
+== Testdokumentation
+include::{docs-Abgabedokumente}/Testdokumentation.adoc[]
+<<<
+
+== Gruppenreflexion
+include::{docs-Abgabedokumente}/Gruppenleistung.adoc[]
+<<<
