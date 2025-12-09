@@ -1,0 +1,39 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Use Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install dependencies
+        working-directory: ./src/nuxt-finanztracker_
+        run: npm install
+
+      # Prisma optional (falls du es nutzt)
+      - name: Generate Prisma Client
+        working-directory: ./src/nuxt-finanztracker_
+        run: npx prisma generate
+        if: ${{ hashFiles('src/nuxt-finanztracker_/prisma/schema.prisma') != '' }}
+
+      # Nuxt vorbereiten – ERFORDERLICH für deine Tests
+      - name: Prepare Nuxt build files
+        working-directory: ./src/nuxt-finanztracker_
+        run: npx nuxt prepare
+
+      - name: Run Vitest (unit + component tests)
+        working-directory: ./src/nuxt-finanztracker_
+        run: npm run test -- --run
