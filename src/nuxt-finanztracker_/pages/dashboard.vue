@@ -11,7 +11,7 @@
       Aktueller Kontostand:
       <strong class="text-teal-600 dark:text-teal-400">{{ currentBalance }}</strong>
     </div>
-    <!-- FILTERBEREICH -->
+    <!-- Filtersegment -->
     <div class="bg-gray-100 dark:bg-gray-900 p-4 rounded-lg shadow-sm mb-6 space-y-4">
       <p class="font-medium text-lg">Filter:</p>
       <!-- Checkbox zum Umschalten -->
@@ -54,7 +54,7 @@
 
       </div>
     </div>
-    <!-- Verlauf des letzten Jahres -->
+    <!-- Verlauf Vollständig -->
     <div class="bg-gray-200 rounded-md p-6 min-h-[220px] shadow-sm hover:shadow-md transition-shadow duration-200 dark:bg-gray-800">
       <p class="text-base font-medium mb-4 text-center">Verlauf des Kontostands (letztes Jahr)</p>
       <verlaufChart :transactions="filteredTransactions" />
@@ -62,7 +62,7 @@
 
     <!-- Ausgaben & Einnahmen nebeneinander -->
     <div class="grid grid-cols-2 gap-6">
-      <!-- Ausgaben -->
+      <!-- Ausgaben Intervall -->
       <div
         class="bg-gray-100 rounded-xl p-6 flex flex-col items-center justify-center shadow-sm hover:shadow-md transition-shadow duration-200 dark:bg-gray-800"
       >
@@ -72,7 +72,7 @@
         </div>
       </div>
 
-      <!-- Einnahmen -->
+      <!-- Einnahmen Interval -->
       <div
         class="bg-gray-100 rounded-xl p-6 flex flex-col items-center justify-center shadow-sm hover:shadow-md transition-shadow duration-200 dark:bg-gray-800"
       >
@@ -85,7 +85,7 @@
 
      <!-- Kategorien Blockcharts -->
     <div class="grid grid-cols-2 gap-6">
-      <!-- Ausgaben -->
+      <!-- Kategorien Ausgaben -->
       <div
         class="bg-gray-100 rounded-xl p-6 flex flex-col items-center justify-center shadow-sm hover:shadow-md transition-shadow duration-200 dark:bg-gray-800"
       >
@@ -95,7 +95,7 @@
         </div>
       </div>
 
-      <!-- Zeile 3 rechts -->
+      <!-- Kategorien Einnahmen -->
       <div
         class="bg-gray-100 rounded-xl p-6 flex flex-col items-center justify-center shadow-sm hover:shadow-md transition-shadow duration-200 dark:bg-gray-800"
       >
@@ -106,42 +106,7 @@
       </div>
     </div>
 
-    <!--Weitere Kacheln -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-      <!-- Ausgaben pro Kategorie -->
-      <div
-        class="bg-gray-100 rounded-lg p-6 flex flex-col items-center justify-center min-h-[150px] shadow-sm hover:shadow-md transition-shadow duration-200 dark:bg-gray-800"
-      >
-        <p class="font-medium mb-2">Ausgaben pro Kategorie</p>
-        <svg
-          class="w-10 h-10 text-gray-500"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          viewBox="0 0 24 24"
-        >
-          <path stroke-linecap="round" stroke-linejoin="round" d="M11 3v18m4-14h6M5 9h6m4 10h6M5 19h6" />
-        </svg>
-      </div>
-
-      <!-- Individuelles Dashboard -->
-      <div
-        class="bg-gray-100 rounded-lg p-6 flex flex-col items-center justify-center min-h-[150px] shadow-sm hover:shadow-md transition-shadow duration-200 dark:bg-gray-800"
-      >
-        <p class="font-medium mb-2">Individuelles Dashboard</p>
-        <svg
-          class="w-10 h-10 text-gray-500"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          viewBox="0 0 24 24"
-        >
-          <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
-        </svg>
-      </div>
-    </div>
-
-    <!-- 🧾 Tabelle -->
+    <!-- Tabelle -->
     <bewegungstabelle :transactions="transactions" />
   </div>
 </template>
@@ -159,7 +124,7 @@ import graph_categories_expenses from '../components/graph_categories_expenses.v
 import graph_categories_incomes from '../components/graph_categories_incomes.vue'
 import bewegungstabelle from '../components/bewegungstabelle.vue'
 
-// FILTER STATES
+// Filter- und Datumssteuerung
 const manualRange = ref(false) // Checkbox
 const selectedInterval = ref("all")
 
@@ -190,14 +155,14 @@ onMounted(async () => {
     console.error('Fehler beim Laden der Daten:', err)
   }
 })
-// Konvertiert einen Euro-String ("1.234,56 €") in eine Float-Zahl (1234.56)
+// Euro String in Zahl umwandeln
 function parseEuro(euroString) {
   if (!euroString) return 0
 
-  let cleaned = euroString.replace(/[^0-9.,]/g, '') // Entfernt Symbole
+  let cleaned = euroString.replace(/[^0-9.,]/g, '')
   if (cleaned.includes('.') && cleaned.includes(',')) {
-    cleaned = cleaned.replace(/\./g, '') // Punkt = Tausendertrennzeichen → entfernen
-    cleaned = cleaned.replace(',', '.') // Komma = Dezimaltrennzeichen → umwandeln
+    cleaned = cleaned.replace(/\./g, '')
+    cleaned = cleaned.replace(',', '.')
   } else if (cleaned.includes(',')) {
     cleaned = cleaned.replace(',', '.')
   }
@@ -215,15 +180,14 @@ const currentBalance = computed(() => {
     return total // fallback
   }, 0)
 
-  // Gibt Wert formatiert als z.B. "123,45 €" zurück
   return sum.toFixed(2).replace('.', ',') + ' €'
 })
 
-// GEFILTERTE TRANSAKTIONEN
+// Gefilterte Transaktionen basierend auf Auswahl
 const filteredTransactions = computed(() => {
   const all = transactions.value
 
-  // 🔹 Modus: manuelle Datumsrange
+  // manuelle Datumsauswahl
   if (manualRange.value) {
     return all.filter(t => {
       const d = new Date(t.date)
@@ -234,7 +198,7 @@ const filteredTransactions = computed(() => {
     })
   }
 
-  // 🔹 Modus: vordefinierte Intervalle
+  // Auswahl vordefinierter Intervalle
   const now = new Date()
   let cutoff = null
 

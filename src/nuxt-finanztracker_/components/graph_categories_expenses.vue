@@ -22,7 +22,7 @@ const props = defineProps({
   transactions: { type: Array, required: true }
 })
 
-// Helper: parse Euro formatted strings to number
+// Hilfsfunktion zum Parsen von Euro-Beträgen
 function parseEuro(euroString) {
   if (!euroString) return 0
   let cleaned = euroString.replace(/[^0-9.,-]/g, '')
@@ -42,7 +42,7 @@ const chartData = computed(() => {
 
   for (const t of props.transactions || []) {
     if (t.type === 'Ausgabe') {
-      // NEU: Kategorie über category.name holen
+
       const category =
         t.category?.name || t.categoryName || "Unkategorisiert"
 
@@ -52,7 +52,7 @@ const chartData = computed(() => {
     }
   }
 
-  // Sort categories by total amount
+  // sortiert nach Betrag aufsteigend
   const entries = Array.from(sums.entries())
     .sort((a, b) => a[1] - b[1])
 

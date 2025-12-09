@@ -16,8 +16,7 @@ import { computed } from 'vue'
 const props = defineProps({
   transactions: { type: Array, required: true }
 })
-
-// Hilfsfunktion: "1.234,56 €" → 1234.56
+// Euro-String zu Float
 function parseEuro(euroString) {
   if (!euroString) return 0
   let cleaned = euroString.replace(/[^0-9.,]/g, '')
@@ -35,7 +34,7 @@ function parseEuro(euroString) {
 
 
 // Intervall-fähige Ausgabe-Berechnung
-// → nutzt automatisch NUR die gefilterten Transaktionen vom Dashboard
+// → nutzt automatisch nur die gefilterten Transaktionen vom Dashboard
 const chartData = computed(() => {
   // Nur Ausgaben wählen
   const expenses = props.transactions.filter(t => t.type === "Ausgabe")

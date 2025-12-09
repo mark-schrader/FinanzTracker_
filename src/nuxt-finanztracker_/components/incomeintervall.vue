@@ -17,7 +17,7 @@ const props = defineProps({
   transactions: { type: Array, required: true }
 })
 
-// Helfer: Euro-String zu Float
+//Euro-String zu Float
 function parseEuro(euroString) {
   if (!euroString) return 0
   let cleaned = euroString.replace(/[^0-9.,]/g, '')
@@ -33,7 +33,7 @@ function parseEuro(euroString) {
 
 
 //Intervall-fähige Einnahmen-Berechnung
-// -> nutzt einfach ALLE übergebenen (bereits gefilterten!) Transaktionen
+// -> nutzt einfach alle übergebenen und bereits gefilterten Transaktionen
 const chartData = computed(() => {
   // Nur Einnahmen verwenden
   const incomes = props.transactions.filter(t => t.type === "Einnahme")
@@ -61,7 +61,7 @@ const chartData = computed(() => {
     map.set(key, (map.get(key) || 0) + amount)
   })
 
-  // Datum-Schlüssel chronologisch sortieren
+  // Datum chronologisch sortieren
   const sortedDates = Array.from(map.keys()).sort((a, b) => new Date(a) - new Date(b))
 
   // Labels formatiert anzeigen
