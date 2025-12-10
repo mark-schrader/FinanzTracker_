@@ -1,1 +1,35 @@
-anwender
+= Anwenderdokumentation
+
+== Was ist der Pleitegeier?
+👩🏻‍💻 Viele Studierende stehen vor der Herausforderung, ihre Finanzen im Griff zu behalten – unerwartete Ausgaben, begrenzte Mittel und der Überblick geht schnell verloren.
+
+💡 Unsere Lösung 
+Eine kostenlose und intuitive App, speziell für junge Menschen entwickelt. Pleitegeier hilft dir, Einnahmen und Ausgaben zu verwalten und deine Sparziele zu erreichen – einfach, übersichtlich und komplett kostenlos 🤩
+
+🌎 Unser Ziel 
+Finanzielle Selbstbestimmung für alle – ganz egal, wie viel (oder wenig) gerade auf dem Konto ist.
+
+Worauf wartest du noch? Melde dich jetzt an und mach deine Finanzen endlich stressfrei! 🥳
+
+== Was kannst du mit dem Pleitegeier machen?
+Jetzt fragst du dich sicher, welche Funktionen der Pleitegeier dir bietet. Hier ist ein Überblick über die wichtigsten Features:
+
+=== Installation
+
+=== Erste Schritte
+
+=== Funktionen im Überblick
+==== Kontobewegung
+===== Einnahmen und Ausgaben erfassen
+===== Kategorien verwalten
+===== Daueraufträge verwalten
+
+==== Dashboard
+===== Überblick über Finanzen
+===== Grafische Auswertungen
+
+==== Challenge 
+
+==== Export
+
+
