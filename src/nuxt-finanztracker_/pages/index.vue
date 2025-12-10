@@ -184,7 +184,7 @@ const login = async () => {
 
     await sleep(1000);
 
-    const profileData = await $fetch('/api/user/me');
+    const { data: profileData, error: profileError } = await $fetch('/api/user/me');
 
     if (!profileData) {
       throw new Error('Benutzerprofil nicht gefunden nach dem Login.');
