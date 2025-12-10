@@ -150,7 +150,7 @@ const register = async () => {
 
     await sleep(1000);
 
-    const { data: loginData, error: loginError } = await supabase.auth.signInWithPassword({
+    const { error: loginError } = await supabase.auth.signInWithPassword({
       email: form.email,
       password: form.password
     });
@@ -184,7 +184,9 @@ const login = async () => {
 
     await sleep(1000);
 
-    const { data: profileData, error: profileError } = await $fetch('/api/user/me');
+    const profileData  = await $fetch('/api/user/me');
+
+    console.log('Profil-Daten nach dem Login:', profileData);
 
     if (!profileData) {
       throw new Error('Benutzerprofil nicht gefunden nach dem Login.');
