@@ -202,15 +202,6 @@ const login = async () => {
   }
 }
 
-const logout = async () => {
-  const { error } = await supabase.auth.signOut();
-  if (error) {
-    console.error('Logout-Fehler:', error.message);
-  } else {
-    return navigateTo('/');
-  }
-}
-
 function openLogin() { showLogin.value = true; }
 function openRegister() { showRegister.value = true; }
 function closeForm() { showLogin.value = false; showRegister.value = false; }
