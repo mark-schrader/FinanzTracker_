@@ -62,7 +62,7 @@
             <label>Zyklus</label>
             <select v-model="incomeForm.interval" class="form-select">
               <option value="once">Einmalig</option>
-              <option value="weekly">Wöchendlich</option>
+              <option value="weekly">Wöchentlich</option>
               <option value="monthly">Monatlich</option>
               <option value="semesterly">Semester</option>
               <option value="annual">Jährlich</option>
