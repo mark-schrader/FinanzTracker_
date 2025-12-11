@@ -273,7 +273,6 @@
 <script setup>
 //Imports
 import { ref, computed, onMounted } from 'vue'
-import { useFetch } from '#app' // optional
 
 //Reaktive Daten
 

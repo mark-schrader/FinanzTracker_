@@ -6,12 +6,8 @@
         Übersicht der Kontobewegung
       </h2>
 
-      <input
-        type="text"
-        v-model="search"
-        placeholder="Suchen..."
-        class="form-input w-1/3 dark:border-gray-500 dark:bg-gray-800 dark:text-gray-100" 
-      />
+      <input type="text" v-model="search" placeholder="Suchen..."
+        class="form-input w-1/3 dark:border-gray-500 dark:bg-gray-800 dark:text-gray-100" />
     </div>
 
     <!-- Tabelle mit horizontalem Scroll für kleine Bildschirme -->
@@ -19,39 +15,48 @@
       <table class="table">
         <thead>
           <tr>
-            <th>Datum</th>
-            <th class="text-right">Betrag</th>
+            <th class="min-w-[110px]">Datum</th>
+            <th class="px-4 py-2 text-right !text-right">Betrag</th>
             <th>Zyklus</th>
             <th>Kontoinhaber</th>
-            <th>Notiz</th>
+            <th class="px-4 py-2">Beschreibung</th>
             <th>Kategorie</th>
-            <th>Kommentar</th>
+            <th class="px-4 py-2 min-w-[110px]">Kommentar</th>
+            <th class="px-4 py-2 w-[100px] text-center">Aktion</th>
           </tr>
         </thead>
 
         <tbody>
-          <tr
-            v-for="(t, index) in filteredTransactions"
-            :key="index"
-            class="hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
-          >
-            <td>{{ t.date }}</td> 
+          <tr v-for="(t, index) in filteredTransactions" :key="index"
+            class="hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+            <td class="px-4 py-2">{{ t.date }}</td>
 
-            <td
-              class="text-right font-medium"
-              :class="{
-                'text-teal-600 dark:text-teal-400': t.type === 'Einnahme',
-                'text-red-500 dark:text-red-400': t.type === 'Ausgabe'
-              }"
-            >
+            <td class="text-right font-medium" :class="{
+              'text-teal-600 dark:text-teal-400': t.type === 'Einnahme',
+              'text-red-500 dark:text-red-400': t.type === 'Ausgabe'
+            }">
               {{ t.amount }}
             </td>
 
-            <td>{{ t.interval }}</td>
-            <td>{{ t.owner }}</td>
-            <td>{{ t.purpose }}</td>
-            <td>{{ t.categoryName }}</td>
-            <td>{{ t.comment }}</td>
+            <td class="px-4 py-2">{{ t.interval }}</td>
+            <td class="px-4 py-2">{{ t.owner }}</td>
+            <td class="px-4 py-2">{{ t.purpose }}</td>
+            <td class="px-4 py-2">{{ t.categoryName }}</td>
+            <td class="px-4 py-2 min-w-[110px]">{{ t.comment }}</td>
+            <td class="px-4 py-2 w-[100px] flex justify-center space-x-4">
+              <!-- Bearbeiten -->
+              <button class="text-teal-600 hover:text-teal-400"
+                @click="$emit('edit', t)">
+                <i class="fas fa-pen"></i>
+              </button>
+
+              <!-- Löschen-->
+              <button class="text-red-600 hover:text-red-400"
+                @click="$emit('delete', t.id)">
+                <i class="fas fa-trash"></i>
+              </button>
+            </td>
+
           </tr>
         </tbody>
       </table>
