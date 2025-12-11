@@ -33,16 +33,16 @@
           <h2 class="text-2xl font-bold text-brand-600 dark:text-brand-600">Neue Einnahme</h2>
 
           <div class="grid gap-2">
-            <label>Betrag (€)</label>
+            <label class="dark:text-gray-900">Betrag (€)</label>
             <input v-model="incomeForm.amount" type="number" step="0.01" class="form-input" />
 
-            <label>Datum</label>
+            <label class="dark:text-gray-900">Datum</label>
             <input v-model="incomeForm.date" type="date" class="form-input" />
 
-            <label>Quelle</label>
+            <label class="dark:text-gray-900">Quelle</label>
             <input v-model="incomeForm.source" type="text" class="form-input" />
 
-            <label>Kategorie</label>
+            <label class="dark:text-gray-900">Kategorie</label>
             <select v-model="incomeForm.category" class="form-input">
               <option disabled value="">Bitte wählen</option>
               <option
@@ -56,10 +56,10 @@
             </select>
 
 
-            <label>Kommentar</label>
+            <label class="dark:text-gray-900">Kommentar</label>
             <textarea v-model="incomeForm.note" class="form-textarea"></textarea>
 
-            <label>Zyklus</label>
+            <label class="dark:text-gray-900">Zyklus</label>
             <select v-model="incomeForm.interval" class="form-select">
               <option value="once">Einmalig</option>
               <option value="weekly">Wöchentlich</option>
@@ -92,16 +92,16 @@
           <h2 class="text-2xl font-bold text-brand-600 dark:text-brand-600">Neue Ausgabe</h2>
 
           <div class="grid gap-2">
-            <label>Betrag (€)</label>
+            <label class="dark:text-gray-900">Betrag (€)</label>
             <input v-model="expenseForm.amount" type="number" step="0.01" class="form-input" />
 
-            <label>Datum</label>
+            <label class="dark:text-gray-900">Datum</label>
             <input v-model="expenseForm.date" type="date" class="form-input" />
 
-            <label>Zweck</label>
+            <label class="dark:text-gray-900">Zweck</label>
             <input v-model="expenseForm.use" type="text" class="form-input" />
 
-            <label>Kategorie</label>
+            <label class="dark:text-gray-900">Kategorie</label>
             <select v-model="expenseForm.category" class="form-select">
               <option disabled value="">Bitte wählen</option>
               <option v-for="cat in categories.filter(c => c.type === 'expense')" :key="cat.id" :value="cat.id">
@@ -109,10 +109,10 @@
               </option>
             </select>
 
-            <label>Kommentar</label>
+            <label class="dark:text-gray-900">Kommentar</label>
             <textarea v-model="expenseForm.note" class="form-textarea"></textarea>
 
-            <label>Zyklus</label>
+            <label class="dark:text-gray-900">Zyklus</label>
             <select v-model="expenseForm.interval" class="form-select">
               <option value="once">Einmalig</option>
               <option value="weekly">Wöchendlich</option>
