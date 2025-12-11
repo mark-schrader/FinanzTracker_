@@ -43,7 +43,7 @@ const navItems = [
 
     <!-- Center: Title + Navigation -->
     <div class="absolute left-1/2 transform -translate-x-1/2 flex flex-col items-center text-center">
-      <h1 class="font-bold text-5xl text-gray-800 dark:text-gray-100 mb-3">
+      <h1 class="font-bold text-5xl text-gray-800 dark:text-gray-100 mb-5">
         Pleitegeier
       </h1>
 
