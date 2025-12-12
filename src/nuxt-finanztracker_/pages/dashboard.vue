@@ -7,12 +7,12 @@
     </div>
     
     <!-- Aktueller Kontostand -->
-    <div class="card text-center text-xl font-semibold mb-6 bg-teal-50 dark:bg-gray-800">
+    <h2 class="card text-center text-xl font-semibold mb-6 bg-teal-50 dark:bg-gray-800">
       Aktueller Kontostand:
       <strong class="text-teal-600 dark:text-teal-400">{{ currentBalance }}</strong>
-    </div>
+    </h2>
     <!-- Filtersegment -->
-    <div class="bg-gray-100 dark:bg-gray-900 p-4 rounded-lg shadow-sm mb-6 space-y-4">
+    <div class="card flex flex-col gap-4 mb-6 bg-gray-200 dark:bg-gray-800">
       <p class="font-medium text-lg">Filter:</p>
       <!-- Checkbox zum Umschalten -->
       <label class="flex items-center gap-2 cursor-pointer">
@@ -23,7 +23,7 @@
       <!-- Intervall-Auswahl -->
       <div v-if="!manualRange" class="flex flex-wrap items-center gap-3">
         <select v-model="selectedInterval"
-                class="border rounded px-3 py-2 bg-white dark:bg-gray-800">
+                class="form-select w-48">
           <option value="all">Alle Daten</option>
           <option value="week">Woche</option>
           <option value="month">Monat</option>
@@ -36,26 +36,26 @@
       <div v-else class="flex flex-wrap items-center gap-4">
 
         <div class="flex flex-col">
-          <label class="text-sm font-medium mb-1">Startdatum</label>
+          <label class="mb-1">Startdatum</label>
           <input type="date" v-model="startDate"
-                class="border rounded px-3 py-2 bg-white dark:bg-gray-800">
+                class="form-input">
         </div>
 
         <div class="flex flex-col">
-          <label class="text-sm font-medium mb-1">Enddatum</label>
+          <label class="mb-1">Enddatum</label>
           <input type="date" v-model="endDate"
-                class="border rounded px-3 py-2 bg-white dark:bg-gray-800">
+                class="form-input">
         </div>
 
         <button @click="clearManualDates"
-                class="px-4 py-2 bg-gray-300 hover:bg-gray-400 dark:bg-gray-700 dark:hover:bg-gray-600 rounded">
+                class="btn btn-primary mt-6">
           Reset
         </button>
 
       </div>
     </div>
     <!-- Verlauf Vollständig -->
-    <div class="bg-gray-200 rounded-md p-6 min-h-[220px] shadow-sm hover:shadow-md transition-shadow duration-200 dark:bg-gray-800">
+    <div class="bg-gray-100 rounded-md p-6 min-h-[220px] shadow-sm hover:shadow-md transition-shadow duration-200 dark:bg-gray-800">
       <p class="text-base font-medium mb-4 text-center">Verlauf des Kontostands (letztes Jahr)</p>
       <verlaufChart :transactions="filteredTransactions" />
     </div>
