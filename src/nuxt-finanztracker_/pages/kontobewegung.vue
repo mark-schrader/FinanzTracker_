@@ -28,21 +28,21 @@
       </button>
 
       <!-- Modal -->
-      <div v-if="showIncomeModal" class="fixed inset-0 backdrop-blur-sm flex items-center justify-center z-50">
-        <div class="bg-white p-6 rounded-lg shadow-lg max-w-md w-full space-y-4 relative">
+      <div v-if="showIncomeModal" class="modal-overlay">
+        <div class="modal-md">
           <h2 class="text-2xl font-bold text-brand-600 dark:text-brand-600">Neue Einnahme</h2>
 
           <div class="grid gap-2">
-            <label class="dark:text-gray-900">Betrag (€)</label>
+            <label>Betrag (€)</label>
             <input v-model="incomeForm.amount" type="number" step="0.01" class="form-input" />
 
-            <label class="dark:text-gray-900">Datum</label>
+            <label>Datum</label>
             <input v-model="incomeForm.date" type="date" class="form-input" />
 
-            <label class="dark:text-gray-900">Quelle</label>
+            <label>Quelle</label>
             <input v-model="incomeForm.source" type="text" class="form-input" />
 
-            <label class="dark:text-gray-900">Kategorie</label>
+            <label>Kategorie</label>
             <select v-model="incomeForm.category" class="form-input">
               <option disabled value="">Bitte wählen</option>
               <option
@@ -56,10 +56,10 @@
             </select>
 
 
-            <label class="dark:text-gray-900">Kommentar</label>
+            <label>Kommentar</label>
             <textarea v-model="incomeForm.note" class="form-textarea"></textarea>
 
-            <label class="dark:text-gray-900">Zyklus</label>
+            <label>Zyklus</label>
             <select v-model="incomeForm.interval" class="form-select">
               <option value="once">Einmalig</option>
               <option value="weekly">Wöchentlich</option>
@@ -87,21 +87,21 @@
       </button>
 
       <!-- Modal für Ausgabe -->
-      <div v-if="showExpenseModal" class="fixed inset-0 backdrop-blur-sm flex items-center justify-center z-50">
-        <div class="bg-white p-6 rounded-lg shadow-lg max-w-md w-full space-y-4 relative">
+      <div v-if="showExpenseModal" class="modal-overlay">
+        <div class="modal-md">
           <h2 class="text-2xl font-bold text-brand-600 dark:text-brand-600">Neue Ausgabe</h2>
 
           <div class="grid gap-2">
-            <label class="dark:text-gray-900">Betrag (€)</label>
+            <label>Betrag (€)</label>
             <input v-model="expenseForm.amount" type="number" step="0.01" class="form-input" />
 
-            <label class="dark:text-gray-900">Datum</label>
+            <label>Datum</label>
             <input v-model="expenseForm.date" type="date" class="form-input" />
 
-            <label class="dark:text-gray-900">Zweck</label>
+            <label>Zweck</label>
             <input v-model="expenseForm.use" type="text" class="form-input" />
 
-            <label class="dark:text-gray-900">Kategorie</label>
+            <label>Kategorie</label>
             <select v-model="expenseForm.category" class="form-select">
               <option disabled value="">Bitte wählen</option>
               <option v-for="cat in categories.filter(c => c.type === 'expense')" :key="cat.id" :value="cat.id">
@@ -109,10 +109,10 @@
               </option>
             </select>
 
-            <label class="dark:text-gray-900">Kommentar</label>
+            <label>Kommentar</label>
             <textarea v-model="expenseForm.note" class="form-textarea"></textarea>
 
-            <label class="dark:text-gray-900">Zyklus</label>
+            <label>Zyklus</label>
             <select v-model="expenseForm.interval" class="form-select">
               <option value="once">Einmalig</option>
               <option value="weekly">Wöchendlich</option>
@@ -142,16 +142,16 @@
         <span class="text-lg">Daueraufträge verwalten</span>
       </button>
        <!-- Modal Verwaltung Dauerauftrag -->
-      <div v-if="showRecurringModal" class="fixed inset-0 backdrop-blur-sm flex items-center justify-center z-50">
-        <div class="bg-white p-6 rounded-lg shadow-lg w-[90%] max-w-4xl space-y-4 relative transition-theme">
+      <div v-if="showRecurringModal" class="modal-overlay">
+        <div class="modal-lg">
           <h2 class="text-2xl font-bold text-brand-600 dark:text-brand-600">Daueraufträge verwalten</h2>
           <!-- Tabelle:-->
                 <!-- css: text-teal-600 dark:text-teal-400': t.type === 'Einnahme',
                 'text-red-500 dark:text-red-400': t.type === 'Ausgabe' -->
           <div class="table-container">
-            <table v-if="formattedAuftraege.length" class="table dark:text-gray-700">
+            <table v-if="formattedAuftraege.length" class="table dark:text-gray-200">
               <thead class="text-center">
-                <tr class="dark:text-gray-100">
+                <tr class="border-b dark:border-gray-700">
                   <th>Name</th>
                   <th>Kategorie</th>
                   <th>Betrag</th>
@@ -160,25 +160,25 @@
                 </tr>
               </thead>
               <tbody>
-                <tr v-for="auftrag in formattedAuftraege" :key="auftrag.id" class="hover:bg-gray-100">
+                <tr v-for="auftrag in formattedAuftraege" :key="auftrag.id" class="hover:bg-gray-100 dark:hover:bg-gray-700 transition">
                   <td>{{ auftrag.name }}</td>
                   <td>{{ auftrag.categoryName }}</td>
                   <td
-                    class="text-left"
-                    :class="auftrag.betrag < 0 ? 'text-red-500 dark:text-red-400' : 'text-teal-600'"
+                    class="text-left font-medium"
+                    :class="auftrag.betrag < 0 ? 'text-red-500 dark:text-red-400' : 'text-teal-600 dark:text-teal-400'"
                   >
                     {{ auftrag.betrag.toFixed(2) }}€  <!--Anzeige mit 2 Dezimalstellen-->
                   </td>
                   <td>{{ auftrag.intervall }}</td>
                   <td class="space-x-6">
                     <button
-                      class="text-teal-600 hover:text-teal-400 transform hover:scale-150 transition"
+                      class="text-teal-600 hover:text-teal-400"
                       @click="openEdit(auftrag)" 
                       >
                       <i class="fas fa-pen"></i> <!-- Edit-Icon -->
                     </button>
                     <button
-                      class="text-gray-700 hover:text-red-500 transform hover:scale-150 transition"
+                      class="text-red-600 hover:text-red-400"
                       @click="selectedAuftrag = { ...auftrag }; showDeleteConfirm = true"
                     >
                       <i class="fas fa-trash"></i> <!-- Lösch-Icon -->
@@ -186,8 +186,8 @@
                   </td>
 
                     <!-- Modal: Dauerauftrag bearbeiten -->
-                      <div v-if="showEditModal" class="fixed inset-0 backdrop-blur-sm flex items-center justify-center z-50">
-                        <div class="bg-white dark:bg-gray-800 p-8 rounded-lg shadow-lg w-[90%] max-w-md space-y-4 relative">
+                      <div v-if="showEditModal" class="modal-overlay">
+                        <div class="modal-md">
                           <h2 class="text-2xl font-bold text-brand-600 dark:text-brand-400">Dauerauftrag bearbeiten</h2>
 
                           <div class="grid gap-2">
@@ -224,8 +224,8 @@
             </table>
 
             <!-- Bestätigungs-Popup: Dauerauftrag löschen -->
-            <div v-if="showDeleteConfirm" class="fixed inset-0 backdrop-blur-sm flex items-center justify-center z-50">
-              <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg w-[90%] max-w-4xl space-y-4 relative transition-theme">
+            <div v-if="showDeleteConfirm" class="modal-overlay">
+              <div class="modal-md">
                 <h2 class="text-2xl font-bold text-brand-600 dark:text-brand-600">Verwaltung Dauerauftrag</h2>
                 <p class="text-lg text-gray-800 dark:text-gray-200 leading-relaxed">
                   Wollen Sie den Dauerauftrag
@@ -241,7 +241,7 @@
             </div>
 
             <!-- Fallback anzeigen, wenn keine Einträge -->
-            <div v-if="!formattedAuftraege.length" class="p-6 text-center text-gray-600">
+            <div v-if="!formattedAuftraege.length" class="modal-md text-center">
               Keine Daueraufträge vorhanden.
             </div>
           </div>
