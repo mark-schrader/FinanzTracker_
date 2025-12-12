@@ -1,6 +1,6 @@
 = Anwenderdokumentation
 
-== Was ist der Pleitegeier?
+== 1. Was ist der Pleitegeier?
 👩🏻‍💻 Viele Studierende stehen vor der Herausforderung, ihre Finanzen im Griff zu behalten – unerwartete Ausgaben, begrenzte Mittel und der Überblick geht schnell verloren.
 
 💡 Unsere Lösung 
@@ -11,25 +11,164 @@ Finanzielle Selbstbestimmung für alle – ganz egal, wie viel (oder wenig) gera
 
 Worauf wartest du noch? Melde dich jetzt an und mach deine Finanzen endlich stressfrei! 🥳
 
-== Was kannst du mit dem Pleitegeier machen?
 Jetzt fragst du dich sicher, welche Funktionen der Pleitegeier dir bietet. Hier ist ein Überblick über die wichtigsten Features:
 
-=== Installation
+== 2 Installation
+Unter diesem Link kannst du dir den Pleitegeier herunterladen: 
 
-=== Erste Schritte
+www.besterLink.com
 
-=== Funktionen im Überblick
-==== Kontobewegung
-===== Einnahmen und Ausgaben erfassen
-===== Kategorien verwalten
-===== Daueraufträge verwalten
+Falls du dich mit dem Pleitegeier vertraut magst, bevor du dir einen Account mit deinen Daten erstellst, kannst du mit diesen Login-Daten dich probeweise anmelden:
 
-==== Dashboard
-===== Überblick über Finanzen
-===== Grafische Auswertungen
+email: email@mail.com
+password: Passwort123
 
-==== Challenge 
+Damit kannst du alle Funktionen der App testen und dich mit der Bedienung vertraut machen.
 
-==== Export
+== 3. Erste Schritte
+image::Startseite.jpg[alt=Startseite,width=600,height=400] 
 
+Das ist unsere Hauptseite. Von hier aus kannst du alle wichtigen Funktionen der App erreichen. Damit du den Pleitegeier vollständig nutzen kannst, musst du dich zunächst registrieren und ein Konto erstellen. Den Button dafür findest du direkt auf der Startseite.
 
+image::Singup.jpg[alt=Singup,width=600,height=400] 
+
+Wenn du da rauf klickst, gelangst du zum Registrierungsfenster.
+
+image::Registrierung.jpg[alt=Registrierung_Popup,width=600,height=400] 
+
+Fülle die erforderlichen Felder aus und klicke auf "Register". 
+
+Danach kannst du dich mit deinen Zugangsdaten anmelden.
+Klicke dafür auf Sign In auf der Startseite.
+
+image::Singin.jpg[alt=Singin,width=600,height=400] 
+
+Hier gibst du deine E-Mail-Adresse und dein Passwort ein und klickst auf "Login".
+
+image::Login.jpg[alt=Login_PopUp,width=600,height=400]
+
+Nachdem du dich erfolgreich angemeldet hast, kannst du auf unsere Funktionen zugreifen.
+
+== Funktionen im Überblick
+Oben findest du die Auswahl unserer Funktionen Dashboard, Kontobewegung, Challenge und Export. Klicke einfach auf die gewünschte Funktion, um loszulegen!
+
+image::Ubersicht.jpg[alt=Ubersicht,width=600,height=400] 
+
+=== 4. Dashboard
+Der erste Reiter _Dashboard_ findest du ganz links.
+
+image::Dashboard.jpg[alt=Dashboard,width=600,height=400]
+
+Hier bekommst du einen Überblick über deine Finanzen und grafische Auswertungen deiner Einnahmen und Ausgaben. Du kannst zum einen deinen Verlauf über verschiedene Zeiträume betrachten und zum anderen deine Einnahmen und Ausgaben in deinen Kategorien analysieren.
+
+==== 4.1 Überblick über Finanzen
+
+==== 4.2 Grafische Auswertungen
+
+=== 5. Kontobewegung
+Unter dem zweiten Reiter findest du _Kontobewegung_.
+
+image::Kontobewegung.jpg[alt=Kontobewegung,width=600,height=400]
+
+Hier kannst du deine Einnahmen und Ausgaben erfassen, Kategorien verwalten und Daueraufträge einrichten.
+
+==== 5.1 Einnahmen und Ausgaben erfassen
+Unter _Einnahmen hinzufügen_ und _Ausgaben hinzufügen_ kannst du deine finanziellen Transaktionen ganz einfach eintragen.
+
+==== Einnahmen hinzufügen
+-> Bild von Einnahmen hinzufügen mit Pfeil
+
+Wenn du auf _Einnahmen hinzufügen_ klickst, öffnet sich ein Fenster, in dem du die Details deiner Einnahme eingeben kannst.
+
+-> Bild von Einnahme Pop-Up
+
+Fülle die folgenden Felder aus:
+
+* _Betrag_: Gib den Betrag der Einnahme ein
+* _Datum_: Wähle das Datum der Einnahme aus dem Kalender
+* _Quelle_: Gib die Quelle der Einnahme an (z.B. Gehalt, Geschenk)
+* _Kategorie_: Wähle die passende Kategorie für deine Einnahme aus dem Dropdown-Menü
+* _Kommentar_: Optional kannst du einen Kommentar hinzufügen, um weitere Details zu notieren.
+* _Zyklus_: Wähle aus, ob es sich um eine einmalige Einnahme handelt oder ob sie regelmäßig (z.B. monatlich) wiederholt wird.
+
+Wenn du die Felder ausgefüllt hast, klickst du auf _Speichern_, um die Einnahme zu deiner Kontobewegung hinzuzufügen. Die Einnahmen wird dann in deiner Übersicht ganz unten angzezeigt und automatisch verrechnet mit deinem aktuellen Kontostand.
+
+==== Ausgaben hinzufügen
+-> Bild von Ausgaben hinzufügen mit Pfeil
+
+Wenn du auf _Ausgaben hinzufügen_ klickst, öffnet sich ein Fenster, in dem du die Details deiner Ausgabe eingeben kannst.
+
+-> Bild von Ausgabe Pop-Up
+Fülle die folgenden Felder aus:
+
+* _Betrag_: Gib den Betrag der Ausgabe ein
+* _Datum_: Wähle das Datum der Ausgabe aus dem Kalender
+* _Zweck_: Gib den Zweck der Ausgabe an (z.B. Miete, Lebensmittel)
+* _Kategorie_: Wähle die passende Kategorie für deine Ausgabe aus dem Dropdown-Menü
+* _Kommentar_: Optional kannst du einen Kommentar hinzufügen, um weitere Details zu notieren.
+* _Zyklus_: Wähle aus, ob es sich um eine einmalige Ausgabe handelt oder ob sie regelmäßig (z.B. monatlich) wiederholt wird.
+
+Wenn du die Felder ausgefüllt hast, klickst du auf _Speichern_, um die Ausgabe zu deiner Kontobewegung hinzuzufügen. Die Ausgabe wird dann in deiner Übersicht ganz unten angzezeigt und automatisch verrechnet mit deinem aktuellen Kontostand.
+
+==== 5.2 Kategorien verwalten
+-> Bild von Kategorien hinzufügen mit Pfeil
+
+Wenn du auf _Kategorien hinzufügen_ klickst, öffnet sich ein Fenster, in dem du eine Übersicht von deinen aktuellen Kategorien findest.
+
+-> Bild von Kategorien Pop-Up
+
+Hier kannst du neue Kategorien hinzufügen, bestehende Kategorien bearbeiten oder löschen. 
+
+-> Bild von Kategorie hinzufügen mit Pfeil
+
+Klicke einfach auf _Kategorie hinzufügen_, um eine neue Kategorie zu erstellen. 
+
+--> Neue Kategorie Pop-Up
+
+Gib den Namen der Kategorie ein und ob es sich um eine Kategorie für Einnahme oder Ausgabe handelt. Klicke auf _Speichern_ und deine neue Kategorie wird hinzugefügt.
+
+-> Bild mit umkreisung um Stift unf Löschen
+
+Falls du eine bestehende Kategorie bearbeiten oder löschen möchtest, klicke einfach auf das Stift-Symbol zum Bearbeiten oder das Papierkorb-Symbol zum Löschen neben der jeweiligen Kategorie.
+
+-> Bild von Kategeorie bearbeiten und Kategorie löschen Pop-Up
+
+==== 5.3 Daueraufträge verwalten
+-> Bild von Dauerauftrag hinzufügen mit Pfeil
+
+Wenn du auf _Daueraufträge verwalten_ klickst, öffnet sich ein Fenster, in dem du eine Übersicht von deinen aktuellen Daueraufträgen findest.
+
+-> Bild von Daueraufträgen Pop-Up
+Hier kannst du neue Daueraufträge hinzufügen, bestehende Daueraufträge bearbeiten oder löschen. 
+
+-> Bild von Dauerauftrag hinzufügen mit Pfeil
+
+Klicke einfach auf _Dauerauftrag hinzufügen_, um einen neuen Dauerauftrag zu erstellen. 
+
+--> Neue Dauerauftrag Pop-Up
+
+Fülle die folgenden Felder aus:
+
+* _Name_: Gib den Namen des Dauerauftrags ein
+* _Betrag_: Gib den Betrag des Dauerauftrags ein
+* _Kategorie_: Wähle die passende Kategorie für deinen Dauerauftrag aus dem Dropdown-Menü
+* _Intervall_: Wähle aus, wie oft der Dauerauftrag ausgeführt werden soll (z.B. monatlich, wöchentlich)
+
+-> Bild mit umkreisung um Stift und Löschen
+
+Falls du eine bestehenden Dauerauftrag bearbeiten oder löschen möchtest, klicke einfach auf das Stift-Symbol zum Bearbeiten oder das Papierkorb-Symbol zum Löschen neben der jeweiligen Dauerauftrag.
+
+-> Bild von Dauerauftrag bearbeiten und Dauerauftrag löschen Pop-Up
+
+=== 6. Challenge 
+
+image::Challenge.jpg[alt=Challenge,width=600,height=400]
+
+=== 7. Export
+
+image::Export.jpg[alt=Export,width=600,height=400]
+
+=== 8. Weitere Funktionen
+image::Darkmode.jpg[alt=Darkmode,width=600,height=400]
+image::Sprache.jpg[alt=Sprache,width=600,height=400]
+image::Konto.jpg[alt=Konto,width=600,height=400]
