@@ -10,10 +10,8 @@
 
   <!-- Modal: Kategorien verwalten -->
   <div
-    v-if="showModal"
-    class="fixed inset-0 backdrop-blur-sm flex items-center justify-center z-50"
-  >
-    <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg w-[90%] max-w-3xl space-y-4 relative">
+    v-if="showModal" class="modal-overlay">
+    <div class="modal-lg">
 
       <!-- Header -->
       <h2 class="text-2xl font-bold text-brand-600 dark:text-brand-300">
@@ -21,8 +19,8 @@
       </h2>
 
       <!-- Table -->
-      <table class="table w-full dark:text-gray-200">
-        <thead>
+      <table class="table dark:text-gray-200">
+        <thead class="text-center">
           <tr class="border-b dark:border-gray-700">
             <th>Name</th>
             <th>Typ</th>
@@ -75,9 +73,9 @@
   <!-- Modal: Add Category -->
   <div
     v-if="showAdd"
-    class="fixed inset-0 backdrop-blur-sm flex items-center justify-center z-50"
+    class="modal-overlay"
   >
-    <div class="bg-white dark:bg-gray-800 p-6 rounded-lg w-[90%] max-w-md space-y-4">
+    <div class="modal-md">
       <h2 class="text-xl font-semibold text-brand-600">Neue Kategorie</h2>
 
       <div class="grid gap-2">
@@ -100,8 +98,8 @@
   </div>
 
   <!-- Modal: Edit Category - Bearbeiten -->
-  <div v-if="showEdit" class="fixed inset-0 backdrop-blur-sm flex items-center justify-center z-50">
-    <div class="bg-white dark:bg-gray-800 p-6 rounded-lg w-[90%] max-w-md space-y-4">
+  <div v-if="showEdit" class="modal-overlay">
+    <div class="modal-md">
 
       <h2 class="text-2xl font-bold text-brand-600 dark:text-brand-400">Kategorie bearbeiten</h2>
 
@@ -124,8 +122,8 @@
   </div>
 
   <!-- Modal: Delete -->
-  <div v-if="showDelete" class="fixed inset-0 backdrop-blur-sm flex items-center justify-center z-50">
-    <div class="bg-white dark:bg-gray-800 p-6 rounded-lg w-[90%] max-w-md space-y-4">
+  <div v-if="showDelete" class="modal-overlay">
+    <div class="modal-md">
 
       <h2 class="text-2xl font-bold text-brand-600 dark:text-brand-400">Kategorie löschen</h2>
       <p class="dark:text-gray-100">
