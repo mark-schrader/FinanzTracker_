@@ -12,9 +12,9 @@
 
     <!-- Tabelle mit horizontalem Scroll für kleine Bildschirme -->
     <div class="table-container">
-      <table class="table">
+      <table class="table dark:text-gray-200">
         <thead>
-          <tr>
+          <tr class="border-b dark:border-gray-700">
             <th class="min-w-[110px]">Datum</th>
             <th class="px-4 py-2 text-right !text-right">Betrag</th>
             <th>Zyklus</th>
