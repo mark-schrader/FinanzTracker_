@@ -37,8 +37,9 @@
       </div>
 
       <!-- Login Form -->
-      <div v-if="showLogin" class="fixed top-1/2 right-10 transform -translate-y-1/2 bg-white p-8 rounded-lg shadow-lg w-[400px] z-50">
-      <button class="absolute top-3 right-4 text-xl text-gray-500 hover:text-teal-600 dark:hover:text-teal-400 transition-transform hover:scale-110"
+      <div v-if="showLogin" class="modal-overlay">
+      <div class="modal-md relative">
+        <button class="absolute top-3 right-4 text-xl text-brand-600 hover:text-teal-400 transition-transform hover:scale-110"
       @click="closeForm">     
       <i class="fas fa-times"></i>
       </button>
@@ -52,11 +53,13 @@
 
           <button type="submit" class="btn btn-primary self-end w-1/2 mt-4 shadow-sm">Login</button>
         </form>
-      </div>
+      </div> 
+    </div>
 
       <!-- Register Form -->
-      <div v-if="showRegister" class="fixed top-1/2 right-10 transform -translate-y-1/2 bg-white p-8 rounded-lg shadow-lg w-[500px] z-50">
-      <button class="absolute top-3 right-4 text-xl text-gray-500 hover:text-teal-600 dark:hover:text-teal-400 transition-transform hover:scale-110"
+      <div v-if="showRegister" class="modal-overlay">
+      <div class="modal-md relative">
+      <button class="absolute top-3 right-4 text-xl text-brand-600 hover:text-teal-400 transition-transform hover:scale-110"
       @click="closeForm">     
       <i class="fas fa-times"></i>
       </button>
@@ -96,6 +99,7 @@
 
           <button type="submit" class="btn btn-primary self-end w-1/2 mt-4 shadow-sm">Register</button>
         </form>
+      </div>
       </div>
     </main>
 </template>
