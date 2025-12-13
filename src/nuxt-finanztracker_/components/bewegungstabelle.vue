@@ -7,7 +7,7 @@
       </h2>
 
       <input type="text" v-model="search" placeholder="Suchen..."
-        class="form-input w-1/3 dark:border-gray-500 dark:bg-gray-800 dark:text-gray-100" />
+        class="form-input w-1/3 border-2 border-brand-300 dark:border-brand-600 " />
     </div>
 
     <!-- Tabelle mit horizontalem Scroll für kleine Bildschirme -->
