@@ -9,7 +9,7 @@ export default class IncomeService {
     const repo = new IncomeRepository()
     let incomes = await repo.findByUserId(userId)
 
-    // Prüfe auf überfällige Daueraufträge und verarbeiten
+    // Prüfe auf überfällige Daueraufträge und verarbeiten (analog zu ExpenseService)
     let changed = false
     const now = new Date()
     for (const inc of incomes) {

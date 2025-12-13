@@ -1,10 +1,50 @@
 import ExpenseRepository from '../repositories/ExpenseRepository'
 import Expense from '../domain/Expense'
+import { isRecurring, advanceToNextFuture, toDate } from '../utility/recurringUtility'
+import { DEFAULT_INTERVAL } from '../domain/Interval'
 
 export default class ExpenseService {
   static async getExpensesByUserId(userId: number) {
     const repo = new ExpenseRepository()
-    const expenses = await repo.findByUserId(userId)
+    let expenses = await repo.findByUserId(userId)
+
+    // Prüfe und verarbeite überfällige Daueraufträge analog zu IncomeService
+    let changed = false
+    const now = new Date()
+    for (const exp of expenses) {
+      const interval = exp.interval ?? DEFAULT_INTERVAL
+      const expDate = toDate(exp.date)
+      if (!expDate) continue
+
+      if (isRecurring(interval) && expDate <= now) {
+        try {
+          // Berechne nächstes Datum in der Zukunft
+          const nextDate = advanceToNextFuture(expDate, interval)
+
+          // Erstelle neuen Eintrag mit gleichem Intervall
+          await repo.create({
+            user_id: exp.user_id,
+            category_id: exp.category_id,
+            use: exp.use,
+            amount: exp.amount,
+            date: nextDate,
+            interval: interval,
+            note: exp.note
+          })
+
+          // Setze den alten Eintrag auf "einmal"
+          await repo.update(exp.id, { interval: DEFAULT_INTERVAL })
+          changed = true
+        } catch (err) {
+          console.error('[recurring expense processing error]', err)
+        }
+      }
+    }
+
+    if (changed) {
+      expenses = await repo.findByUserId(userId)
+    }
+
     return expenses.map((e: any) => Expense.fromPrisma(e))
   }
 
@@ -23,7 +63,7 @@ export default class ExpenseService {
       use: data.use,
       amount: parseFloat(String(data.amount)),
       date: new Date(data.date),
-      interval: data.interval || 'once',
+      interval: data.interval || DEFAULT_INTERVAL,
       note: data.note
     })
     return {
