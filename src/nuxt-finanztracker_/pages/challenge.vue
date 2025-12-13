@@ -21,9 +21,6 @@
             {{ completedChallenges }} von {{ challenges.length }} Challenges
             geschafft
           </span>
-          <span class="font-bold text-xl dark:text-gray-800">{{
-            successRate
-          }}</span>
         </div>
 
         <!-- Progress Bar -->
@@ -31,7 +28,7 @@
           class="h-10 bg-white rounded-full overflow-hidden shadow-inner backdrop-blur-sm"
         >
           <div
-            class="h-full bg-white rounded-full transition-all duration-1000 ease-out flex items-center justify-end pr-6 font-bold drop-shadow-sm"
+            class="h-full bg-green-500 rounded-full transition-all duration-1000 ease-out flex items-center justify-end pr-6 font-bold drop-shadow-sm"
             :style="{ width: successRate + '%' }"
           >
             {{ successRate }}%
@@ -58,21 +55,21 @@
       <div
         class="bg-orange-100 p-6 rounded-xl shadow-md h-full flex items-center justify-center dark:text-gray-800"
       >
-        <VCalendar :attributes="attr" />
+        <Calendar :attributes="attr" />
       </div>
 
       <!-- 2 Neue Challenges Button -->
       <div class="h-full">
         <button
           @click="showChallengeModal = true"
-          class="group w-full flex flex-col items-center justify-center gap-4 bg-emerald-100 text-emerald-900 font-bold text-xl px-8 py-10 rounded-xl shadow-md hover:scale-105 hover:bg-emerald-200 transition-all duration-200 dark:text-gray-800"
+          class="group w-full flex flex-col items-center justify-center gap-4 bg-emerald-100 text-emerald-800 font-bold text-xl px-8 py-10 rounded-xl shadow-md hover:scale-105 hover:bg-emerald-200 transition-all duration-200 dark:emerald-800"
         >
           Neue Challenges
           <i class="fas fa-plus text-3xl items-center"></i>
         </button>
         <button
-          @click="placeholder"
-          class="group w-full flex flex-col items-center justify-center gap-4 mt-10 bg-yellow-100 text-yellow-900 font-bold text-xl px-8 py-10 rounded-xl shadow-md hover:bg-yellow-200 hover:scale-105 transition-all duration-200 dark:text-gray-800"
+          @click="showSaveModal = true"
+          class="group w-full flex flex-col items-center justify-center gap-4 mt-10 bg-yellow-100 text-yellow-800 font-bold text-xl px-8 py-10 rounded-xl shadow-md hover:bg-yellow-200 hover:scale-105 transition-all duration-200 dark:text-yellow-800"
         >
           Spare Geld
           <i class="fas fa-line-chart text-3xl items-center"></i>
@@ -85,39 +82,41 @@
         class="fixed inset-0 backdrop-blur-sm flex items-center justify-center z-50 rounded-xl"
       >
         <div
-          class="bg-white p-6 rounded-lg shadow-lg max-w-md w-full space-y-4 relative"
+          class="bg-white p-6 rounded-lg shadow-lg max-w-md w-full space-y-4 relative dark:text-gray-800"
         >
-          <h2 class="text-xl font-bold">Neuer Challenge</h2>
+          <h2 class="text-xl font-bold dark:text-gray-800">Neuer Challenge</h2>
 
           <div class="grid gap-2">
-            <label class="block text-sm font-medium">Titel</label>
+            <label class="block text-sm font-medium dark:text-gray-800"
+              >Titel</label
+            >
             <input
               v-model="challengeForm.name"
               type="text"
               class="border px-2 py-1 rounded w-full"
             />
 
-            <!--label class="block text-sm font-medium">Beschreibung</label>
-            <textarea
-              v-model="challengeForm.description"
-              class="border px-2 py-1 rounded w-full"
-            ></textarea-->
-
-            <label class="block text-sm font-medium">Zielbetrag (€)</label>
+            <label class="block text-sm font-medium dark:text-gray-800"
+              >Zielbetrag (€)</label
+            >
             <input
               v-model.number="challengeForm.target"
               type="number"
               class="border px-2 py-1 rounded w-full"
             />
 
-            <label class="block text-sm font-medium">Startdatum</label>
+            <label class="block text-sm font-medium dark:text-gray-800"
+              >Startdatum</label
+            >
             <input
               v-model="challengeForm.created_at"
               type="date"
               class="border px-2 py-1 rounded w-full"
             />
 
-            <label class="block text-sm font-medium">Enddatum</label>
+            <label class="block text-sm font-medium dark:text-gray-800"
+              >Enddatum</label
+            >
             <input
               v-model="challengeForm.due_date"
               type="date"
@@ -141,15 +140,70 @@
           </div>
         </div>
       </div>
+
+      <!-- 2.2 Button Popup -->
+      <div
+        v-if="showSaveModal"
+        class="fixed inset-0 backdrop-blur-sm flex items-center justify-center z-50 rounded-xl dark:text-gray-800"
+      >
+        <div
+          class="bg-white p-6 rounded-lg shadow-lg max-w-md w-full space-y-4 relative"
+        >
+          <h2 class="text-2xl font-bol dark:text-gray-800">Jetzt sparen!</h2>
+          <label class="block text-sm font-medium dark:text-gray-800"
+            >Challenge</label
+          >
+          <select
+            v-model="selectedChallengeId"
+            class="border px-2 py-1 rounded w-full"
+          >
+            <option disabled value="text-gray-800">Challenge auswählen</option>
+            <option
+              v-for="challenge in challenges"
+              :key="challenge.id"
+              :value="challenge.id"
+            >
+              {{ challenge.name }}
+            </option>
+          </select>
+
+          <label class="block text-sm font-medium dark:text-gray-800"
+            >Betrag einfügen
+          </label>
+          <input
+            v-model="savedAmount"
+            type="number"
+            class="border px-2 py-1 rounded w-full"
+          />
+
+          <div class="flex justify-end space-x-2 mt-4">
+            <button
+              @click="showSaveModal = false"
+              class="text-gray-500 hover:text-red-600"
+            >
+              Abbrechen
+            </button>
+            <button
+              @click="saveChallenge"
+              class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
+            >
+              Speichern
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
-      <!-- 2 Challenge Liste-->
-      <div v-if="challenges.length">
+    <div class="">
+      <!-- 3 Challenge Liste-->
+      <div
+        v-if="challenges.length"
+        class="grid grid-cols-2 grid-rows-2 md:grid-cols-3 gap-2 mb-6"
+      >
         <div
           v-for="(challenge, index) in challenges"
           :key="index"
-          class="bg-white shadow rounded-md p-4 space-y-2 border-l-4 dark:text-gray-800"
+          class="group w-full flex flex-col items-center justify-center gap-1 mt-5 px-4 py-4 bg-white shadow-md rounded-xl p-4 border-l-4 dark:text-gray-800"
           :class="
             challengeProgress(challenge) >= 100
               ? 'border-green-500'
@@ -159,7 +213,6 @@
           <h2 class="text-xl font-semibold dark:text-gray-800">
             {{ challenge.name }}
           </h2>
-          <!--p class="text-sm text-gray-600">{{ challenge.description }}</p-->
           <p class="text-sm">
             Ziel: <strong>{{ challenge.target }} €</strong>
           </p>
@@ -191,9 +244,13 @@
 import { ref, onMounted, computed } from "vue";
 import { useFetch } from "#app";
 import { Calendar } from "v-calendar";
+import { channel } from "process";
 
 const showChallengeModal = ref(false);
+const showSaveModal = ref(false);
 const challenges = ref([]);
+const selectedChallengeId = ref(""); //stores only the id of the challenge
+const savedAmount = ref(0);
 
 const challengeForm = ref({
   name: "",
@@ -201,24 +258,6 @@ const challengeForm = ref({
   created_at: "", //start date of the spar challenge
   due_date: "", //end date
 });
-
-/*async function getChallenges() {
-  try {
-    const goals = await $fetch("/api/goals");
-    if (Array.isArray(goals)) {
-      challenges.value = goals.map((goal) => ({
-        ...goal,
-        target: Number(goal.target),
-        saved: Number(goal.saved),
-      }));
-    } else {
-      console.log("API liefert keine Daten");
-      challenges.value = [];
-    }
-  } catch (err) {
-    console.error("Fehler beim Laden der Challenges", err);
-  }
-}*/
 
 onMounted(async () => {
   try {
@@ -235,12 +274,11 @@ async function addChallenge() {
     const saved = await $fetch("/api/goals", {
       method: "POST",
       body: {
+        userId: 1,
         name: challengeForm.value.name,
         target: Number(challengeForm.value.target),
         saved: 0,
-        created_at: challengeForm.value.created_at,
-        due_date: challengeForm.value.due_date,
-        userId: 1,
+        due_date: Date(challengeForm.value.due_date),
       },
     });
 
@@ -249,7 +287,7 @@ async function addChallenge() {
     //Reset
     challengeForm.value = {
       name: "",
-      target: "",
+      target: 0,
       created_at: "",
       due_date: "",
     };
@@ -259,7 +297,38 @@ async function addChallenge() {
     console.error("Fehler beim Speichern in die Datenbank", err);
   }
 }
-/*
+
+async function saveChallenge() {
+  if (!selectedChallengeId.value || savedAmount.value == 0) {
+    alert("Bitte Challenge und Betrag auswählen!");
+    return;
+  }
+
+  const challenge = challenges.value.find(
+    (c) => (c.id = selectedChallengeId.value) //hier userId oder id ? welcher und wie?
+  );
+
+  if (!challenge) return;
+
+  const newSaved = challenge.saved + savedAmount.value; //kumulieren
+
+  try {
+    await $fetch("/api/goals/${challenge.id}", {
+      method: "PATCH",
+      body: {
+        saved: newSaved,
+      },
+    });
+
+    //reset
+    challenge.saved = newSaved;
+    showSaveModal = false;
+    savedAmount.value = 0;
+    selectedChallengeId.value = "";
+  } catch (err) {
+    console.error("Fehler beim Speichern in die Datenbank", err);
+  }
+}
 function challengeProgress(challenge) {
   if (!challenge.target) return 0;
   const p = Math.round((challenge.saved / challenge.target) * 100);
@@ -278,26 +347,26 @@ const successRate = computed(() => {
 const completedChallenges = computed(() => {
   return challenges.value.filter((c) => challengeProgress(c) === 100).length;
 });
-*/
+
 // for Calendar styling
-const attr = ref([
+const attr = computed(() => [
   {
-    content: "red",
     key: "today",
-    highlight: true,
+    highlight: {
+      color: "blue",
+      fillMode: "light",
+    },
     dates: new Date(),
   },
-]);
-</script>
-
-<!--const challenges = ref([
-  // Als Platzhalter Beispiel: Beispielchallenge
+  /* für später, wenn DB Daten GET normal wird
   {
-    name: "30€ Wochenspar-Challenge",
-    //description: "Versuche in 7 Tagen 30 Euro beiseite zu legen.",
-    target: 30,
-    saved: 12,
-    created_at: "2025-06-15",
-    due_date: "2025-06-22",
-  },
-]);-->
+    key: "due-dates",
+    highlight: "red",
+    dates: challenges.value.map((c) => ({
+      start: new Date(c.due_date),
+      tooltip: c.name,
+    })),
+  },*/
+]);
+// wie nimmt es von der datenbank und präsentiert es auf dem page? erkläre in javascript und html
+</script>
