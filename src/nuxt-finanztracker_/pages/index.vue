@@ -13,9 +13,9 @@
       <p class="text-lg mb-4 font-bold">💡 Unsere Lösung →</p>
       <p class="text-lg mb-4">
         Eine kostenlose und intuitive App, speziell für junge Menschen
-        entwickelt. Pleitegeier hilft dir, Einnahmen und Ausgaben zu verwalten,
-        Budgets zu erstellen und deine Sparziele zu erreichen – einfach,
-        übersichtlich und komplett kostenlos 🤩
+        entwickelt. Pleitegeier hilft dir, Einnahmen und Ausgaben zu verwalten
+        und deine Sparziele zu erreichen – einfach, übersichtlich und komplett
+        kostenlos 🤩
       </p>
       <p class="text-lg mb-4 font-bold">🌎 Unser Ziel →</p>
       <p class="text-lg mb-4">
