@@ -1,6 +1,6 @@
 import ExpenseRepository from '../repositories/ExpenseRepository'
 import Expense from '../domain/Expense'
-import { isRecurring, advanceToNextFuture, toDate } from '../utility/recurringUtility'
+import { isRecurring, advanceToNextFuture, addInterval, toDate } from '../utility/recurringUtility'
 import { DEFAULT_INTERVAL } from '../domain/Interval'
 
 export default class ExpenseService {
@@ -18,8 +18,8 @@ export default class ExpenseService {
 
       if (isRecurring(interval) && expDate <= now) {
         try {
-          // Berechne nächstes Datum in der Zukunft
-          const nextDate = advanceToNextFuture(expDate, interval)
+          // Berechne nächstes Datum relativ zum eingetragenen Datum
+          const nextDate = addInterval(expDate, interval, 1)
 
           // Erstelle neuen Eintrag mit gleichem Intervall
           await repo.create({

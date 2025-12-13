@@ -1,7 +1,7 @@
 import IncomeRepository from '../repositories/IncomeRepository'
 import Income from '../domain/Income'
 import type CreateIncometoU from '../domain/Income'
-import { isRecurring, advanceToNextFuture, toDate } from '../utility/recurringUtility'
+import { isRecurring, advanceToNextFuture, addInterval, toDate } from '../utility/recurringUtility'
 import { DEFAULT_INTERVAL } from '../domain/Interval'
 
 export default class IncomeService {
@@ -19,8 +19,8 @@ export default class IncomeService {
 
       if (isRecurring(interval) && incDate <= now) {
         try {
-          // berechne nächstes Datum in der Zukunft
-          const nextDate = advanceToNextFuture(incDate, interval)
+          // berechne nächstes Datum relativ zum eingetragenen Datum
+          const nextDate = addInterval(incDate, interval, 1)
 
           // erstelle neuen Eintrag mit gleichem Intervall
           await repo.create({
