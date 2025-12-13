@@ -18,16 +18,31 @@ export default class ExpenseService {
 
       if (isRecurring(interval) && expDate <= now) {
         try {
-          // Berechne nächstes Datum relativ zum eingetragenen Datum
-          const nextDate = addInterval(expDate, interval, 1)
+          // Berechne erstes Datum in der Zukunft (erstes Datum > now)
+          const firstFuture = advanceToNextFuture(expDate, interval)
 
-          // Erstelle neuen Eintrag mit gleichem Intervall
+          // Fülle alle fehlenden Vorkommen vom eingetragenen Datum bis heute auf
+          let iter = addInterval(expDate, interval, 1)
+          while (iter <= now) {
+            await repo.create({
+              user_id: exp.user_id,
+              category_id: exp.category_id,
+              use: exp.use,
+              amount: exp.amount,
+              date: iter,
+              interval: DEFAULT_INTERVAL,
+              note: exp.note
+            })
+            iter = addInterval(iter, interval, 1)
+          }
+
+          // Erstelle genau einen zukünftigen wiederkehrenden Eintrag
           await repo.create({
             user_id: exp.user_id,
             category_id: exp.category_id,
             use: exp.use,
             amount: exp.amount,
-            date: nextDate,
+            date: firstFuture,
             interval: interval,
             note: exp.note
           })

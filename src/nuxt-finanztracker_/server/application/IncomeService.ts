@@ -19,16 +19,31 @@ export default class IncomeService {
 
       if (isRecurring(interval) && incDate <= now) {
         try {
-          // berechne nächstes Datum relativ zum eingetragenen Datum
-          const nextDate = addInterval(incDate, interval, 1)
+          // Berechne erstes Datum in der Zukunft (erstes Datum > now)
+          const firstFuture = advanceToNextFuture(incDate, interval)
 
-          // erstelle neuen Eintrag mit gleichem Intervall
+          // Fülle alle fehlenden Vorkommen vom eingetragenen Datum bis heute auf
+          let iter = addInterval(incDate, interval, 1)
+          while (iter <= now) {
+            await repo.create({
+              user_id: inc.user_id,
+              category_id: inc.category_id,
+              source: inc.source,
+              amount: inc.amount,
+              date: iter,
+              interval: DEFAULT_INTERVAL,
+              note: inc.note
+            })
+            iter = addInterval(iter, interval, 1)
+          }
+
+          // Erstelle genau einen zukünftigen wiederkehrenden Eintrag
           await repo.create({
             user_id: inc.user_id,
             category_id: inc.category_id,
             source: inc.source,
             amount: inc.amount,
-            date: nextDate,
+            date: firstFuture,
             interval: interval,
             note: inc.note
           })
