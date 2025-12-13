@@ -1,11 +1,19 @@
 <script setup>
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 import DarkMode from "~/components/darkMode.vue"; // Dark mode toggle component
 import { ref, onMounted, onUnmounted } from "vue";
 
 //Reaktive Referenzen
 const route = useRoute(); //hightlight current nav item
+const router = useRouter();
 const isScrolled = ref(false); // pruef scroll zustand
+
+const showLogoutAlert = () => {
+  console.log("Logout clicked");
+  // later
+  // localStorage.removeItem("token");
+  // router.push("/login");
+};
 
 onMounted(() => {
   const onScroll = () => (isScrolled.value = window.scrollY > 80); // wenn mehr als 80px gescrollt, setze isScrolled auf true
@@ -22,19 +30,16 @@ const navItems = [
 </script>
 
 <template>
-  <!--!!!!Wrap everything into one single PARENT ELEMENT ansonsten beschwert sich nuxt!!!!-->
+  <!-- Root wrapper (Nuxt requirement) -->
   <div>
+    <!-- Font Awesome -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
     />
+
     <!-- Header -->
-    <header
-      :class="[
-        'header',
-        isScrolled ? 'header-scrolled' : '', //wenn sroll, header wird kleiner
-      ]"
-    >
+    <header :class="['header', isScrolled ? 'header-scrolled' : '']">
       <!-- Left: Logo -->
       <NuxtLink to="/" class="group flex-shrink-0">
         <img
@@ -46,32 +51,31 @@ const navItems = [
 
       <!-- Center: Title + Navigation -->
       <div
-        class="absolute left-1/2 transform -translate-x-1/2 flex flex-col items-center text-center"
+        class="absolute left-1/2 -translate-x-1/2 flex flex-col items-center text-center"
       >
         <h1 class="font-bold text-5xl text-gray-800 dark:text-gray-100 mb-3">
           Pleitegeier
         </h1>
 
-      <Navigation :nav-items="navItems" :active-path="route.path" layout="header" /> <!-- Navigation Komponente -->
-    </div>
-
-    <!-- Right: Actions -->
-    <div class="flex items-center gap-6">
-      <!-- Dark Mode -->
-      <div class="flex items-center gap-2 h-8">
-        <i class="fas fa-adjust text-lg text-brand-600 dark:text-brand-300 "></i>
-         <!-- Toggle with border in dark mode -->
-        <div class="p-[3px] rounded-full border border-transparent dark:border-brand-700 transition-colors">
-        <DarkMode />
-      </div>
+        <Navigation
+          :nav-items="navItems"
+          :active-path="route.path"
+          layout="header"
+        />
       </div>
 
       <!-- Right: Actions -->
-      <div class="flex items-center gap-5">
+      <div class="flex items-center gap-6">
         <!-- Dark Mode -->
-        <div class="flex flex-col items-center gap-1">
-          <i class="fas fa-adjust text-lg text-gray-700 dark:text-gray-200"></i>
-          <DarkMode />
+        <div class="flex items-center gap-2 h-8">
+          <i
+            class="fas fa-adjust text-lg text-brand-600 dark:text-brand-300"
+          ></i>
+          <div
+            class="p-[3px] rounded-full border border-transparent dark:border-brand-700 transition-colors"
+          >
+            <DarkMode />
+          </div>
         </div>
 
         <!-- Language Selector -->
@@ -85,23 +89,21 @@ const navItems = [
           </select>
         </div>
 
-        <!-- Avatar-->
+        <!-- Avatar -->
         <div
-          @click="$router.push('/profile')"
-          class="w-10 h-10 rounded-full bg-black flex items-center justify-center text-white hover:bg-sky-900 transition-all duration-600"
+          @click="router.push('/profile')"
+          class="w-10 h-10 rounded-full bg-black flex items-center justify-center text-white hover:bg-sky-900 transition-all cursor-pointer"
         >
           <i class="fas fa-user"></i>
         </div>
 
-        <!-- Log Out -->
-        <div class="group flex items-center hover: transition-all duration-200">
-          <button
-            @click="showLogoutAlert"
-            class="focus:outline-none transition-all duration-200 transform hover:translate-x-1"
-          >
-            <i class="fas fa-sign-out-alt transition-transform"></i>
-          </button>
-        </div>
+        <!-- Logout -->
+        <button
+          @click="showLogoutAlert"
+          class="focus:outline-none transition-all hover:translate-x-1"
+        >
+          <i class="fas fa-sign-out-alt"></i>
+        </button>
       </div>
     </header>
   </div>
