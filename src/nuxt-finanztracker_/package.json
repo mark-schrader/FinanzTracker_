@@ -9,8 +9,9 @@
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare"
   },
- "dependencies": {
+  "dependencies": {
     "@prisma/client": "^6.10.1",
+    "@samk-dev/nuxt-vcalendar": "^1.0.4",
     "animate.css": "^4.1.1",
     "chart.js": "^4.5.0",
     "nuxt": "^3.17.5",
@@ -20,9 +21,9 @@
   },
   "devDependencies": {
     "@nuxtjs/tailwindcss": "6.11.4",
-    "tailwindcss": "3.4.13",
     "autoprefixer": "10.4.20",
     "postcss": "8.4.47",
-    "prisma": "^6.10.1"
+    "prisma": "^6.10.1",
+    "tailwindcss": "3.4.13"
   }
 }
