@@ -104,7 +104,7 @@
       <div
         class="absolute inset-0 bg-white/75 dark:bg-gray-900 backdrop-blur-md"
       ></div>
-      <div class="bg-white p-8 rounded-lg shadow-lg w-[400px] relative">
+      <div class="bg-white p-5 rounded-lg shadow-lg w-[400px] relative">
         <button
           class="absolute top-3 right-4 text-xl text-gray-900 hover:text-blue-700 hover:scale-125 transition-all duration-200 ease-in-out cursor-pointer dark:hover:text-gray-900"
           @click="closeForm"
