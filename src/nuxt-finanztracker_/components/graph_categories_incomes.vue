@@ -65,7 +65,7 @@ const chartData = computed(() => {
       {
         label: 'Einnahmen (€)',
         data,
-        backgroundColor: '#3b82f6', // Tailwind blue-500
+        backgroundColor: 'rgba(42,161,152,0.35)', // teal Farbton angepasst
         borderRadius: 6,
         barThickness: 'flex'
       }
