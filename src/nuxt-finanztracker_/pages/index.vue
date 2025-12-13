@@ -4,28 +4,28 @@
     <!-- Welcome Text -->
     <div
       class="flex-1 max-w-[600px] card bg-gradient-to-br from-teal-50/60 to-white/40 dark:from-gray-800/60 dark:to-gray-900/30 backdrop-blur-md">
-      <p class="text-4xl font-bold text-brand-600 dark:text-brand-300 mb-8 break-word">
+      <h1 class="mb-8 break-word">
         WILLKOMMEN IN PLEITEGEIER!
-      </p>
-      <p class="text-lg text-gray-700 dark:text-gray-300 mb-4">
+      </h1>
+      <p class="text-lg mb-4">
         👩🏻‍💻 Viele Studierende stehen vor der Herausforderung, ihre Finanzen im Griff zu behalten – unerwartete
         Ausgaben, begrenzte Mittel und der Überblick geht schnell verloren.
       </p>
-      <p class="text-lg font-semibold text-brand-600 dark:text-brand-300 mb-3">
+      <h3 class="mt-10 mb-3">
         💡 Unsere Lösung →
-      </p>
-      <p class="text-lg text-gray-700 dark:text-gray-300 mb-4">
+      </h3>
+      <p class="text-lg mb-4">
         Eine kostenlose und intuitive App, speziell für junge Menschen entwickelt. Pleitegeier hilft dir, Einnahmen und
         Ausgaben zu verwalten, Budgets zu erstellen und deine Sparziele zu erreichen – einfach, übersichtlich und
         komplett kostenlos 🤩
       </p>
-      <p class="text-lg font-semibold text-brand-600 dark:text-brand-300 mb-3">
+      <h3 class="mt-10 mb-3">
         🌎 Unser Ziel →
-      </p>
-      <p class="text-lg text-gray-700 dark:text-gray-300 mb-4">
+      </h3>
+      <p class="text-lg mb-4">
         Finanzielle Selbstbestimmung für alle – ganz egal, wie viel (oder wenig) gerade auf dem Konto ist.
       </p>
-      <p class="text-lg text-gray-700 dark:text-gray-300">
+      <p class="text-lg mb-4">
         Worauf wartest du noch? Melde dich jetzt an und mach deine Finanzen endlich stressfrei! 🥳
       </p>
     </div>
@@ -55,7 +55,7 @@
           <i class="fas fa-times"></i>
         </button>
         <form class="flex flex-col gap-4">
-          <h1 class="text-2xl font-bold text-brand-600 dark:text-brand-600">Login →</h1>
+          <h3>Login →</h3>
           <label for="email">Email</label>
           <input type="email" name="email" placeholder="Enter Email" required class="form-input" />
 
@@ -76,7 +76,7 @@
           <i class="fas fa-times"></i>
         </button>
         <form class="flex flex-col gap-4">
-          <h1 class="text-2xl font-bold text-brand-600 dark:text-brand-600">Register →</h1>
+          <h3>Register →</h3>
 
           <label for="fname">Vorname</label>
           <input type="text" name="fname" id="fname" class="form-input" />

@@ -13,7 +13,7 @@ useHead({
 
 <template>
   <section class="content-wrapper text-gray-800 dark:text-gray-200">
-    <h1 class="text-4xl font-bold mb-6 text-brand-600 dark:text-brand-300">
+    <h1 class="mb-6">
       Über Pleitegeier
     </h1>
 
@@ -26,7 +26,7 @@ useHead({
       bessere finanzielle Entscheidungen zu treffen.
     </p>
 
-    <h2 class="text-2xl font-semibold text-gray-900 dark:text-gray-100 mt-10 mb-3">
+    <h2 class="mt-10 mb-3">
       Unsere Motivation
     </h2>
     <p class="mb-6 leading-relaxed">
@@ -41,7 +41,7 @@ useHead({
       Konsumverhalten anregen.
     </p>
 
-    <h2 class="text-2xl font-semibold text-gray-900 dark:text-gray-100 mt-10 mb-3">
+    <h2 class="mt-10 mb-3">
       Was macht Pleitegeier besonders?
     </h2>
     <ul class="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300">
@@ -52,7 +52,7 @@ useHead({
       <li>Integration mit modernen Tools wie <span class="link-primary">Tailwind CSS</span> und <span class="link-primary">Nuxt 3</span></li>
     </ul>
 
-    <h2 class="text-2xl font-semibold text-gray-900 dark:text-gray-100 mt-10 mb-3">
+    <h2 class="mt-10 mb-3">
       Technologie
     </h2>
     <p class="leading-relaxed">

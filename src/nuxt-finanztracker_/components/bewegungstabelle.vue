@@ -2,9 +2,9 @@
   <div class="card">
     <!-- Header -->
     <div class="flex justify-between items-center mb-4">
-      <h2 class="text-lg font-semibold text-brand-600 dark:text-brand-300">
+      <h3>
         Übersicht der Kontobewegung
-      </h2>
+      </h3>
 
       <input type="text" v-model="search" placeholder="Suchen..."
         class="form-input w-1/3 border-2 border-brand-300 dark:border-brand-600 " />

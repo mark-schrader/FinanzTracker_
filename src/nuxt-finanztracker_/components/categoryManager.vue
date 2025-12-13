@@ -14,9 +14,7 @@
     <div class="modal-lg">
 
       <!-- Header -->
-      <h2 class="text-2xl font-bold text-brand-600 dark:text-brand-300">
-        Kategorien verwalten
-      </h2>
+      <h3 class="mb-2">Kategorien verwalten</h3>
 
       <!-- Table -->
       <table class="table dark:text-gray-200">
@@ -76,7 +74,7 @@
     class="modal-overlay"
   >
     <div class="modal-md">
-      <h2 class="text-xl font-semibold text-brand-600">Neue Kategorie</h2>
+      <h3>Neue Kategorie</h3>
 
       <div class="grid gap-2">
         <label>Name</label>
@@ -101,7 +99,7 @@
   <div v-if="showEdit" class="modal-overlay">
     <div class="modal-md">
 
-      <h2 class="text-2xl font-bold text-brand-600 dark:text-brand-400">Kategorie bearbeiten</h2>
+      <h3>Kategorie bearbeiten</h3>
 
       <div class="grid gap-2">
         <label>Name</label>
@@ -125,7 +123,7 @@
   <div v-if="showDelete" class="modal-overlay">
     <div class="modal-md">
 
-      <h2 class="text-2xl font-bold text-brand-600 dark:text-brand-400">Kategorie löschen</h2>
+      <h3>Kategorie löschen</h3>
       <p class="dark:text-gray-100">
         Möchtest du die Kategorie
         <span class="font-semibold">{{ selected?.name }}</span>

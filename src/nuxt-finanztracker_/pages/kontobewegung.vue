@@ -6,15 +6,15 @@
 
     <!-- Header -->
     <div class="flex items-center justify-between mb-6">
-      <h1 class="text-3xl font-bold text-brand-600 dark:text-brand-300">Kontobewegung</h1>
+      <h1>Kontobewegung</h1>
       <CurrentTime />
     </div>
 
     <!-- Aktueller Kontostand -->
-    <div class="card text-center text-xl font-semibold mb-6 bg-teal-50 dark:bg-gray-800">
+    <h2 class="card text-center mb-6 bg-teal-50 dark:bg-gray-800">
       Aktueller Kontostand:
       <strong class="text-teal-600 dark:text-teal-400">{{ currentBalance }}</strong>
-    </div>
+    </h2>
 
     <!-- Aktionen: Einnahmen / Ausgaben / Verwaltung -->
 
@@ -30,7 +30,7 @@
       <!-- Modal -->
       <div v-if="showIncomeModal" class="modal-overlay">
         <div class="modal-md">
-          <h2 class="text-2xl font-bold text-brand-600 dark:text-brand-600">Neue Einnahme</h2>
+          <h3>Neue Einnahme</h3>
 
           <div class="grid gap-2">
             <label>Betrag (€)</label>
@@ -89,7 +89,7 @@
       <!-- Modal für Ausgabe -->
       <div v-if="showExpenseModal" class="modal-overlay">
         <div class="modal-md">
-          <h2 class="text-2xl font-bold text-brand-600 dark:text-brand-600">Neue Ausgabe</h2>
+          <h3>Neue Ausgabe</h3>
 
           <div class="grid gap-2">
             <label>Betrag (€)</label>
@@ -144,7 +144,7 @@
        <!-- Modal Verwaltung Dauerauftrag -->
       <div v-if="showRecurringModal" class="modal-overlay">
         <div class="modal-lg">
-          <h2 class="text-2xl font-bold text-brand-600 dark:text-brand-600">Daueraufträge verwalten</h2>
+          <h3 class="mb-2">Daueraufträge verwalten</h3>
           <!-- Tabelle:-->
                 <!-- css: text-teal-600 dark:text-teal-400': t.type === 'Einnahme',
                 'text-red-500 dark:text-red-400': t.type === 'Ausgabe' -->
@@ -188,7 +188,7 @@
                     <!-- Modal: Dauerauftrag bearbeiten -->
                       <div v-if="showEditModal" class="modal-overlay">
                         <div class="modal-md">
-                          <h2 class="text-2xl font-bold text-brand-600 dark:text-brand-400">Dauerauftrag bearbeiten</h2>
+                          <h3>Dauerauftrag bearbeiten</h3>
 
                           <div class="grid gap-2">
                             <label>Name</label>
@@ -226,7 +226,7 @@
             <!-- Bestätigungs-Popup: Dauerauftrag löschen -->
             <div v-if="showDeleteConfirm" class="modal-overlay">
               <div class="modal-md">
-                <h2 class="text-2xl font-bold text-brand-600 dark:text-brand-600">Verwaltung Dauerauftrag</h2>
+                <h3>Verwaltung Dauerauftrag</h3>
                 <p class="text-lg text-gray-800 dark:text-gray-200 leading-relaxed">
                   Wollen Sie den Dauerauftrag
                   <span class="font-semibold text-brand-600 dark:text-brand-400">

@@ -12,13 +12,27 @@ html {
 }
 
 body {
-  @apply bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 
+  @apply bg-brand-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 
          font-sans transition-colors duration-300;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  @apply font-bold text-gray-900 dark:text-gray-100;
-}
+  h1 {
+    @apply text-4xl font-bold text-brand-600 dark:text-brand-300;
+  }
+  h2 {
+    @apply text-2xl font-semibold text-gray-900 dark:text-gray-100;
+  }
+  h3 {
+    @apply text-2xl font-bold text-brand-600 dark:text-brand-300;
+  }
+
+h4 {
+    @apply text-lg font-medium text-gray-900 dark:text-gray-100;
+  }
+
+p {
+    @apply text-gray-700 dark:text-gray-300 leading-relaxed;
+  }
 
 /* Reusable Components */
 /* Allgemein:  
@@ -39,7 +53,7 @@ for links: dark:text-brand-300 dark:hover:text-brand-200*/
   }
 
   label {
-  @apply text-gray-700 dark:text-gray-100 text-sm font-medium;
+  @apply text-gray-600 dark:text-gray-100 text-sm font-medium;
   }
 
   /*header und footer*/
@@ -85,7 +99,7 @@ for links: dark:text-brand-300 dark:hover:text-brand-200*/
   }
 
   .card-title {
-    @apply text-xl font-semibold mb-4;
+    @apply text-xl font-bold text-gray-900 dark:text-gray-100;
   }
 
   /* --- Tables --- */
@@ -116,7 +130,7 @@ for links: dark:text-brand-300 dark:hover:text-brand-200*/
     @apply border border-gray-300 dark:border-gray-600 rounded 
            px-3 py-2 text-sm w-full
            bg-white dark:bg-gray-800 dark:text-gray-100
-           focus:ring-2 focus:ring-teal-400 focus:outline-none 
+           focus:ring-2 focus:ring-brand-400 focus:outline-none 
            transition-colors duration-200;
   }
 
@@ -127,7 +141,7 @@ for links: dark:text-brand-300 dark:hover:text-brand-200*/
   }
 
   .btn-primary {
-    @apply btn bg-teal-500 hover:bg-teal-600 text-white shadow-sm;
+    @apply btn bg-brand-500 hover:bg-brand-600 text-white shadow-sm;
   }
 
   .btn-secondary {

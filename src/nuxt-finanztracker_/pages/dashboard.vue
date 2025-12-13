@@ -2,18 +2,18 @@
   <div class="p-6 max-w-screen-xl mx-auto space-y-6">
     <!-- Header -->
     <div class="flex items-center justify-between mb-6">
-      <h1 class="text-3xl font-bold">Dashboard:</h1>
+      <h1>Dashboard</h1>
       <CurrentTime />
     </div>
     
     <!-- Aktueller Kontostand -->
-    <h2 class="card text-center text-xl font-semibold mb-6 bg-teal-50 dark:bg-gray-800">
+    <h2 class="card text-center mb-6 bg-teal-50 dark:bg-gray-800">
       Aktueller Kontostand:
       <strong class="text-teal-600 dark:text-teal-400">{{ currentBalance }}</strong>
     </h2>
     <!-- Filtersegment -->
     <div class="card flex flex-col gap-4 mb-6 bg-gray-200 dark:bg-gray-800">
-      <p class="font-medium text-lg">Filter:</p>
+      <h3>Filter</h3>
       <!-- Checkbox zum Umschalten -->
       <label class="flex items-center gap-2 cursor-pointer">
         <input type="checkbox" v-model="manualRange" class="w-4 h-4" />
@@ -21,7 +21,7 @@
       </label>
 
       <!-- Intervall-Auswahl -->
-      <div v-if="!manualRange" class="flex flex-wrap items-center gap-3">
+      <div v-if="!manualRange" class="flex flex-wrap items-center gap-3 border-2 border-brand-300 dark:border-brand-600 rounded w-48">
         <select v-model="selectedInterval"
                 class="form-select w-48">
           <option value="all">Alle Daten</option>
@@ -56,7 +56,7 @@
     </div>
     <!-- Verlauf Vollständig -->
     <div class="bg-gray-100 rounded-md p-6 min-h-[220px] shadow-sm hover:shadow-md transition-shadow duration-200 dark:bg-gray-800">
-      <p class="text-base font-medium mb-4 text-center">Verlauf des Kontostands (letztes Jahr)</p>
+      <h4 class="mb-4 text-center">Verlauf des Kontostands (letztes Jahr)</h4>
       <verlaufChart :transactions="filteredTransactions" />
     </div>
 
@@ -66,7 +66,7 @@
       <div
         class="bg-gray-100 rounded-xl p-6 flex flex-col items-center justify-center shadow-sm hover:shadow-md transition-shadow duration-200 dark:bg-gray-800"
       >
-        <p class="font-medium mb-2 text-center">Ausgaben</p>
+        <h4 class="mb-2 text-center">Ausgaben</h4>
         <div class="w-full h-[260px]">
           <expenseslast7days :transactions="filteredTransactions" />
         </div>
@@ -76,7 +76,7 @@
       <div
         class="bg-gray-100 rounded-xl p-6 flex flex-col items-center justify-center shadow-sm hover:shadow-md transition-shadow duration-200 dark:bg-gray-800"
       >
-        <p class="font-medium mb-2 text-center">Einnahmen</p>
+        <h4 class="mb-2 text-center">Einnahmen</h4>
         <div class="w-full h-[260px]">
           <incomelast7days :transactions="filteredTransactions" />
         </div>
@@ -89,7 +89,7 @@
       <div
         class="bg-gray-100 rounded-xl p-6 flex flex-col items-center justify-center shadow-sm hover:shadow-md transition-shadow duration-200 dark:bg-gray-800"
       >
-        <p class="font-medium mb-2 text-center">Ausgaben je Kategorie</p>
+        <h4 class="mb-2 text-center">Ausgaben je Kategorie</h4>
         <div class="w-full h-[260px]">
           <graph_categories_expenses :transactions="filteredTransactions" />
         </div>
@@ -99,7 +99,7 @@
       <div
         class="bg-gray-100 rounded-xl p-6 flex flex-col items-center justify-center shadow-sm hover:shadow-md transition-shadow duration-200 dark:bg-gray-800"
       >
-        <p class="font-medium mb-2 text-center">Einnahmen je Kategorie</p>
+        <h4 class="mb-2 text-center">Einnahmen je Kategorie</h4>
         <div class="w-full h-[260px]">
           <graph_categories_incomes :transactions="filteredTransactions" />
         </div>
