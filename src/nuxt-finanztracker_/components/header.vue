@@ -4,7 +4,8 @@ import DarkMode from "~/components/darkMode.vue"; // Dark mode toggle component
 import { ref, onMounted, onUnmounted } from "vue";
 
 //Reaktive Referenzen
-const router = useRoute(); //hightlight current nav item
+const route = useRoute();
+const router = useRouter(); //hightlight current nav item
 const isScrolled = ref(false); // pruef scroll zustand
 
 const showLogoutAlert = () => {
