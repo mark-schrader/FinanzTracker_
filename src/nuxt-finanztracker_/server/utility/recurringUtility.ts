@@ -1,6 +1,6 @@
 // utility/recurringUtility.ts
 
-export type Interval = 'once' | 'weekly' | 'monthly' | 'semesterly' | 'annual'
+import { Interval, DEFAULT_INTERVAL } from '../domain/Interval'
 
 // Funktion zum Hinzufügen von Monaten unter Berücksichtigung von Monatslängen
 function addMonths(date: Date, months: number): Date {
@@ -12,7 +12,7 @@ function addMonths(date: Date, months: number): Date {
 // Fügt dem Datum entsprechend dem Intervall die Zeit hinzu
 export function addInterval(date: Date, interval: Interval, times = 1): Date {
   const d = new Date(date.getTime())
-  if (interval === 'once') return d
+  if (interval === DEFAULT_INTERVAL) return d
 
   switch (interval) {
     case 'weekly':
@@ -34,12 +34,12 @@ export function addInterval(date: Date, interval: Interval, times = 1): Date {
 
 // Prüft, ob das Intervall wiederkehrend ist (nicht 'once' und nicht null oder undefined)
 export function isRecurring(interval?: string | null): interval is Interval {
-  return !!interval && interval !== 'once'
+  return !!interval && interval !== DEFAULT_INTERVAL
 }
 
 // Berechnet das nächste Datum in der Zukunft basierend auf dem Intervall
 export function advanceToNextFuture(date: Date, interval: Interval): Date {
-  if (interval === 'once') return new Date(date.getTime())
+  if (interval === DEFAULT_INTERVAL) return new Date(date.getTime())
 
   let next = new Date(date.getTime())
   const now = new Date()
