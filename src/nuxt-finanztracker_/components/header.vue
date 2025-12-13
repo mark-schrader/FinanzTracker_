@@ -52,12 +52,18 @@ const navItems = [
           Pleitegeier
         </h1>
 
-        <Navigation
-          :nav-items="navItems"
-          :active-path="route.path"
-          layout="header"
-        />
-        <!-- Navigation Komponente -->
+      <Navigation :nav-items="navItems" :active-path="route.path" layout="header" /> <!-- Navigation Komponente -->
+    </div>
+
+    <!-- Right: Actions -->
+    <div class="flex items-center gap-6">
+      <!-- Dark Mode -->
+      <div class="flex items-center gap-2 h-8">
+        <i class="fas fa-adjust text-lg text-brand-600 dark:text-brand-300 "></i>
+         <!-- Toggle with border in dark mode -->
+        <div class="p-[3px] rounded-full border border-transparent dark:border-brand-700 transition-colors">
+        <DarkMode />
+      </div>
       </div>
 
       <!-- Right: Actions -->

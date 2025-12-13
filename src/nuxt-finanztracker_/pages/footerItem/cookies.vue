@@ -53,8 +53,8 @@ useHead({
       Du kannst Cookies jederzeit in den Einstellungen deines Browsers deaktivieren oder löschen.
       Beachte bitte, dass dadurch manche Funktionen unserer Website eingeschränkt sein könnten.
       Weitere Informationen findest du auch in unseren
-      <NuxtLink to="/footerItem/nutzungsbedingungen" class="link-primary">
-        Nutzungsbedingungen
+      <NuxtLink to="/footerItem/terms" class="link-primary">
+        Terms
       </NuxtLink>.
     </p>
 

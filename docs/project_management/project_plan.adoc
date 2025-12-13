@@ -45,6 +45,7 @@ In unserem Projekt verwenden wir eine angepasste Form des *agilen Scrum-Ansatzes
 * Code wird regelmäßig in ein gemeinsames Repository gepusht.
 * Eine automatisierte CI-Pipeline (GitHub) führt bei jedem Commit Builds und Tests aus.
 * Änderungen werden kleinteilig entwickelt, um Merge-Konflikte und Integrationsprobleme zu vermeiden.
+* Bei der Arbeit mit verschiedenen Branches wird immer ein Pull-Request erstellt, wenn ein persönlicher Branch in den Main-Branch gemergt werden soll. Die Entscheidung über die Annahme des Pull-Requests erfolgt nach dem Vier-Augen-Prinzip. Das bedeutet, dass neben dem/der Entwickler*in eine weitere Person aus dem Team oder unser Coach den Code auf Richtigkeit und Qualität überprüft.
 
 ==== Unabhängiges Testen
 
@@ -64,14 +65,11 @@ In unserem Projekt verwenden wir eine angepasste Form des *agilen Scrum-Ansatzes
 
 === Definition of Ready
 // Listen Sie hier die Kriterien auf, die ein Product Backlog Item (z.B. User Story) erfüllen muss, damit es bei der Sprint-Planung berücksichtigt werden kann
-* die Entwicklung ist abgeschlossen
-* das Programm ist bereit für den Test
-* keine unabhängige Person hat das Produkt gesehen
+Die Definition of Ready legt fest, wann eine User Story oder ein Task so weit vorbereitet ist, dass er im nächsten Sprint umgesetzt werden kann. Das bedeutet, dass alle notwendigen Informationen und Anforderungen geklärt sind und das Dev-Team genau versteht, was umgesetzt werden soll.
 
 === Definition of Done
 // Listen Sie hier alle Kritierien auf, damit die Aufgabe eines bestimmten Typs (z.B. Task, User Story) als abgeschlossen gilt.
-* das Programm wurde von einer nicht am Entwicklungsprozess beteiligten Person getestet
-* eine unbeteiligte Person hat das Produkt getestet und ist zufrieden
+Die Definition of Done beschreibt, wann eine User Story oder ein Task als vollständig abgeschlossen gilt. Dafür müssen alle Akzeptanzkriterien erfüllt sein, damit die Aufgabe als erledigt gilt. 
 
 == Deployment
 //Outline the strategy for deploying the software (and its updates) into the production environment.
@@ -81,7 +79,7 @@ In unserem Projekt verwenden wir eine angepasste Form des *agilen Scrum-Ansatzes
 
 
 == Erkenntnisse (Lessons learned)
-
+=== Aus SE1
 [%header] 
 |===
 | Datum | Erkenntnisse/Was haben wir gelernt?
@@ -127,3 +125,43 @@ In unserem Projekt verwenden wir eine angepasste Form des *agilen Scrum-Ansatzes
 |===
 
 Insgesamt verlief unsere Gruppenarbeit sehr gut. Wir haben uns stets gut abgestimmt, und insbesondere die wöchentlichen persönlichen Treffen haben uns geholfen, kontinuierlich am Projekt zu arbeiten. Der einzige kleine Rückschlag war, dass die Login-Funktion nicht rechtzeitig fertiggestellt wurde. Dies stellte jedoch kein größeres Problem dar, da unser Prototyp auch ohne diese Funktion für die Live-Demo ausreichend war. Abgesehen davon war unsere Zusammenarbeit sehr koordiniert und produktiv.
+
+=== Aus SE2
+[%header] 
+|===
+| Datum | Erkenntnisse/Was haben wir gelernt?
+
+|07.10.2025
+|
+-Wir haben alle dieses Semester eine begrentze Terminkapazität
+
+- Wir schaffen es nur alles zwei Wochen ein Meeting mit allen Teilnehmern.
+
+|15.10.2025
+|
+- Wie wir im letztes Semester Lessons learned umgesetzt haben war nicht der richtige Ansatz
+
+- Wir müssen Anfangen unsere Erkenntnisse über unsere Zusammenarbeit und welche Verbesserung wir daraus gewonnen haben
+
+|05.11.2025
+|
+- Priorisierung von den Aufgaben wurde nicht klar genung kommuniziert, weswesgen Features umgesetzt wurden, die noch nicht an der Reihe waren
+
+- Wir besprechen in den zweiwöchigen Meetings genau wer welche Umsetzte in der nächsten Iteration umgesetzt werden
+
+|21.11.2025
+|
+- Wir haben uns dazu entschieden, unser Backend grundlegend umzustrukturieren, da der vorherige Aufbau zu unübersichtlich geworden war, um effizient und nachhaltig weiterarbeiten zu können. Der Impuls kam zwar hauptsächlich vom Backend-Team, aber es wurde schnell klar, dass sie mit dieser Einschätzung recht hatten. Dabei haben wir gelernt, dass wir als Team deutlich weiterkommen, wenn wir offen kommunizieren und einander vertrauen.
+
+- Trotz des zusätzlichen Zeitaufwands sind wir überzeugt, dass die Umstrukturierung der richtige Schritt war. Mit dem überarbeiteten Backend können wir nun wesentlich effizienter arbeiten und haben eine deutlich solidere Grundlage für die weitere Entwicklung.
+
+|26.11.2025
+|
+- Im Verlauf der Entwicklung sind bei uns viele Merge-Konflikte aufgetreten. Diese hätten sich vermeiden lassen, wenn wir häufiger und mit kleineren Pull-Requests gearbeitet hätten. Außerdem wurde deutlich, dass einige Probleme durch bessere und frühzeitigere Kommunikation hätten verhindert werden können.
+
+- Für die Zukunft haben wir uns daher darauf verständigt, regelmäßiger und in kleineren Schritten in den Main-Branch zu mergen, um solche Konflikte zu reduzieren. Dadurch hoffen wir, die Zusammenarbeit im Team zu verbessern und effizienter arbeiten zu können.
+
+|
+|
+-
+|===

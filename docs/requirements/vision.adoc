@@ -103,31 +103,43 @@ Die Verfeinerung der Stakeholder, die das System benutzen, wird in der "ux-conze
 |===
 | Bedarf | Priorität | Features / Funktionen | Geplantes Release
 | Eintragen von Finanzeinnahmen | hoch | Möglichkeit zur manuellen Eingabe von Einnahmen inkl. Datum, Betrag, Kategorie | SE1
-| Anmelden und Ausloggen | hoch | Authentifizierung durch Username und Password | SE2
+
 | Eintragen von Finanzausgaben | hoch |  Erfassung aller Ausgaben mit Tags/Kategorien und Wiederholungseinstellungen | SE1
+
 | Kategorisierung von Einnahmen und Ausgaben | mittel | System zur Verwaltung und Anpassung von Kategorien | SE1
+
 | Übersicht über aktuelle Finanzen | hoch | Dashboard mit grafischer und tabellarischer Darstellung aktueller Finanzlage | SE1
-| Prognosen | gering | Vorhersage zukünftiger Finanzentwicklungen basierend auf bisherigen Daten | SE2
-| Spar-challenges | mittel | Vordefinierte oder benutzerdefinierte Challenges mit Fortschrittsanzeige |  SE2
-| Wiederkehrende Ausgaben automatisch ins nächste Semester übernehmen | mittel | Automatisches Kopieren der wiederkehrenden Ausgaben ins neue Semester (Grundkonzept) |  SE2
-| Finanzdaten-Export |  gering | Export als CSV, Excel oder PDF zur Archivierung oder Analyse |  SE2
+
 | Simples Layout | hoch | Intuitives und minimalistisches UI für einfache Bedienung |  SE1
-| Zweite Sprache (Englisch) | mittel |  Umschaltfunktion zwischen Deutsch und Englisch |  SE2
+
+| Anmelden und Ausloggen | hoch | Authentifizierung durch Username und Password | SE2
+
+| Spar-challenges | mittel | Vordefinierte oder benutzerdefinierte Challenges mit Fortschrittsanzeige |  SE2
+
 | Dark-Mode | gering | Dunkles Farbschema für angenehme Nutzung bei wenig Licht |  SE2
+
 | Individuelle anpassbare Elemente | gering | Benutzerdefinierte Gestaltung von Farben, Diagrammen und Zeitraumfiltern |  SE2
+
 | Modulares Layout (Entfernen von Modulen möglich) | gering | Frei anpassbares Interface, bei dem einzelne Module ein-/ausblendbar sind |  SE2
 
+| Wiederkehrende Ausgaben automatisch ins nächste Semester übernehmen | mittel | Automatisches Kopieren der wiederkehrenden Ausgaben ins neue Semester (Grundkonzept) |  SE2
+
+| Finanzdaten-Export |  mittel | Export als CSV, Excel oder PDF zur Archivierung oder Analyse |  SE3
+
+| Prognosen | gering | Vorhersage zukünftiger Finanzentwicklungen basierend auf bisherigen Daten | SE3
+
+| Zweite Sprache (Englisch) | gering |  Umschaltfunktion zwischen Deutsch und Englisch |  SE2
 
 |===
-
+Wir mussten uns dazu entscheiden, die Export- und Prognosefunktion sowie die Option für eine zweite Sprache im Rahmen von Software Engineering 2 nicht mehr umzusetzen. Hauptgrund dafür war die umfangreiche Umstrukturierung unseres Backends, die deutlich mehr Zeit in Anspruch nahm als erwartet und unseren Zeitplan spürbar verzögert hat. Während dieser Phase konnten wir vor allem das Frontend weiterentwickeln und erst später die Verbindung zwischen Frontend und Backend herstellen. Im Team haben wir gemeinsam beschlossen, dass das Testen der bereits implementierten Funktionen eine höhere Priorität hat als die Entwicklung neuer Features. Daher konzentrieren wir uns nun darauf, die noch fehlenden relevanten Funktionen fertigzustellen und umfassende Softwaretests durchzuführen. 
 
 === Zusätzliche Produktanforderungen
 //Zutreffendes angeben, nicht zutreffendes streichen oder auskommentieren
 [%header, cols="4,1,1"]
 |===
 | Anforderung | Priorität | Geplantes Release
-| Rechnungs -& Belegscanner | nicht wichtig | xx
-| AI-basierter Finanzcoach | nicht wichtig | xx
-| Offline-Funktionalität | sehr wichtig | xx
-| 2-Faktor-Authentifizierung | sehr wichtig | xx
+| Rechnungs -& Belegscanner | nicht wichtig | SE4
+| AI-basierter Finanzcoach | nicht wichtig | SE4
+| Offline-Funktionalität | sehr wichtig | SE3
+| 2-Faktor-Authentifizierung | sehr wichtig | SE3
 |===

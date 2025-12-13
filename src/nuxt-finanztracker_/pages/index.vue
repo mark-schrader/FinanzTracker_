@@ -171,7 +171,7 @@
             required
             pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
             title="Muss mindestens eine Zahl und einen Groß- und Kleinbuchstaben sowie mindestens 8 oder mehr Zeichen enthalten"
-            class="border p-2 rounded"
+            class="form-input"
           />
 
           <button
