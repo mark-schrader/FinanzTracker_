@@ -1,11 +1,51 @@
 import IncomeRepository from '../repositories/IncomeRepository'
 import Income from '../domain/Income'
-import type  CreateIncometoU from '../domain/Income'
+import type CreateIncometoU from '../domain/Income'
+import { isRecurring, advanceToNextFuture, toDate } from '../utility/recurringUtility'
+import { DEFAULT_INTERVAL } from '../domain/Interval'
 
 export default class IncomeService {
   static async getIncomesByUserId(userId: number) {
     const repo = new IncomeRepository()
-    const incomes = await repo.findByUserId(userId)
+    let incomes = await repo.findByUserId(userId)
+
+    // Prüfe auf überfällige Daueraufträge und verarbeiten
+    let changed = false
+    const now = new Date()
+    for (const inc of incomes) {
+      const interval = inc.interval ?? DEFAULT_INTERVAL
+      const incDate = toDate(inc.date)
+      if (!incDate) continue
+
+      if (isRecurring(interval) && incDate <= now) {
+        try {
+          // berechne nächstes Datum in der Zukunft
+          const nextDate = advanceToNextFuture(incDate, interval)
+
+          // erstelle neuen Eintrag mit gleichem Intervall
+          await repo.create({
+            user_id: inc.user_id,
+            category_id: inc.category_id,
+            source: inc.source,
+            amount: inc.amount,
+            date: nextDate,
+            interval: interval,
+            note: inc.note
+          })
+
+          // altes auf "einmal" setzen
+          await repo.update(inc.id, { interval: DEFAULT_INTERVAL })
+          changed = true
+        } catch (err) {
+          console.error('[recurring income processing error]', err)
+        }
+      }
+    }
+
+    if (changed) {
+      incomes = await repo.findByUserId(userId)
+    }
+
     return incomes.map((i: any) => Income.fromPrisma(i))
   }
 
@@ -24,7 +64,7 @@ export default class IncomeService {
       source: data.source,
       amount: parseFloat(String(data.amount)),
       date: data.date ? new Date(data.date) : new Date(),
-      interval: data.interval || 'once',
+      interval: data.interval || DEFAULT_INTERVAL,
       note: data.note
     })
     return {
