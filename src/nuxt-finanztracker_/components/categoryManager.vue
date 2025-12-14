@@ -128,8 +128,6 @@
 
 <script setup>
 import { ref, onMounted } from "vue";
-import InlineAlert from '~/components/InlineAlert.vue';
-import { useAlert } from "~/composables/useAlert";
 // Alert handling, erfolgreich oder fehlerhaft
 const { showAlertBox, alertMessage, alertType, showAlert } = useAlert();
 
