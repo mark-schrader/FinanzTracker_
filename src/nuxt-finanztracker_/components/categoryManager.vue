@@ -1,16 +1,16 @@
 <template>
+  <!-- Inline Alert -->
+  <InlineAlert v-if="showAlertBox" :message="alertMessage" :type="alertType" />
+
   <!-- Main Button to Open Modal -->
-  <button
-    @click="showModal = true"
-    class="bg-blue-100 hover:bg-blue-200 text-blue-700 font-semibold py-4 rounded shadow
+  <button @click="showModal = true" class="bg-blue-100 hover:bg-blue-200 text-blue-700 font-semibold py-4 rounded shadow
            text-center flex flex-col items-center justify-center space-y-2 transform hover:scale-105 transition">
     <i class="fas fa-tags text-4xl"></i>
     <span class="text-lg">Kategorien verwalten</span>
   </button>
 
   <!-- Modal: Kategorien verwalten -->
-  <div
-    v-if="showModal" class="modal-overlay">
+  <div v-if="showModal" class="modal-overlay">
     <div class="modal-lg">
 
       <!-- Header -->
@@ -27,25 +27,15 @@
         </thead>
 
         <tbody>
-          <tr
-            v-for="cat in categories"
-            :key="cat.id"
-            class="hover:bg-gray-100 dark:hover:bg-gray-700 transition"
-          >
+          <tr v-for="cat in categories" :key="cat.id" class="hover:bg-gray-100 dark:hover:bg-gray-700 transition">
             <td>{{ cat.name }}</td>
             <td>{{ displayType(cat.type) }}</td> <!--displayType Funktion: zeigt Ausnahme/Einnnahme -->
             <td class="space-x-4">
-              <button
-                class="text-teal-600 hover:text-teal-400"
-                @click="openEdit(cat)"
-              >
+              <button class="text-teal-600 hover:text-teal-400" @click="openEdit(cat)">
                 <i class="fas fa-pen"></i>
               </button>
 
-              <button
-                class="text-red-600 hover:text-red-400"
-                @click="openDelete(cat)"
-              >
+              <button class="text-red-600 hover:text-red-400" @click="openDelete(cat)">
                 <i class="fas fa-trash"></i>
               </button>
             </td>
@@ -69,10 +59,7 @@
   </div>
 
   <!-- Modal: Add Category -->
-  <div
-    v-if="showAdd"
-    class="modal-overlay"
-  >
+  <div v-if="showAdd" class="modal-overlay">
     <div class="modal-md">
       <h3>Neue Kategorie</h3>
 
@@ -112,7 +99,7 @@
         </select>
       </div>
 
-      <div class="flex justify-end space-x-2">
+      <div class="flex justify-end space-x-2 mt-4">
         <button @click="showEdit = false" class="btn btn-secondary">Abbrechen</button>
         <button @click="saveEditCategory" class="btn btn-primary">Speichern</button>
       </div>
@@ -130,7 +117,7 @@
         wirklich löschen?
       </p>
 
-      <div class="flex justify-end space-x-4">
+      <div class="flex justify-center space-x-4 mt-2">
         <button @click="deleteCategory" class="btn btn-danger">Löschen</button>
         <button @click="showDelete = false" class="btn btn-secondary">Zurück</button>
       </div>
@@ -141,6 +128,10 @@
 
 <script setup>
 import { ref, onMounted } from "vue";
+import InlineAlert from '~/components/InlineAlert.vue';
+import { useAlert } from "~/composables/useAlert";
+// Alert handling, erfolgreich oder fehlerhaft
+const { showAlertBox, alertMessage, alertType, showAlert } = useAlert();
 
 // UI control
 const showModal = ref(false);
@@ -165,7 +156,7 @@ onMounted(loadCategories);
 
 // Damit zeigt es "Einnahme" oder "Ausgabe" anstatt "income" oder "expense", für besesere Lesbarkeit
 function displayType(type) {
-  if (type === "income") return "Einnahme"   
+  if (type === "income") return "Einnahme"
   if (type === "expense") return "Ausgabe"
   return type
 }
@@ -198,6 +189,7 @@ async function createCategory() {
 
   await loadCategories();
   showAdd.value = false;
+  showAlert("Kategorie wurde erfolgreich erstellt!", "success");
 }
 
 async function saveEditCategory() {
@@ -208,6 +200,7 @@ async function saveEditCategory() {
 
   await loadCategories();
   showEdit.value = false;
+  showAlert("Kategorie wurde erfolgreich aktualisiert!", "success");
 }
 
 async function deleteCategory() {
@@ -217,5 +210,6 @@ async function deleteCategory() {
 
   await loadCategories();
   showDelete.value = false;
+  showAlert("Kategorie wurde erfolgreich gelöscht!", "success");
 }
 </script>
