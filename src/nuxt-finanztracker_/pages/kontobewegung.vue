@@ -270,6 +270,16 @@ const currentBalance = computed(() => {
 
 // Einnahme speichern — POST an /api/incomes (plural)
 async function submitIncome() {
+
+  //console.log("Aktueller User beim Senden:", user.value);
+
+ 
+  if (!user.value || !user.value.id) {
+    alert("Fehler: Benutzer nicht geladen. Bitte Seite neu laden.");
+    return;
+  }
+
+
   try {
     const res = await $fetch('/api/incomes', {
       method: 'POST',
@@ -280,7 +290,7 @@ async function submitIncome() {
         categoryId: incomeForm.value.category,
         note: incomeForm.value.note,
         interval: incomeForm.value.interval,
-        userId: 1
+        userId: user.value.id
       }
     })
 
@@ -326,7 +336,7 @@ async function submitExpense() {
         categoryId: expenseForm.value.category,
         note: expenseForm.value.note,
         interval: expenseForm.value.interval,
-        userId: 1
+        userId: user.value.id
       }
     })
 
