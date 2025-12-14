@@ -37,8 +37,7 @@
             }">
               {{ t.amount }}
             </td>
-
-            <td class="px-4 py-2">{{ t.interval }}</td>
+            <td class="px-4 py-2">{{ displayInterval(t.interval) }}</td> <!-- Intervall auf Deutsch anzeigen -->
             <td class="px-4 py-2">{{ t.owner }}</td>
             <td class="px-4 py-2">{{ t.purpose }}</td>
             <td class="px-4 py-2">{{ t.categoryName }}</td>
@@ -81,4 +80,14 @@ const filteredTransactions = computed(() => {
     )
   )
 })
+// Hilfsfunktion Intervall auf Deutsch umwandeln bzw. anzeigen
+function displayInterval(interval) {
+  if (interval === "once") return "Einmalig"
+  if (interval === "weekly") return "Wöchentlich"
+  if (interval === "monthly") return "Monatlich"
+  if (interval === "semesterly") return "Semester"
+  if (interval === "annual") return "Jährlich"
+  return interval
+}
+
 </script>

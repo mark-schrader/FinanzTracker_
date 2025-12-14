@@ -164,7 +164,8 @@
                     :class="auftrag.betrag < 0 ? 'text-red-500 dark:text-red-400' : 'text-teal-600 dark:text-teal-400'">
                     {{ auftrag.betrag.toFixed(2) }}€ <!--Anzeige mit 2 Dezimalstellen-->
                   </td>
-                  <td>{{ auftrag.intervall }}</td>
+                  <td>{{ displayInterval(auftrag.intervall) }}</td> <!-- Intervall auf Deutsch anzeigen -->
+
                   <td class="space-x-6">
                     <button class="text-teal-600 hover:text-teal-400" @click="openEdit(auftrag)">
                       <i class="fas fa-pen"></i> <!-- Edit-Icon -->
@@ -608,6 +609,16 @@ async function deleteAuftrag() {
     console.error(err);
     showAlert("Fehler beim Löschen des Dauerauftrags", "error");
   }
+}
+
+// Hilfsfunktion Intervall auf Deutsch umwandeln bzw. anzeigen
+function displayInterval(interval) {
+  if (interval === "once") return "Einmalig"
+  if (interval === "weekly") return "Wöchentlich"
+  if (interval === "monthly") return "Monatlich"
+  if (interval === "semesterly") return "Semester"
+  if (interval === "annual") return "Jährlich"
+  return interval
 }
 
 </script>
