@@ -9,7 +9,7 @@ export default defineEventHandler(async (event) => {
   const method = getMethod(event)
   const id = getRouterParam(event, 'id')
 
-  const supabaseUser = serverSupabaseUser(event)
+  const supabaseUser = await serverSupabaseUser(event)
 
   if (!supabaseUser) {
     throw createError({ statusCode: 401, message: 'Nicht Authorisiert!' })
@@ -34,14 +34,14 @@ export default defineEventHandler(async (event) => {
         } else {  // Anzeige aller Ausgaben eines Benutzers
           // GET /api/expenses?userId=123
           if (!userId) throw createError({ statusCode: 400, message: 'Missing userId' })
-          return await ExpenseService.getExpensesByUserId(Number(userId))
+          return await ExpenseService.getExpensesByUserId(userId)
         }
 
       case 'POST': { // Anlegen einer neuen Ausgabe
         // POST /api/expenses
         const body = await readBody(event)
         return await ExpenseService.createExpense({
-          userId: Number(body.userId), 
+          userId: supabaseUser.id, 
           categoryId: body.categoryId,
           use: body.use,
           amount: body.amount,

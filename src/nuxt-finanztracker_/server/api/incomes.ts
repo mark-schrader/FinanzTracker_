@@ -1,4 +1,6 @@
 
+// src/.../server/api/incomes.ts
+
 import { serverSupabaseUser } from '#supabase/server'
 import { PrismaClient } from '@prisma/client'
 import IncomeService from '../application/IncomeService'
@@ -34,14 +36,14 @@ export default defineEventHandler(async (event) => {
         } else {  // Anzeige aller Einnahmen eines Benutzers
           // GET /api/incomes?userId=123
           if (!userId) throw createError({ statusCode: 400, message: 'Missing userId' })
-          return await IncomeService.getIncomesByUserId(Number(userId))
+          return await IncomeService.getIncomesByUserId(userId)
         }
 
       case 'POST': { // Anlegen einer neuen Einnahme
         // POST /api/incomes
         const body = await readBody(event)
         return await IncomeService.createIncome({
-          userId: Number(body.userId),
+          userId: supabaseUser.id,
           categoryId: Number(body.categoryId),
           source: body.source,
           amount: Number(body.amount),
