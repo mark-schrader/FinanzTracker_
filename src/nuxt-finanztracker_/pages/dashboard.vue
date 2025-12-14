@@ -155,6 +155,10 @@ onMounted(async () => {
     
     transactions.value = transData || []
 
+    console.log('Angemeldeter Benutzer ID:', userId)
+    console.log('Geladene Transaktionen:', transactions.value)
+    console.log('Geladene Kategorien:', categories.value)
+
   } catch (err) {
     console.error('Fehler beim Laden der Daten:', err)
   }
