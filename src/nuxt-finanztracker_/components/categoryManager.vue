@@ -29,7 +29,20 @@
         <tbody>
           <tr v-for="cat in categories" :key="cat.id" class="hover:bg-gray-100 dark:hover:bg-gray-700 transition">
             <td>{{ cat.name }}</td>
-            <td>{{ displayType(cat.type) }}</td> <!--displayType Funktion: zeigt Ausnahme/Einnnahme -->
+
+            <!--displayType Funktion: zeigt Ausnahme/Einnnahme -->
+            <td>
+              <div class="flex items-center gap-2">
+                <i :class="cat.type === 'income'
+                  ? 'fa-solid fa-circle-plus text-brand-500'
+                  : 'fa-solid fa-circle-minus text-red-500'"></i>
+                <span>
+                  {{ displayType(cat.type) }}
+                </span>
+
+              </div>
+            </td>
+
             <td class="space-x-4">
               <button class="text-teal-600 hover:text-teal-400" @click="openEdit(cat)">
                 <i class="fas fa-pen"></i>
@@ -75,7 +88,7 @@
 
       </div>
 
-      <div class="flex justify-end space-x-2">
+      <div class="flex justify-end space-x-2 mt-4">
         <button @click="showAdd = false" class="btn btn-secondary">Abbrechen</button>
         <button @click="createCategory" class="btn btn-primary">Speichern</button>
       </div>
