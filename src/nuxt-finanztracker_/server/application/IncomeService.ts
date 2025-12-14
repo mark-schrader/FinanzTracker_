@@ -1,6 +1,7 @@
 import IncomeRepository from '../repositories/IncomeRepository'
 import Income from '../domain/Income'
 import type  CreateIncometoU from '../domain/Income'
+import categories from '../api/categories'
 
 export default class IncomeService {
   static async getIncomesByUserId(userId: number) {
@@ -18,15 +19,24 @@ export default class IncomeService {
 
   static async createIncome(data: CreateIncometoU) {
     const repo = new IncomeRepository()
-    const created = await repo.create({
-      user_id: data.userId !== undefined ? Number(data.userId) : undefined,
-      category_id: data.categoryId,
-      source: data.source,
+    const prismaData = {
       amount: parseFloat(String(data.amount)),
       date: data.date ? new Date(data.date) : new Date(),
+      source: data.source,
       interval: data.interval || 'once',
-      note: data.note
-    })
+      note: data.note,
+
+      categories: {
+        connect: { id: Number(data.categoryId) }
+      },
+      user: {
+        connect: { supabaseid: data.userId }
+      }
+
+    }
+
+    const created = await repo.create(prismaData)
+   
     return {
       message: 'Income created successfully',
       income: Income.fromPrisma(created)
@@ -37,8 +47,8 @@ export default class IncomeService {
     const repo = new IncomeRepository()
     const updateData: any = {}
 
-    if (data.userId !== undefined) updateData.user_id = Number(data.userId)
-    if (data.categoryId !== undefined) updateData.category_id = data.categoryId
+    if (data.userId !== undefined) updateData.user_id = data.userId
+    if (data.categoryId !== undefined) updateData.categories = { connect: { id: Number(data.categoryId) } }
     if (data.source !== undefined) updateData.source = data.source
     if (data.amount !== undefined) updateData.amount = parseFloat(String(data.amount))
     if (data.date !== undefined) updateData.date = new Date(data.date)

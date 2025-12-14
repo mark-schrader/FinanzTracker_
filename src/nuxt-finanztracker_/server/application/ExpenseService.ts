@@ -17,15 +17,24 @@ export default class ExpenseService {
 
   static async createExpense(data: any) {
     const repo = new ExpenseRepository()
-    const created = await repo.create({
-      user_id: data.userId !== undefined ? Number(data.userId) : undefined,
-      category_id: data.categoryId,
-      use: data.use,
+  
+    const prismaData = {
       amount: parseFloat(String(data.amount)),
-      date: new Date(data.date),
+      date: data.date ? new Date(data.date) : new Date(),
+      use: data.use,
       interval: data.interval || 'once',
-      note: data.note
-    })
+      note: data.note,
+
+      categories: {
+        connect: { id: Number(data.categoryId) }
+      },
+      user: {
+        connect: { supabaseid: data.userId }
+      }
+    }
+
+    const created = await repo.create(prismaData)
+
     return {
       message: 'Expense created successfully',
       expense: Expense.fromPrisma(created)
