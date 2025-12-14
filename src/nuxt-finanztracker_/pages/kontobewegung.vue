@@ -461,7 +461,7 @@ async function submitIncome() {
     }
     showIncomeModal.value = false
     showAlert("Einnahme wurde erfolgreich gespeichert!"
-, "success")
+      , "success")
   } catch (err) {
     console.error('Fehler beim Speichern der Einnahme:', err)
     showAlert('Fehler beim Speichern der Einnahme', 'error')
@@ -605,9 +605,9 @@ async function deleteAuftrag() {
     showAlert("Dauerauftrag wurde erfolgreich gelöscht", "success")
 
   } catch (err) {
-    console.error('Es ist ein Fehler aufgetreten!', err)
+    console.error(err);
+    showAlert("Fehler beim Löschen des Dauerauftrags", "error");
   }
 }
-
 
 </script>

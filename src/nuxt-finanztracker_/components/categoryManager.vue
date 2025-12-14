@@ -145,9 +145,26 @@ const form = ref({
   type: "income",
 });
 
+// Kategorien alphabetisch sortieren (A bis Z)
+function sortCategories() {
+  if (!Array.isArray(categories.value)) return;
+
+  categories.value.sort((a, b) => {
+    const nameA = (a.name || "").toLowerCase();
+    const nameB = (b.name || "").toLowerCase();
+    return nameA.localeCompare(nameB, "de");
+  });
+}
+
 // Load categories
 async function loadCategories() {
-  categories.value = await $fetch("/api/categories?userId=1");
+  try {
+    categories.value = await $fetch("/api/categories?userId=1");
+    sortCategories(); // Nach dem Laden sortieren alphabetisch
+  } catch (err) {
+    console.error('Fehler beim Laden der Kategorien:', err);
+    showAlert('Fehler beim Laden der Kategorien', 'error');
+  }
 }
 
 onMounted(loadCategories);
@@ -178,36 +195,53 @@ function closeAll() {
   showDelete.value = false;
 }
 
+
 // ---- CRUD actions ----
 async function createCategory() {
-  await $fetch("/api/categories", {
-    method: "POST",
-    body: { ...form.value, userId: 1 }
-  });
+  try {
+    await $fetch("/api/categories", {
+      method: "POST",
+      body: { ...form.value, userId: 1 }
+    });
 
-  await loadCategories();
-  showAdd.value = false;
-  showAlert("Kategorie wurde erfolgreich erstellt!", "success");
+    await loadCategories();
+    showAdd.value = false;
+    showAlert("Kategorie wurde erfolgreich erstellt!", "success");
+  } catch (err) {
+    console.error('Fehler beim Erstellen der Kategorie:', err);
+    showAlert('Fehler beim Erstellen der Kategorie', 'error');
+  }
 }
 
 async function saveEditCategory() {
-  await $fetch(`/api/categories/${selected.value.id}`, {
-    method: "PUT",
-    body: selected.value
-  });
+  try {
+    await $fetch(`/api/categories/${selected.value.id}`, {
+      method: "PUT",
+      body: selected.value
+    });
 
-  await loadCategories();
-  showEdit.value = false;
-  showAlert("Kategorie wurde erfolgreich aktualisiert!", "success");
+    await loadCategories();
+    showEdit.value = false;
+    showAlert("Kategorie wurde erfolgreich aktualisiert!", "success");
+  } catch (err) {
+    console.error('Fehler beim Aktualisieren der Kategorie:', err);
+    showAlert('Fehler beim Aktualisieren der Kategorie', 'error');
+  }
 }
 
 async function deleteCategory() {
-  await $fetch(`/api/categories/${selected.value.id}`, {
-    method: "DELETE"
-  });
+  try {
+    await $fetch(`/api/categories/${selected.value.id}`, {
+      method: "DELETE"
+    });
 
-  await loadCategories();
-  showDelete.value = false;
-  showAlert("Kategorie wurde erfolgreich gelöscht!", "success");
+    await loadCategories();
+    showDelete.value = false;
+    showAlert("Kategorie wurde erfolgreich gelöscht!", "success");
+  } catch (err) {
+    console.error('Fehler beim Löschen der Kategorie:', err);
+    showAlert('Fehler beim Löschen der Kategorie', 'error');
+  }
 }
+
 </script>
