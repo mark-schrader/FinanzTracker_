@@ -11,12 +11,21 @@
         <div class="grid gap-3">
           <label>Datum</label>
           <input v-model="localItem.date" type="date" class="form-input" />
-
           <label>Betrag (€)</label>
-          <input v-model="localItem.amount" type="number" step="0.01" class="form-input" />
+          <input v-model="localItem.amount" type="number" min="0" step="0.50" class="form-input" />
+          <!-- Typ nur Anzeigen für Nutzer, nicht bearbeiten  -->
+          <label>Typ</label>
+          <input :value="localItem.type" class="form-input bg-gray-100 cursor-not-allowed" disabled />
+
 
           <label>Zyklus</label>
-          <input v-model="localItem.interval" class="form-input" />
+          <select v-model="localItem.interval" class="form-select">
+            <option value="once">Einmalig</option>
+            <option value="weekly">Wöchentlich</option>
+            <option value="monthly">Monatlich</option>
+            <option value="semesterly">Semester</option>
+            <option value="annual">Jährlich</option>
+          </select>
 
           <label>Kontoinhaber</label>
           <input v-model="localItem.owner" class="form-input" />
@@ -25,7 +34,12 @@
           <input v-model="localItem.purpose" class="form-input" />
 
           <label>Kategorie</label>
-          <input v-model="localItem.categoryName" class="form-input" />
+          <select v-model="localItem.categoryId" class="form-input">
+            <option disabled value="">Bitte wählen</option>
+            <option v-for="cat in categories" :value="cat.id" :key="cat.id">
+              {{ cat.name }}
+            </option>
+          </select>
 
           <label>Kommentar</label>
           <textarea v-model="localItem.comment" class="form-textarea"></textarea>
@@ -62,19 +76,33 @@ import { ref, watch } from "vue"
 
 const props = defineProps({
   item: { type: Object, required: true },
-  mode: { type: String, required: true } // "edit" oder "delete"
+  mode: { type: String, required: true }, // "edit" oder "delete"
+  categories: { type: Array, default: () => [] }
 })
 
 const emit = defineEmits(["save-edit", "confirm-delete", "close"])
 
-const localItem = ref({ ...props.item })
+const localItem = ref({})
+
 
 watch(
-  () => props.item,
-  (val) => {
-    if (val) localItem.value = { ...val }
-  }
+  () => [props.item, props.mode],
+  ([item, mode]) => {
+    if (mode !== "edit" || !item) return
+
+    const raw = Number(
+      String(item.amount).replace(/[^0-9.-]/g, "")
+    )
+
+    localItem.value = {
+      ...item,
+      amount: isNaN(raw) ? null : Math.abs(raw)
+    }
+  },
+  { immediate: true }
 )
+
+
 
 function saveEdit() {
   emit("save-edit", localItem.value)

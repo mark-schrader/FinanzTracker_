@@ -257,7 +257,12 @@
     </div>
 
     <!-- Übersicht der Kontobewegung -->
-    <bewegungstabelle :transactions="transactions" />
+    <bewegungstabelle :transactions="transactions" @edit="handleEdit" @delete="handleDelete" />
+
+    <!-- Modal für Bearbeiten/Löschen -->
+    <bewegungstabelle_aktion v-if="showActionModal" :item="selectedTransaction" :mode="actionMode"
+      :categories="categories" @save-edit="saveTransactionEdit" @confirm-delete="confirmDeleteTransaction"
+      @close="closeActionModal" />
   </div> <!-- Ende von content-wrapper -->
 </template>
 
@@ -289,6 +294,11 @@ const showRecurringModal = ref(false)
 const showEditModal = ref(false) // Modal zum Bearbeiten eines Dauerauftrags
 const showDeleteConfirm = ref(false) // Bestätigungsmodal für das Löschen eines Dauerauftrags
 const selectedAuftrag = ref(null) // Der aktuell ausgewählte Dauerauftrag zum Bearbeiten/Löschen
+
+// Modal für Transaktionen bearbeiten/löschen
+const showActionModal = ref(false)
+const selectedTransaction = ref(null)
+const actionMode = ref('') // 'edit' or 'delete'
 
 // Funktion zum Öffnen des Edit-Modals mit den Daten des ausgewählten Auftrags
 function openEdit(auftrag) {
@@ -609,6 +619,104 @@ async function deleteAuftrag() {
     console.error(err);
     showAlert("Fehler beim Löschen des Dauerauftrags", "error");
   }
+}
+
+// Handler für Bearbeiten einer Transaktion
+function handleEdit(transaction) {
+  const raw = Number(
+    String(transaction.amount).replace(/[^0-9.-]/g, "")
+  )
+
+  selectedTransaction.value = {
+    ...transaction,
+    amount: isNaN(raw) ? null : Math.abs(raw)
+  }
+
+  actionMode.value = "edit"
+  showActionModal.value = true
+}
+
+
+
+// Handler für Löschen einer Transaktion
+function handleDelete(transactionId) {
+  const transaction = transactions.value.find(t => t.id === transactionId)
+  if (transaction) {
+    selectedTransaction.value = { ...transaction }
+    actionMode.value = 'delete'
+    showActionModal.value = true
+  }
+}
+
+// Speichern der bearbeiteten Transaktion
+async function saveTransactionEdit(updatedTransaction) {
+  try {
+    const original = selectedTransaction.value
+    const isIncome = original.type === 'Einnahme'
+    const baseUrl = isIncome ? `/api/incomes/${original.id}` : `/api/expenses/${original.id}`
+
+    // Bereite den Payload vor
+    const payload = {
+      amount: Number(updatedTransaction.amount), // Sicherstellen, dass es eine Zahl ist (positive Zahl)
+      type: updatedTransaction.type, // Einnahme oder Ausgabe
+      date: updatedTransaction.date,
+      interval: updatedTransaction.interval,
+      note: updatedTransaction.comment || '',
+      categoryId: updatedTransaction.categoryId,
+      userId: 1
+    }
+
+    if (isIncome) {
+      payload.source = updatedTransaction.purpose || original.source
+    } else {
+      payload.use = updatedTransaction.purpose || original.use
+    }
+
+    await $fetch(baseUrl, {
+      method: 'PUT',
+      body: payload
+    })
+
+    // Transaktionen neu laden
+    const transData = await $fetch('/api/transactions?userId=1')
+    transactions.value = transData || []
+
+    closeActionModal()
+    showAlert("Transaktion wurde erfolgreich aktualisiert!", "success")
+  } catch (err) {
+    console.error('Fehler beim Aktualisieren der Transaktion:', err)
+    showAlert('Fehler beim Aktualisieren der Transaktion', 'error')
+  }
+}
+
+// Bestätigen des Löschens einer Transaktion
+async function confirmDeleteTransaction() {
+  try {
+    const transaction = selectedTransaction.value
+    const isIncome = transaction.type === 'Einnahme'
+    const baseUrl = isIncome ? `/api/incomes/${transaction.id}` : `/api/expenses/${transaction.id}`
+
+    await $fetch(baseUrl, {
+      method: 'DELETE'
+    })
+
+    // Transaktionen neu laden
+    const transData = await $fetch('/api/transactions?userId=1')
+    transactions.value = transData || []
+
+    closeActionModal()
+    showAlert("Transaktion wurde erfolgreich gelöscht!", "success")
+  } catch (err) {
+    console.error('Fehler beim Löschen der Transaktion:', err)
+    showAlert('Fehler beim Löschen der Transaktion', 'error')
+  }
+}
+
+// Schließen des Action Modals
+function closeActionModal() {
+  showActionModal.value = false
+  selectedTransaction.value = null
+  actionMode.value = ''
 }
 
 // Hilfsfunktion Intervall auf Deutsch umwandeln bzw. anzeigen
