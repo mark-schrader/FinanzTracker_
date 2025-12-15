@@ -13,7 +13,6 @@ const isScrolled = ref(false) // pruef scroll zustand
         v-for="item in [
           { to: '/footerItem/about', label: 'About' },
           { to: '/footerItem/authors', label: 'Authors' },
-          { to: '/footerItem/archive', label: 'Archive' },
           { to: '/footerItem/terms', label: 'Terms' },
           { to: '/footerItem/cookies', label: 'Cookies' }
         ]" 
