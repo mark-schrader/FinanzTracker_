@@ -1,12 +1,12 @@
 <template>
-  <div class="fixed inset-0 backdrop-blur-sm flex items-center justify-center z-50">
-    <div class="bg-white dark:bg-gray-800 p-8 rounded-lg shadow-lg w-[90%] max-w-md space-y-4 relative">
+  <div class="modal-overlay">
+    <div class="modal-md">
 
       <!-- BEARBEITEN -->
-      <template v-if="mode === 'edit'">
-        <h2 class="text-2xl font-bold text-brand-600 dark:text-brand-400">
+      <template v-if="mode === 'edit'" >
+        <h3>
           Kontobewegung bearbeiten
-        </h2>
+        </h3>
 
         <div class="grid gap-3">
           <label>Datum</label>
