@@ -93,9 +93,16 @@
         </div>
 
         <!-- Exportübersicht -->
-        <!-- Exportübersicht -->
         <div class="card">
+            <div class="flex items-center justify-between mb-4">
             <h3 class="mb-4">Exportübersicht</h3>
+            <!-- Download Button aber erst nur für pdf-->
+                <div class="flex justify-end mb-4">
+                    <button class="btn-primary" @click="downloadPdf">
+                        PDF herunterladen
+                    </button>
+                </div>
+            </div>
 
             <!-- Placeholder bevor Exportieren -->
             <div v-if="!pdfPreviewUrl" class="h-48 flex items-center justify-center border-2 border-dashed rounded-lg
@@ -103,14 +110,22 @@
                 Vorschau wird nach dem Export angezeigt
             </div>
 
-            <!-- Download Button aber erst nur für pdf-->
+            <!-- Vorschau nach Export -->
             <div v-else>
-                <div class="flex justify-end mb-4">
-                    <button class="btn-primary" @click="downloadPdf">
-                        PDF herunterladen
-                    </button>
+                <div v-if="pdfPreviewUrl" class="text-sm">
+                    <p>
+                        <strong>Summe Einnahmen:</strong>
+                        {{ exportSummary.income.toLocaleString('de-DE', { minimumFractionDigits: 2 }) }} €
+                    </p>
+                    <p>
+                        <strong>Summe Ausgaben:</strong>
+                        {{ exportSummary.expense.toLocaleString('de-DE', { minimumFractionDigits: 2 }) }} €
+                    </p>
+                    <p class="font-semibold mb-4">
+                        <strong>Saldo:</strong>
+                        {{ exportSummary.saldo.toLocaleString('de-DE', { minimumFractionDigits: 2 }) }} €
+                    </p>
                 </div>
-
                 <iframe :src="pdfPreviewUrl" class="w-full h-96 border rounded" />
             </div>
         </div>
@@ -148,14 +163,34 @@ onBeforeUnmount(() => {
 
 // Gefilterte Transaktionen für den Export (nur bis heute)
 const exportTransactions = computed(() => {
-  const now = new Date()
-  now.setHours(23, 59, 59, 999)
+    const now = new Date()
+    now.setHours(23, 59, 59, 999)
 
-  return filteredTransactions.value.filter(t => {
-    const d = new Date(t.date)
-    d.setHours(0, 0, 0, 0)
-    return d <= now
-  })
+    return filteredTransactions.value.filter(t => {
+        const d = new Date(t.date)
+        d.setHours(0, 0, 0, 0)
+        return d <= now
+    })
+})
+
+// Export Zusammenfassung mit Saldo
+const exportSummary = computed(() => {
+    let income = 0
+    let expense = 0
+
+    exportTransactions.value.forEach(t => {
+        const amount =
+            Number(String(t.amount).replace(/[^0-9.-]/g, '')) || 0
+
+        if (t.type === 'Einnahme') income += amount
+        if (t.type === 'Ausgabe') expense += Math.abs(amount)
+    })
+
+    return {
+        income,
+        expense,
+        saldo: income - expense
+    }
 })
 
 // Export Optionen aber erstmal nur Kontobewegung
@@ -172,7 +207,7 @@ const pdfPreviewUrl = ref(null) // Vorschau URL für PDF Export (Data URL oder B
 
 // Erstmal nur PDF Export Funktion
 function exportPdf(preview = false) {
-    if (!options.kontobewegung || filteredTransactions.value.length === 0) return
+    if (!options.kontobewegung || exportTransactions.value.length === 0) return
 
     const doc = new jsPDF('p', 'mm', 'a4') // Portrait, mm, A4
 
@@ -271,6 +306,38 @@ function exportPdf(preview = false) {
         }
 
     })
+
+    // Summen & Saldo 
+    const finalY = doc.lastAutoTable.finalY + 8
+    doc.setFontSize(10)
+
+    doc.text(
+        `Summe Einnahmen: ${exportSummary.value.income.toLocaleString('de-DE', {
+            minimumFractionDigits: 2
+        })} €`,
+        14,
+        finalY
+    )
+
+    doc.text(
+        `Summe Ausgaben: ${exportSummary.value.expense.toLocaleString('de-DE', {
+            minimumFractionDigits: 2
+        })} €`,
+        14,
+        finalY + 6
+    )
+
+    doc.setFont(undefined, 'bold')
+    doc.text(
+        `Saldo: ${exportSummary.value.saldo.toLocaleString('de-DE', {
+            minimumFractionDigits: 2
+        })} €`,
+        14,
+        finalY + 14
+    )
+    doc.setFont(undefined, 'normal')
+
+
     // exportPdf Funktion, true für Preview, false für Download
     if (preview) { // wenn preview true ist
         // Preview generieren als Blob URL
@@ -291,4 +358,5 @@ function exportPdf(preview = false) {
 function downloadPdf() {
     exportPdf(false)
 }
+
 </script>
