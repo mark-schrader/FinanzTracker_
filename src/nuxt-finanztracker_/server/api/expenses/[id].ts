@@ -1,41 +1,59 @@
 import ExpenseService from '../../application/ExpenseService'
+import { z } from 'zod'
+import { IdParamSchema, toDatePreprocess, IntervalEnum } from '../../utility/validationUtility'
+
+// Schema zum Validieren des Request-Bodys für das Aktualisieren einer Ausgabe
+const UpdateExpenseSchema = z.object({
+  userId: z.preprocess((val) => (val === undefined || val === null ? undefined : Number(val)), z.number().int().positive().optional()),
+  categoryId: z.preprocess((val) => (val === undefined || val === null ? undefined : Number(val)), z.number().int().positive().optional()),
+  use: z.string().min(1).optional(),
+  amount: z.preprocess((val) => (val === undefined || val === null ? undefined : Number(val)), z.number().positive().optional()),
+  date: z.preprocess(toDatePreprocess, z.instanceof(Date).refine((d: Date) => !isNaN(d.getTime()), { message: 'Invalid date' }).optional()),
+  interval: IntervalEnum.optional(),
+  note: z.string().optional().nullable()
+})
 
 export default defineEventHandler(async (event) => {
   const method = getMethod(event)
-  const id = getRouterParam(event, 'id')
-  const userId = getQuery(event).userId // GET /api/expenses?userId=123
+  const idRaw = getRouterParam(event, 'id')
+  if (!idRaw) throw createError({ statusCode: 400, message: 'Missing id param' })
 
   try {
-    switch (method) {
-      case 'GET':
-        // Anzeige einer einzelnen Ausgabe
-          // GET /api/expenses/5
-          return await ExpenseService.getExpenseById(Number(id))
+    const idParsed = IdParamSchema.safeParse(idRaw)
+    if (!idParsed.success) throw createError({ statusCode: 400, message: 'Invalid id param' })
+    const id = Number(idParsed.data)
 
-      case 'PUT': { // Verändern einer Ausgabe
-        // PUT /api/expenses/5
-        if (!id) throw createError({ statusCode: 400, message: 'Missing ID' })
+    // Handler für die API-Endpunkte
+    switch (method) {
+      case 'PUT': { // PUT /api/expenses/:id
         const body = await readBody(event)
-        return await ExpenseService.updateExpense(Number(id), body)
+        const parsed = UpdateExpenseSchema.safeParse(body)
+        if (!parsed.success) {
+          throw createError({ statusCode: 400, message: `Invalid body: ${JSON.stringify(parsed.error.errors)}` })
+        }
+
+        const payload: any = {
+          userId: parsed.data.userId,
+          categoryId: parsed.data.categoryId,
+          use: parsed.data.use,
+          amount: parsed.data.amount,
+          date: parsed.data.date,
+          interval: parsed.data.interval,
+          note: parsed.data.note
+        }
+
+        return await ExpenseService.updateExpense(Number(id), payload) // Aktualisieren einer Ausgabe
       }
 
-      case 'DELETE': // Löschen einer Ausgabe
-        // DELETE /api/expenses/5
-        if (!id) throw createError({ statusCode: 400, message: 'Missing ID' })
-        return await ExpenseService.deleteExpense(Number(id))
-        /*
-        * fetch('http://localhost:3000/api/expenses/5', {
-        * method: 'DELETE'
-        * })
-        * .then(data => console.log('Antwort:', data))
-        * .catch(err => console.error('Fehler:', err));
-        */
-
+      case 'DELETE': { // DELETE /api/expenses/:id
+        return await ExpenseService.deleteExpense(Number(id)) // Löschen einer Ausgabe
+      }
+      
       default:
         throw createError({ statusCode: 405, message: `Method ${method} not allowed` })
     }
-  } catch (error: any) {
-    console.error('[expenses API error]', error)
-    throw createError({ statusCode: 500, message: error.message || 'Server error' })
+  } catch (err: any) {
+    console.error('[expense by id API error]', err)
+    throw createError({ statusCode: err.statusCode ?? 500, message: err.message || 'Server error' })
   }
 })

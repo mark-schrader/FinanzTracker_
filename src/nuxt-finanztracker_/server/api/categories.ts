@@ -1,42 +1,79 @@
-import CategoryService from '../application/CategoryService'
+import CategoryService from "../application/CategoryService";
+import { QueryUserIdSchema } from "../utility/validationUtility";
+import { z } from "zod";
 
+// Schema zum Validieren des Request-Bodys für das Erstellen einer Kategorie
+const CreateCategorySchema = z.object({
+  name: z
+    .string()
+    .min(1)
+    .refine((val) => !val.startsWith(" "), {
+      message: "Name darf nicht mit einem Leerzeichen beginnen",
+    }),
+  type: z.string().min(1),
+  userId: z.preprocess((val) => {
+    if (val === undefined || val === null) return undefined;
+    return Number(val);
+  }, z.number().int().positive().optional()),
+  icon: z.string().nullable().optional(),
+  color: z.string().nullable().optional(),
+});
+
+// Handler für die API-Endpunkte
 export default defineEventHandler(async (event) => {
-  const method = getMethod(event)
-  const userId = getQuery(event).userId // /api/categories?userId=1
+  const method = getMethod(event);
+  const query = getQuery(event);
 
   try {
+    // Behandeln der verschiedenen Anfragen-Methoden
     switch (method) {
-      case 'GET': // GET /api/categories?userId=1
-        if (!userId) throw createError({ statusCode: 400, message: 'Missing userId' })
-        return await CategoryService.getCategoryByUserId(Number(userId)) // Ausgabe der Kategorien für den angegebenen Benutzer
-
-      case 'POST': { // POST /api/categories
-        const body = await readBody(event)
-        return await CategoryService.createCategory(body) // Erstellen einer neuen Kategorie mit den im Body angegebenen Daten
+      case "GET": {
+        // GET /api/categories?userId=1
+        const rawUserId = query.userId; //?? query.user_id
+        const parsed = QueryUserIdSchema.safeParse(rawUserId);
+        if (!parsed.success || parsed.data === undefined) {
+          throw createError({
+            statusCode: 400,
+            message: "Missing or invalid userId",
+          });
+        }
+        return await CategoryService.getCategoryByUserId(Number(parsed.data)); // Ausgabe aller Kategorien eines Benutzers
       }
-      /*
-      fetch('/api/categories', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          name: "Essen",
-          type: "expense",    // z.B. "expense" oder "income"
-          userId: 1,          // oder user_id
-          icon: "🍔",
-          color: "#FF5733"
-        })
-    })
-        .then(res => res.json())
-        .then(data => console.log("Kategorie erstellt:", data))
-        .catch(err => console.error("Error:", err))
-      */
+
+      case "POST": {
+        // POST /api/categories
+        const body = await readBody(event);
+        const parsed = CreateCategorySchema.safeParse(body);
+        if (!parsed.success) {
+          const err = parsed.error;
+          throw createError({
+            statusCode: 400,
+            message: `Invalid body: ${JSON.stringify(err.errors)}`,
+          });
+        }
+
+        const payload: any = {
+          name: parsed.data.name,
+          type: parsed.data.type,
+          userId: parsed.data.userId,
+          icon: parsed.data.icon ?? null,
+          color: parsed.data.color ?? null,
+        };
+
+        return await CategoryService.createCategory(payload); // Erstellung einer neuen Kategorie
+      }
+
       default:
-        throw createError({ statusCode: 405, message: `Method ${method} not allowed` })
+        throw createError({
+          statusCode: 405,
+          message: `Method ${method} not allowed`,
+        });
     }
   } catch (err: any) {
-    console.error('[categories API error]', err)
-    throw createError({ statusCode: 500, message: err.message || 'Server error' })
+    console.error("[categories API error]", err);
+    throw createError({
+      statusCode: err.statusCode ?? 500,
+      message: err.message || "Server error",
+    });
   }
-})
+});

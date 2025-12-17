@@ -51,19 +51,23 @@ const navItems = [
     </div>
 
     <!-- Right: Actions -->
-    <div class="flex items-center gap-5">
+    <div class="flex items-center gap-6">
       <!-- Dark Mode -->
-      <div class="flex flex-col items-center gap-1">
-        <i class="fas fa-adjust text-lg text-gray-700 dark:text-gray-200"></i>
+      <div class="flex items-center gap-2 h-8">
+        <i class="fas fa-adjust text-lg text-brand-600 dark:text-brand-300 "></i>
+         <!-- Toggle with border in dark mode -->
+        <div class="p-[3px] rounded-full border border-transparent dark:border-brand-700 transition-colors">
         <DarkMode />
+      </div>
       </div>
 
       <!-- Language Selector -->
-      <div class="flex flex-col items-center gap-1">
-        <i class="fas fa-globe text-lg text-gray-700 dark:text-gray-200"></i>
+      <div class="flex items-center gap-2 h-8">
+        <i class="fas fa-globe text-lg text-brand-600 dark:text-brand-300"></i>
         <select
-          class="text-sm border border-gray-300 dark:border-gray-600 rounded px-1 py-0.5
-                 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          class="form-select px-2 py-1 rounded-md
+             border border-brand-300 dark:border-brand-700
+             dark:bg-gray-800 dark:text-brand-200 h-8"
         >
           <option value="de">DE</option>
           <option value="en">EN</option>

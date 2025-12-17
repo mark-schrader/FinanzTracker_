@@ -1,41 +1,59 @@
 import IncomeService from '../../application/IncomeService'
+import { z } from 'zod'
+import { IdParamSchema, toDatePreprocess, IntervalEnum } from '../../utility/validationUtility'
 
+// Schema zum Validieren des Request-Bodys für das Aktualisieren eines Einkommens
+const UpdateIncomeSchema = z.object({
+  userId: z.preprocess((val) => (val === undefined || val === null ? undefined : Number(val)), z.number().int().positive().optional()),
+  categoryId: z.preprocess((val) => (val === undefined || val === null ? undefined : Number(val)), z.number().int().positive().optional()),
+  source: z.string().min(1).optional(),
+  amount: z.preprocess((val) => (val === undefined || val === null ? undefined : Number(val)), z.number().positive().optional()),
+  date: z.preprocess(toDatePreprocess, z.instanceof(Date).refine((d: Date) => !isNaN(d.getTime()), { message: 'Invalid date' }).optional()),
+  interval: IntervalEnum.optional(),
+  note: z.string().optional().nullable()
+})
+
+// Handler für die API-Endpunkte
 export default defineEventHandler(async (event) => {
   const method = getMethod(event)
-  const id = getRouterParam(event, 'id')
-  const userId = getQuery(event).userId // GET /api/incomes?userId=123
+  const idRaw = getRouterParam(event, 'id')
+  if (!idRaw) throw createError({ statusCode: 400, message: 'Missing id param' })
 
   try {
-    switch (method) {
-      case 'GET':
-          // Anzeige einer einzelnen Einnahme
-          // GET /api/incomes/5
-          return await IncomeService.getIncomeById(Number(id))
+    const idParsed = IdParamSchema.safeParse(idRaw)
+    if (!idParsed.success) throw createError({ statusCode: 400, message: 'Invalid id param' })
+    const id = Number(idParsed.data)
 
-      case 'PUT': { // Verändern einer Einnahme
-        // PUT /api/incomes/5
-        if (!id) throw createError({ statusCode: 400, message: 'Missing ID' })
+    // Behandeln der verschiedenen Anfragen-Methoden
+    switch (method) {
+      case 'PUT': { // PUT /api/incomes/5
         const body = await readBody(event)
-        return await IncomeService.updateIncome(Number(id), body)
+        const parsed = UpdateIncomeSchema.safeParse(body)
+        if (!parsed.success) {
+          throw createError({ statusCode: 400, message: `Invalid body: ${JSON.stringify(parsed.error.errors)}` })
+        }
+
+        const payload: any = {
+          userId: parsed.data.userId,
+          categoryId: parsed.data.categoryId,
+          source: parsed.data.source,
+          amount: parsed.data.amount,
+          date: parsed.data.date,
+          interval: parsed.data.interval,
+          note: parsed.data.note
+        }
+
+        return await IncomeService.updateIncome(Number(id), payload) // Aktualisieren eines Einkommens
       }
 
-      case 'DELETE': // Löschen einer Einnahme
-        // DELETE /api/incomes/5
-        if (!id) throw createError({ statusCode: 400, message: 'Missing ID' })
-        return await IncomeService.deleteIncome(Number(id))
-        /*
-        * fetch('http://localhost:3000/api/expenses/5', {
-        * method: 'DELETE'
-        * })
-        * .then(data => console.log('Antwort:', data))
-        * .catch(err => console.error('Fehler:', err));
-        */
+      case 'DELETE': // DELETE /api/incomes/5
+        return await IncomeService.deleteIncome(Number(id)) // Löschen eines Einkommens
 
       default:
         throw createError({ statusCode: 405, message: `Method ${method} not allowed` })
     }
-  } catch (error: any) {
-    console.error('[incomes API error]', error)
-    throw createError({ statusCode: 500, message: error.message || 'Server error' })
+  } catch (err: any) {
+    console.error('[income by id API error]', err)
+    throw createError({ statusCode: err.statusCode ?? 500, message: err.message || 'Server error' })
   }
 })

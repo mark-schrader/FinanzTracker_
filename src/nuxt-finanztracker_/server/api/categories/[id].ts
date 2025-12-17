@@ -1,37 +1,51 @@
 import CategoryService from '../../application/CategoryService'
+import { IdParamSchema } from '../../utility/validationUtility'
+import { z } from 'zod'
 
+// Schema zum Validieren des Request-Bodys für das Aktualisieren einer Kategorie
+const UpdateCategorySchema = z.object({
+  name: z.string().min(1).optional(),
+  type: z.string().min(1).optional(),
+  icon: z.string().nullable().optional(),
+  color: z.string().nullable().optional(),
+  userId: z.preprocess((val) => {
+    if (val === undefined || val === null) return undefined
+    return Number(val)
+  }, z.number().int().positive().optional())
+})
+
+// Handler für die API-Endpunkte
 export default defineEventHandler(async (event) => {
   const method = getMethod(event)
-  const id = getRouterParam(event, 'id')
-  if (!id) throw createError({ statusCode: 400, message: 'Missing id param' })
+  const idRaw = getRouterParam(event, 'id')
+  if (!idRaw) throw createError({ statusCode: 400, message: 'Missing id param' })
 
   try {
+    const idParsed = IdParamSchema.safeParse(idRaw)
+    if (!idParsed.success) throw createError({ statusCode: 400, message: 'Invalid id param' })
+    const id = Number(idParsed.data)
+
+    // Behandeln der verschiedenen Anfragen-Methoden
     switch (method) {
       case 'GET':   // GET /api/categories/5
         return await CategoryService.getCategoryByCategoryId(Number(id))    // Ausgabe einer einzelnen Kategorie
 
       case 'PUT': { // PUT /api/categories/5
         const body = await readBody(event)
-        return await CategoryService.updateCategory(Number(id), body)   // Aktualisierung einer Kategorie
+        const parsed = UpdateCategorySchema.safeParse(body)
+        if (!parsed.success) {
+          const err = parsed.error
+          throw createError({ statusCode: 400, message: `Invalid body: ${JSON.stringify(err.errors)}` })
+        }
+
+        return await CategoryService.updateCategory(Number(id), { // Aktualisierung einer Kategorie
+          name: parsed.data.name,
+          type: parsed.data.type,
+          icon: parsed.data.icon,
+          color: parsed.data.color,
+          userId: parsed.data.userId
+        })
       }
-      /*
-      fetch('/api/categories/5', { 
-        method: 'PUT',               
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          name: "Neue Kategorie",
-          type: "expense",
-          icon: "🔥",
-          color: "#FF9900",
-          userId: 1
-      })
-    })
-    .then(res => res.json())
-    .then(data => console.log("Kategorie aktualisiert:", data))
-    .catch(err => console.error("Update error:", err))
-      */
 
       case 'DELETE':  // DELETE /api/categories/5
         return await CategoryService.deleteCategory(Number(id))     // Löschen einer Kategorie
@@ -41,6 +55,6 @@ export default defineEventHandler(async (event) => {
     }
   } catch (err: any) {
     console.error('[category by id API error]', err)
-    throw createError({ statusCode: 500, message: err.message || 'Server error' })
+    throw createError({ statusCode: err.statusCode ?? 500, message: err.message || 'Server error' })
   }
 })
