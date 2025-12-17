@@ -217,7 +217,24 @@ function exportPdf() {
             ) {
                 data.cell.styles.halign = 'right'
             }
+        },
+
+        // Fußzeile mit Seitenzahl und Copyright Pelitegeier
+        didDrawPage(data) {
+            const pageHeight = doc.internal.pageSize.height // Seitenhöhe, für Fußzeile
+            const pageNumber = doc.getNumberOfPages() // Aktuelle Seitenzahl
+            doc.setFontSize(8) // Fußzeile Schriftgröße
+            doc.setTextColor(0) // Fußzeile Schriftfarbe, schwarz
+
+            doc.text(
+                // Fußzeile links, Copyright + Seitenzahl und Seitenzahl
+                `© ${new Date().getFullYear()} Pleitegeier – Seite ${pageNumber} / ${doc.getNumberOfPages()}`, 
+                doc.internal.pageSize.width / 2,
+                pageHeight - 10,
+                { align: 'center' }
+            )
         }
+
     })
 
 
