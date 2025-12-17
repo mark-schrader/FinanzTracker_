@@ -7,7 +7,12 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "test": "vitest",
+    "test:run": "vitest run",
+    "test:unit:frontend": "vitest run test/unit/frontend",
+    "test:unit:backend": "vitest run test/unit/backend",
+    "test:integration:backend": "cross-env NODE_ENV=test dotenv -e .env.test -- vitest run test/integration/backend"
   },
   "dependencies": {
     "@prisma/client": "^6.10.1",
@@ -22,9 +27,15 @@
   },
   "devDependencies": {
     "@nuxtjs/tailwindcss": "6.11.4",
+    "@vitejs/plugin-vue": "^6.0.3",
+    "@vue/test-utils": "^2.4.6",
     "autoprefixer": "10.4.20",
+    "cross-env": "^10.1.0",
+    "dotenv-cli": "^11.0.0",
+    "happy-dom": "^20.0.11",
     "postcss": "8.4.47",
     "prisma": "^6.10.1",
-    "tailwindcss": "3.4.13"
+    "tailwindcss": "3.4.13",
+    "vitest": "^4.0.16"
   }
 }
