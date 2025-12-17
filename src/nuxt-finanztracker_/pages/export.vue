@@ -190,19 +190,33 @@ function exportPdf() {
         startY: 35,
         head: [['Datum', 'Beschreibung', 'Einnahme (€)', 'Ausgabe (€)']],
         body: rows,
+
         styles: {
             fontSize: 9,
             cellPadding: 2
         },
+
         headStyles: {
             fillColor: [20, 184, 166],
-            halign: 'center'
+            textColor: 255,
+            fontStyle: 'bold',
+            halign: 'left'
         },
+
         columnStyles: {
             0: { cellWidth: 30, halign: 'left' }, // Datum
             1: { cellWidth: 70, halign: 'left' }, // Beschreibung
-            2: { cellWidth: 40, halign: 'right' }, // Einnahme
-            3: { cellWidth: 40, halign: 'right' } // Ausgabe
+            2: { cellWidth: 40, halign: 'right', font: 'courier' }, // Einnahme
+            3: { cellWidth: 40, halign: 'right', font: 'courier' } // Ausgabe
+        },
+
+        didParseCell(data) { // Zellenanpassungen
+            if (
+                data.section === 'head' && //Kopfzeile
+                (data.column.index === 2 || data.column.index === 3)
+            ) {
+                data.cell.styles.halign = 'right'
+            }
         }
     })
 
