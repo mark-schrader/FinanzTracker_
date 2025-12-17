@@ -2,7 +2,7 @@
   <div class="p-6 max-w-screen-xl mx-auto">
     <!-- Header -->
     <div class="flex items-center justify-between mb-6">
-      <h1 class="text-3xl font-bold">Finanz-Challenges</h1>
+      <h1>Finanz-Challenges</h1>
       <button @click="showChallengeModal = true"
         class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 shadow">
         + Neue Challenge

@@ -13,7 +13,7 @@ useHead({
 
 <template>
   <section class="content-wrapper text-gray-800 dark:text-gray-200">
-    <h1 class="text-4xl font-bold mb-6 text-brand-600 dark:text-brand-300">
+    <h1 class="mb-6">
       Cookies auf Pleitegeier
     </h1>
 
@@ -24,7 +24,7 @@ useHead({
       und bestimmte Funktionen bereitzustellen.
     </p>
 
-    <h2 class="text-2xl font-semibold text-gray-900 dark:text-gray-100 mt-10 mb-3">
+    <h2 class="mt-10 mb-3">
       Welche Cookies verwenden wir?
     </h2>
     <ul class="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300 leading-relaxed">
@@ -46,7 +46,7 @@ useHead({
       </li>
     </ul>
 
-    <h2 class="text-2xl font-semibold text-gray-900 dark:text-gray-100 mt-10 mb-3">
+    <h2 class="mt-10 mb-3">
       Wie kannst du Cookies verwalten?
     </h2>
     <p class="mb-4 leading-relaxed">

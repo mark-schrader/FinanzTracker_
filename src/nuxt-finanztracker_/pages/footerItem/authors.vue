@@ -19,7 +19,7 @@ const team = [
 
 <template>
   <section class="content-wrapper text-gray-800 dark:text-gray-200">
-    <h1 class="text-4xl font-bold mb-6 text-brand-600 dark:text-brand-300">
+    <h1 class="mb-6">
       Unser Team
     </h1>
 
