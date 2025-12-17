@@ -238,14 +238,6 @@
             </div>
           </div>
 
-          <!--Button: Daueraufträge hinzufügen -->
-          <div class="flex justify-center mt-2">
-            <button class="btn btn-primary flex items-center space-x-2">
-              <i class="fas fa-plus-circle text-lg"></i> <!-- Icon -->
-              <span>Daueraufträge hinzufügen</span>
-            </button>
-          </div>
-
           <!-- Button: schließen // danach vllt auch Button: Speichern dazu?-->
           <div class="flex justify-end mt-6">
             <button @click="showRecurringModal = false" class="btn btn-secondary">
