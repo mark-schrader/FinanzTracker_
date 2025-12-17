@@ -71,7 +71,7 @@
         <div class="card grid md:grid-cols-3 gap-4 items-end">
             <div>
                 <label class="block mb-1">Dateiname</label>
-                <input type="text" v-model="filename" placeholder="kontobewegung_juni_2025"
+                <input type="text" v-model="filename" placeholder="z.B. kontobewegung_juni_2025"
                     class="form-input border-2 border-brand-300 dark:border-brand-600" />
             </div>
 
@@ -84,23 +84,37 @@
                     <option>Json (.json)</option>
                 </select>
             </div>
-
-            <button class="btn-primary h-11" :disabled="!options.kontobewegung || filteredTransactions.length === 0"
-                @click="exportPdf">
+            <!-- Export Button -->
+            <button class="btn-primary h-11" :disabled="!options.kontobewegung || exportTransactions.length === 0"
+                @click="exportPdf(true)">
                 Exportieren
             </button>
 
         </div>
 
         <!-- Exportübersicht -->
-        <div class="card text-center">
-            <h2 class="mb-4">Exportübersicht</h2>
+        <!-- Exportübersicht -->
+        <div class="card">
+            <h3 class="mb-4">Exportübersicht</h3>
 
-            <div class="h-48 flex items-center justify-center border-2 border-dashed rounded-lg
+            <!-- Placeholder bevor Exportieren -->
+            <div v-if="!pdfPreviewUrl" class="h-48 flex items-center justify-center border-2 border-dashed rounded-lg
                text-gray-400 dark:text-gray-500">
-                Vorschau folgt nach Auswahl
+                Vorschau wird nach dem Export angezeigt
+            </div>
+
+            <!-- Download Button aber erst nur für pdf-->
+            <div v-else>
+                <div class="flex justify-end mb-4">
+                    <button class="btn-primary" @click="downloadPdf">
+                        PDF herunterladen
+                    </button>
+                </div>
+
+                <iframe :src="pdfPreviewUrl" class="w-full h-96 border rounded" />
             </div>
         </div>
+
     </div>
 </template>
 
@@ -121,27 +135,48 @@ const {
     filteredTransactions
 } = useTransactionFilter(transactions)
 
+// Lade alle Kontobewegungen vom Nutzer 
 onMounted(async () => {
     const data = await $fetch('/api/transactions?userId=1')
     transactions.value = data || []
 })
 
+// Lösche Blob URL wenn Komponente zerstört wird
+onBeforeUnmount(() => {
+    if (pdfPreviewUrl.value) URL.revokeObjectURL(pdfPreviewUrl.value)
+})
+
+// Gefilterte Transaktionen für den Export (nur bis heute)
+const exportTransactions = computed(() => {
+  const now = new Date()
+  now.setHours(23, 59, 59, 999)
+
+  return filteredTransactions.value.filter(t => {
+    const d = new Date(t.date)
+    d.setHours(0, 0, 0, 0)
+    return d <= now
+  })
+})
+
+// Export Optionen aber erstmal nur Kontobewegung
 const options = reactive({
     kontobewegung: true, // exportiere Kontobewegung
     dashboard: false, // erstmal kein Dashboard Export
     challenge: false, // erstmal kein Challenge Export
-    period: 'month' // Standard Zeitraum Monat
 })
 
 const filename = ref('') // Dateiname für Export von Nutzer definiert, wenn leer, Standardname verwenden
 
+const pdfPreviewUrl = ref(null) // Vorschau URL für PDF Export (Data URL oder Blob URL)
+
+
 // Erstmal nur PDF Export Funktion
-function exportPdf() {
+function exportPdf(preview = false) {
     if (!options.kontobewegung || filteredTransactions.value.length === 0) return
 
     const doc = new jsPDF('p', 'mm', 'a4') // Portrait, mm, A4
 
-    // Titel
+    // Titel oben links
     doc.setFontSize(16)
     doc.text('Kontobewegung', 14, 20)
 
@@ -167,7 +202,7 @@ function exportPdf() {
 
     // Tabelle 
     // Daten vorbereiten, jede Zeile ein Array mit Spaltenwerten
-    const rows = filteredTransactions.value.map(t => {
+    const rows = exportTransactions.value.map(t => {
         const amountNumber =
             Number(String(t.amount).replace(/[^0-9.-]/g, '')) || 0 // Betrag als Zahl
 
@@ -219,16 +254,16 @@ function exportPdf() {
             }
         },
 
-        // Fußzeile mit Seitenzahl und Copyright Pelitegeier
-        didDrawPage(data) {
+        // Fußzeile mit Seitenzahl und Copyright Pleitegeier
+        didDrawPage() {
             const pageHeight = doc.internal.pageSize.height // Seitenhöhe, für Fußzeile
             const pageNumber = doc.getNumberOfPages() // Aktuelle Seitenzahl
             doc.setFontSize(8) // Fußzeile Schriftgröße
             doc.setTextColor(0) // Fußzeile Schriftfarbe, schwarz
 
             doc.text(
-                // Fußzeile links, Copyright + Seitenzahl und Seitenzahl
-                `© ${new Date().getFullYear()} Pleitegeier – Seite ${pageNumber} / ${doc.getNumberOfPages()}`, 
+                // Fußzeile links, Copyright + Seitenzahl 
+                `© ${new Date().getFullYear()} Pleitegeier – Seite ${pageNumber} / ${doc.getNumberOfPages()}`,
                 doc.internal.pageSize.width / 2,
                 pageHeight - 10,
                 { align: 'center' }
@@ -236,15 +271,24 @@ function exportPdf() {
         }
 
     })
+    // exportPdf Funktion, true für Preview, false für Download
+    if (preview) { // wenn preview true ist
+        // Preview generieren als Blob URL
+        if (pdfPreviewUrl.value) URL.revokeObjectURL(pdfPreviewUrl.value)
+        const blob = doc.output('blob')
+        pdfPreviewUrl.value = URL.createObjectURL(blob)
+    }
+    else { // wenn preview false ist, Datei herunterladen
+        const today = new Date().toISOString().slice(0, 10)
+        const name = filename.value?.trim()
+            ? filename.value
+            : `kontobewegung_${today}`
 
-
-    // Filename generieren und speichern
-    const today = new Date().toISOString().slice(0, 10)
-    const name = filename.value?.trim()
-        ? filename.value
-        : `kontobewegung_${today}` // Standardname, wenn kein Name angegeben
-
-    doc.save(`${name}.pdf`) // PDF speichern
+        doc.save(`${name}.pdf`)
+    }
 }
 
+function downloadPdf() {
+    exportPdf(false)
+}
 </script>
