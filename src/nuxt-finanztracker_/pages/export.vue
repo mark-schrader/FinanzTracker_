@@ -95,24 +95,30 @@
         <!-- Exportübersicht -->
         <div class="card">
             <div class="flex items-center justify-between mb-4">
-            <h3 class="mb-4">Exportübersicht</h3>
-            <!-- Download Button aber erst nur für pdf-->
-                <div class="flex justify-end mb-4">
-                    <button class="btn-primary" @click="downloadPdf">
-                        PDF herunterladen
-                    </button>
-                </div>
+                <h3>Exportübersicht</h3>
+                <!-- PDF herunterladen button-->
+                <button v-if="pdfPreviewUrl" class="btn-primary" @click="downloadPdf">
+                    PDF herunterladen
+                </button>
             </div>
 
-            <!-- Placeholder bevor Exportieren -->
-            <div v-if="!pdfPreviewUrl" class="h-48 flex items-center justify-center border-2 border-dashed rounded-lg
-               text-gray-400 dark:text-gray-500">
+            <!-- wenn keine Daten -->
+            <div v-if="exportTransactions.length === 0" class="h-32 flex items-center justify-center
+           border-2 border-dashed rounded-lg
+           text-red-500 text-sm">
+                Für den ausgewählten Zeitraum sind keine Daten vorhanden.
+            </div>
+
+            <!-- Placeholder -->
+            <div v-else-if="!pdfPreviewUrl" class="h-48 flex items-center justify-center
+           border-2 border-dashed rounded-lg
+           text-gray-400 dark:text-gray-500">
                 Vorschau wird nach dem Export angezeigt
             </div>
 
-            <!-- Vorschau nach Export -->
+            <!-- Vorschau/preview -->
             <div v-else>
-                <div v-if="pdfPreviewUrl" class="text-sm">
+                <div class="text-sm mb-4">
                     <p>
                         <strong>Summe Einnahmen:</strong>
                         {{ exportSummary.income.toLocaleString('de-DE', { minimumFractionDigits: 2 }) }} €
@@ -121,11 +127,12 @@
                         <strong>Summe Ausgaben:</strong>
                         {{ exportSummary.expense.toLocaleString('de-DE', { minimumFractionDigits: 2 }) }} €
                     </p>
-                    <p class="font-semibold mb-4">
+                    <p class="font-semibold">
                         <strong>Saldo:</strong>
                         {{ exportSummary.saldo.toLocaleString('de-DE', { minimumFractionDigits: 2 }) }} €
                     </p>
                 </div>
+
                 <iframe :src="pdfPreviewUrl" class="w-full h-96 border rounded" />
             </div>
         </div>
