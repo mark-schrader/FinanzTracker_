@@ -189,6 +189,9 @@
                         <label>Betrag (€)</label>
                         <input v-model="selectedAuftrag.betrag" type="number" step="0.50" class="form-input" />
 
+                        <label>Datum</label>
+                        <input v-model="selectedAuftrag.date" type="date" class="form-input" />
+
                         <label>Kategorie</label>
                         <select v-model="selectedAuftrag.categoryId" class="form-select">
                           <option disabled value="">Bitte wählen</option>
