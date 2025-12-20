@@ -58,7 +58,7 @@
 
       <!-- Add Button -->
       <div class="flex justify-center mt-4">
-        <button @click="showAdd = true" class="btn btn-primary flex items-center space-x-2">
+        <button data-testid="open-category-popup" @click="showAdd = true" class="btn btn-primary flex items-center space-x-2">
           <i class="fas fa-plus-circle"></i>
           <span>Kategorie hinzufügen</span>
         </button>
