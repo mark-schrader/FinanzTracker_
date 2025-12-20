@@ -3,13 +3,6 @@ import { mount } from '@vue/test-utils'
 import { describe, it, expect, vi } from 'vitest'
 import Kontobewegung from '../../../pages/kontobewegung.vue'
 
-vi.stubGlobal('useAlert', () => ({
-  showAlertBox: false,
-  alertMessage: '',
-  alertType: '',
-  showAlert: vi.fn()
-}))
-
 const factory = () =>
   mount(Kontobewegung, {
     global: {
