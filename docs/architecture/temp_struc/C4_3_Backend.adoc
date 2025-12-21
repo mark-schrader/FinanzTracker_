@@ -40,10 +40,10 @@ Controller: "Budgetcontroller" (nicht umgesetzt)
 
 === Controller: transaction
     * Entgegennehmen der Anfrage vom Frontend
-    * erhalten der Transaktionen vom Service und ausgeben an das Frontend
-    * erhalten der Transaktionen-Liste vom Service und ausgeben an das Frontend
-    * erhalten einer neuen Transaktion vom Frontend
-    * senden der neuen Transaktion an den Service
+    * erhalten der Transaktionen (Einahmen und Ausgaben) vom Service und ausgeben an das Frontend
+    * erhalten der Transaktionen-Liste (Einahmen und Ausgaben) vom Service und ausgeben an das Frontend
+    * erhalten einer neuen Transaktion (Einahmen und Ausgaben) vom Frontend
+    * senden der neuen Transaktion (Einahmen und Ausgaben) an den Service
     * Fehlermeldung an das Frontend senden
 
 Controller: "UserController" (nicht umgesetzt, kommt von erik)
@@ -53,16 +53,18 @@ Controller: "UserController" (nicht umgesetzt, kommt von erik)
 Service: BudgetService (nicht umgesetzt)
 
 === Service: CategoryService
-    * erhalten der Kategorien vom Repository
-    * senden der Kategorien an den Controller
+    * erhalten der Kategorie vom Repository
+    * erhalten der Kategorie-Liste vom Repository
+    * senden der Kategorie an den Controller
+    * senden der Kategorien-Liste an den Controller
     * erhalten einer neuen Kategorie vom Controller
     * senden der neuen Kategorie an das Repository
     * ID vom Controller erhalten
-    * je nach wünsch löschen/aktualisieren der Kategorie im Repository
+    * je nach wünsch löschen/aktualisieren (Inhalt der Kategorie mitgegeben) der Kategorie im Repository
 
 === Service: ExpenseService
-    * erhalten der Ausgaben vom Repository
-    * senden der Ausgaben an den Controller
+    * erhalten der Ausgabe vom Repository
+    * senden der Ausgabe an den Controller
     * erhalten einer neuen Ausgabe vom Controller
     * senden der neuen Ausgabe an das Repository
     * ID vom Controller erhalten
@@ -70,20 +72,24 @@ Service: BudgetService (nicht umgesetzt)
 
 === Service: GoalService
     * erhalten der Challenge vom Repository
+    * erhalten der Challenge-Liste vom Repository
     * senden der Challenge an den Controller
+    * senden der Challenge-Liste an den Controller
     * erhalten eines neuen Challenge vom Controller
     * senden des neuen Challenge an das Repository
     * ID vom Controller erhalten
-    * je nach wünsch löschen/aktualisieren der Challenge im Repository
+    * je nach wünsch löschen/aktualisieren (Inhalt des Challenge mitgegeben) der Challenge im Repository
 
 === Service: IncomeService
-    * erhalten der Einnahmen vom Repository
-    * senden der Einnahmen an den Controller
+    * erhalten der Einnahme vom Repository
+    * senden der Einnahme an den Controller
     * erhalten einer neuen Einnahme vom Controller
     * senden der neuen Einnahme an das Repository
     * ID vom Controller erhalten
-    * je nach wünsch löschen/aktualisieren der Einnahme im Repository
+    * je nach wünsch löschen/aktualisieren (Inhalt der Einnahme mitgegeben) der Einnahme im Repository
+
 === Service: TransactionService
+    * Zusammenfassung von Einnahmen und Ausgaben von Service-Ebene (Ruft ExpenseService und IncomeService auf)
 
 Service: UserService (nicht umgesetzt, kommt von erik)
 
@@ -93,12 +99,26 @@ Service: UserService (nicht umgesetzt, kommt von erik)
 Domain: Budget (nicht umgesetzt)
 
 === Domain: Category
+    * Definition der Attribute einer Kategorie
 
 === Domain: Expense
+    * Definition der Attribute einer Ausgabe
+    * Definition der Methoden einer Ausgabe
+    * Definition der Methoden zur Berechnung von wiederkehrenden Ausgaben
+    * Definition der Methoden zur Formattierung des Datums (asugelagert in \FinanzTracker_\src\nuxt-finanztracker_\server\utility\transactionFormatUtility.ts (Hilfsklasse für Formattierung))
 
 === Domain: Goal
+    * Definition der Attribute eines Challenge
+    * Definition der Methoden eines Challenge
+    * Definition der Methoden zur Fromattierung des Betrags (asugelagert in \FinanzTracker_\src\nuxt-finanztracker_\server\utility\amountFormatUtility.ts (Hilfsklasse für Formattierung))
+    * Definition der Methoden zur Fromattierung des Zielbetrags (asugelagert in \FinanzTracker_\src\nuxt-finanztracker_\server\utility\transactionFormatUtility.ts (Hilfsklasse für Formattierung))
+    * Definition der Methoden zur Fromattierung des Datums (asugelagert in \FinanzTracker_\src\nuxt-finanztracker_\server\utility\transactionFormatUtility.ts (Hilfsklasse für Formattierung))
 
 === Domain: Income
+    * Definition der Attribute einer Einnahme
+    * Definition der Methoden einer Einnahme
+    * Definition der Methoden zur Berechnung von wiederkehrenden Einnahmen
+    * Definition der Methoden zur Formattierung des Datums (asugelagert in \FinanzTracker_\src\nuxt-finanztracker_\server\utility\transactionFormatUtility.ts (Hilfsklasse für Formattierung)) 
 
 Domain: UserService (nicht umgesetzt, kommt von erik)
 
@@ -108,11 +128,15 @@ Domain: UserService (nicht umgesetzt, kommt von erik)
 Repository: Budget (nicht umgesetzt)
 
 === Repository: Category
+    * CRUD Operationen für Kategorien
 
 === Repository: Expense
+    * CRUD Operationen für Ausgaben
 
 === Repository: Goal
+    * CRUD Operationen für Challenge
 
 === Repository: Income
-
+    * CRUD Operationen für Einnahmen
+    
 Repository: UserService (nicht umgesetzt, kommt von erik)

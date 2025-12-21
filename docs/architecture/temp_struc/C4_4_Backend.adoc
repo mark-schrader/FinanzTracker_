@@ -1,62 +1,83 @@
-= C4-4 Backend Struktur 
+= C4-3 Backend Struktur
 
-alles Einzeln als in individuellen Diagrammen erstellen!
+alles Einzeln als ein Diagramm erstellen!
 
 == Controller (Kommunikation mit Frontend)
+
 Controller: "Budgetcontroller" (nicht umgesetzt)
 
 === Controller: categories
 
+
 === Controller: expenses
+
 
 === Controller: goals
 
+
 === Controller: incomes
+
 
 === Controller: transaction
 
+
 Controller: "UserController" (nicht umgesetzt, kommt von erik)
 
+== Service (Logik)
 
-== Service (Geschäftslogik)
 Service: BudgetService (nicht umgesetzt)
 
 === Service: CategoryService
 
+
 === Service: ExpenseService
+
 
 === Service: GoalService
 
+
 === Service: IncomeService
 
+
 === Service: TransactionService
+
 
 Service: UserService (nicht umgesetzt, kommt von erik)
 
 
 == Domain (Definierung der Klasse)
+
 Domain: Budget (nicht umgesetzt)
 
 === Domain: Category
 
+
 === Domain: Expense
+
 
 === Domain: Goal
 
+
 === Domain: Income
+
 
 Domain: UserService (nicht umgesetzt, kommt von erik)
 
 
 == Repository (Kommunikation mit Backend)
+
 Repository: Budget (nicht umgesetzt)
 
 === Repository: Category
+    *
 
 === Repository: Expense
+    
 
 === Repository: Goal
+    
 
 === Repository: Income
-
+    
+    
 Repository: UserService (nicht umgesetzt, kommt von erik)
