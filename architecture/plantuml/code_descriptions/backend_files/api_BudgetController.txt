@@ -1,0 +1,9 @@
+File: server/api/BudgetController.ts
+
+Status: Datei vorhanden, aktuell leer
+
+Erwartetes Verhalten (Platzhalter):
+- API-Endpunkte für Budget-Abfragen und -Änderungen (z. B. GET /budget, POST /budget)
+- Erwartete Funktionen: `handler` via `defineEventHandler` mit Methoden GET/POST/PUT/DELETE
+
+Zu implementieren: Integration mit `BudgetService` und `BudgetRepository`

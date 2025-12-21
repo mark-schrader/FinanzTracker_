@@ -1,4 +1,4 @@
-= C4-3 Backend Struktur
+= C4-4 Backend Struktur
 
 alles Einzeln als ein Diagramm erstellen!
 
@@ -7,10 +7,59 @@ alles Einzeln als ein Diagramm erstellen!
 Controller: "Budgetcontroller" (nicht umgesetzt)
 
 === Controller: categories
+    File: server/api/categories.ts
 
+    Schema: `CreateCategorySchema` (zod) — validiert Body für POST (name,
+    type, userId, icon, color)
+
+    Exported handler: default async (event)
+
+    Funktionen / Verhalten:
+        - Handler(event):
+        - `GET`: Validiert `userId` → ruft
+          `CategoryService.getCategoryByUserId(userId)` → gibt
+          Kategorie-Liste zurück
+        - `POST`: Liest Body, validiert mit `CreateCategorySchema` → baut
+          `payload` → ruft `CategoryService.createCategory(payload)` → gibt
+          erstellte Kategorie zurück
+        - Andere Methoden → `405`
+        - Fehler: Log + `createError`
+
+    Aufruft / Abhängigkeiten:
+        - `CategoryService.getCategoryByUserId(Number(userId))`
+      - `CategoryService.createCategory(payload)`
+
+    Rückgabewerte:
+        - GET: Array von Kategorien (vereinfachtes DTO: id, name, type,
+          icon, color)
+        - POST: DTO der erstellten Kategorie
 
 === Controller: expenses
+    File: server/api/expenses.ts
 
+        Schema: `CreateExpenseSchema` (zod) — validiert Body für POST (userId,
+        categoryId, amount, date, interval, note)
+
+    Exported handler: default async (event)
+
+    Funktionen / Verhalten:
+    - Handler(event):
+     - `GET`: Validiert `userId` → ruft
+      `ExpenseService.getExpensesByUserId(userId)` → gibt Liste der Ausgaben
+      zurück
+    - `POST`: Liest Body, validiert gegen `CreateExpenseSchema` → baut
+     `payload` → ruft `ExpenseService.createExpense(payload)` → gibt Ergebnis
+     zurück
+    - Andere Methoden → `405`
+    - Fehlerbehandlung: Log + `createError`
+
+    Aufruft / Abhängigkeiten:
+    - `ExpenseService.getExpensesByUserId(Number(userId))`
+    - `ExpenseService.createExpense(payload)`
+
+    Rückgabewerte:
+    - GET: Array von Expense-Domain-Objekten (vom Service transformiert)
+    - POST: Objekt { message, expense }
 
 === Controller: goals
 
@@ -28,18 +77,144 @@ Controller: "UserController" (nicht umgesetzt, kommt von erik)
 Service: BudgetService (nicht umgesetzt)
 
 === Service: CategoryService
+File: server/application/CategoryService.ts
+
+Exported class: `CategoryService` (default) mit statischen Methoden
+
+Methoden:
+- `static async getCategoryByUserId(userId: number)`
+  - `repository.findByUserId(userId)` → map zu DTOs (id, name, type, icon, color)
+  - Rückgabe: Array von Kategorie-DTOs
+
+- `static async getCategoryByCategoryId(id: number)`
+  - `repository.findByCategoryId(id)` → wirft Fehler wenn nicht gefunden
+  - Rückgabe: Kategorie-DTO
+
+- `static async createCategory(data: any)`
+  - Baut `payload` mit `user_id`, icon/color Normalisierung
+  - `repo.create(payload)` → Rückgabe: DTO der erstellten Kategorie
+
+- `static async updateCategory(id: number, data: any)`
+  - Baut `updateData` aus übergebenen Feldern
+  - `repo.update(id, updateData)` → Rückgabe: DTO der aktualisierten Kategorie
+
+- `static async deleteCategory(id: number)`
+  - `repo.remove(id)` → wirft Fehler bei Fehlschlag
+  - Rückgabe: { message: 'Category deleted', id }
+
+Abhängigkeiten:
+- `CategoryRepository` (findByUserId, findByCategoryId, create, update, remove)
 
 
 === Service: ExpenseService
+File: server/application/ExpenseService.ts
+
+Exported class: `ExpenseService` (default) with static methods
+
+Methoden:
+- `static async getExpensesByUserId(userId: number)`
+  - Erstellt `ExpenseRepository`, ruft `repo.findByUserId(userId)`
+  - Wandelt Prisma-Objekte mithilfe `Expense.fromPrisma(e)` in Domain-Objekte um
+  - Rückgabe: Array von Expense-Domain-Objekten
+
+- `static async getExpenseById(id: number)`
+  - `repo.findById(id)`, wirft Fehler wenn nicht gefunden
+  - Rückgabe: Expense-Domain-Objekt
+
+- `static async createExpense(data: any)`
+  - Baut Payload um (user_id, category_id, amount, date, interval, note)
+  - Ruft `repo.create(payload)` auf
+  - Rückgabe: { message: 'Expense created successfully', expense }
+
+- `static async updateExpense(id: number, data: any)`
+  - Baut `updateData` basierend auf übergebenen Feldern
+  - Ruft `repo.update(id, updateData)` auf
+  - Rückgabe: { message: 'Expense updated successfully', expense }
+
+- `static async deleteExpense(id: number)`
+  - Ruft `repo.remove(id)` auf
+  - Rückgabe: { message: 'Expense deleted successfully', id }
+
+Abhängigkeiten / Aufrufe:
+- `ExpenseRepository` (findByUserId, findById, create, update, remove)
+- `Expense.fromPrisma()` (Domain-Transform)
 
 
 === Service: GoalService
+File: server/application/GoalService.ts
+
+Exported class: `GoalService` (default) mit statischen Methoden
+
+Methoden:
+- `static async getGoalsByUserId(userId: number)`
+  - `repo.findByUserId(userId)` → map zu `Goal.fromPrisma`
+  - Rückgabe: Array von Goal-Domain-Objekten
+
+- `static async getGoalById(id: number)`
+  - `repo.findById(id)` → wirft Fehler wenn nicht gefunden
+  - Rückgabe: Goal-Domain-Objekt
+
+- `static async createGoal(data)`
+  - Baut Payload (user_id, name, target, saved, due_date)
+  - `repo.create(payload)` → Rückgabe: { message, goal }
+
+- `static async updateGoal(id, data)`
+  - Baut updateData, ruft `repo.update(id, updateData)` → Rückgabe: { message, goal }
+
+- `static async deleteGoal(id)`
+  - `repo.remove(id)` → Rückgabe: { message, id }
+
+Abhängigkeiten:
+- `GoalRepository` (findByUserId, findById, create, update, remove)
 
 
 === Service: IncomeService
+File: server/application/IncomeService.ts
 
+Exported class: `IncomeService` (default) mit statischen Methoden
+
+Methoden:
+- `static async getIncomesByUserId(userId: number)`
+  - `repo.findByUserId(userId)` → map zu `Income.fromPrisma`
+  - Rückgabe: Array von Income-Domain-Objekten
+
+- `static async getIncomeById(id: number)`
+  - `repo.findById(id)`, wirft Fehler wenn nicht gefunden
+  - Rückgabe: Income-Domain-Objekt
+
+- `static async createIncome(data)`
+  - Baut Payload (user_id, category_id, source, amount, date, interval, note)
+  - `repo.create(payload)`
+  - Rückgabe: { message: 'Income created successfully', income }
+
+- `static async updateIncome(id, data)`
+  - Baut updateData, ruft `repo.update(id, updateData)`
+  - Rückgabe: { message: 'Income updated successfully', income }
+
+- `static async deleteIncome(id)`
+  - `repo.remove(id)`
+  - Rückgabe: { message: 'Income deleted successfully', id }
+
+Abhängigkeiten:
+- `IncomeRepository` (findByUserId, findById, create, update, remove)
+- `Income.fromPrisma()`
 
 === Service: TransactionService
+File: server/application/TransactionService.ts
+
+Exported class: `TransactionService` (default) mit statischen Methoden
+
+Methoden:
+- `static async getAllTransactions(userId: number)`
+  - Validiert userId (wirft Fehler wenn fehlend)
+  - Ruft parallel `ExpenseService.getExpensesByUserId(userId)` und `IncomeService.getIncomesByUserId(userId)` via `Promise.all`
+  - Transformiert Expenses und Incomes in ein einheitliches Response-Format (recordType, type, date, amount, categoryName, purpose, comment...)
+  - Vereint die beiden Arrays, sortiert nach Datum (neu→alt) und entfernt Hilfsfeld `rawDate`
+  - Rückgabe: Array formatierter Transaktionen (Einnahmen + Ausgaben)
+
+Aufruft / Abhängigkeiten:
+- `ExpenseService.getExpensesByUserId`
+- `IncomeService.getIncomesByUserId`
 
 
 Service: UserService (nicht umgesetzt, kommt von erik)
@@ -66,18 +241,138 @@ Domain: UserService (nicht umgesetzt, kommt von erik)
 
 == Repository (Kommunikation mit Backend)
 
-Repository: Budget (nicht umgesetzt)
+=== Repository: Budget (nicht umgesetzt)
 
 === Repository: Category
-    *
+File: server/repositories/CategoryRepository.ts
+
+Exported class: `CategoryRepository` (named export)
+
+Methoden:
+- `async findByUserId(userId: number)`
+  - Prisma: `prisma.categories.findMany({ where: { OR: [{ user_id: Number(userId) }, { user_id: null }] }, orderBy: { name: 'asc' } })`
+  - Rückgabe: Array von Category-Records (inkl. systemweite Kategorien)
+
+- `async findByCategoryId(id: number)`
+  - Prisma: `prisma.categories.findUnique({ where: { id } })`
+  - Rückgabe: Category oder null
+
+- `async create(data)`
+  - Prisma: `prisma.categories.create({ data })`
+  - Rückgabe: erstellte Category
+
+- `async update(id, data)`
+  - Prisma: `prisma.categories.update({ where: { id }, data })`
+  - Rückgabe: aktualisierte Category
+
+- `async remove(id)`
+  - Prisma: `prisma.categories.delete({ where: { id } })` → Rückgabe true
+
+Abhängigkeiten:
+- `@prisma/client` (`PrismaClient`)
+
 
 === Repository: Expense
-    
+File: server/repositories/ExpenseRepository.ts
+
+Exported class: `ExpenseRepository` (default)
+
+Methoden:
+- `async findByUserId(userId: number)`
+  - Prisma: `prisma.expenses.findMany({ where: { user_id }, orderBy: { date: 'desc' }, include: { categories: true, user: true } })`
+  - Rückgabe: Array von Prisma-Expense-Objekten (inkl. categories, user)
+
+- `async findById(id: number)`
+  - Prisma: `prisma.expenses.findUnique({ where: { id }, include: { categories: true, user: true } })`
+  - Rückgabe: einzelnes Prisma-Expense-Objekt oder null
+
+- `async create(data: any)`
+  - Normalisiert `data` (user_id Number, Date für date)
+  - Prisma: `prisma.expenses.create({ data: payload, include: { categories: true, user: true } })`
+  - Rückgabe: erstelltes Prisma-Objekt
+
+- `async update(id: number, data: any)`
+  - Normalisiert Felder (user_id, date, amount)
+  - Prisma: `prisma.expenses.update({ where: { id }, data: payload, include: { categories: true, user: true } })`
+  - Rückgabe: aktualisiertes Prisma-Objekt
+
+- `async remove(id: number)`
+  - Prisma: `prisma.expenses.delete({ where: { id } })`
+  - Rückgabe: true (oder throw bei Fehler)
+
+Abhängigkeiten:
+- `@prisma/client` via `PrismaClient` (instanziiert als `prisma`)
+   
 
 === Repository: Goal
-    
+File: server/repositories/GoalRepository.ts
+
+Exported class: `GoalRepository` (default)
+
+Methoden:
+- `async findByUserId(userId: number)`
+  - Prisma: `prisma.goals.findMany({ where: { user_id: Number(userId) }, orderBy: { due_date: 'asc' } })`
+  - Rückgabe: Array von Goal-Records
+
+- `async findById(id: number)`
+  - Prisma: `prisma.goals.findUnique({ where: { id } })`
+  - Rückgabe: Goal oder null
+
+- `async create(data: any)`
+  - Normalisiert `user_id`, `due_date` → Prisma `prisma.goals.create({ data: payload })`
+  - Rückgabe: erstelltes Goal-Objekt
+
+- `async update(id: number, data: any)`
+  - Normalisiert Felder (user_id, due_date, target, saved)
+  - Prisma: `prisma.goals.update({ where: { id }, data: payload })`
+  - Rückgabe: aktualisiertes Goal-Objekt
+
+- `async remove(id: number)`
+  - Prisma: `prisma.goals.delete({ where: { id } })` → Rückgabe true
+
+Abhängigkeiten:
+- `@prisma/client` (`PrismaClient`)
+
 
 === Repository: Income
+File: server/repositories/IncomeRepository.ts
+
+Exported class: `IncomeRepository` (default)
+
+Methoden:
+- `async findByUserId(userId: number)`
+  - Prisma: `prisma.incomes.findMany({ where: { user_id: Number(userId) }, include: { categories: true, user: true }, orderBy: { date: 'desc' } })`
+  - Rückgabe: Array von Income-Records (inkl. categories, user)
+
+- `async findById(id: number)`
+  - Prisma: `prisma.incomes.findUnique({ where: { id }, include: { categories: true, user: true } })`
+  - Rückgabe: einzelnes Income-Record oder null
+
+- `async create(data: any)`
+  - Normalisiert Felder (user_id, category_id, date)
+  - Prisma: `prisma.incomes.create({ data: payload, include: { categories: true, user: true } })`
+  - Rückgabe: erstelltes Income-Objekt
+
+- `async update(id: number, data: any)`
+  - Normalisiert Felder (user_id, date, amount)
+  - Prisma: `prisma.incomes.update({ where: { id }, data: payload, include: { categories: true, user: true } })`
+  - Rückgabe: aktualisiertes Income-Objekt
+
+- `async remove(id: number)`
+  - Prisma: `prisma.incomes.delete({ where: { id } })` → Rückgabe true
+
+Abhängigkeiten:
+- `@prisma/client` (`PrismaClient`)
     
     
-Repository: UserService (nicht umgesetzt, kommt von erik)
+=== Repository: UserService (nicht umgesetzt, kommt von erik)
+
+== Datenbank (Tabellenstruktur)
+
+File: prisma/schema.prisma
+
+Beschreibung:
+- Enthält das Prisma-Schema für die Datenbank-Modelle (Expenses, Incomes, Categories, Goals, Users, Budgets etc.)
+- Wird vom Prisma-Client genutzt, um Typen und DB-Zugriffe zu generieren
+Pfad im Repo:
+- src/nuxt-finanztracker_/prisma/schema.prisma

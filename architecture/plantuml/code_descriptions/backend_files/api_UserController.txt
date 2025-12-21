@@ -1,0 +1,9 @@
+File: server/api/UserController.ts
+
+Status: Datei vorhanden, aktuell leer
+
+Erwartetes Verhalten (Platzhalter):
+- Sollte Endpunkte zur Benutzerverwaltung bieten (Profile, Rollen, evtl. Session-Info)
+- Erwartete Funktionen: `getUser`, `createUser`, `updateUser`, `deleteUser` oder `getSession`
+
+Zu implementieren: Einbindung des Auth-Adapters / Supabase-Client
