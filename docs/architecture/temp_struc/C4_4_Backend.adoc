@@ -4,7 +4,7 @@ alles Einzeln als ein Diagramm erstellen!
 
 == Controller (Kommunikation mit Frontend)
 
-Controller: "Budgetcontroller" (nicht umgesetzt)
+=== Controller: "Budgetcontroller" (nicht umgesetzt)
 
 === Controller: categories
     File: server/api/categories.ts
@@ -62,19 +62,77 @@ Controller: "Budgetcontroller" (nicht umgesetzt)
     - POST: Objekt { message, expense }
 
 === Controller: goals
+File: server/api/goals.ts
+
+Schema: `CreateGoalSchema` (zod) — validiert Body für POST (userId, name, target, saved, dueDate)
+
+Exported handler: default async (event)
+
+Funktionen / Verhalten:
+- Handler(event):
+  - `GET`: Validiert `userId` → ruft `GoalService.getGoalsByUserId(userId)` → gibt Liste zurück
+  - `POST`: Liest Body, validiert → baut `payload` (inkl. saved defaulting to 0) → ruft `GoalService.createGoal(payload)` → gibt Ergebnis zurück
+  - Fehler/405 entsprechend
+
+Aufruft / Abhängigkeiten:
+- `GoalService.getGoalsByUserId(Number(userId))`
+- `GoalService.createGoal(payload)`
+
+Rückgabewerte:
+- GET: Array von Goals
+- POST: Objekt { message, goal }
 
 
 === Controller: incomes
+File: server/api/incomes.ts
+
+Schema: `CreateIncomeSchema` (zod) — validiert Body für POST (userId, categoryId, source, amount, date, interval, note)
+
+Exported handler: default async (event)
+
+Funktionen / Verhalten:
+- Handler(event):
+  - `GET`: Validiert `userId` → ruft `IncomeService.getIncomesByUserId(userId)` → gibt Liste zurück
+  - `POST`: Liest Body, validiert → baut `payload` → ruft `IncomeService.createIncome(payload)` → gibt Ergebnis zurück
+  - Fehler/405 entsprechend
+
+Aufruft / Abhängigkeiten:
+- `IncomeService.getIncomesByUserId(Number(userId))`
+- `IncomeService.createIncome(payload)`
+
+Rückgabewerte:
+- GET: Array von Income-Domain-Objekten (vom Service transformiert)
+- POST: Objekt { message, income }
 
 
 === Controller: transaction
+File: server/api/transactions.ts
+
+Exported handler: default async (event) via `defineEventHandler`
+
+Funktionen / Verhalten:
+- Handler(event):
+  - Liest HTTP-Methode (`getMethod`) und Query-Parameter
+  - Unterstützte Methode: `GET`
+    - Validiert `userId` mit `QueryUserIdSchema`
+    - Ruft `TransactionService.getAllTransactions(userId)` auf
+    - Gibt das Ergebnis von `TransactionService.getAllTransactions` zurück (Array formatierter Transaktionen)
+  - Nicht unterstützte Methoden → `405 Method not allowed`
+  - Fehler: Loggt den Fehler und returned `createError` mit StatusCode
+
+Aufruft / Abhängigkeiten:
+- `TransactionService.getAllTransactions(Number(userId))`
+
+Rückgabewerte:
+- Bei Erfolg: Array von Transaktionen (im Format, das `TransactionService` liefert)
+- Bei Fehler: HTTP-Error (Status 4xx/5xx)
 
 
-Controller: "UserController" (nicht umgesetzt, kommt von erik)
+=== Controller: "UserController" (nicht umgesetzt, kommt von erik)
 
 == Service (Logik)
 
-Service: BudgetService (nicht umgesetzt)
+=== Service: BudgetService (nicht umgesetzt)
 
 === Service: CategoryService
 File: server/application/CategoryService.ts
@@ -217,12 +275,12 @@ Aufruft / Abhängigkeiten:
 - `IncomeService.getIncomesByUserId`
 
 
-Service: UserService (nicht umgesetzt, kommt von erik)
+=== Service: UserService (nicht umgesetzt, kommt von erik)
 
 
 == Domain (Definierung der Klasse)
 
-Domain: Budget (nicht umgesetzt)
+=== Domain: Budget (nicht umgesetzt)
 
 === Domain: Category
 
@@ -236,7 +294,7 @@ Domain: Budget (nicht umgesetzt)
 === Domain: Income
 
 
-Domain: UserService (nicht umgesetzt, kommt von erik)
+=== Domain: UserService (nicht umgesetzt, kommt von erik)
 
 
 == Repository (Kommunikation mit Backend)
