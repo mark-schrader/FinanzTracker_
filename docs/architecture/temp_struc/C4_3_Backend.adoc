@@ -7,36 +7,41 @@ alles Einzeln als ein Diagramm erstellen!
 Controller: "Budgetcontroller" (nicht umgesetzt)
 
 === Controller: categories
-    * erhalten der Kategorien vom Service
-    * senden der Kategorien an das Frontend
+    * Entgegennehmen der Anfrage vom Frontend
+    * erhalten der Kategorien vom Service und ausgeben an das Frontend
+    * erhalten der Kategorien-Liste vom Service und ausgeben an das Frontend
     * erhalten einer neuen Kategorie vom Frontend
     * senden der neuen Kategorie an den Service
     * Fehlermeldung an das Frontend senden
 
 === Controller: expenses
-    * erhalten der Ausgaben vom Service
-    * senden der Ausgaben an das Frontend
+    * Entgegennehmen der Anfrage vom Frontend
+    * erhalten der Ausgaben vom Service und ausgeben an das Frontend
+    * erhalten der Ausgaben-Liste vom Service und ausgeben an das Frontend
     * erhalten einer neuen Ausgabe vom Frontend
     * senden der neuen Ausgabe an den Service
     * Fehlermeldung an das Frontend senden
 
 === Controller: goals
-    * erhalten der Challenge vom Service
-    * senden der Challenge an das Frontend
+    * Entgegennehmen der Anfrage vom Frontend
+    * erhalten der Challenge vom Service und ausgeben an das Frontend
+    * erhalten der Challenge-Liste vom Service und ausgeben an das Frontend
     * erhalten eines neuen Challenge vom Frontend
     * senden des neuen Challenge an den Service
     * Fehlermeldung an das Frontend senden
 
 === Controller: incomes
-    * erhalten der Einnahmen vom Service
-    * senden der Einnahmen an das Frontend
+    * Entgegennehmen der Anfrage vom Frontend
+    * erhalten der Einnahmen vom Service und ausgeben an das Frontend
+    * erhalten der Einnahmen-Liste vom Service und ausgeben an das Frontend
     * erhalten einer neuen Einnahme vom Frontend
     * senden der neuen Einnahme an den Service
     * Fehlermeldung an das Frontend senden
 
 === Controller: transaction
-    * erhalten der Transaktionen vom Service
-    * senden der Transaktionen an das Frontend
+    * Entgegennehmen der Anfrage vom Frontend
+    * erhalten der Transaktionen vom Service und ausgeben an das Frontend
+    * erhalten der Transaktionen-Liste vom Service und ausgeben an das Frontend
     * erhalten einer neuen Transaktion vom Frontend
     * senden der neuen Transaktion an den Service
     * Fehlermeldung an das Frontend senden
@@ -52,13 +57,32 @@ Service: BudgetService (nicht umgesetzt)
     * senden der Kategorien an den Controller
     * erhalten einer neuen Kategorie vom Controller
     * senden der neuen Kategorie an das Repository
+    * ID vom Controller erhalten
+    * je nach wünsch löschen/aktualisieren der Kategorie im Repository
 
 === Service: ExpenseService
+    * erhalten der Ausgaben vom Repository
+    * senden der Ausgaben an den Controller
+    * erhalten einer neuen Ausgabe vom Controller
+    * senden der neuen Ausgabe an das Repository
+    * ID vom Controller erhalten
+    * je nach wünsch löschen/aktualisieren der Ausgabe im Repository
 
 === Service: GoalService
+    * erhalten der Challenge vom Repository
+    * senden der Challenge an den Controller
+    * erhalten eines neuen Challenge vom Controller
+    * senden des neuen Challenge an das Repository
+    * ID vom Controller erhalten
+    * je nach wünsch löschen/aktualisieren der Challenge im Repository
 
 === Service: IncomeService
-
+    * erhalten der Einnahmen vom Repository
+    * senden der Einnahmen an den Controller
+    * erhalten einer neuen Einnahme vom Controller
+    * senden der neuen Einnahme an das Repository
+    * ID vom Controller erhalten
+    * je nach wünsch löschen/aktualisieren der Einnahme im Repository
 === Service: TransactionService
 
 Service: UserService (nicht umgesetzt, kommt von erik)
