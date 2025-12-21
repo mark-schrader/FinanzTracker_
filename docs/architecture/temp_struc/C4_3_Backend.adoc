@@ -1,60 +1,94 @@
 = C4-3 Backend Struktur
 
+alles Einzeln als ein Diagramm erstellen!
+
 == Controller (Kommunikation mit Frontend)
+
 Controller: "Budgetcontroller" (nicht umgesetzt)
 
-Controller: categories
+=== Controller: categories
+    * erhalten der Kategorien vom Service
+    * senden der Kategorien an das Frontend
+    * erhalten einer neuen Kategorie vom Frontend
+    * senden der neuen Kategorie an den Service
+    * Fehlermeldung an das Frontend senden
 
-Controller: expenses
+=== Controller: expenses
+    * erhalten der Ausgaben vom Service
+    * senden der Ausgaben an das Frontend
+    * erhalten einer neuen Ausgabe vom Frontend
+    * senden der neuen Ausgabe an den Service
+    * Fehlermeldung an das Frontend senden
 
-Controller: goals
+=== Controller: goals
+    * erhalten der Challenge vom Service
+    * senden der Challenge an das Frontend
+    * erhalten eines neuen Challenge vom Frontend
+    * senden des neuen Challenge an den Service
+    * Fehlermeldung an das Frontend senden
 
-Controller: incomes
+=== Controller: incomes
+    * erhalten der Einnahmen vom Service
+    * senden der Einnahmen an das Frontend
+    * erhalten einer neuen Einnahme vom Frontend
+    * senden der neuen Einnahme an den Service
+    * Fehlermeldung an das Frontend senden
 
-Controller: transaction
+=== Controller: transaction
+    * erhalten der Transaktionen vom Service
+    * senden der Transaktionen an das Frontend
+    * erhalten einer neuen Transaktion vom Frontend
+    * senden der neuen Transaktion an den Service
+    * Fehlermeldung an das Frontend senden
 
 Controller: "UserController" (nicht umgesetzt, kommt von erik)
 
+== Service (Logik)
 
-== Service (Geschäftslogik)
 Service: BudgetService (nicht umgesetzt)
 
-Service: CategoryService
+=== Service: CategoryService
+    * erhalten der Kategorien vom Repository
+    * senden der Kategorien an den Controller
+    * erhalten einer neuen Kategorie vom Controller
+    * senden der neuen Kategorie an das Repository
 
-Service: ExpenseService
+=== Service: ExpenseService
 
-Service: GoalService
+=== Service: GoalService
 
-Service: IncomeService
+=== Service: IncomeService
 
-Service: TransactionService
+=== Service: TransactionService
 
 Service: UserService (nicht umgesetzt, kommt von erik)
 
 
 == Domain (Definierung der Klasse)
+
 Domain: Budget (nicht umgesetzt)
 
-Domain: Category
+=== Domain: Category
 
-Domain: Expense
+=== Domain: Expense
 
-Domain: Goal
+=== Domain: Goal
 
-Domain: Income
+=== Domain: Income
 
 Domain: UserService (nicht umgesetzt, kommt von erik)
 
 
 == Repository (Kommunikation mit Backend)
+
 Repository: Budget (nicht umgesetzt)
 
-Domain: Category
+=== Repository: Category
 
-Domain: Expense
+=== Repository: Expense
 
-Domain: Goal
+=== Repository: Goal
 
-Domain: Income
+=== Repository: Income
 
-Domain: UserService (nicht umgesetzt, kommt von erik)
+Repository: UserService (nicht umgesetzt, kommt von erik)
