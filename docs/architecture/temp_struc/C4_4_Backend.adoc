@@ -3,36 +3,44 @@
 alles Einzeln als ein Diagramm erstellen!
 
 == Controller (Kommunikation mit Frontend)
+    GET mit id // Ausgabe eines einzelnen Elements
+    GET mit userId // Ausgabe aller Elemente eines Users   
+    Put mit id // Aktualisierung eines Elements
+    Post // Erstellen eines neuen Elements
+    Delete mit id // Löschen eines Elements
+    
 
 === Controller: "Budgetcontroller" (nicht umgesetzt)
 
 === Controller: categories
     File: server/api/categories.ts
 
-    Schema: `CreateCategorySchema` (zod) — validiert Body für POST (name,
-    type, userId, icon, color)
+    Schema: `CreateCategorySchema` (zod) — validiert Body für POST (name, type, userId, icon, color)
 
     Exported handler: default async (event)
 
     Funktionen / Verhalten:
-        - Handler(event):
-        - `GET`: Validiert `userId` → ruft
-          `CategoryService.getCategoryByUserId(userId)` → gibt
-          Kategorie-Liste zurück
-        - `POST`: Liest Body, validiert mit `CreateCategorySchema` → baut
-          `payload` → ruft `CategoryService.createCategory(payload)` → gibt
-          erstellte Kategorie zurück
-        - Andere Methoden → `405`
+        - Handler(event): Dispatch je nach HTTP-Methode
+        - `GET /api/categories?userId=:userId`: Validiert `userId` → ruft `CategoryService.getCategoryByUserId(userId)` → gibt Kategorie-Liste zurück
+        - `GET /api/categories/:id`: Liest `id` aus Route → ruft `CategoryService.getCategoryByCategoryId(id)` → gibt einzelne Kategorie zurück
+        - `POST /api/categories`: Liest Body, validiert mit `CreateCategorySchema` → baut `payload` → ruft `CategoryService.createCategory(payload)` → gibt erstellte Kategorie zurück
+        - `PUT /api/categories/:id`: Liest `id` + Body (teilweise validiert) → ruft `CategoryService.updateCategory(id, data)` → gibt aktualisierte Kategorie zurück
+        - `DELETE /api/categories/:id`: Ruft `CategoryService.deleteCategory(id)` → gibt Erfolgsmeldung zurück
         - Fehler: Log + `createError`
 
     Aufruft / Abhängigkeiten:
         - `CategoryService.getCategoryByUserId(Number(userId))`
-      - `CategoryService.createCategory(payload)`
+        - `CategoryService.getCategoryByCategoryId(id)`
+        - `CategoryService.createCategory(payload)`
+        - `CategoryService.updateCategory(id, data)`
+        - `CategoryService.deleteCategory(id)`
 
     Rückgabewerte:
-        - GET: Array von Kategorien (vereinfachtes DTO: id, name, type,
-          icon, color)
-        - POST: DTO der erstellten Kategorie
+        - `GET /api/categories`: Array von Kategorien (vereinfachtes DTO: id, name, type, icon, color)
+        - `GET /api/categories/:id`: einzelne Kategorie-DTO oder 404
+        - `POST /api/categories`: DTO der erstellten Kategorie
+        - `PUT /api/categories/:id`: DTO der aktualisierten Kategorie
+        - `DELETE /api/categories/:id`: { message: 'Category deleted', id }
 
 === Controller: expenses
     File: server/api/expenses.ts
@@ -58,8 +66,15 @@ alles Einzeln als ein Diagramm erstellen!
     - `ExpenseService.createExpense(payload)`
 
     Rückgabewerte:
-    - GET: Array von Expense-Domain-Objekten (vom Service transformiert)
-    - POST: Objekt { message, expense }
+    - GET /api/expenses: Array von Expense-Domain-Objekten (vom Service transformiert)
+    - GET /api/expenses/:id: einzelnes Expense-Objekt oder 404
+    - POST /api/expenses: Objekt { message, expense }
+    - PUT /api/expenses/:id: Objekt { message, expense }
+    - DELETE /api/expenses/:id: Objekt { message, id }
+
+    Zusätzliche Hinweise:
+    - `GET /api/expenses` unterstützt Filtering (z.B. Datum, Kategorie) und Paging — Parser im Controller
+    - `POST/PUT` validieren Body mit `CreateExpenseSchema` bzw. Partial-Schema
 
 === Controller: goals
 File: server/api/goals.ts
@@ -82,6 +97,11 @@ Rückgabewerte:
 - GET: Array von Goals
 - POST: Objekt { message, goal }
 
+  Zusätzliche Endpunkte:
+  - `GET /api/goals/:id` → `GoalService.getGoalById(id)` → einzelne Goal-DTO
+  - `PUT /api/goals/:id` → `GoalService.updateGoal(id, data)` → { message, goal }
+  - `DELETE /api/goals/:id` → `GoalService.deleteGoal(id)` → { message, id }
+
 
 === Controller: incomes
 File: server/api/incomes.ts
@@ -103,6 +123,11 @@ Aufruft / Abhängigkeiten:
 Rückgabewerte:
 - GET: Array von Income-Domain-Objekten (vom Service transformiert)
 - POST: Objekt { message, income }
+
+  Zusätzliche Endpunkte:
+  - `GET /api/incomes/:id` → `IncomeService.getIncomeById(id)` → einzelnes Income-DTO
+  - `PUT /api/incomes/:id` → `IncomeService.updateIncome(id, data)` → { message, income }
+  - `DELETE /api/incomes/:id` → `IncomeService.deleteIncome(id)` → { message, id }
 
 
 === Controller: transaction
