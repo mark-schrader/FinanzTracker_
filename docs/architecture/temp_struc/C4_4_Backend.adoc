@@ -8,7 +8,8 @@ alles Einzeln als ein Diagramm erstellen!
     Put mit id // Aktualisierung eines Elements
     Post // Erstellen eines neuen Elements
     Delete mit id // Löschen eines Elements
-    
+    wenn nicht dann error 405
+
 
 === Controller: "Budgetcontroller" (nicht umgesetzt)
 
@@ -26,7 +27,9 @@ alles Einzeln als ein Diagramm erstellen!
         - `POST /api/categories`: Liest Body, validiert mit `CreateCategorySchema` → baut `payload` → ruft `CategoryService.createCategory(payload)` → gibt erstellte Kategorie zurück
         - `PUT /api/categories/:id`: Liest `id` + Body (teilweise validiert) → ruft `CategoryService.updateCategory(id, data)` → gibt aktualisierte Kategorie zurück
         - `DELETE /api/categories/:id`: Ruft `CategoryService.deleteCategory(id)` → gibt Erfolgsmeldung zurück
-        - Fehler: Log + `createError`
+        --> UserId und id seperat in zwei verschiedenen Endpunkten behandeln!
+        - Andere Methoden → `405`
+        - Fehlerbehandlung: Log + `createError`
 
     Aufruft / Abhängigkeiten:
         - `CategoryService.getCategoryByUserId(Number(userId))`
@@ -52,12 +55,12 @@ alles Einzeln als ein Diagramm erstellen!
 
     Funktionen / Verhalten:
     - Handler(event):
-     - `GET`: Validiert `userId` → ruft
-      `ExpenseService.getExpensesByUserId(userId)` → gibt Liste der Ausgaben
-      zurück
-    - `POST`: Liest Body, validiert gegen `CreateExpenseSchema` → baut
-     `payload` → ruft `ExpenseService.createExpense(payload)` → gibt Ergebnis
-     zurück
+    - `GET`: Validiert `userId` → ruft `ExpenseService.getExpensesByUserId(userId)` → gibt Liste der Ausgaben zurück
+    - `GET /api/expenses/:id`: Liest `id` aus Route → ruft `ExpenseService.getExpenseById(id)` → gibt einzelne Ausgabe zurück oder 404
+    - `POST`: Liest Body, validiert gegen `CreateExpenseSchema` → baut `payload` → ruft `ExpenseService.createExpense(payload)` → gibt Ergebnis zurück
+    - `PUT /api/expenses/:id`: Liest `id` + Body (teilweise validiert) → ruft `ExpenseService.updateExpense(id, data)` → gibt Ergebnis zurück
+    - `DELETE /api/expenses/:id`: Ruft `ExpenseService.deleteExpense(id)` → gibt Erfolgsmeldung zurück
+    --> UserId und id seperat in zwei verschiedenen Endpunkten behandeln!
     - Andere Methoden → `405`
     - Fehlerbehandlung: Log + `createError`
 
@@ -86,8 +89,13 @@ Exported handler: default async (event)
 Funktionen / Verhalten:
 - Handler(event):
   - `GET`: Validiert `userId` → ruft `GoalService.getGoalsByUserId(userId)` → gibt Liste zurück
+  - `GET /api/goals/:id`: Liest `id` aus Route → ruft `GoalService.getGoalById(id)` → gibt einzelne Goal zurück
   - `POST`: Liest Body, validiert → baut `payload` (inkl. saved defaulting to 0) → ruft `GoalService.createGoal(payload)` → gibt Ergebnis zurück
-  - Fehler/405 entsprechend
+  - `PUT /api/goals/:id`: Liest `id` + Body (teilweise validiert) → ruft `GoalService.updateGoal(id, data)` → gibt Ergebnis zurück
+  - `DELETE /api/goals/:id`: Ruft `GoalService.deleteGoal(id)` → gibt Erfolgsmeldung zurück
+    --> UserId und id seperat in zwei verschiedenen Endpunkten behandeln!
+    - Andere Methoden → `405`
+    - Fehlerbehandlung: Log + `createError`
 
 Aufruft / Abhängigkeiten:
 - `GoalService.getGoalsByUserId(Number(userId))`
@@ -113,8 +121,13 @@ Exported handler: default async (event)
 Funktionen / Verhalten:
 - Handler(event):
   - `GET`: Validiert `userId` → ruft `IncomeService.getIncomesByUserId(userId)` → gibt Liste zurück
+  - `GET /api/incomes/:id`: Liest `id` aus Route → ruft `IncomeService.getIncomeById(id)` → gibt einzelne Income zurück
   - `POST`: Liest Body, validiert → baut `payload` → ruft `IncomeService.createIncome(payload)` → gibt Ergebnis zurück
-  - Fehler/405 entsprechend
+  - `PUT /api/incomes/:id`: Liest `id` + Body (teilweise validiert) → ruft `IncomeService.updateIncome(id, data)` → gibt Ergebnis zurück
+  - `DELETE /api/incomes/:id`: Ruft `IncomeService.deleteIncome(id)` → gibt Erfolgsmeldung zurück 
+    --> UserId und id seperat in zwei verschiedenen Endpunkten behandeln!
+    - Andere Methoden → `405`
+    - Fehlerbehandlung: Log + `createError`
 
 Aufruft / Abhängigkeiten:
 - `IncomeService.getIncomesByUserId(Number(userId))`
