@@ -8,7 +8,7 @@
 
     <!-- Aktueller Kontostand -->
     <div
-      class="card text-center text-xl font-semibold mb-6 bg-teal-50 dark:bg-gray-800"
+      class="card text-center text-xl font-semibold mb-6 bg-gradient-to-r from-cyan-100 to-teal-100 dark:bg-gray-800 dark:text-gray-800"
     >
       Aktueller Kontostand:
       <strong class="text-teal-600 dark:text-teal-400">{{
@@ -17,9 +17,11 @@
     </div>
     <!-- Filtersegment -->
     <div
-      class="bg-gray-100 dark:bg-gray-900 p-4 rounded-lg shadow-sm mb-6 space-y-4"
+      class="bg-white p-4 rounded-lg shadow-sm mb-6 space-y-4 dark:bg-gray-800"
     >
-      <p class="font-medium text-lg">Filter:</p>
+      <p class="font-medium text-lg text-teal-600 dark:text-teal-400">
+        Filter:
+      </p>
       <!-- Checkbox zum Umschalten -->
       <label class="flex items-center gap-2 cursor-pointer">
         <input type="checkbox" v-model="manualRange" class="w-4 h-4" />
@@ -70,9 +72,11 @@
     </div>
     <!-- Verlauf Vollständig -->
     <div
-      class="bg-gray-200 rounded-md p-6 min-h-[220px] shadow-sm hover:shadow-md transition-shadow duration-200 dark:bg-gray-800"
+      class="bg-white rounded-md p-6 min-h-[220px] shadow-sm hover:shadow-md transition-shadow duration-200 dark:bg-gray-800"
     >
-      <p class="text-base font-medium mb-4 text-center">
+      <p
+        class="text-base font-medium mb-4 text-center text-teal-600 dark:text-teal-400"
+      >
         Verlauf des Kontostands (letztes Jahr)
       </p>
       <verlaufChart :transactions="filteredTransactions" />
@@ -82,9 +86,13 @@
     <div class="grid grid-cols-2 gap-6">
       <!-- Ausgaben Intervall -->
       <div
-        class="bg-gray-100 rounded-xl p-6 flex flex-col items-center justify-center shadow-sm hover:shadow-md transition-shadow duration-200 dark:bg-gray-800"
+        class="bg-white rounded-xl p-6 flex flex-col items-center justify-center shadow-sm hover:shadow-md transition-shadow duration-200 dark:bg-gray-800"
       >
-        <p class="font-medium mb-2 text-center">Ausgaben</p>
+        <p
+          class="font-medium mb-2 text-center text-teal-600 dark:text-teal-400"
+        >
+          Ausgaben
+        </p>
         <div class="w-full h-[260px]">
           <expenseslast7days :transactions="filteredTransactions" />
         </div>
@@ -92,9 +100,13 @@
 
       <!-- Einnahmen Interval -->
       <div
-        class="bg-gray-100 rounded-xl p-6 flex flex-col items-center justify-center shadow-sm hover:shadow-md transition-shadow duration-200 dark:bg-gray-800"
+        class="bg-white rounded-xl p-6 flex flex-col items-center justify-center shadow-sm hover:shadow-md transition-shadow duration-200 dark:bg-gray-800"
       >
-        <p class="font-medium mb-2 text-center">Einnahmen</p>
+        <p
+          class="font-medium mb-2 text-center text-teal-600 dark:text-teal-400"
+        >
+          Einnahmen
+        </p>
         <div class="w-full h-[260px]">
           <incomelast7days :transactions="filteredTransactions" />
         </div>
@@ -105,9 +117,13 @@
     <div class="grid grid-cols-2 gap-6">
       <!-- Kategorien Ausgaben -->
       <div
-        class="bg-gray-100 rounded-xl p-6 flex flex-col items-center justify-center shadow-sm hover:shadow-md transition-shadow duration-200 dark:bg-gray-800"
+        class="bg-white rounded-xl p-6 flex flex-col items-center justify-center shadow-sm hover:shadow-md transition-shadow duration-200 dark:bg-gray-800"
       >
-        <p class="font-medium mb-2 text-center">Ausgaben je Kategorie</p>
+        <p
+          class="font-medium mb-2 text-center text-teal-600 dark:text-teal-400"
+        >
+          Ausgaben je Kategorie
+        </p>
         <div class="w-full h-[260px]">
           <graph_categories_expenses :transactions="filteredTransactions" />
         </div>
@@ -115,9 +131,13 @@
 
       <!-- Kategorien Einnahmen -->
       <div
-        class="bg-gray-100 rounded-xl p-6 flex flex-col items-center justify-center shadow-sm hover:shadow-md transition-shadow duration-200 dark:bg-gray-800"
+        class="bg-white rounded-xl p-6 flex flex-col items-center justify-center shadow-sm hover:shadow-md transition-shadow duration-200 dark:bg-gray-800"
       >
-        <p class="font-medium mb-2 text-center">Einnahmen je Kategorie</p>
+        <p
+          class="font-medium mb-2 text-center text-teal-600 dark:text-teal-400"
+        >
+          Einnahmen je Kategorie
+        </p>
         <div class="w-full h-[260px]">
           <graph_categories_incomes :transactions="filteredTransactions" />
         </div>
