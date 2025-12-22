@@ -106,19 +106,10 @@
             />
 
             <label class="block text-sm font-medium dark:text-gray-800"
-              >Startdatum</label
-            >
-            <input
-              v-model="challengeForm.created_at"
-              type="date"
-              class="border px-2 py-1 rounded w-full"
-            />
-
-            <label class="block text-sm font-medium dark:text-gray-800"
               >Enddatum</label
             >
             <input
-              v-model="challengeForm.due_date"
+              v-model="challengeForm.dueDate"
               type="date"
               class="border px-2 py-1 rounded w-full"
             />
@@ -196,45 +187,80 @@
 
     <div class="">
       <!-- 3 Challenge Liste-->
-      <div
-        v-if="challenges.length"
-        class="grid grid-cols-2 grid-rows-2 md:grid-cols-3 gap-2 mb-6"
-      >
-        <div
-          v-for="(challenge, index) in challenges"
-          :key="index"
-          class="group w-full flex flex-col items-center justify-center gap-1 mt-5 px-4 py-4 bg-white shadow-md rounded-xl p-4 border-l-4 dark:text-gray-800"
-          :class="
-            challengeProgress(challenge) >= 100
-              ? 'border-green-500'
-              : 'border-blue-400'
-          "
-        >
-          <h2 class="text-xl font-semibold dark:text-gray-800">
-            {{ challenge.name }}
-          </h2>
-          <p class="text-sm">
-            Ziel: <strong>{{ challenge.target }} €</strong>
-          </p>
-          <p class="text-sm">
-            Gespart: <strong>{{ challenge.saved }} €</strong>
-          </p>
-          <div class="h-3 bg-gray-200 rounded-full overflow-hidden">
-            <div
-              class="h-full bg-green-500"
-              :style="{ width: challengeProgress(challenge) + '%' }"
-            ></div>
-          </div>
-          <p class="text-xs text-right text-gray-500">
-            {{ challengeProgress(challenge) }} % erreicht
-          </p>
-          <p class="text-xs text-gray-500">
-            Zeitraum: {{ challenge.created_at }} bis {{ challenge.due_date }}
-          </p>
-        </div>
-      </div>
-      <div v-else class="text-gray-500 text-center mt-12">
+      <div v-if="!challenges.length" class="text-gray-500 text-center mt-14">
         Noch keine Challenges erstellt.
+      </div>
+
+      <div v-else>
+        <!--Aktive Challenges-->
+        <div v-if="activeChallenges.length > 0" class="">
+          <h2 class="text-2xl font-bold mb-4 dark:text-white">
+            Aktive Challenges
+          </h2>
+          <div class="grid grid-cols-2 grid-rows-2 md:grid-cols-3 gap-2 mb-24">
+            <div
+              v-for="challenge in activeChallenges"
+              :key="challenge.id"
+              class="group w-full flex flex-col items-center justify-center gap-1 mt-5 px-4 py-4 bg-white shadow-md rounded-xl p-4 border-l-4 border-blue-400 dark:text-gray-800"
+            >
+              <h2 class="text-xl font-semibold dark:text-gray-800">
+                {{ challenge.name }}
+              </h2>
+              <p class="text-sm">
+                Ziel: <strong>{{ challenge.target }} €</strong>
+              </p>
+              <p class="text-sm">
+                Gespart: <strong>{{ challenge.saved }} €</strong>
+              </p>
+              <div
+                class="w-full h-3 bg-gray-200 rounded-full overflow-hidden shadow-sm"
+              >
+                <div
+                  class="h-full bg-green-500 transition-all duration-300"
+                  :style="{ width: challengeProgress(challenge) + '%' }"
+                ></div>
+              </div>
+              <p class="text-xs text-right text-gray-500">
+                {{ challengeProgress(challenge) }} % erreicht
+              </p>
+              <p class="text-xs text-gray-500">
+                Zeitraum: bis {{ challenge.dueDate }}
+              </p>
+            </div>
+          </div>
+        </div>
+        <!--Fertige Challenges-->
+        <div v-if="completedChallengesListe.length > 0">
+          <h2 class="text-2xl font-bold mb-4 dark:text-white">
+            Abgeschlossene Challenges
+          </h2>
+          <div class="grid grid-cols-2 grid-rows-2 md:grid-cols-3 gap-2 mb-24">
+            <div
+              v-for="challenge in completedChallengesListe"
+              :key="challenge.id"
+              class="group w-full flex flex-col items-center justify-center gap-1 mt-5 px-4 py-4 bg-white shadow-md rounded-xl p-4 border-l-4 border-green-500 dark:text-gray-800"
+            >
+              <h2 class="text-xl font-semibold dark:text-gray-800">
+                {{ challenge.name }}
+              </h2>
+              <p class="text-green-700 font-semibold">
+                Erfolgreich gespart: <strong>{{ challenge.target }} €</strong>
+              </p>
+              <!--Progress bar nicht mehr sichtbar-->
+              <div
+                class="w-full h-3 bg-gray-200 rounded-full overflow-hidden shadow-sm"
+              >
+                <div
+                  class="h-full bg-green-500"
+                  :style="{ width: challengeProgress(challenge) + '%' }"
+                ></div>
+              </div>
+              <p class="text-xs text-right text-gray-500">
+                {{ challengeProgress(challenge) }} % erreicht
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -255,8 +281,7 @@ const savedAmount = ref(0);
 const challengeForm = ref({
   name: "",
   target: 0,
-  created_at: "", //start date of the spar challenge
-  due_date: "", //end date
+  dueDate: "", //end date
 });
 
 onMounted(async () => {
@@ -269,7 +294,7 @@ onMounted(async () => {
 });
 
 async function addChallenge() {
-  console.log("BUTTON WURDE GEDRUCKT!!!!!!!!!!");
+  //console.log("BUTTON WURDE GEDRUCKT!!!!!!!!!!");
   try {
     const saved = await $fetch("/api/goals", {
       method: "POST",
@@ -278,7 +303,7 @@ async function addChallenge() {
         name: challengeForm.value.name,
         target: Number(challengeForm.value.target),
         saved: 0,
-        due_date: Date(challengeForm.value.due_date),
+        dueDate: new Date(challengeForm.value.dueDate).toISOString(),
       },
     });
 
@@ -288,33 +313,36 @@ async function addChallenge() {
     challengeForm.value = {
       name: "",
       target: 0,
-      created_at: "",
-      due_date: "",
+      dueDate: "",
     };
 
     showChallengeModal.value = false;
+    alert("Erfoglreich erstellt worden!");
   } catch (err) {
     console.error("Fehler beim Speichern in die Datenbank", err);
   }
 }
 
 async function saveChallenge() {
-  if (!selectedChallengeId.value || savedAmount.value == 0) {
+  if (!selectedChallengeId.value || savedAmount.value <= 0) {
     alert("Bitte Challenge und Betrag auswählen!");
     return;
   }
 
   const challenge = challenges.value.find(
-    (c) => (c.id = selectedChallengeId.value) //hier userId oder id ? welcher und wie?
+    (c) => c.id === selectedChallengeId.value
   );
 
-  if (!challenge) return;
+  if (!challenge) {
+    alert("Challenge nicht gefunden!");
+    return;
+  }
 
   const newSaved = challenge.saved + savedAmount.value; //kumulieren
 
   try {
-    await $fetch("/api/goals/${challenge.id}", {
-      method: "PATCH",
+    await $fetch(`/api/goals/${challenge.id}`, {
+      method: "PUT",
       body: {
         saved: newSaved,
       },
@@ -322,7 +350,7 @@ async function saveChallenge() {
 
     //reset
     challenge.saved = newSaved;
-    showSaveModal = false;
+    showSaveModal.value = false;
     savedAmount.value = 0;
     selectedChallengeId.value = "";
   } catch (err) {
@@ -341,6 +369,7 @@ const successRate = computed(() => {
   const done = challenges.value.filter(
     (c) => challengeProgress(c) === 100
   ).length;
+
   return Math.round((done / total) * 100);
 });
 
@@ -348,25 +377,66 @@ const completedChallenges = computed(() => {
   return challenges.value.filter((c) => challengeProgress(c) === 100).length;
 });
 
+const activeChallenges = computed(() => {
+  return challenges.value.filter((c) => challengeProgress(c) < 100);
+});
+
+const completedChallengesListe = computed(() => {
+  return challenges.value.filter((c) => challengeProgress(c) >= 100);
+});
 // for Calendar styling
 const attr = computed(() => [
   {
-    key: "today",
+    key: "due-dates",
     highlight: {
       color: "blue",
-      fillMode: "light",
     },
-    dates: new Date(),
-  },
-  /* für später, wenn DB Daten GET normal wird
-  {
-    key: "due-dates",
-    highlight: "red",
     dates: challenges.value.map((c) => ({
-      start: new Date(c.due_date),
-      tooltip: c.name,
+      start: new Date(c.dueDate),
     })),
-  },*/
+  },
 ]);
-// wie nimmt es von der datenbank und präsentiert es auf dem page? erkläre in javascript und html
 </script>
+<!--div
+        v-if="challenges.length"
+        class="grid grid-cols-2 grid-rows-2 md:grid-cols-3 gap-2 mb-6"
+      >
+        <div
+          v-for="(challenge, index) in challenges"
+          :key="index"
+          class="group w-full flex flex-col items-center justify-center gap-1 mt-5 px-4 py-4 bg-white shadow-md rounded-xl p-4 border-l-4 dark:text-gray-800"
+          :class="
+            challengeProgress(challenge) >= 100
+              ? 'border-green-500'
+              : 'border-blue-400'
+          "
+        >
+          <div v-if="challenge.target === challenge.saved" class="">
+            <h2 class="text-xl font-semibold dark:text-gray-800">
+              {{ challenge.name }}
+            </h2>
+            <p class="text-sm">
+              Ziel: <strong>{{ challenge.target }} €</strong>
+            </p>
+            <p class="text-sm">
+              Gespart: <strong>{{ challenge.saved }} €</strong>
+            </p>
+            <div class="h-3 bg-gray-200 rounded-full overflow-hidden">
+              <div
+                class="h-full bg-green-500"
+                :style="{ width: challengeProgress(challenge) + '%' }"
+              ></div>
+            </div>
+            <p class="text-xs text-right text-gray-500">
+              {{ challengeProgress(challenge) }} % erreicht
+            </p>
+            <p class="text-xs text-gray-500">
+              Zeitraum: bis {{ challenge.dueDate }}
+            </p>
+          </div>
+          <div v-else class=""></div>
+        </div>
+      </div>
+      <div v-else class="text-gray-500 text-center mt-12">
+        Noch keine Challenges erstellt.
+      </div-->
