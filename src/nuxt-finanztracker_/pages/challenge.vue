@@ -233,8 +233,15 @@
         <div v-if="completedChallengesListe.length > 0">
           <h2 class="text-2xl font-bold mb-4 dark:text-white">
             Abgeschlossene Challenges
+            <button @click="isShowing = !isShowing" class="">
+              <i v-if="isShowing" class="fa fa-caret-up"></i>
+              <i v-else class="fa fa-caret-down"></i>
+            </button>
           </h2>
-          <div class="grid grid-cols-2 grid-rows-2 md:grid-cols-3 gap-2 mb-24">
+          <div
+            v-if="isShowing"
+            class="grid grid-cols-2 grid-rows-2 md:grid-cols-3 gap-2 mb-24"
+          >
             <div
               v-for="challenge in completedChallengesListe"
               :key="challenge.id"
@@ -277,6 +284,7 @@ const showSaveModal = ref(false);
 const challenges = ref([]);
 const selectedChallengeId = ref(""); //stores only the id of the challenge
 const savedAmount = ref(0);
+const isShowing = ref(false);
 
 const challengeForm = ref({
   name: "",
@@ -397,46 +405,3 @@ const attr = computed(() => [
   },
 ]);
 </script>
-<!--div
-        v-if="challenges.length"
-        class="grid grid-cols-2 grid-rows-2 md:grid-cols-3 gap-2 mb-6"
-      >
-        <div
-          v-for="(challenge, index) in challenges"
-          :key="index"
-          class="group w-full flex flex-col items-center justify-center gap-1 mt-5 px-4 py-4 bg-white shadow-md rounded-xl p-4 border-l-4 dark:text-gray-800"
-          :class="
-            challengeProgress(challenge) >= 100
-              ? 'border-green-500'
-              : 'border-blue-400'
-          "
-        >
-          <div v-if="challenge.target === challenge.saved" class="">
-            <h2 class="text-xl font-semibold dark:text-gray-800">
-              {{ challenge.name }}
-            </h2>
-            <p class="text-sm">
-              Ziel: <strong>{{ challenge.target }} €</strong>
-            </p>
-            <p class="text-sm">
-              Gespart: <strong>{{ challenge.saved }} €</strong>
-            </p>
-            <div class="h-3 bg-gray-200 rounded-full overflow-hidden">
-              <div
-                class="h-full bg-green-500"
-                :style="{ width: challengeProgress(challenge) + '%' }"
-              ></div>
-            </div>
-            <p class="text-xs text-right text-gray-500">
-              {{ challengeProgress(challenge) }} % erreicht
-            </p>
-            <p class="text-xs text-gray-500">
-              Zeitraum: bis {{ challenge.dueDate }}
-            </p>
-          </div>
-          <div v-else class=""></div>
-        </div>
-      </div>
-      <div v-else class="text-gray-500 text-center mt-12">
-        Noch keine Challenges erstellt.
-      </div-->
