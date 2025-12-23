@@ -171,7 +171,7 @@ onBeforeUnmount(() => {
 // Gefilterte Transaktionen für den Export (nur bis heute)
 const exportTransactions = computed(() => {
     const now = new Date()
-    now.setHours(23, 59, 59, 999)
+    now.setHours(23, 59, 59, 999) // heute
 
     return filteredTransactions.value.filter(t => {
         const d = new Date(t.date)
