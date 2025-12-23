@@ -4,7 +4,7 @@ import { PrismaClient } from '@prisma/client'
 export const prisma = new PrismaClient()
 
 beforeEach(async () => {
-  // Reihenfolge an eure Models anpassen!
+  // Reihenfolge an Models anpassen, um Fremdschlüsselverletzungen zu vermeiden
   // await prisma.transaction.deleteMany()
   // await prisma.category.deleteMany()
 })

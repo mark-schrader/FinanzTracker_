@@ -32,19 +32,28 @@ test/
 │  └─ (E2E Tests – Browser, später)
 │
 ├─ integration/
-│  └─ backend/
-│     └─ prisma.spec.ts
-│
+│  ├─ backend/
+│  |  ├─ "API"."Kurze Beschreibung des Test".spec.ts
+|  |  └─ category.newcategoryinlist.spec.ts
+│  └─ prisma.spec.ts --> Datei für Mounts und co. ähnlich wie setup.frontend.ts
 ├─ unit/
 │  ├─ backend/
-│  │  └─ smoke.spec.ts
+│  │  ├─ <domain>.<layer>.<action>.spec.ts
+│  |  └─ z.B. 
 │  └─ frontend/
-│     └─ smoke.spec.ts
+│     ├─ <domain>.<Bereich>.<Feld>.<action>.spec.ts
+|     └─ Kontobewegung.expense.category.select.spec.ts
 │
 ├─ setup.frontend.ts
 └─ setup.prisma.ts
 
 ```
+## Namenskonvention
+
+Es ist wichtig das die namen so gewählt werden das eine Fremnde Person möglicht leicht anhand des Namnes erkennen kann was dieser Test macht.
+
+Haltet euch also an die bereits vorhanden Namensgebung und fragt nach wenn ihr nicht wisst wie ihr die Test richtig benennen sollt.
+ 
 ---
 ## ▶️ Tests ausführen
 

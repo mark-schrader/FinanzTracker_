@@ -1,4 +1,4 @@
-// test/integration/backend/delete.expense.transaction.spec.ts
+// test/integration/backend/transaction.expense.delete.spec.ts
 import { describe, it, expect, afterEach, afterAll } from 'vitest'
 import { PrismaClient } from '@prisma/client'
 
