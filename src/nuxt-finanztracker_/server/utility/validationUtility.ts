@@ -1,5 +1,6 @@
 //utility/validationUtility.ts
 import { z } from 'zod'
+import { IntervalValues } from '../domain/Interval'
 
 // Schema zum Validieren des id-Params in der URL
 export const IdParamSchema = z.preprocess((val) => {
@@ -21,4 +22,4 @@ export const toDatePreprocess = (val: any) => {
 }
 
 // Interval-Enum (wie in Prisma)
-export const IntervalEnum = z.enum(['once', 'weekly', 'monthly', 'semesterly', 'annual'])
+export const IntervalEnum = z.enum(IntervalValues as unknown as [string, ...string[]])
