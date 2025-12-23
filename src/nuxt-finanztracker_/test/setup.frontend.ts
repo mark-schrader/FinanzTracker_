@@ -1,14 +1,19 @@
 import { config } from '@vue/test-utils'
 import { vi } from 'vitest'
 
-// Vue / Nuxt Stubs
+// Alle Nuxt / globale Komponenten stubben
 config.global.stubs = {
+  InlineAlert: true,
+  CurrentTime: true,
+  categoryManager: true,
+  bewegungstabelle: true,
+  bewegungstabelle_aktion: true,
   NuxtLink: true,
   NuxtPage: true,
   ClientOnly: true
 }
 
-// Mock: useAlert (Nuxt Composable)
+// Mock: useAlert
 vi.stubGlobal('useAlert', () => ({
   showAlertBox: false,
   alertMessage: '',
@@ -16,7 +21,7 @@ vi.stubGlobal('useAlert', () => ({
   showAlert: vi.fn()
 }))
 
-// Mock: $fetch (Nuxt global)
+// Mock: $fetch
 export const fetchMock = vi.fn(async () => [])
-
 vi.stubGlobal('$fetch', fetchMock)
+
