@@ -33,13 +33,13 @@ test/
 │
 ├─ integration/
 │  ├─ backend/
-│  |  ├─ "API"."Kurze Beschreibung des Test".spec.ts
+│  |  ├─ <domain>.<layer>.<action>.spec.ts
 |  |  └─ category.newcategoryinlist.spec.ts
-│  └─ prisma.spec.ts --> Datei für Mounts und co. ähnlich wie setup.frontend.ts
+│  └─ prisma.spec.ts
 ├─ unit/
 │  ├─ backend/
 │  │  ├─ <domain>.<layer>.<action>.spec.ts
-│  |  └─ z.B. 
+│  |  └─ category.service.spec.ts
 │  └─ frontend/
 │     ├─ <domain>.<Bereich>.<Feld>.<action>.spec.ts
 |     └─ Kontobewegung.expense.category.select.spec.ts
@@ -53,7 +53,7 @@ test/
 Es ist wichtig das die namen so gewählt werden das eine Fremnde Person möglicht leicht anhand des Namnes erkennen kann was dieser Test macht.
 
 Haltet euch also an die bereits vorhanden Namensgebung und fragt nach wenn ihr nicht wisst wie ihr die Test richtig benennen sollt.
- 
+
 ---
 ## ▶️ Tests ausführen
 
