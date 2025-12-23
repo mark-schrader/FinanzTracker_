@@ -2,9 +2,9 @@ name: Tests (Unit + Integration)
 
 on:
   push:
-    branches: [ main, test, develop ]
+    branches: [ main ]
   pull_request:
-    branches: [ main, test, develop ]
+    branches: [ main ]
 
 jobs:
   test:
