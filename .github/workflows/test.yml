@@ -25,6 +25,11 @@ jobs:
           cache: npm
           cache-dependency-path: src/nuxt-finanztracker_/package-lock.json
 
+      - name: Debug paths
+        run: |
+          pwd
+          ls -la    
+          
       - name: Install dependencies
         run: npm ci
 
