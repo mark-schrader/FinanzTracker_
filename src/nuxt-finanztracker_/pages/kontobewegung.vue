@@ -189,6 +189,9 @@
                         <label>Betrag (€)</label>
                         <input v-model="selectedAuftrag.betrag" type="number" step="0.50" class="form-input" />
 
+                        <label>Datum</label>
+                        <input v-model="selectedAuftrag.date" type="date" class="form-input" />
+
                         <label>Kategorie</label>
                         <select v-model="selectedAuftrag.categoryId" class="form-select">
                           <option disabled value="">Bitte wählen</option>
@@ -236,14 +239,6 @@
             <div v-if="!formattedAuftraege.length" class="modal-md text-center">
               Keine Daueraufträge vorhanden.
             </div>
-          </div>
-
-          <!--Button: Daueraufträge hinzufügen -->
-          <div class="flex justify-center mt-2">
-            <button class="btn btn-primary flex items-center space-x-2">
-              <i class="fas fa-plus-circle text-lg"></i> <!-- Icon -->
-              <span>Daueraufträge hinzufügen</span>
-            </button>
           </div>
 
           <!-- Button: schließen // danach vllt auch Button: Speichern dazu?-->

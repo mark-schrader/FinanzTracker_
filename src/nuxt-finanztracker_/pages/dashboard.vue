@@ -12,7 +12,7 @@
       <strong class="text-teal-600 dark:text-teal-400">{{ currentBalance }}</strong>
     </h2>
     <!-- Filtersegment -->
-    <div class="card flex flex-col gap-4 mb-6 bg-gray-200 dark:bg-gray-800">
+    <div class="card flex flex-col gap-4 mb-6 bg-gray-100 dark:bg-gray-800">
       <h3>Filter</h3>
       <!-- Checkbox zum Umschalten -->
       <label class="flex items-center gap-2 cursor-pointer">
@@ -123,21 +123,20 @@ import incomelast7days from '../components/incomeintervall.vue'
 import graph_categories_expenses from '../components/graph_categories_expenses.vue'
 import graph_categories_incomes from '../components/graph_categories_incomes.vue'
 import bewegungstabelle from '../components/bewegungstabelle.vue'
-
-// Filter- und Datumssteuerung
-const manualRange = ref(false) // Checkbox
-const selectedInterval = ref("all")
-
-const startDate = ref(null)
-const endDate = ref(null)
-
-function clearManualDates() {
-  startDate.value = null
-  endDate.value = null
-}
+import { useTransactionFilter } from '~/composables/useTransactionFilter'
 
 // Alle Transaktionen (Einnahmen & Ausgaben)
 const transactions = ref([])
+
+// Filter Zeitraum & Logik (useTransactionFilter composable)
+const {
+  manualRange,
+  selectedInterval,
+  startDate,
+  endDate,
+  clearManualDates,
+  filteredTransactions
+} = useTransactionFilter(transactions)
 
 // Kategorien für Einnahmen & Ausgaben
 const categories = ref([])
@@ -183,48 +182,5 @@ const currentBalance = computed(() => {
   return sum.toFixed(2).replace('.', ',') + ' €'
 })
 
-// Gefilterte Transaktionen basierend auf Auswahl
-const filteredTransactions = computed(() => {
-  const all = transactions.value
-
-  // manuelle Datumsauswahl
-  if (manualRange.value) {
-    return all.filter(t => {
-      const d = new Date(t.date)
-
-      if (startDate.value && d < new Date(startDate.value)) return false
-      if (endDate.value && d > new Date(endDate.value)) return false
-      return true
-    })
-  }
-
-  // Auswahl vordefinierter Intervalle
-  const now = new Date()
-  let cutoff = null
-
-  switch (selectedInterval.value) {
-    case "week":
-      cutoff = new Date(now)
-      cutoff.setDate(now.getDate() - 7)
-      break
-    case "month":
-      cutoff = new Date(now)
-      cutoff.setMonth(now.getMonth() - 1)
-      break
-    case "semester":
-      cutoff = new Date(now)
-      cutoff.setMonth(now.getMonth() - 6)
-      break
-    case "year":
-      cutoff = new Date(now)
-      cutoff.setFullYear(now.getFullYear() - 1)
-      break
-    case "all":
-    default:
-      return all
-  }
-
-  return all.filter(t => new Date(t.date) >= cutoff)
-})
 </script>
 
