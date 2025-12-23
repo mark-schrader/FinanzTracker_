@@ -1,0 +1,35 @@
+name: Tests (Unit + Integration)
+
+on:
+  push:
+    branches: [ main, test, develop ]
+  pull_request:
+    branches: [ main, test, develop ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Repository auschecken
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Node.js installieren
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      # Dependencies installieren
+      - name: Install dependencies
+        run: npm ci
+
+      # Prisma Client generieren
+      - name: Generate Prisma Client
+        run: npx prisma generate
+
+      # Tests ausführen
+      - name: Run tests
+        run: npm run test
