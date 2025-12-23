@@ -17,6 +17,7 @@
   "dependencies": {
     "@prisma/client": "^6.10.1",
     "animate.css": "^4.1.1",
+    "canvg": "^4.0.3",
     "chart.js": "^4.5.0",
     "jspdf": "^3.0.4",
     "jspdf-autotable": "^5.0.2",
