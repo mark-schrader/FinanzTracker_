@@ -28,8 +28,11 @@ jobs:
       - name: Debug paths
         run: |
           pwd
-          ls -la    
+          ls -la
           
+      - name: Generate Prisma Client (test)
+        run: npx prisma generate --schema=prisma/schema.test.prisma
+
       - name: Install dependencies
         run: npm ci
 
