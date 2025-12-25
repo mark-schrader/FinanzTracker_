@@ -8,11 +8,11 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
-    "test": "vitest",
+    "test": "npm run test:unit:frontend && npm run test:unit:backend && npm run test:integration:backend",
     "test:run": "vitest run",
     "test:unit:frontend": "vitest run test/unit/frontend",
     "test:unit:backend": "vitest run test/unit/backend",
-    "test:integration:backend": "cross-env NODE_ENV=test dotenv -e .env.test -- vitest run test/integration/backend"
+    "test:integration:backend": "cross-env NODE_ENV=test DATABASE_URL=file:./prisma/test.db prisma generate --schema=prisma/schema.test.prisma && cross-env DATABASE_URL=file:./prisma/test.db prisma db push --schema=prisma/schema.test.prisma && cross-env DATABASE_URL=file:./prisma/test.db vitest run test/integration/backend"
   },
   "dependencies": {
     "@prisma/client": "^6.10.1",
