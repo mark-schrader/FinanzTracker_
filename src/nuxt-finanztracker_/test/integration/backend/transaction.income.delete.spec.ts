@@ -45,9 +45,10 @@ describe('Integration: Income löschen', () => {
         category_id: category.id,
         user_id: 1,
         date: new Date(),
-        interval: 'once'
+        note: 'TEST_INCOME_NOTE'
       }
     })
+    
     incomeId = income.id
 
     // Income löschen
@@ -55,7 +56,7 @@ describe('Integration: Income löschen', () => {
       where: { id: income.id }
     })
 
-    // Prüfen: weg
+    // Prüfen ob Datensatz weg ist
     const found = await prisma.incomes.findUnique({
       where: { id: income.id }
     })

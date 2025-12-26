@@ -45,7 +45,7 @@ describe('Integration: Expense löschen', () => {
         category_id: category.id,
         user_id: 1,
         date: new Date(),
-        interval: 'once'
+        note: 'TEST_EXPENSE_NOTE'
       }
     })
     expenseId = expense.id
@@ -55,7 +55,7 @@ describe('Integration: Expense löschen', () => {
       where: { id: expense.id }
     })
 
-    // Prüfen: weg
+    // Prüfen ob Datensatz weg ist
     const found = await prisma.expenses.findUnique({
       where: { id: expense.id }
     })

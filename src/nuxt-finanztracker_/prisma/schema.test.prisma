@@ -1,0 +1,63 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+/* =======================
+   MODELS (1:1 Kopie)
+   ======================= */
+
+model budgets {
+  id         Int       @id @default(autoincrement())
+  user_id    Int
+  period     String
+  amount     Decimal
+  created_at DateTime? @default(now())
+}
+
+model categories {
+  id       Int        @id @default(autoincrement())
+  name     String
+  type     String
+  user_id  Int?
+  icon     String?
+  color    String?
+
+  expenses expenses[]
+  incomes  incomes[]
+}
+
+model expenses {
+  id          Int      @id @default(autoincrement())
+  user_id     Int
+  category_id Int
+  use         String?
+  amount      Decimal
+  date        DateTime
+  note        String?
+
+  categories categories @relation(fields: [category_id], references: [id])
+}
+
+model incomes {
+  id          Int      @id @default(autoincrement())
+  user_id     Int
+  category_id Int
+  source      String?
+  amount      Decimal
+  date        DateTime
+  note        String?
+
+  categories categories @relation(fields: [category_id], references: [id])
+}
+
+model user {
+  userid     Int      @id @default(autoincrement())
+  firstname  String
+  lastname   String
+  email      String
+}
