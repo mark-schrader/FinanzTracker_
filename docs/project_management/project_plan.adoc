@@ -149,13 +149,17 @@ Insgesamt verlief unsere Gruppenarbeit sehr gut. Wir haben uns stets gut abgesti
 
 - Wir besprechen in den zweiwöchigen Meetings genau wer welche Umsetzte in der nächsten Iteration umgesetzt werden
 
+|21.11.2025
 |
-|
--
+- Wir haben uns dazu entschieden, unser Backend grundlegend umzustrukturieren, da der vorherige Aufbau zu unübersichtlich geworden war, um effizient und nachhaltig weiterarbeiten zu können. Der Impuls kam zwar hauptsächlich vom Backend-Team, aber es wurde schnell klar, dass sie mit dieser Einschätzung recht hatten. Dabei haben wir gelernt, dass wir als Team deutlich weiterkommen, wenn wir offen kommunizieren und einander vertrauen.
 
+- Trotz des zusätzlichen Zeitaufwands sind wir überzeugt, dass die Umstrukturierung der richtige Schritt war. Mit dem überarbeiteten Backend können wir nun wesentlich effizienter arbeiten und haben eine deutlich solidere Grundlage für die weitere Entwicklung.
+
+|26.11.2025
 |
-|
--
+- Im Verlauf der Entwicklung sind bei uns viele Merge-Konflikte aufgetreten. Diese hätten sich vermeiden lassen, wenn wir häufiger und mit kleineren Pull-Requests gearbeitet hätten. Außerdem wurde deutlich, dass einige Probleme durch bessere und frühzeitigere Kommunikation hätten verhindert werden können.
+
+- Für die Zukunft haben wir uns daher darauf verständigt, regelmäßiger und in kleineren Schritten in den Main-Branch zu mergen, um solche Konflikte zu reduzieren. Dadurch hoffen wir, die Zusammenarbeit im Team zu verbessern und effizienter arbeiten zu können.
 
 |
 |

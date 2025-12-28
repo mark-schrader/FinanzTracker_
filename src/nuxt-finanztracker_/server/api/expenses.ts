@@ -2,6 +2,19 @@
 import { serverSupabaseUser } from '#supabase/server'
 import { PrismaClient } from '@prisma/client'
 import ExpenseService from '../application/ExpenseService'
+import { z } from 'zod'
+import { QueryUserIdSchema, toDatePreprocess, IntervalEnum } from '../utility/validationUtility'
+
+// Schema zum Validieren des Request-Bodys für das Erstellen einer neuen Ausgabe
+const CreateExpenseSchema = z.object({
+  userId: z.preprocess((val) => (val === undefined || val === null ? undefined : Number(val)), z.number().int().positive()),
+  categoryId: z.preprocess((val) => (val === undefined || val === null ? undefined : Number(val)), z.number().int().positive()),
+  use: z.string().min(1).optional(),
+  amount: z.preprocess((val) => (val === undefined || val === null ? undefined : Number(val)), z.number().positive()),
+  date: z.preprocess(toDatePreprocess, z.instanceof(Date).refine((d: Date) => !isNaN(d.getTime()), { message: 'Invalid date' })),
+  interval: IntervalEnum.optional(),
+  note: z.string().optional().nullable()
+})
 
 const prisma = new PrismaClient()
 
@@ -25,6 +38,7 @@ export default defineEventHandler(async (event) => {
   const userId = prismaUser.userid
 
   try {
+    // Handler für die API-Endpunkte
     switch (method) {
       case 'GET':
         if (id) { // Anzeige einer einzelnen Ausgabe
@@ -55,19 +69,29 @@ export default defineEventHandler(async (event) => {
         // PUT /api/expenses/5
         if (!id) throw createError({ statusCode: 400, message: 'Missing ID' })
         const body = await readBody(event)
-        return await ExpenseService.updateExpense(Number(id), body)
-      }
+        const parsed = CreateExpenseSchema.safeParse(body)
+        if (!parsed.success) {
+          throw createError({ statusCode: 400, message: `Invalid body: ${JSON.stringify(parsed.error.errors)}` })
+        }
 
-      case 'DELETE': // Löschen einer Ausgabe
-        // DELETE /api/expenses/5
-        if (!id) throw createError({ statusCode: 400, message: 'Missing ID' })
-        return await ExpenseService.deleteExpense(Number(id))
+        const payload: any = {
+          userId: parsed.data.userId,
+          categoryId: parsed.data.categoryId,
+          use: parsed.data.use,
+          amount: parsed.data.amount,
+          date: parsed.data.date,
+          interval: parsed.data.interval,
+          note: parsed.data.note
+        }
+
+        return await ExpenseService.createExpense(payload) // Erstellen einer neuen Ausgabe
+      }
 
       default:
         throw createError({ statusCode: 405, message: `Method ${method} not allowed` })
     }
   } catch (error: any) {
     console.error('[expenses API error]', error)
-    throw createError({ statusCode: 500, message: error.message || 'Server error' })
+    throw createError({ statusCode: error.statusCode ?? 500, message: error.message || 'Server error' })
   }
 })

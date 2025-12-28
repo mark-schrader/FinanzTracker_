@@ -1,10 +1,65 @@
 import ExpenseRepository from '../repositories/ExpenseRepository'
 import Expense from '../domain/Expense'
+import { isRecurring, advanceToNextFuture, addInterval, toDate } from '../utility/recurringUtility'
+import { DEFAULT_INTERVAL } from '../domain/Interval'
 
 export default class ExpenseService {
   static async getExpensesByUserId(userId: number) {
     const repo = new ExpenseRepository()
-    const expenses = await repo.findByUserId(userId)
+    let expenses = await repo.findByUserId(userId)
+
+    // Prüfe und verarbeite überfällige Daueraufträge analog zu IncomeService
+    let changed = false
+    const now = new Date()
+    for (const exp of expenses) {
+      const interval = exp.interval ?? DEFAULT_INTERVAL
+      const expDate = toDate(exp.date)
+      if (!expDate) continue
+
+      if (isRecurring(interval) && expDate <= now) {
+        try {
+          // Berechne erstes Datum in der Zukunft (erstes Datum > now)
+          const firstFuture = advanceToNextFuture(expDate, interval)
+
+          // Fülle alle fehlenden Vorkommen vom eingetragenen Datum bis heute auf
+          let iter = addInterval(expDate, interval, 1)
+          while (iter <= now) {
+            await repo.create({
+              user_id: exp.user_id,
+              category_id: exp.category_id,
+              use: exp.use,
+              amount: exp.amount,
+              date: iter,
+              interval: DEFAULT_INTERVAL,
+              note: exp.note
+            })
+            iter = addInterval(iter, interval, 1)
+          }
+
+          // Erstelle genau einen zukünftigen wiederkehrenden Eintrag
+          await repo.create({
+            user_id: exp.user_id,
+            category_id: exp.category_id,
+            use: exp.use,
+            amount: exp.amount,
+            date: firstFuture,
+            interval: interval,
+            note: exp.note
+          })
+
+          // Setze den alten Eintrag auf "einmal"
+          await repo.update(exp.id, { interval: DEFAULT_INTERVAL })
+          changed = true
+        } catch (err) {
+          console.error('[recurring expense processing error]', err)
+        }
+      }
+    }
+
+    if (changed) {
+      expenses = await repo.findByUserId(userId)
+    }
+
     return expenses.map((e: any) => Expense.fromPrisma(e))
   }
 

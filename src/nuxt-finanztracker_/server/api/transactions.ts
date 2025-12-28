@@ -2,10 +2,12 @@
 import { serverSupabaseUser } from '#supabase/server'
 import { PrismaClient } from '@prisma/client'
 import TransactionService from '../application/TransactionService'
+import { QueryUserIdSchema } from '../utility/validationUtility'
 
 
 const prisma = new PrismaClient()
 
+// Handler für die API-Endpunkte
 export default defineEventHandler(async (event) => {
   const method = getMethod(event)
   
@@ -25,6 +27,7 @@ export default defineEventHandler(async (event) => {
   const userId = prismaUser.userid
 
   try {
+    // Behandeln der verschiedenen Anfragen-Methoden
     switch (method) {
       case 'GET': // GET /api/transactions?userId=123
         
@@ -35,6 +38,6 @@ export default defineEventHandler(async (event) => {
     }
   } catch (err: any) {
     console.error('[transactions API error]', err)
-    throw createError({ statusCode: 500, message: err.message || 'Server error' })
+    throw createError({ statusCode: err.statusCode ?? 500, message: err.message || 'Server error' })
   }
 })
