@@ -2,26 +2,18 @@
   <div class="p-6 max-w-screen-xl mx-auto space-y-6">
     <!-- Header -->
     <div class="flex items-center justify-between mb-6">
-      <h1 class="text-3xl font-bold">Dashboard:</h1>
+      <h1>Dashboard</h1>
       <CurrentTime />
     </div>
 
     <!-- Aktueller Kontostand -->
-    <div
-      class="card text-center text-xl font-semibold mb-6 bg-gradient-to-r from-cyan-100 to-teal-100 dark:bg-gray-800 dark:text-gray-800"
-    >
+    <h2 class="card text-center mb-6 bg-teal-50 dark:bg-gray-800">
       Aktueller Kontostand:
-      <strong class="text-teal-600 dark:text-teal-400">{{
-        currentBalance
-      }}</strong>
-    </div>
+      <strong class="text-teal-600 dark:text-teal-400">{{ currentBalance }}</strong>
+    </h2>
     <!-- Filtersegment -->
-    <div
-      class="bg-white p-4 rounded-lg shadow-sm mb-6 space-y-4 dark:bg-gray-800"
-    >
-      <p class="font-medium text-lg text-teal-600 dark:text-teal-400">
-        Filter:
-      </p>
+    <div class="card flex flex-col gap-4 mb-6 bg-gray-100 dark:bg-gray-800">
+      <h3>Filter</h3>
       <!-- Checkbox zum Umschalten -->
       <label class="flex items-center gap-2 cursor-pointer">
         <input type="checkbox" v-model="manualRange" class="w-4 h-4" />
@@ -29,11 +21,9 @@
       </label>
 
       <!-- Intervall-Auswahl -->
-      <div v-if="!manualRange" class="flex flex-wrap items-center gap-3">
-        <select
-          v-model="selectedInterval"
-          class="border rounded px-3 py-2 bg-white dark:bg-gray-800"
-        >
+      <div v-if="!manualRange" class="flex flex-wrap items-center gap-3 border-2 border-brand-300 dark:border-brand-600 rounded w-48">
+        <select v-model="selectedInterval"
+                class="form-select w-48">
           <option value="all">Alle Daten</option>
           <option value="week">Woche</option>
           <option value="month">Monat</option>
@@ -45,40 +35,26 @@
       <!-- Manuelle Datumsauswahl -->
       <div v-else class="flex flex-wrap items-center gap-4">
         <div class="flex flex-col">
-          <label class="text-sm font-medium mb-1">Startdatum</label>
-          <input
-            type="date"
-            v-model="startDate"
-            class="border rounded px-3 py-2 bg-white dark:bg-gray-800"
-          />
+          <label class="mb-1">Startdatum</label>
+          <input type="date" v-model="startDate"
+                class="form-input">
         </div>
 
         <div class="flex flex-col">
-          <label class="text-sm font-medium mb-1">Enddatum</label>
-          <input
-            type="date"
-            v-model="endDate"
-            class="border rounded px-3 py-2 bg-white dark:bg-gray-800"
-          />
+          <label class="mb-1">Enddatum</label>
+          <input type="date" v-model="endDate"
+                class="form-input">
         </div>
 
-        <button
-          @click="clearManualDates"
-          class="px-4 py-2 bg-gray-300 hover:bg-gray-400 dark:bg-gray-700 dark:hover:bg-gray-600 rounded"
-        >
+        <button @click="clearManualDates"
+                class="btn btn-primary mt-6">
           Reset
         </button>
       </div>
     </div>
     <!-- Verlauf Vollständig -->
-    <div
-      class="bg-white rounded-md p-6 min-h-[220px] shadow-sm hover:shadow-md transition-shadow duration-200 dark:bg-gray-800"
-    >
-      <p
-        class="text-base font-medium mb-4 text-center text-teal-600 dark:text-teal-400"
-      >
-        Verlauf des Kontostands (letztes Jahr)
-      </p>
+    <div class="bg-gray-100 rounded-md p-6 min-h-[220px] shadow-sm hover:shadow-md transition-shadow duration-200 dark:bg-gray-800">
+      <h4 class="mb-4 text-center">Verlauf des Kontostands (letztes Jahr)</h4>
       <verlaufChart :transactions="filteredTransactions" />
     </div>
 
@@ -88,11 +64,7 @@
       <div
         class="bg-white rounded-xl p-6 flex flex-col items-center justify-center shadow-sm hover:shadow-md transition-shadow duration-200 dark:bg-gray-800"
       >
-        <p
-          class="font-medium mb-2 text-center text-teal-600 dark:text-teal-400"
-        >
-          Ausgaben
-        </p>
+        <h4 class="mb-2 text-center">Ausgaben</h4>
         <div class="w-full h-[260px]">
           <expenseslast7days :transactions="filteredTransactions" />
         </div>
@@ -102,11 +74,7 @@
       <div
         class="bg-white rounded-xl p-6 flex flex-col items-center justify-center shadow-sm hover:shadow-md transition-shadow duration-200 dark:bg-gray-800"
       >
-        <p
-          class="font-medium mb-2 text-center text-teal-600 dark:text-teal-400"
-        >
-          Einnahmen
-        </p>
+        <h4 class="mb-2 text-center">Einnahmen</h4>
         <div class="w-full h-[260px]">
           <incomelast7days :transactions="filteredTransactions" />
         </div>
@@ -119,11 +87,7 @@
       <div
         class="bg-white rounded-xl p-6 flex flex-col items-center justify-center shadow-sm hover:shadow-md transition-shadow duration-200 dark:bg-gray-800"
       >
-        <p
-          class="font-medium mb-2 text-center text-teal-600 dark:text-teal-400"
-        >
-          Ausgaben je Kategorie
-        </p>
+        <h4 class="mb-2 text-center">Ausgaben je Kategorie</h4>
         <div class="w-full h-[260px]">
           <graph_categories_expenses :transactions="filteredTransactions" />
         </div>
@@ -133,11 +97,7 @@
       <div
         class="bg-white rounded-xl p-6 flex flex-col items-center justify-center shadow-sm hover:shadow-md transition-shadow duration-200 dark:bg-gray-800"
       >
-        <p
-          class="font-medium mb-2 text-center text-teal-600 dark:text-teal-400"
-        >
-          Einnahmen je Kategorie
-        </p>
+        <h4 class="mb-2 text-center">Einnahmen je Kategorie</h4>
         <div class="w-full h-[260px]">
           <graph_categories_incomes :transactions="filteredTransactions" />
         </div>
@@ -154,28 +114,27 @@ import { ref, onMounted } from "vue";
 import { useFetch } from "#app";
 
 // Komponenten
-import verlaufChart from "../components/verlaufChart.vue";
-import CurrentTime from "../components/currentTime.vue";
-import expenseslast7days from "../components/expenseintervall.vue";
-import incomelast7days from "../components/incomeintervall.vue";
-import graph_categories_expenses from "../components/graph_categories_expenses.vue";
-import graph_categories_incomes from "../components/graph_categories_incomes.vue";
-import bewegungstabelle from "../components/bewegungstabelle.vue";
-
-// Filter- und Datumssteuerung
-const manualRange = ref(false); // Checkbox
-const selectedInterval = ref("all");
-
-const startDate = ref(null);
-const endDate = ref(null);
-
-function clearManualDates() {
-  startDate.value = null;
-  endDate.value = null;
-}
+import verlaufChart from '../components/verlaufChart.vue'
+import CurrentTime from '../components/currentTime.vue'
+import expenseslast7days from '../components/expenseintervall.vue'
+import incomelast7days from '../components/incomeintervall.vue'
+import graph_categories_expenses from '../components/graph_categories_expenses.vue'
+import graph_categories_incomes from '../components/graph_categories_incomes.vue'
+import bewegungstabelle from '../components/bewegungstabelle.vue'
+import { useTransactionFilter } from '~/composables/useTransactionFilter'
 
 // Alle Transaktionen (Einnahmen & Ausgaben)
 const transactions = ref([]);
+
+// Filter Zeitraum & Logik (useTransactionFilter composable)
+const {
+  manualRange,
+  selectedInterval,
+  startDate,
+  endDate,
+  clearManualDates,
+  filteredTransactions
+} = useTransactionFilter(transactions)
 
 // Kategorien für Einnahmen & Ausgaben
 const categories = ref([]);
@@ -221,47 +180,4 @@ const currentBalance = computed(() => {
   return sum.toFixed(2).replace(".", ",") + " €";
 });
 
-// Gefilterte Transaktionen basierend auf Auswahl
-const filteredTransactions = computed(() => {
-  const all = transactions.value;
-
-  // manuelle Datumsauswahl
-  if (manualRange.value) {
-    return all.filter((t) => {
-      const d = new Date(t.date);
-
-      if (startDate.value && d < new Date(startDate.value)) return false;
-      if (endDate.value && d > new Date(endDate.value)) return false;
-      return true;
-    });
-  }
-
-  // Auswahl vordefinierter Intervalle
-  const now = new Date();
-  let cutoff = null;
-
-  switch (selectedInterval.value) {
-    case "week":
-      cutoff = new Date(now);
-      cutoff.setDate(now.getDate() - 7);
-      break;
-    case "month":
-      cutoff = new Date(now);
-      cutoff.setMonth(now.getMonth() - 1);
-      break;
-    case "semester":
-      cutoff = new Date(now);
-      cutoff.setMonth(now.getMonth() - 6);
-      break;
-    case "year":
-      cutoff = new Date(now);
-      cutoff.setFullYear(now.getFullYear() - 1);
-      break;
-    case "all":
-    default:
-      return all;
-  }
-
-  return all.filter((t) => new Date(t.date) >= cutoff);
-});
 </script>

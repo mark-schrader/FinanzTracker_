@@ -7,13 +7,23 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "prisma:generate": "prisma generate",
+    "prisma:test:generate": "prisma generate --schema=prisma/schema.test.prisma",
+    "prisma:test:push": "cross-env DATABASE_URL=file:./prisma/test.db prisma db push --schema=prisma/schema.test.prisma",
+    "test:unit:frontend": "vitest run test/unit/frontend",
+    "test:unit:backend": "vitest run test/unit/backend",
+    "test:integration:backend": "cross-env NODE_ENV=test DATABASE_URL=file:./prisma/test.db vitest run test/integration/backend",
+    "test": "npm run prisma:generate && npm run test:unit:frontend && npm run test:unit:backend && npm run prisma:test:generate && npm run prisma:test:push && npm run test:integration:backend"
   },
   "dependencies": {
     "@prisma/client": "^6.10.1",
     "@samk-dev/nuxt-vcalendar": "^1.0.4",
     "animate.css": "^4.1.1",
+    "canvg": "^4.0.3",
     "chart.js": "^4.5.0",
+    "jspdf": "^3.0.4",
+    "jspdf-autotable": "^5.0.2",
     "magic-regexp": "^0.10.0",
     "nuxt": "^3.17.5",
     "vue": "^3.5.16",
@@ -23,9 +33,15 @@
   },
   "devDependencies": {
     "@nuxtjs/tailwindcss": "6.11.4",
+    "@vitejs/plugin-vue": "^6.0.3",
+    "@vue/test-utils": "^2.4.6",
     "autoprefixer": "10.4.20",
+    "cross-env": "^10.1.0",
+    "dotenv-cli": "^11.0.0",
+    "happy-dom": "^20.0.11",
     "postcss": "8.4.47",
     "prisma": "^6.10.1",
-    "tailwindcss": "3.4.13"
+    "tailwindcss": "3.4.13",
+    "vitest": "^4.0.16"
   }
 }

@@ -1,185 +1,111 @@
 <template>
-  <main class="flex-1 p-12 flex justify-evenly items-center gap-8 flex-wrap">
+
+  <main class="content-wrapper flex flex-wrap justify-evenly items-center gap-10 py-16">
     <!-- Welcome Text -->
-    <div class="flex-1 max-w-[50%] bg-white/20 backdrop-blur rounded-xl p-6">
-      <p class="text-3xl font-bold mb-10 break-word">
+    <div
+      class="flex-1 max-w-[600px] card bg-gradient-to-br from-teal-50/60 to-white/40 dark:from-gray-800/60 dark:to-gray-900/30 backdrop-blur-md">
+      <h1 class="mb-8 break-word">
         WILLKOMMEN IN PLEITEGEIER!
+      </h1>
+      <p class="text-lg mb-4">
+        👩🏻‍💻 Viele Studierende stehen vor der Herausforderung, ihre Finanzen im Griff zu behalten – unerwartete
+        Ausgaben, begrenzte Mittel und der Überblick geht schnell verloren.
+      </p>
+      <h3 class="mt-10 mb-3">
+        💡 Unsere Lösung →
+      </h3>
+      <p class="text-lg mb-4">
+        Eine kostenlose und intuitive App, speziell für junge Menschen entwickelt. Pleitegeier hilft dir, Einnahmen und
+        Ausgaben zu verwalten, Budgets zu erstellen und deine Sparziele zu erreichen – einfach, übersichtlich und
+        komplett kostenlos 🤩
+      </p>
+      <h3 class="mt-10 mb-3">
+        🌎 Unser Ziel →
+      </h3>
+      <p class="text-lg mb-4">
+        Finanzielle Selbstbestimmung für alle – ganz egal, wie viel (oder wenig) gerade auf dem Konto ist.
       </p>
       <p class="text-lg mb-4">
-        👩🏻‍💻 Viele Studierende stehen vor der Herausforderung, ihre Finanzen im
-        Griff zu behalten – unerwartete Ausgaben, begrenzte Mittel und der
-        Überblick geht schnell verloren.
-      </p>
-      <p class="text-lg mb-4 font-bold">💡 Unsere Lösung →</p>
-      <p class="text-lg mb-4">
-        Eine kostenlose und intuitive App, speziell für junge Menschen
-        entwickelt. Pleitegeier hilft dir, Einnahmen und Ausgaben zu verwalten
-        und deine Sparziele zu erreichen – einfach, übersichtlich und komplett
-        kostenlos 🤩
-      </p>
-      <p class="text-lg mb-4 font-bold">🌎 Unser Ziel →</p>
-      <p class="text-lg mb-4">
-        Finanzielle Selbstbestimmung für alle – ganz egal, wie viel (oder wenig)
-        gerade auf dem Konto ist.
-      </p>
-      <p class="text-lg">
-        Worauf wartest du noch? Melde dich jetzt an und mach deine Finanzen
-        endlich stressfrei! 🥳
+        Worauf wartest du noch? Melde dich jetzt an und mach deine Finanzen endlich stressfrei! 🥳
       </p>
     </div>
 
-    <!-- Buttons -->
-    <div
-      class="flex-1 max-w-[50%] flex flex-col justify-center items-center gap-6"
-    >
-      <button
-        @click="openLogin"
-        class="w-[130px] h-[40px] font-medium bg-white/40 rounded-full hover:scale-110 transition duration-300 shadow-md"
-      >
-        Anmelden
-      </button>
-      <button
-        @click="openRegister"
-        class="w-[130px] h-[40px] font-medium bg-white/40 rounded-full hover:scale-110 transition duration-300 shadow-md"
-      >
-        Registrieren
-      </button>
+    <div class="flex-1 max-w-[50%] flex flex-col justify-center items-center gap-8">
+      <!-- Logo -->
+      <img src="/Logo.png" alt="Logo" class="w-80 h-auto mb-4 drop-shadow-md" />
+      <!-- Buttons -->
+      <div class="flex-1 max-w-[50%] flex flex-col justify-center items-center gap-6">
+        <button @click="openLogin"
+          class="btn btn-primary w-[150px] rounded-full text-base shadow-md hover:scale-110 transition duration-300">
+          Sign In
+        </button>
+        <button @click="openRegister"
+          class="btn btn-secondary w-[150px] rounded-full text-base shadow-md hover:scale-110 transition duration-300">
+          Sign Up
+        </button>
+      </div>
     </div>
 
     <!-- Login Form -->
-    <div
-      v-if="showLogin"
-      class="fixed inset-0 flex items-center justify-center z-50"
-    >
-      <!-- Blur effect -->
-      <div
-        class="absolute inset-0 bg-white/70 dark:bg-gray-900 backdrop-blur-md"
-      ></div>
-      <div
-        class="bg-white p-8 rounded-lg shadow-lg w-[400px] relative dark:ring-gray-700"
-      >
-        <!-- Close button-->
+    <div v-if="showLogin" class="modal-overlay">
+      <div class="modal-md relative">
         <button
-          class="absolute top-3 right-4 text-xl text-gray-900 hover:text-blue-700 hover:scale-125 transition-all duration-200 ease-in-out cursor-pointer dark:hover:text-gray-800"
-          @click="closeForm"
-        >
+          class="absolute top-3 right-4 text-xl text-brand-600 hover:text-teal-400 transition-transform hover:scale-110"
+          @click="closeForm">
           <i class="fas fa-times"></i>
         </button>
         <form class="flex flex-col gap-4">
-          <h1 class="text-2xl font-bold mb-4 dark:text-gray-800">Login →</h1>
-          <label class="dark:text-gray-900">Email</label>
-          <input
-            type="email"
-            name="email"
-            placeholder="Enter Email"
-            required
-            class="border p-2 rounded"
-          />
+          <h3>Login →</h3>
+          <label for="email">Email</label>
+          <input type="email" name="email" placeholder="Enter Email" required class="form-input" />
 
-          <label class="dark:text-gray-900">Password</label>
-          <input
-            type="password"
-            name="psw"
-            placeholder="Enter Password"
-            required
-            class="border p-2 rounded"
-          />
+          <label for="psw">Password</label>
+          <input type="password" name="psw" placeholder="Enter Password" required class="form-input" />
 
-          <button
-            type="submit"
-            class="bg-blue-100 text-blue-700 hover:bg-blue-200 px-4 py-2 rounded w-1/2 self-end cursor-pointer"
-          >
-            Anmelden
-          </button>
+          <button type="submit" class="btn btn-primary self-end w-1/2 mt-4 shadow-sm">Login</button>
         </form>
       </div>
     </div>
 
     <!-- Register Form -->
-    <div
-      v-if="showRegister"
-      class="fixed inset-0 flex items-center justify-center z-50"
-    >
-      <!-- Blur effect -->
-      <div
-        class="absolute inset-0 bg-white/75 dark:bg-gray-900 backdrop-blur-md"
-      ></div>
-      <div class="bg-white p-5 rounded-lg shadow-lg w-[400px] relative">
+    <div v-if="showRegister" class="modal-overlay">
+      <div class="modal-md relative">
         <button
-          class="absolute top-3 right-4 text-xl text-gray-900 hover:text-blue-700 hover:scale-125 transition-all duration-200 ease-in-out cursor-pointer dark:hover:text-gray-900"
-          @click="closeForm"
-        >
+          class="absolute top-3 right-4 text-xl text-brand-600 hover:text-teal-400 transition-transform hover:scale-110"
+          @click="closeForm">
           <i class="fas fa-times"></i>
         </button>
         <form class="flex flex-col gap-4">
-          <h1 class="text-2xl font-bold mb-4 dark:text-gray-900">Register →</h1>
+          <h3>Register →</h3>
 
-          <label class="dark:text-gray-900">Vorname</label>
-          <input
-            type="text"
-            name="fname"
-            id="fname"
-            placeholder="Maria"
-            class="border p-2 rounded"
-          />
+          <label for="fname">Vorname</label>
+          <input type="text" name="fname" id="fname" class="form-input" />
+          <!-- form-input schon definiert in tailwind.css -->
 
-          <label class="dark:text-gray-900">Nachname</label>
-          <input
-            type="text"
-            name="lname"
-            id="lname"
-            placeholder="Schneider"
-            class="border p-2 rounded"
-          />
+          <label for="lname">Nachname</label>
+          <input type="text" name="lname" id="lname" class="form-input" />
 
-          <label class="dark:text-gray-900">Universität</label>
-          <select
-            id="uni"
-            name="uni"
-            class="border p-2 rounded dark:text-gray-900"
-          >
+          <label for="uni">Universität</label>
+          <select id="uni" name="uni" class="form-select">
             <option value="htw">HTW Dresden</option>
             <option value="tu">TU Dresden</option>
             <option value="fh">Fachhochschule Dresden</option>
-            <option value="hm">
-              Hochschule für Musik Carl Maria von Weber Dresden
-            </option>
+            <option value="hm">Hochschule für Musik Carl Maria von Weber Dresden</option>
           </select>
 
-          <label class="dark:text-gray-900">Geburtstag</label>
-          <input
-            type="date"
-            name="bday"
-            id="bday"
-            class="border p-2 rounded dark:text-gray-900"
-          />
+          <label for="bday">Geburtstag</label>
+          <input type="date" name="bday" id="bday" class="form-input" />
 
-          <label class="dark:text-gray-900">Email</label>
-          <input
-            type="email"
-            name="email"
-            placeholder="Enter Email"
-            required
-            class="border p-2 rounded"
-          />
+          <label for="email">Email</label>
+          <input type="email" name="email" placeholder="Enter Email" required class="form-input" />
 
-          <label class="dark:text-gray-900">Password</label>
-          <input
-            type="password"
-            name="psw"
-            placeholder="Enter Password"
-            required
+          <label for="psw">Password</label>
+          <input type="password" name="psw" placeholder="Enter Password" required
             pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
             title="Muss mindestens eine Zahl und einen Groß- und Kleinbuchstaben sowie mindestens 8 oder mehr Zeichen enthalten"
-            class="form-input"
-          />
+            class="form-input" />
 
-          <button
-            type="submit"
-            class="bg-blue-100 text-blue-700 hover:bg-blue-200 px-4 py-2 rounded w-1/2 self-end cursor-pointer"
-          >
-            Registrieren
-          </button>
+          <button type="submit" class="btn btn-primary self-end w-1/2 mt-4 shadow-sm">Register</button>
         </form>
       </div>
     </div>

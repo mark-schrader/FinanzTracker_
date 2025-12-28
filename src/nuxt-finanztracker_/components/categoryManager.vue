@@ -1,28 +1,24 @@
 <template>
+  <!-- Inline Alert -->
+  <InlineAlert v-if="showAlertBox" :message="alertMessage" :type="alertType" />
+
   <!-- Main Button to Open Modal -->
-  <button
-    @click="showModal = true"
-    class="bg-blue-100 hover:bg-blue-200 text-blue-700 font-semibold py-4 rounded shadow
+  <button @click="showModal = true" class="bg-blue-100 hover:bg-blue-200 text-blue-700 font-semibold py-4 rounded shadow
            text-center flex flex-col items-center justify-center space-y-2 transform hover:scale-105 transition">
     <i class="fas fa-tags text-4xl"></i>
     <span class="text-lg">Kategorien verwalten</span>
   </button>
 
   <!-- Modal: Kategorien verwalten -->
-  <div
-    v-if="showModal"
-    class="fixed inset-0 backdrop-blur-sm flex items-center justify-center z-50"
-  >
-    <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg w-[90%] max-w-3xl space-y-4 relative">
+  <div v-if="showModal" class="modal-overlay">
+    <div class="modal-lg">
 
       <!-- Header -->
-      <h2 class="text-2xl font-bold text-brand-600 dark:text-brand-300">
-        Kategorien verwalten
-      </h2>
+      <h3 class="mb-2">Kategorien verwalten</h3>
 
       <!-- Table -->
-      <table class="table w-full dark:text-gray-200">
-        <thead>
+      <table class="table dark:text-gray-200">
+        <thead class="text-center">
           <tr class="border-b dark:border-gray-700">
             <th>Name</th>
             <th>Typ</th>
@@ -31,25 +27,28 @@
         </thead>
 
         <tbody>
-          <tr
-            v-for="cat in categories"
-            :key="cat.id"
-            class="hover:bg-gray-100 dark:hover:bg-gray-700 transition"
-          >
+          <tr v-for="cat in categories" :key="cat.id" class="hover:bg-gray-100 dark:hover:bg-gray-700 transition">
             <td>{{ cat.name }}</td>
-            <td>{{ displayType(cat.type) }}</td> <!--displayType Funktion: zeigt Ausnahme/Einnnahme -->
+
+            <!--displayType Funktion: zeigt Ausnahme/Einnnahme -->
+            <td>
+              <div class="flex items-center gap-2">
+                <i :class="cat.type === 'income'
+                  ? 'fa-solid fa-circle-plus text-brand-500'
+                  : 'fa-solid fa-circle-minus text-red-500'"></i>
+                <span>
+                  {{ displayType(cat.type) }}
+                </span>
+
+              </div>
+            </td>
+
             <td class="space-x-4">
-              <button
-                class="text-teal-600 hover:text-teal-400"
-                @click="openEdit(cat)"
-              >
+              <button class="text-teal-600 hover:text-teal-400" @click="openEdit(cat)">
                 <i class="fas fa-pen"></i>
               </button>
 
-              <button
-                class="text-red-600 hover:text-red-400"
-                @click="openDelete(cat)"
-              >
+              <button class="text-red-600 hover:text-red-400" @click="openDelete(cat)">
                 <i class="fas fa-trash"></i>
               </button>
             </td>
@@ -59,7 +58,7 @@
 
       <!-- Add Button -->
       <div class="flex justify-center mt-4">
-        <button @click="showAdd = true" class="btn btn-primary flex items-center space-x-2">
+        <button data-testid="open-category-popup" @click="showAdd = true" class="btn btn-primary flex items-center space-x-2">
           <i class="fas fa-plus-circle"></i>
           <span>Kategorie hinzufügen</span>
         </button>
@@ -73,12 +72,9 @@
   </div>
 
   <!-- Modal: Add Category -->
-  <div
-    v-if="showAdd"
-    class="fixed inset-0 backdrop-blur-sm flex items-center justify-center z-50"
-  >
-    <div class="bg-white dark:bg-gray-800 p-6 rounded-lg w-[90%] max-w-md space-y-4">
-      <h2 class="text-xl font-semibold text-brand-600">Neue Kategorie</h2>
+  <div v-if="showAdd" class="modal-overlay">
+    <div class="modal-md">
+      <h3>Neue Kategorie</h3>
 
       <div class="grid gap-2">
         <label>Name</label>
@@ -92,7 +88,7 @@
 
       </div>
 
-      <div class="flex justify-end space-x-2">
+      <div class="flex justify-end space-x-2 mt-4">
         <button @click="showAdd = false" class="btn btn-secondary">Abbrechen</button>
         <button @click="createCategory" class="btn btn-primary">Speichern</button>
       </div>
@@ -100,10 +96,10 @@
   </div>
 
   <!-- Modal: Edit Category - Bearbeiten -->
-  <div v-if="showEdit" class="fixed inset-0 backdrop-blur-sm flex items-center justify-center z-50">
-    <div class="bg-white dark:bg-gray-800 p-6 rounded-lg w-[90%] max-w-md space-y-4">
+  <div v-if="showEdit" class="modal-overlay">
+    <div class="modal-md">
 
-      <h2 class="text-2xl font-bold text-brand-600 dark:text-brand-400">Kategorie bearbeiten</h2>
+      <h3>Kategorie bearbeiten</h3>
 
       <div class="grid gap-2">
         <label>Name</label>
@@ -116,7 +112,7 @@
         </select>
       </div>
 
-      <div class="flex justify-end space-x-2">
+      <div class="flex justify-end space-x-2 mt-4">
         <button @click="showEdit = false" class="btn btn-secondary">Abbrechen</button>
         <button @click="saveEditCategory" class="btn btn-primary">Speichern</button>
       </div>
@@ -124,17 +120,17 @@
   </div>
 
   <!-- Modal: Delete -->
-  <div v-if="showDelete" class="fixed inset-0 backdrop-blur-sm flex items-center justify-center z-50">
-    <div class="bg-white dark:bg-gray-800 p-6 rounded-lg w-[90%] max-w-md space-y-4">
+  <div v-if="showDelete" class="modal-overlay">
+    <div class="modal-md">
 
-      <h2 class="text-2xl font-bold text-brand-600 dark:text-brand-400">Kategorie löschen</h2>
+      <h3>Kategorie löschen</h3>
       <p class="dark:text-gray-100">
         Möchtest du die Kategorie
         <span class="font-semibold">{{ selected?.name }}</span>
         wirklich löschen?
       </p>
 
-      <div class="flex justify-end space-x-4">
+      <div class="flex justify-center space-x-4 mt-2">
         <button @click="deleteCategory" class="btn btn-danger">Löschen</button>
         <button @click="showDelete = false" class="btn btn-secondary">Zurück</button>
       </div>
@@ -145,6 +141,8 @@
 
 <script setup>
 import { ref, onMounted } from "vue";
+// Alert handling, erfolgreich oder fehlerhaft
+const { showAlertBox, alertMessage, alertType, showAlert } = useAlert();
 
 // UI control
 const showModal = ref(false);
@@ -160,16 +158,33 @@ const form = ref({
   type: "income",
 });
 
+// Kategorien alphabetisch sortieren (A bis Z)
+function sortCategories() {
+  if (!Array.isArray(categories.value)) return;
+
+  categories.value.sort((a, b) => {
+    const nameA = (a.name || "").toLowerCase();
+    const nameB = (b.name || "").toLowerCase();
+    return nameA.localeCompare(nameB, "de");
+  });
+}
+
 // Load categories
 async function loadCategories() {
-  categories.value = await $fetch("/api/categories?userId=1");
+  try {
+    categories.value = await $fetch("/api/categories?userId=1");
+    sortCategories(); // Nach dem Laden sortieren alphabetisch
+  } catch (err) {
+    console.error('Fehler beim Laden der Kategorien:', err);
+    showAlert('Fehler beim Laden der Kategorien', 'error');
+  }
 }
 
 onMounted(loadCategories);
 
 // Damit zeigt es "Einnahme" oder "Ausgabe" anstatt "income" oder "expense", für besesere Lesbarkeit
 function displayType(type) {
-  if (type === "income") return "Einnahme"   
+  if (type === "income") return "Einnahme"
   if (type === "expense") return "Ausgabe"
   return type
 }
@@ -193,33 +208,53 @@ function closeAll() {
   showDelete.value = false;
 }
 
+
 // ---- CRUD actions ----
 async function createCategory() {
-  await $fetch("/api/categories", {
-    method: "POST",
-    body: { ...form.value, userId: 1 }
-  });
+  try {
+    await $fetch("/api/categories", {
+      method: "POST",
+      body: { ...form.value, userId: 1 }
+    });
 
-  await loadCategories();
-  showAdd.value = false;
+    await loadCategories();
+    showAdd.value = false;
+    showAlert("Kategorie wurde erfolgreich erstellt!", "success");
+  } catch (err) {
+    console.error('Fehler beim Erstellen der Kategorie:', err);
+    showAlert('Fehler beim Erstellen der Kategorie', 'error');
+  }
 }
 
 async function saveEditCategory() {
-  await $fetch(`/api/categories/${selected.value.id}`, {
-    method: "PUT",
-    body: selected.value
-  });
+  try {
+    await $fetch(`/api/categories/${selected.value.id}`, {
+      method: "PUT",
+      body: selected.value
+    });
 
-  await loadCategories();
-  showEdit.value = false;
+    await loadCategories();
+    showEdit.value = false;
+    showAlert("Kategorie wurde erfolgreich aktualisiert!", "success");
+  } catch (err) {
+    console.error('Fehler beim Aktualisieren der Kategorie:', err);
+    showAlert('Fehler beim Aktualisieren der Kategorie', 'error');
+  }
 }
 
 async function deleteCategory() {
-  await $fetch(`/api/categories/${selected.value.id}`, {
-    method: "DELETE"
-  });
+  try {
+    await $fetch(`/api/categories/${selected.value.id}`, {
+      method: "DELETE"
+    });
 
-  await loadCategories();
-  showDelete.value = false;
+    await loadCategories();
+    showDelete.value = false;
+    showAlert("Kategorie wurde erfolgreich gelöscht!", "success");
+  } catch (err) {
+    console.error('Fehler beim Löschen der Kategorie:', err);
+    showAlert('Fehler beim Löschen der Kategorie', 'error');
+  }
 }
+
 </script>
