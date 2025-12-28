@@ -5,7 +5,7 @@
       <h1>Dashboard</h1>
       <CurrentTime />
     </div>
-    
+
     <!-- Aktueller Kontostand -->
     <h2 class="card text-center mb-6 bg-teal-50 dark:bg-gray-800">
       Aktueller Kontostand:
@@ -34,7 +34,6 @@
 
       <!-- Manuelle Datumsauswahl -->
       <div v-else class="flex flex-wrap items-center gap-4">
-
         <div class="flex flex-col">
           <label class="mb-1">Startdatum</label>
           <input type="date" v-model="startDate"
@@ -51,7 +50,6 @@
                 class="btn btn-primary mt-6">
           Reset
         </button>
-
       </div>
     </div>
     <!-- Verlauf Vollständig -->
@@ -64,7 +62,7 @@
     <div class="grid grid-cols-2 gap-6">
       <!-- Ausgaben Intervall -->
       <div
-        class="bg-gray-100 rounded-xl p-6 flex flex-col items-center justify-center shadow-sm hover:shadow-md transition-shadow duration-200 dark:bg-gray-800"
+        class="bg-white rounded-xl p-6 flex flex-col items-center justify-center shadow-sm hover:shadow-md transition-shadow duration-200 dark:bg-gray-800"
       >
         <h4 class="mb-2 text-center">Ausgaben</h4>
         <div class="w-full h-[260px]">
@@ -74,7 +72,7 @@
 
       <!-- Einnahmen Interval -->
       <div
-        class="bg-gray-100 rounded-xl p-6 flex flex-col items-center justify-center shadow-sm hover:shadow-md transition-shadow duration-200 dark:bg-gray-800"
+        class="bg-white rounded-xl p-6 flex flex-col items-center justify-center shadow-sm hover:shadow-md transition-shadow duration-200 dark:bg-gray-800"
       >
         <h4 class="mb-2 text-center">Einnahmen</h4>
         <div class="w-full h-[260px]">
@@ -83,11 +81,11 @@
       </div>
     </div>
 
-     <!-- Kategorien Blockcharts -->
+    <!-- Kategorien Blockcharts -->
     <div class="grid grid-cols-2 gap-6">
       <!-- Kategorien Ausgaben -->
       <div
-        class="bg-gray-100 rounded-xl p-6 flex flex-col items-center justify-center shadow-sm hover:shadow-md transition-shadow duration-200 dark:bg-gray-800"
+        class="bg-white rounded-xl p-6 flex flex-col items-center justify-center shadow-sm hover:shadow-md transition-shadow duration-200 dark:bg-gray-800"
       >
         <h4 class="mb-2 text-center">Ausgaben je Kategorie</h4>
         <div class="w-full h-[260px]">
@@ -97,7 +95,7 @@
 
       <!-- Kategorien Einnahmen -->
       <div
-        class="bg-gray-100 rounded-xl p-6 flex flex-col items-center justify-center shadow-sm hover:shadow-md transition-shadow duration-200 dark:bg-gray-800"
+        class="bg-white rounded-xl p-6 flex flex-col items-center justify-center shadow-sm hover:shadow-md transition-shadow duration-200 dark:bg-gray-800"
       >
         <h4 class="mb-2 text-center">Einnahmen je Kategorie</h4>
         <div class="w-full h-[260px]">
@@ -112,8 +110,8 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
-import { useFetch } from '#app'
+import { ref, onMounted } from "vue";
+import { useFetch } from "#app";
 
 // Komponenten
 import verlaufChart from '../components/verlaufChart.vue'
@@ -126,7 +124,7 @@ import bewegungstabelle from '../components/bewegungstabelle.vue'
 import { useTransactionFilter } from '~/composables/useTransactionFilter'
 
 // Alle Transaktionen (Einnahmen & Ausgaben)
-const transactions = ref([])
+const transactions = ref([]);
 
 // Filter Zeitraum & Logik (useTransactionFilter composable)
 const {
@@ -139,48 +137,47 @@ const {
 } = useTransactionFilter(transactions)
 
 // Kategorien für Einnahmen & Ausgaben
-const categories = ref([])
+const categories = ref([]);
 
 onMounted(async () => {
   try {
     // Kategorien (falls backend userId braucht, ergänzen)
-    const catData = await $fetch('/api/categories?userId=1')
-    categories.value = catData || []
+    const catData = await $fetch("/api/categories?userId=1");
+    categories.value = catData || [];
 
     // Lade kombinierte Transaktionen mit userId query (wichtig für Backend)
-    const transData = await $fetch('/api/transactions?userId=1')
-    transactions.value = transData || []
+    const transData = await $fetch("/api/transactions?userId=1");
+    transactions.value = transData || [];
   } catch (err) {
-    console.error('Fehler beim Laden der Daten:', err)
+    console.error("Fehler beim Laden der Daten:", err);
   }
-})
+});
 // Euro String in Zahl umwandeln
 function parseEuro(euroString) {
-  if (!euroString) return 0
+  if (!euroString) return 0;
 
-  let cleaned = euroString.replace(/[^0-9.,]/g, '')
-  if (cleaned.includes('.') && cleaned.includes(',')) {
-    cleaned = cleaned.replace(/\./g, '')
-    cleaned = cleaned.replace(',', '.')
-  } else if (cleaned.includes(',')) {
-    cleaned = cleaned.replace(',', '.')
+  let cleaned = euroString.replace(/[^0-9.,]/g, "");
+  if (cleaned.includes(".") && cleaned.includes(",")) {
+    cleaned = cleaned.replace(/\./g, "");
+    cleaned = cleaned.replace(",", ".");
+  } else if (cleaned.includes(",")) {
+    cleaned = cleaned.replace(",", ".");
   }
 
-  const value = parseFloat(cleaned)
-  return isNaN(value) ? 0 : value
+  const value = parseFloat(cleaned);
+  return isNaN(value) ? 0 : value;
 }
 
 // Berechnet den aktuellen Kontostand auf Basis der Transaktionen
 const currentBalance = computed(() => {
   const sum = transactions.value.reduce((total, t) => {
-    const amount = parseEuro(t.amount)
-    if (t.type === 'Ausgabe') return total - amount
-    if (t.type === 'Einnahme') return total + amount
-    return total // fallback
-  }, 0)
+    const amount = parseEuro(t.amount);
+    if (t.type === "Ausgabe") return total - amount;
+    if (t.type === "Einnahme") return total + amount;
+    return total; // fallback
+  }, 0);
 
-  return sum.toFixed(2).replace('.', ',') + ' €'
-})
+  return sum.toFixed(2).replace(".", ",") + " €";
+});
 
 </script>
-

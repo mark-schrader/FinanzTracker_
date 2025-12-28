@@ -18,6 +18,7 @@
   },
   "dependencies": {
     "@prisma/client": "^6.10.1",
+    "@samk-dev/nuxt-vcalendar": "^1.0.4",
     "animate.css": "^4.1.1",
     "canvg": "^4.0.3",
     "chart.js": "^4.5.0",
