@@ -111,6 +111,7 @@ const navItems = [
           <i class="fas fa-sign-out-alt"></i>
         </button>
       </div>
+    </div>
     </header>
   </div>
 </template>
