@@ -8,9 +8,8 @@ const route = useRoute()
 const router = useRouter()
 const isScrolled = ref(false)
 
-const showLogoutAlert = () => {
-  console.log('Logout clicked')
-  // later: localStorage.removeItem('token'); router.push('/login')
+async function signOut() {
+  const { error } = await supabase.auth.signOut()
 }
 
 onMounted(() => {
@@ -78,7 +77,7 @@ const navItems = [
       </div>
 
       <!-- Logout -->
-      <button @click="showLogoutAlert" class="focus:outline-none transition-all hover:translate-x-1">
+      <button @click="signOut" class="focus:outline-none transition-all hover:translate-x-1">
         <i class="fas fa-sign-out-alt"></i>
       </button>
     </div>
