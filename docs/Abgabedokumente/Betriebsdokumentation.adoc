@@ -1,1 +1,36 @@
-Betrieb
+= Betriebsdokumentation
+
+== Systemvoraussetzungen
+Damit der Pleitgeier reibungslos funktioniert, müssen folgende Systemvoraussetzungen erfüllt sein:
+
+Für die Hardware werden folgende Mindestanforderungen benötigt:
+
+* CPU: Quad-Core Prozessor
+* RAM: 8 GB
+* Festplatte: SSD mit 1–2 GB freiem Speicher
+* Netz: ≥ 10 Mbit/s, geringe Latenz
+
+Für die Software werden folgende Mindestanforderungen benötigt:
+
+* Betriebssystem: Windows 10, macOS 11, Linux Kernel 5.x?????
+* Datenbank:
+* Webserver:
+* Browser: alle Browser möglich 
+
+== Systemeinrichtung
+
+=== Wo findet man die aktuell lauffähige Version ihres Systems (URL) oder einen Docker Image?
+
+=== Wie muss das System konfigurationshinweisen, Umgebungsvariablen und notwendigen Voraussetzungen für die Nutzung (Browser)
+
+=== Wie müssen die Bestandteile ihres Systems konfiguriert werden?
+
+=== Welche Einstellung müssen am Browser oder anderen Komponenten gemacht werden?
+
+== Systembetreuung
+
+=== FAQ für Benutzersupport
+
+=== Fehlerdiagnose
+
+=== Datensicherung und wiederherstellung

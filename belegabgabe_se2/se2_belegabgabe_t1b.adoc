@@ -30,21 +30,25 @@ include::{docs}/_includes/default-attributes.inc.adoc[]
 :docs-Abgabedokumente: {docs}/Abgabedokumente
 
 == Betriebsdokumentation
-include::{docs-Abgabedokumente}/Betriebsdokumentation.adoc[]
+include::{docs-Abgabedokumente}/Betriebsdokumentation.adoc[lines=2..-1, leveloffset=+1]
 <<<
 
 == Anwenderdokumentation
-include::{docs-Abgabedokumente}/Anwenderdokumentation.adoc[]
+include::{docs-Abgabedokumente}/Anwenderdokumentation.adoc[lines=2..-1, leveloffset=+1]
 <<<
 
 == Entwicklerdokumentation
-include::{docs-Abgabedokumente}/Entwicklerdokumentation.adoc[]
+include::{docs-Abgabedokumente}/Entwicklerdokumentation.adoc[lines=2..-1, leveloffset=+1]
 <<<
 
 == Testdokumentation
-include::{docs-Abgabedokumente}/Testdokumentation.adoc[]
+include::{docs-Abgabedokumente}/Testdokumentation.adoc[lines=2..-1, leveloffset=+1]
 <<<
 
 == Gruppenreflexion
-include::{docs-Abgabedokumente}/Gruppenleistung.adoc[]
+include::{docs-Abgabedokumente}/Gruppenleistung.adoc[lines=2..-1, leveloffset=+1]
+<<<
+
+== Einzelreflexionen
+include::{docs-Abgabedokumente}/Einzelreflexion.adoc[lines=2..-1, leveloffset=+1]
 <<<

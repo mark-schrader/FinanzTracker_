@@ -1,1 +1,34 @@
-gruppe
+= Gruppenreflexion
+Wir haben das Ende von *Software Engineering 2* erreicht. Die Entwicklung unseres Projekts _Pleitegeier_ ist abgeschlossen und wir blicken auf die vergangenen Monate zurück. In dieser Gruppenreflexion betrachten wir sowohl unsere größten Erfolge als auch unsere wichtigsten Misserfolge und reflektieren, welche Erkenntnisse wir daraus gewonnen haben.
+
+== Erfolge
+Bevor wir auf unsere Misserfolge eingehen, möchten wir zunächst unsere Erfolge und unsere Leistungen als Team hervorheben.
+
+=== Erfolg 1: Funktionierender Finanztracker
+Am Ende von *Software Engineering 2* können wir mit Stolz sagen, dass wir einen funktionierenden Finanztracker entwickelt haben. Die Funktionalitäten, die wir uns zu Beginn des Projekts vorgenommen hatten, sind größtenteils umgesetzt und funktionsfähig. Besonders gut gelöst wurde die Kernaufgabe der Projektarbeit, nämlich die strukturierte Erfassung und Auswertung von Einnahmen und Ausgaben. Der Nutzer kann seine Finanzen übersichtlich mit passenden Kategorien verwalten und wiederkehrende Zahlungen bequem als Daueraufträge speichern. Dadurch wird der alltägliche Umgang mit dem Finanztracker deutlich vereinfacht. Ein weiterer Erfolg ist das übersichtliche Dashboard, das die finanziellen Verläufe grafisch aufbereitet darstellt. Diese Visualisierung hilft dem Benutzer, seine Ausgaben besser zu verstehen und finanzielle Entscheidungen bewusster zu treffen. Zusätzlich wurden Challenges implementiert, die den Nutzer spielerisch dazu motivieren, Geld zu sparen und seine finanziellen Ziele zu erreichen. Auch das ansprechende und benutzerfreundliche Design unseres _Pleitegeiers_ trägt zur positiven Nutzererfahrung bei.
+
+-> Wie wurdend diese Erfolge realisiert? 
+
+=== Erfolg 2: Gute Gruppenaufteilung und Zusammenarbeit
+Die Zusammenarbeit innerhalb der Gruppe sowie zwischen den Teilgruppen hat insgesamt sehr gut funktioniert. Durch klare Kommunikation und regelmäßige Meetings konnten Aufgaben sinnvoll verteilt und Probleme frühzeitig besprochen werden. Die allgemeine Grundstimmung im Team war durchgehend positiv und motivierend, was sich sehr förderlich auf den Projektverlauf ausgewirkt hat.
+
+=== Erfolg 3: Einarbeitung in Scrum
+Obwohl keine Person aus dem Team zuvor intensiv mit Scrum gearbeitet hatte, konnten wir uns nach einer gewissen Zeit gut in die Arbeitsweise einfinden. Die Scrum-Strukturen wurden zunehmend besser verstanden und effektiv genutzt, wodurch unsere Arbeitsorganisation im Laufe des Projekts deutlich strukturierter wurde.
+
+== Misserfolge
+Natürlich gab es während des Projekts auch einige Misserfolge und Herausforderungen, die wir im Folgenden reflektieren möchten.
+
+=== Misserfolg 1: Probleme mit der Backend-Architektur
+Ein großer Misserfolg war die anfängliche Backend-Architektur, die sich als nicht optimal herausgestellt hat. Die notwendige Restrukturierung war mit erheblichem Aufwand verbunden und hätte im Vorfeld besser geplant werden können.  
+Durch diese Umstrukturierung mussten auch bereits implementierte Features angepasst werden. Beispielsweise wurden Daueraufträge zunächst mit Hardcode umgesetzt, später korrekt an die Datenbank angebunden und mussten aufgrund der Backend-Änderungen erneut überarbeitet werden.  
+
+**Lösung:** Trotz des hohen Aufwands haben wir uns bewusst dafür entschieden, die Probleme konsequent anzugehen und die Architektur sauber neu aufzubauen.
+
+=== Misserfolg 2: Workload-Management
+Das Management des Arbeitsaufwands stellte sich als schwierig heraus. Einige Features mussten verschoben werden, da der tatsächliche Zeitaufwand höher war als ursprünglich geplant.
+
+=== Misserfolg 3: GitHub-Management und Merge-Konflikte
+Der Umgang mit GitHub, insbesondere das Lösen von Merge-Konflikten, war für das Team anfangs schwer zu verstehen und führte zu Problemen im Entwicklungsprozess.  
+
+**Lösung:** Durch bessere Kommunikation sowie klarere Absprachen und Anweisungen konnten diese Probleme im weiteren Verlauf reduziert werden.
+
