@@ -50,7 +50,7 @@
             <label>Kategorie</label>
             <select v-model="incomeForm.category" class="form-input">
               <option disabled value="">Bitte wählen</option>
-              <option v-for="cat in categories" :value="cat.id" :key="cat.id">
+              <option v-for="cat in categories.filter(c => c.type === 'income')" :value="cat.id" :key="cat.id">
                 {{ cat.name }}
               </option>
             </select>
@@ -488,14 +488,13 @@ async function submitIncome() {
   try {
     const res = await $fetch("/api/incomes", {
       method: "POST",
-      body: {
+        body: {
         amount: incomeForm.value.amount,
         date: incomeForm.value.date,
         source: incomeForm.value.source,
         categoryId: incomeForm.value.category,
         note: incomeForm.value.note,
-        interval: incomeForm.value.interval,
-        userId: user.value.id
+        interval: incomeForm.value.interval
       }
     })
 
@@ -542,14 +541,13 @@ async function submitExpense() {
   try {
     const res = await $fetch("/api/expenses", {
       method: "POST",
-      body: {
+        body: {
         amount: expenseForm.value.amount,
         date: expenseForm.value.date,
         use: expenseForm.value.use,
         categoryId: expenseForm.value.category,
         note: expenseForm.value.note,
-        interval: expenseForm.value.interval,
-        userId: user.value.id
+        interval: expenseForm.value.interval
       }
     })
 
@@ -724,8 +722,7 @@ async function saveTransactionEdit(updatedTransaction) {
       date: updatedTransaction.date,
       interval: updatedTransaction.interval,
       note: updatedTransaction.comment || '',
-      categoryId: updatedTransaction.categoryId,
-      userId: user.value.id
+      categoryId: updatedTransaction.categoryId
     }
 
     if (isIncome) {
