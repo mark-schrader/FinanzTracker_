@@ -6,10 +6,21 @@ import { ref, onMounted, onUnmounted } from 'vue'
 //Reaktive Referenzen
 const route = useRoute()
 const router = useRouter()
+const supabase = useSupabaseClient()
 const isScrolled = ref(false)
 
 async function signOut() {
-  const { error } = await supabase.auth.signOut()
+  try {
+    const { error } = await supabase.auth.signOut()
+    if (error) {
+      console.error('Sign out error', error)
+      return
+    }
+    // redirect to home/login after sign out
+    await router.push('/')
+  } catch (err) {
+    console.error('Unexpected sign out error', err)
+  }
 }
 
 onMounted(() => {
