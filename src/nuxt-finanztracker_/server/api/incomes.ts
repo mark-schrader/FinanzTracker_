@@ -59,7 +59,7 @@ export default defineEventHandler(async (event) => {
         // POST /api/incomes
         const body = await readBody(event)
         return await IncomeService.createIncome({
-          userId: supabaseUser.id,
+          userId: userId,
           categoryId: Number(body.categoryId),
           source: body.source,
           amount: Number(body.amount),
@@ -79,7 +79,7 @@ export default defineEventHandler(async (event) => {
         }
 
         const payload: any = {
-          userId: parsed.data.userId,
+          userId: userId,
           categoryId: parsed.data.categoryId,
           source: parsed.data.source,
           amount: parsed.data.amount,
@@ -88,7 +88,7 @@ export default defineEventHandler(async (event) => {
           note: parsed.data.note
         }
 
-        return await IncomeService.createIncome(payload) // Erstellen eines neuen Einkommens
+        return await IncomeService.updateIncome(Number(id), payload) // Aktualisieren eines Einkommens
       }
 
       default:

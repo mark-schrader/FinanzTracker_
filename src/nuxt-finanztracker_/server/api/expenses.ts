@@ -54,7 +54,7 @@ export default defineEventHandler(async (event) => {
         // POST /api/expenses
         const body = await readBody(event)
         return await ExpenseService.createExpense({
-          userId: supabaseUser.id, 
+          userId: userId,
           categoryId: body.categoryId,
           use: body.use,
           amount: body.amount,
@@ -74,7 +74,7 @@ export default defineEventHandler(async (event) => {
         }
 
         const payload: any = {
-          userId: parsed.data.userId,
+          userId: userId,
           categoryId: parsed.data.categoryId,
           use: parsed.data.use,
           amount: parsed.data.amount,
@@ -83,7 +83,7 @@ export default defineEventHandler(async (event) => {
           note: parsed.data.note
         }
 
-        return await ExpenseService.createExpense(payload) // Erstellen einer neuen Ausgabe
+        return await ExpenseService.updateExpense(Number(id), payload) // Aktualisieren einer Ausgabe
       }
 
       default:
