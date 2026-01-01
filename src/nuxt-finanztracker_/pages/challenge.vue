@@ -278,18 +278,19 @@ import { ref, onMounted, computed } from "vue";
 import { useFetch } from "#app";
 import { Calendar } from "v-calendar";
 import { channel } from "process";
+import 'v-calendar/dist/style.css'
 
 const showChallengeModal = ref(false);
 const showSaveModal = ref(false);
 const challenges = ref([]);
-const selectedChallengeId = ref(""); //stores only the id of the challenge
+const selectedChallengeId = ref(""); //später ausgewählte Challenge ID
 const savedAmount = ref(0);
 const isShowing = ref(false);
 
 const challengeForm = ref({
   name: "",
   target: 0,
-  dueDate: "", //end date
+  dueDate: "",
 });
 
 onMounted(async () => {
@@ -302,7 +303,6 @@ onMounted(async () => {
 });
 
 async function addChallenge() {
-  //console.log("BUTTON WURDE GEDRUCKT!!!!!!!!!!");
   try {
     const saved = await $fetch("/api/goals", {
       method: "POST",
