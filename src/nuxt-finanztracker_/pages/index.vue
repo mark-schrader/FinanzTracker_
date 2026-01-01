@@ -114,11 +114,28 @@
 
 <script setup lang="ts">
 
-import { reactive, ref } from "vue";
+import { reactive, ref, watch } from "vue";
 import { navigateTo, useFetch } from '#app';
-//import { useSupabaseClient } from '#supabase/server'
 
 const supabase = useSupabaseClient();
+const user = useSupabaseUser()
+
+// wenn der user eingeloggt ist, direkt zum dashboard weiterleiten
+watch(user, async (u) => {
+  try {
+    if (u) {
+      const profileData = await $fetch('/api/user/me')
+      if (profileData && profileData.userid) {
+        navigateTo(`/dashboard/${profileData.userid}`)
+      } else {
+        // fallback: dashboard root
+        navigateTo('/dashboard')
+      }
+    }
+  } catch (err) {
+    console.error('Redirect to dashboard failed:', err)
+  }
+}, { immediate: true })
 
 // UI state
 const showLogin = ref(false);
