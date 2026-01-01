@@ -388,13 +388,13 @@ onMounted(async () => {
     const userId = user.value.id
 
     // catData mit userId query laden
-    const catData = await $fetch(`/api/categories?userId=${userId}`)
+    const catData = await $fetch(`/api/categories`)
     
     // categories setzen
     categories.value = catData || []
 
     // Lade kombinierte Transaktionen mit userId query (wichtig für Backend)
-    const transData = await $fetch(`/api/transactions?userId=${userId}`)
+    const transData = await $fetch(`/api/transactions`)
     
     transactions.value = transData || []
 
@@ -637,7 +637,7 @@ async function saveEdit() {
     });
 
     // Aktualisierte Transaktionen neu laden
-    const transData = await $fetch("/api/transactions?userId=1");
+    const transData = await $fetch("/api/transactions");
     transactions.value = transData || [];
 
     // schließen & reset
@@ -667,7 +667,7 @@ async function deleteAuftrag() {
       method: "DELETE",
     });
 
-    const updated = await $fetch('/api/transactions?userId=1')
+    const updated = await $fetch('/api/transactions');
     transactions.value = updated || []
 
     showDeleteConfirm.value = false
@@ -725,7 +725,7 @@ async function saveTransactionEdit(updatedTransaction) {
       interval: updatedTransaction.interval,
       note: updatedTransaction.comment || '',
       categoryId: updatedTransaction.categoryId,
-      userId: 1
+      userId: user.value.id
     }
 
     if (isIncome) {
@@ -740,7 +740,7 @@ async function saveTransactionEdit(updatedTransaction) {
     })
 
     // Transaktionen neu laden
-    const transData = await $fetch('/api/transactions?userId=1')
+    const transData = await $fetch('/api/transactions')
     transactions.value = transData || []
 
     closeActionModal()
@@ -763,7 +763,7 @@ async function confirmDeleteTransaction() {
     })
 
     // Transaktionen neu laden
-    const transData = await $fetch('/api/transactions?userId=1')
+    const transData = await $fetch('/api/transactions')
     transactions.value = transData || []
 
     closeActionModal()

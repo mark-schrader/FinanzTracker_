@@ -294,7 +294,7 @@ const challengeForm = ref({
 
 onMounted(async () => {
   try {
-    const result = await $fetch("/api/goals?userId=1");
+    const result = await $fetch("/api/goals");
     challenges.value = result || [];
   } catch (err) {
     console.error("Fehler beim Laden von der Datendank", err);
