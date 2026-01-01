@@ -1,4 +1,3 @@
-
 import { serverSupabaseUser } from '#supabase/server'
 import { PrismaClient } from '@prisma/client'
 import CategoryService from "../application/CategoryService";
@@ -71,7 +70,7 @@ export default defineEventHandler(async (event) => {
         const payload: any = {
           name: parsed.data.name,
           type: parsed.data.type,
-          userId: parsed.data.userId,
+          userId: userId,
           icon: parsed.data.icon ?? null,
           color: parsed.data.color ?? null,
         };

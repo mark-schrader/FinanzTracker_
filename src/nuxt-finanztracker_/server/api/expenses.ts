@@ -1,4 +1,3 @@
-
 import { serverSupabaseUser } from '#supabase/server'
 import { PrismaClient } from '@prisma/client'
 import ExpenseService from '../application/ExpenseService'
