@@ -28,7 +28,7 @@
           </select>
 
           <label>Kontoinhaber</label>
-          <input v-model="localItem.owner" class="form-input" />
+          <input :value="localItem.owner" class="form-input bg-gray-100 cursor-not-allowed" disabled />
 
           <label>Beschreibung</label>
           <input v-model="localItem.purpose" class="form-input" />
@@ -36,7 +36,7 @@
           <label>Kategorie</label>
           <select v-model="localItem.categoryId" class="form-input">
             <option disabled value="">Bitte wählen</option>
-            <option v-for="cat in categories" :value="cat.id" :key="cat.id">
+            <option v-for="cat in filteredCategories" :value="cat.id" :key="cat.id">
               {{ cat.name }}
             </option>
           </select>
@@ -72,7 +72,7 @@
 </template>
 
 <script setup>
-import { ref, watch } from "vue"
+import { ref, watch, computed } from "vue"
 
 const props = defineProps({
   item: { type: Object, required: true },
@@ -105,6 +105,19 @@ watch(
 
 
 function saveEdit() {
-  emit("save-edit", localItem.value)
+  // send cleaned payload without UI-only fields (owner) to avoid backend errors
+  const payload = { ...localItem.value }
+  if (payload.hasOwnProperty('owner')) delete payload.owner
+  emit('save-edit', payload)
 }
+  // compute filtered categories based on transaction type (map German labels to backend types)
+  const filteredCategories = computed(() => {
+    const typeMap = {
+      'Einnahme': 'income',
+      'Ausgabe': 'expense'
+    }
+    const allowed = typeMap[localItem.value.type] || null
+    if (!allowed) return props.categories || []
+    return (props.categories || []).filter(c => c.type === allowed)
+  })
 </script>
