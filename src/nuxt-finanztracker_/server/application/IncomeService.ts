@@ -85,7 +85,7 @@ export default class IncomeService {
         connect: { id: Number(data.categoryId) }
       },
       user: {
-        connect: { supabaseid: data.userId }
+        connect: { userid: Number(data.userId) }
       }
 
     }

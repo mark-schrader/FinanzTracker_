@@ -84,7 +84,7 @@ export default class ExpenseService {
         connect: { id: Number(data.categoryId) }
       },
       user: {
-        connect: { supabaseid: data.userId }
+        connect: { userid: Number(data.userId) }
       }
     }
 
