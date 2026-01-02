@@ -307,7 +307,6 @@ async function addChallenge() {
     const saved = await $fetch("/api/goals", {
       method: "POST",
       body: {
-        userId: 1,
         name: challengeForm.value.name,
         target: Number(challengeForm.value.target),
         saved: 0,
