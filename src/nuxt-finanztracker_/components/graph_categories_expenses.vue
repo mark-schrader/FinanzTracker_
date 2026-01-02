@@ -22,7 +22,7 @@ const props = defineProps({
   transactions: { type: Array, required: true }
 })
 
-// Helper: parse Euro formatted strings to number
+// Hilfsfunktion zum Parsen von Euro-Beträgen
 function parseEuro(euroString) {
   if (!euroString) return 0
   let cleaned = euroString.replace(/[^0-9.,-]/g, '')
@@ -36,18 +36,23 @@ function parseEuro(euroString) {
   return isNaN(value) ? 0 : value
 }
 
-// Compute sums per category and sort ascending (smallest left, largest right)
+// Compute sums per category
 const chartData = computed(() => {
   const sums = new Map()
+
   for (const t of props.transactions || []) {
     if (t.type === 'Ausgabe') {
-      const category = t.category || 'Unkategorisiert'
+
+      const category =
+        t.category?.name || t.categoryName || "Unkategorisiert"
+
       const amount = parseEuro(t.amount)
+
       sums.set(category, (sums.get(category) || 0) + amount)
     }
   }
 
-  // Convert to array and sort by value ascending
+  // sortiert nach Betrag aufsteigend
   const entries = Array.from(sums.entries())
     .sort((a, b) => a[1] - b[1])
 
@@ -60,7 +65,7 @@ const chartData = computed(() => {
       {
         label: 'Ausgaben (€)',
         data,
-        backgroundColor: '#ef4444', // red-500
+        backgroundColor: '#ef4444', // Tailwind red-500
         borderRadius: 6,
         barThickness: 'flex'
       }

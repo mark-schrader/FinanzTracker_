@@ -75,10 +75,10 @@ const chartData = computed(() => {
         borderWidth: 2,
 
         // Fallback-Farben (falls Segment-Callback mal nichts liefert)
-        borderColor: '#3b82f6',
-        backgroundColor: 'rgba(59, 130, 246, 0.15)',
+        borderColor: '#2AA198',
+        backgroundColor: 'rgba(42, 161, 152, 0.15)',
 
-        // Punkte (konstant blau, um Fehler zu vermeiden)
+        // Punkte
         pointRadius: 4,
         pointHoverRadius: 6,
 
@@ -97,26 +97,26 @@ const chartData = computed(() => {
                 ? y0
                 : 0 // Fallback
 
-            return y >= 0 ? '#3b82f6' : '#ef4444'
+            return y >= 0 ? '#2AA198' : '#ef4444'
           }
         },
         // Punkte dynamisch färben
         pointBackgroundColor: ctx => {
           const v = ctx?.parsed?.y
-          if (typeof v !== "number") return "rgba(59, 130, 246, 0.3)"
-          return v >= 0 ? "rgba(59, 130, 246, 0.3)" : "rgba(239, 68, 68, 0.3)"
+          if (typeof v !== "number") return "rgba(42,161,152,0.3)"
+          return v >= 0 ? "rgba(42,161,152,0.3)" : "rgba(239, 68, 68, 0.3)"
         },
 
         pointBorderColor: ctx => {
           const v = ctx?.parsed?.y
-          if (typeof v !== "number") return "rgba(59, 130, 246, 0.3)"
-          return v >= 0 ? "rgba(59, 130, 246, 0.3)" : "rgba(239, 68, 68, 0.3)"
+          if (typeof v !== "number") return "rgba(42,161,152,0.3)"
+          return v >= 0 ? "rgba(42,161,152,0.3)" : "rgba(239, 68, 68, 0.3)"
         },
 
         pointHoverBackgroundColor: ctx => {
           const v = ctx?.parsed?.y
-          if (typeof v !== "number") return "#2563eb"
-          return v >= 0 ? "#2563eb" : "#dc2626"
+          if (typeof v !== "number") return "#21897F"
+          return v >= 0 ? "#21897F" : "#dc2626"
         },
       }
     ]

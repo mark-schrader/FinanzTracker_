@@ -13,7 +13,7 @@ useHead({
 
 <template>
   <section class="content-wrapper text-gray-800 dark:text-gray-200">
-    <h1 class="text-4xl font-bold mb-6 text-brand-600 dark:text-brand-300">
+    <h1 class="mb-6">
       Nutzungsbedingungen
     </h1>
 
@@ -24,14 +24,14 @@ useHead({
       Bitte lies sie sorgfältig durch.
     </p>
 
-    <h2 class="text-2xl font-semibold text-gray-900 dark:text-gray-100 mt-10 mb-3">
+    <h2 class="mt-10 mb-3">
       1. Allgemeines
     </h2>
     <p class="mb-4 leading-relaxed">
       Die Nutzung von Pleitegeier erfolgt auf eigene Verantwortung......
     </p>
 
-    <h2 class="text-2xl font-semibold text-gray-900 dark:text-gray-100 mt-10 mb-3">
+    <h2 class="mt-10 mb-3">
       2. Inhalte und Daten
     </h2>
     <p class="mb-4 leading-relaxed">
@@ -39,7 +39,7 @@ useHead({
       verantwortlich. ...
     </p>
 
-    <h2 class="text-2xl font-semibold text-gray-900 dark:text-gray-100 mt-10 mb-3">
+    <h2 class="mt-10 mb-3">
       3. Datenschutz
     </h2>
     <p class="mb-4 leading-relaxed">
@@ -47,7 +47,7 @@ useHead({
       <NuxtLink to="/footerItem/cookies" class="link-primary">Cookie-Richtlinie</NuxtLink>.
     </p>
 
-    <h2 class="text-2xl font-semibold text-gray-900 dark:text-gray-100 mt-10 mb-3">
+    <h2 class="mt-10 mb-3">
       4. Änderungen
     </h2>
     <p class="mb-4 leading-relaxed">

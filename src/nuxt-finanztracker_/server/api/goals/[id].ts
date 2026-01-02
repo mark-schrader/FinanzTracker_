@@ -1,0 +1,76 @@
+import GoalService from '../../application/GoalService'
+import { z } from 'zod'
+import { IdParamSchema, toDatePreprocess } from '../../utility/validationUtility'
+import { serverSupabaseUser } from '#supabase/server'
+import { PrismaClient } from '@prisma/client'
+
+// Schema zum Validieren des Request-Bodys für das Aktualisieren eines Ziels
+const UpdateGoalSchema = z.object({
+  userId: z.preprocess((val) => {
+    if (val === undefined || val === null) return undefined
+    return Number(val)
+  }, z.number().int().positive().optional()),
+  name: z.string().min(1).optional(),
+  target: z.preprocess((val) => {
+    if (val === undefined || val === null) return undefined
+    return Number(val)
+  }, z.number().positive().optional()),
+  saved: z.preprocess((val) => {
+    if (val === undefined || val === null) return undefined
+    return Number(val)
+  }, z.number().nonnegative().optional()),
+  dueDate: z.preprocess(toDatePreprocess, z.instanceof(Date).refine((d: Date) => !isNaN(d.getTime()), { message: 'Invalid date' }).optional())
+})
+
+// Handler für die API-Endpunkte
+export default defineEventHandler(async (event) => {
+  const method = getMethod(event)
+  const idRaw = getRouterParam(event, 'id')
+  if (!idRaw) throw createError({ statusCode: 400, message: 'Missing id param' })
+
+  try {
+    const idParsed = IdParamSchema.safeParse(idRaw)
+    if (!idParsed.success) throw createError({ statusCode: 400, message: 'Invalid id param' })
+    const id = Number(idParsed.data)
+
+    const supabaseUser = await serverSupabaseUser(event)
+    if (!supabaseUser) throw createError({ statusCode: 401, message: 'Nicht Authorisiert!' })
+    const prisma = new PrismaClient()
+    const prismaUser = await prisma.user.findUnique({ where: { supabaseid: supabaseUser.id } })
+    if (!prismaUser) throw createError({ statusCode: 401, message: 'Benutzer nicht gefunden!' })
+    const userId = prismaUser.userid
+
+    // Behandeln der verschiedenen Anfragen-Methoden
+    switch (method) {
+      case 'GET': // GET /api/goals/5
+        return await GoalService.getGoalById(Number(id))  // Ausgabe eines einzelnen Ziels
+
+      case 'PUT': { // PUT /api/goals/5
+        const body = await readBody(event)
+        const parsed = UpdateGoalSchema.safeParse(body)
+        if (!parsed.success) {
+          throw createError({ statusCode: 400, message: `Invalid body: ${JSON.stringify(parsed.error.errors)}` })
+        }
+
+        const payload: any = {
+          userId: userId,
+          name: parsed.data.name,
+          target: parsed.data.target,
+          saved: parsed.data.saved,
+          dueDate: parsed.data.dueDate
+        }
+
+        return await GoalService.updateGoal(Number(id), payload) // Aktualisierung eines Ziels
+      }
+
+      case 'DELETE': // DELETE /api/goals/5
+        return await GoalService.deleteGoal(Number(id))    // Löschen eines Ziels
+
+      default:
+        throw createError({ statusCode: 405, message: `Method ${method} not allowed` })
+    }
+  } catch (err: any) {
+    console.error('[goal by id API error]', err)
+    throw createError({ statusCode: err.statusCode ?? 500, message: err.message || 'Server error' })
+  }
+})

@@ -61,8 +61,8 @@ const chartData = computed(() => {
         label: 'Einnahmen (€)',
         data: dailyIncome,
         fill: true,
-        borderColor: '#3b82f6',
-        backgroundColor: 'rgba(59, 130, 246, 0.3)',
+        borderColor: '#2AA198', // Teal-Farbton angepasst
+        backgroundColor: 'rgba(42, 161, 152, 0.25)', // Teal Hintergrundfarbe
         tension: 0.3,
         pointRadius: 4,
         pointHoverRadius: 6,
