@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
-      SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_KEY }}
+      SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
       
     defaults:
       run:
@@ -48,7 +48,7 @@ jobs:
     - name: Run Playwright tests
       env:
         SUPABASE_URL: ${{ env.SUPABASE_URL }}
-        SUPABASE_ANON_KEY: ${{ env.SUPABASE_KEY }}
+        SUPABASE_KEY: ${{ env.SUPABASE_KEY }}
       run: npx playwright test
     - uses: actions/upload-artifact@v4
       if: ${{ !cancelled() }}
