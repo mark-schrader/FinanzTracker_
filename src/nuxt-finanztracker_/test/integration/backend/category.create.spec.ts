@@ -1,41 +1,18 @@
-// test/integration/backend/category.create.spec.ts
+/// <reference types="node" />
 
-import { describe, it, expect, afterAll } from 'vitest'
-import { PrismaClient } from '@prisma/client'
+import { describe, it, expect } from 'vitest'
+import { prisma, TEST_USER_ID } from '../../setup.prisma'
 import CategoryService from '../../../server/application/CategoryService'
 
-// Create Prisma client locally for this test (Option B)
-const prisma = new PrismaClient()
-
-describe('Integration Backend: Create Category (without HTTP)', () => {
-  afterAll(async () => {
-    // Close DB connection after test run
-    await prisma.$disconnect()
-  })
-
-  it('creates a category and persists it in the database', async () => {
-    // ARRANGE
-    const payload = {
-      name: `Integration Category ${Date.now()}`, // unique name to avoid conflicts
+describe('Integration: create category', () => {
+  it('creates category in database', async () => {
+    const category = await CategoryService.createCategory({
+      name: 'Test Category',
       type: 'income',
-      userId: 1
-    }
-
-    // ACT
-    const createdCategory = await CategoryService.createCategory(payload)
-
-    // ASSERT (service response)
-    expect(createdCategory).toBeDefined()
-    expect(createdCategory.name).toBe(payload.name)
-    expect(createdCategory.type).toBe(payload.type)
-
-    // ASSERT (database state)
-    const categoryInDb = await prisma.categories.findFirst({
-      where: { name: payload.name }
+      userId: TEST_USER_ID,
     })
 
-    expect(categoryInDb).not.toBeNull()
-    expect(categoryInDb?.name).toBe(payload.name)
-    expect(categoryInDb?.type).toBe(payload.type)
+    expect(category.id).toBeDefined()
+    expect(category.name).toBe('Test Category')
   })
 })

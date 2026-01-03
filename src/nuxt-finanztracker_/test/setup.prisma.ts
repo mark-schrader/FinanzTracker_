@@ -1,3 +1,5 @@
+/// <reference types="node" />
+
 import { beforeAll } from 'vitest'
 import { PrismaClient } from '@prisma/client'
 
@@ -11,9 +13,7 @@ beforeAll(async () => {
   console.log('TEST DB:', process.env.DATABASE_URL)
 
   const user = await prisma.user.upsert({
-    where: {
-      email: TEST_USER_EMAIL, // unique
-    },
+    where: { email: TEST_USER_EMAIL },
     update: {},
     create: {
       email: TEST_USER_EMAIL,
