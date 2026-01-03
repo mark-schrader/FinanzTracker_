@@ -8,6 +8,9 @@ jobs:
   test:
     timeout-minutes: 60
     runs-on: ubuntu-latest
+    env:
+      SUPABASE_URL: "http://localhost:8000"
+      SUPABASE_ANON_KEY: "anonkey-test"
 
     defaults:
       run:
