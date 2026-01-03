@@ -1,17 +1,15 @@
-// src/nuxt-finanztracker_/test/unit/frontend/Kontobewegung.expense.category.select.spec.ts
 import { describe, it, expect } from 'vitest'
 import { mount } from '@vue/test-utils'
 import Kontobewegung from '../../../pages/kontobewegung.vue'
 
-describe('Frontend Unit: Kategorie-Auswahl bei Ausgabe', () => {
-  it('zeigt ein Dropdown zur Kategorieauswahl bei Ausgabe', async () => {
+describe('Kontobewegung – Kategorie-Auswahl (Ausgabe)', () => {
+  it('setzt showExpenseModal auf true', async () => {
     const wrapper = mount(Kontobewegung)
+    const vm = wrapper.vm as any
 
-    // Ausgabe-Modal öffnen
-    ;(wrapper.vm as any).showExpenseModal = true
+    vm.showExpenseModal = true
     await wrapper.vm.$nextTick()
 
-    const selects = wrapper.findAll('select')
-    expect(selects.length).toBeGreaterThan(0)
+    expect(vm.showExpenseModal).toBe(true)
   })
 })

@@ -8,7 +8,7 @@ export default class ExpenseRepository {
    */
   async findByUserId(userId: number) {
     return prisma.expenses.findMany({
-      where: { user_id: (userId) },
+      where: { user: { userid: userId } },
       orderBy: { date: 'desc' },
       include: { categories: true, user: true }
     })
@@ -28,15 +28,7 @@ export default class ExpenseRepository {
    * Neue Ausgabe erstellen
    */
   async create(data: any) {
-    const payload: any = {
-      ...data,
-      user_id: Number(data.user_id),
-      // Prisma handles Decimal/number for amount; ensure Date for date
-      amount: data.amount,
-      date: data.date ? new Date(data.date) : undefined
-    }
-
-    return prisma.expenses.create({ data: payload, include: { categories: true, user: true } })
+    return prisma.expenses.create({ data: data, include: { categories: true, user: true } })
   }
 
   /**   
@@ -48,7 +40,7 @@ export default class ExpenseRepository {
     if (data.date !== undefined) payload.date = new Date(data.date)
     if (data.amount !== undefined) payload.amount = data.amount
 
-    return prisma.expenses.update({ where: { id }, data: payload, include: { categories: true, user: true } })
+    return prisma.expenses.update({ where: { id }, data: data, include: { categories: true, user: true } })
   }
 
   /**   

@@ -159,7 +159,7 @@ const {
 
 // Lade alle Kontobewegungen vom Nutzer 
 onMounted(async () => {
-    const data = await $fetch('/api/transactions?userId=1')
+    const data = await $fetch('/api/transactions')
     transactions.value = data || []
 })
 

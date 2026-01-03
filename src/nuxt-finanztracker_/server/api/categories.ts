@@ -1,3 +1,5 @@
+import { serverSupabaseUser } from '#supabase/server'
+import { PrismaClient } from '@prisma/client'
 import CategoryService from "../application/CategoryService";
 import { QueryUserIdSchema } from "../utility/validationUtility";
 import { z } from "zod";
@@ -20,25 +22,38 @@ const CreateCategorySchema = z.object({
 });
 
 // Handler für die API-Endpunkte
+const prisma = new PrismaClient()
+
 export default defineEventHandler(async (event) => {
-  const method = getMethod(event);
-  const query = getQuery(event);
+  
+  const method = getMethod(event)
+
+  const supabaseUser = await serverSupabaseUser(event)
+
+  console.log('--- DEBUG START ---')
+  console.log('Ganzer User:', supabaseUser)
+  console.log('Die ID ist:', supabaseUser?.id)
+  console.log('--- DEBUG END ---')
+
+  if (!supabaseUser) {
+    throw createError({ statusCode: 401, message: 'Nicht Authorisiert!' })
+  } 
+
+  const prismaUser = await prisma.user.findUnique({
+    where: { supabaseid: supabaseUser.id }
+  })  
+  if (!prismaUser) {
+    throw createError({ statusCode: 401, message: 'Benutzer nicht gefunden!' })
+  }
+
+  const userId = prismaUser.userid
 
   try {
     // Behandeln der verschiedenen Anfragen-Methoden
     switch (method) {
-      case "GET": {
-        // GET /api/categories?userId=1
-        const rawUserId = query.userId; //?? query.user_id
-        const parsed = QueryUserIdSchema.safeParse(rawUserId);
-        if (!parsed.success || parsed.data === undefined) {
-          throw createError({
-            statusCode: 400,
-            message: "Missing or invalid userId",
-          });
-        }
-        return await CategoryService.getCategoryByUserId(Number(parsed.data)); // Ausgabe aller Kategorien eines Benutzers
-      }
+      case 'GET': // GET /api/categories?userId=1
+        
+        return await CategoryService.getCategoryByUserId(Number(userId)) // Ausgabe der Kategorien für den angegebenen Benutzer
 
       case "POST": {
         // POST /api/categories
@@ -55,7 +70,7 @@ export default defineEventHandler(async (event) => {
         const payload: any = {
           name: parsed.data.name,
           type: parsed.data.type,
-          userId: parsed.data.userId,
+          userId: userId,
           icon: parsed.data.icon ?? null,
           color: parsed.data.color ?? null,
         };

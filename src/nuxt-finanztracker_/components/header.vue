@@ -6,11 +6,21 @@ import { ref, onMounted, onUnmounted } from 'vue'
 //Reaktive Referenzen
 const route = useRoute()
 const router = useRouter()
+const supabase = useSupabaseClient()
 const isScrolled = ref(false)
 
-const showLogoutAlert = () => {
-  console.log('Logout clicked')
-  // later: localStorage.removeItem('token'); router.push('/login')
+async function signOut() {
+  try {
+    const { error } = await supabase.auth.signOut()
+    if (error) {
+      console.error('Sign out error', error)
+      return
+    }
+    // redirect to home/login after sign out
+    await router.push('/')
+  } catch (err) {
+    console.error('Unexpected sign out error', err)
+  }
 }
 
 onMounted(() => {
@@ -78,7 +88,7 @@ const navItems = [
       </div>
 
       <!-- Logout -->
-      <button @click="showLogoutAlert" class="focus:outline-none transition-all hover:translate-x-1">
+      <button @click="signOut" class="focus:outline-none transition-all hover:translate-x-1">
         <i class="fas fa-sign-out-alt"></i>
       </button>
     </div>

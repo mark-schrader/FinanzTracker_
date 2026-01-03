@@ -50,16 +50,16 @@ image::Login.jpg[alt=Login_PopUp,width=600,height=400]
 Nachdem du dich erfolgreich angemeldet hast, kannst du auf unsere Funktionen zugreifen.
 
 == Funktionen im Überblick
-Oben findest du die Auswahl unserer Funktionen Dashboard, Kontobewegung, Challenge und Export. Klicke einfach auf die gewünschte Funktion, um loszulegen!
+Oben findest du die Auswahl unserer Funktionen: Dashboard, Kontobewegung, Challenge und Export. Klicke einfach auf den gewünschten Reiter, um loszulegen!
 
 image::Ubersicht.jpg[alt=Ubersicht,width=600,height=400] 
 
 === 4. Dashboard
-Der erste Reiter _Dashboard_ findest du ganz links.
+Den ersten Reiter _Dashboard_ findest du ganz links.
 
 image::Dashboard.jpg[alt=Dashboard,width=600,height=400]
 
-Hier bekommst du einen Überblick über deine Finanzen und grafische Auswertungen deiner Einnahmen und Ausgaben. Du kannst zum einen deinen Verlauf über verschiedene Zeiträume betrachten und zum anderen deine Einnahmen und Ausgaben in deinen Kategorien analysieren.
+Hier bekommst du einen Überblick über deine Finanzen und grafische Auswertungen deiner Einnahmen und Ausgaben. Du kannst zum Einen deinen Verlauf über verschiedene Zeiträume betrachten und zum Anderen deine Einnahmen und Ausgaben in deinen Kategorien analysieren.
 
 ==== 4.1 Überblick über Finanzen
 
