@@ -20,7 +20,7 @@ Das Ziel dieses Setups ist:
 | Frontend Unit Tests | Vue-Komponenten & UI-Logik | vitest, @vue/test-utils, happy-dom |
 | Backend Unit Tests | Reine Logik ohne DB | vitest |
 | Backend Integration Tests | Prisma + echte DB | vitest, prisma |
-| E2E Tests | Echte User-Flows im Browser | Playwright / Selenium / Cypress (noch offen) |
+| E2E Tests | Echte User-Flows im Browser | Playwright |
 
 ---
 
@@ -77,6 +77,18 @@ Haltet euch also an die bereits vorhanden Namensgebung und fragt nach wenn ihr n
     ```
     npx prisma migrate deploy --schema prisma/schema.prisma
     ```
+- E2E-Tests
+    ```
+    npx playwright test
+    ```
+    HTML Test Report
+    ```
+    npx playwright show-report
+    ```
+    Test in UI Mode
+    ```
+    npx playwright test --ui
+    ```
 ---
 ## 🤖 Tests in GitHub Actions
 
@@ -92,7 +104,7 @@ Vorteile:
 
 ## 🚫 Was nicht in Unit Tests gehört
 - echter Browser
-- Playwright / Selenium / Cypress
+- Playwright
 - Nuxt Boot
 - echte HTTP-Server
 - echte Datenbanken (außer Integration Tests)

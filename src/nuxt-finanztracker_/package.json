@@ -17,6 +17,7 @@
     "test": "npm run prisma:generate && npm run test:unit:frontend && npm run test:unit:backend && npm run prisma:test:generate && npm run prisma:test:push && npm run test:integration:backend"
   },
   "dependencies": {
+    "@nuxtjs/supabase": "^1.5.2",
     "@prisma/client": "^6.10.1",
     "@samk-dev/nuxt-vcalendar": "^1.0.4",
     "animate.css": "^4.1.1",
@@ -33,6 +34,8 @@
   },
   "devDependencies": {
     "@nuxtjs/tailwindcss": "6.11.4",
+    "@playwright/test": "^1.57.0",
+    "@types/node": "^25.0.3",
     "@vitejs/plugin-vue": "^6.0.3",
     "@vue/test-utils": "^2.4.6",
     "autoprefixer": "10.4.20",

@@ -36,7 +36,7 @@ export default class CategoryService {
     const payload = {
       name: data.name,
       type: data.type,
-      user_id: data.userId !== undefined ? Number(data.userId) : (data.user_id ?? undefined),
+      user_id: data.userId, // !== undefined ? Number(data.userId) : (data.user_id ?? undefined),
       icon: data.icon ?? null,
       color: data.color ?? null
     }
