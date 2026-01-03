@@ -18,11 +18,31 @@ jobs:
         
     steps:
     - uses: actions/checkout@v4
+    - name: Cache npm
+      uses: actions/cache@v4
+      with:
+        path: ~/.npm
+        key: ${{ runner.os }}-node-${{ hashFiles('src/nuxt-finanztracker_/package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-node-
     - uses: actions/setup-node@v4
       with:
         node-version: lts/*
-    - name: Install dependencies
-      run: npm ci
+    - name: Install dependencies (with retries)
+      run: |
+        set -euo pipefail
+        for i in 1 2 3; do
+          if npm ci --prefer-offline --no-audit --no-fund; then
+            echo "npm ci succeeded"
+            break
+          fi
+          echo "npm ci failed (attempt $i). Retrying..."
+          sleep $((i * 5))
+          if [ "$i" -eq 3 ]; then
+            echo "npm ci failed after 3 attempts, exiting." >&2
+            exit 1
+          fi
+        done
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps
     - name: Run Playwright tests
