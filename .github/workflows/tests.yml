@@ -10,9 +10,27 @@ jobs:
   test:
     runs-on: ubuntu-latest
 
+    services:
+      postgres:
+        image: postgres:15
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: finanztracker_test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd="pg_isready -U postgres"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+
     defaults:
       run:
         working-directory: src/nuxt-finanztracker_
+
+    env:
+      DATABASE_URL: postgresql://postgres:postgres@localhost:5432/finanztracker_test
 
     steps:
       - name: Checkout repository
@@ -25,20 +43,15 @@ jobs:
           cache: npm
           cache-dependency-path: |
             src/nuxt-finanztracker_/package-lock.json
-            src/nuxt-finanztracker_/prisma/schema.prisma
-            src/nuxt-finanztracker_/prisma/schema.test.prisma
-            
+
       - name: Install dependencies
         run: npm ci
-        
-      - name: Set test database
-        run: echo "DATABASE_URL=file:./prisma/test-${{ github.run_id }}.db" >> $GITHUB_ENV
 
       - name: Generate Prisma Client
         run: npx prisma generate
 
-      - name: Prepare test database
-        run: npx prisma db push --schema=prisma/schema.test.prisma
+      - name: Run Prisma migrations (test DB)
+        run: npx prisma migrate deploy --schema=prisma/schema.test.prisma
 
       - name: Run tests
         run: npm run test
