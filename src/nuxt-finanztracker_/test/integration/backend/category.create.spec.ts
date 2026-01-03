@@ -1,42 +1,41 @@
-// src/nuxt-finanztracker_/test/integration/backend/category.create.spec.ts
-import { describe, it, expect, afterEach, afterAll } from 'vitest'
-import { PrismaClient } from '@prisma/client'
+// test/integration/backend/category.create.spec.ts
 
+import { describe, it, expect, afterAll } from 'vitest'
+import { PrismaClient } from '@prisma/client'
+import CategoryService from '../../../server/application/CategoryService'
+
+// Create Prisma client locally for this test (Option B)
 const prisma = new PrismaClient()
 
-let createdCategoryId: number | null = null
-
-describe('Backend Integration: Kategorie erstellen (ohne deleteMany)', () => {
-
-  afterEach(async () => {
-    if (createdCategoryId) {
-      await prisma.categories.delete({
-        where: { id: createdCategoryId }
-      })
-      createdCategoryId = null
-    }
-  })
-
+describe('Integration Backend: Create Category (without HTTP)', () => {
   afterAll(async () => {
+    // Close DB connection after test run
     await prisma.$disconnect()
   })
 
-  it('speichert eine neue Kategorie', async () => {
-    const created = await prisma.categories.create({
-      data: {
-        name: 'TEST_KATEGORIE_CREATE',
-        type: 'income',
-        color: '#ff0000',
-        user_id: 1
-      }
+  it('creates a category and persists it in the database', async () => {
+    // ARRANGE
+    const payload = {
+      name: `Integration Category ${Date.now()}`, // unique name to avoid conflicts
+      type: 'income',
+      userId: 1
+    }
+
+    // ACT
+    const createdCategory = await CategoryService.createCategory(payload)
+
+    // ASSERT (service response)
+    expect(createdCategory).toBeDefined()
+    expect(createdCategory.name).toBe(payload.name)
+    expect(createdCategory.type).toBe(payload.type)
+
+    // ASSERT (database state)
+    const categoryInDb = await prisma.categories.findFirst({
+      where: { name: payload.name }
     })
 
-    createdCategoryId = created.id
-
-    const found = await prisma.categories.findUnique({
-      where: { id: created.id }
-    })
-
-    expect(found).not.toBeNull()
+    expect(categoryInDb).not.toBeNull()
+    expect(categoryInDb?.name).toBe(payload.name)
+    expect(categoryInDb?.type).toBe(payload.type)
   })
 })

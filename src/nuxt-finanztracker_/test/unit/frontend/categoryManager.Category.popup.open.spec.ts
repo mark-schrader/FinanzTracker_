@@ -1,4 +1,3 @@
-// test/unit/frontend/Category.popup.open.spec.ts
 import { mount } from '@vue/test-utils'
 import { describe, it, expect } from 'vitest'
 import CategoryManager from '../../../components/categoryManager.vue'
@@ -7,7 +6,7 @@ describe('Kategorie Popup', () => {
   it('öffnet das Kategorie-Popup zum Anlegen neuer Kategorien', async () => {
     const wrapper = mount(CategoryManager)
 
-    // Haupt-Modal öffnen (Kategorien verwalten)
+    // Button "Kategorien verwalten"
     const manageButton = wrapper
       .findAll('button')
       .find(b => b.text().includes('Kategorien verwalten'))
@@ -15,17 +14,13 @@ describe('Kategorie Popup', () => {
     expect(manageButton).toBeTruthy()
     await manageButton!.trigger('click')
 
-    await wrapper.vm.$nextTick()
+    // Add-Button visible
+    const addButton = wrapper.find('[data-testid="open-category-popup"]')
+    expect(addButton.exists()).toBe(true)
 
-    // Jetzt existiert der Add-Button
-    const openAddButton = wrapper.find('[data-testid="open-category-popup"]')
-    expect(openAddButton.exists()).toBe(true)
+    await addButton.trigger('click')
 
-    // Add-Modal öffnen
-    await openAddButton.trigger('click')
-    await wrapper.vm.$nextTick()
-
-    // Add-Modal ist sichtbar
-    expect(wrapper.html()).toContain('Neue Kategorie')
+    // Popup visible (DOM-based, stable way)
+    expect(wrapper.text()).toContain('Neue Kategorie')
   })
 })

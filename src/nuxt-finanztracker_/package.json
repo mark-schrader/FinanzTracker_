@@ -10,11 +10,11 @@
     "postinstall": "nuxt prepare",
     "prisma:generate": "prisma generate",
     "prisma:test:generate": "prisma generate --schema=prisma/schema.test.prisma",
-    "prisma:test:push": "cross-env DATABASE_URL=file:./prisma/test.db prisma db push --schema=prisma/schema.test.prisma",
+    "prisma:test:push": "prisma db push --schema=prisma/schema.test.prisma",
     "test:unit:frontend": "vitest run test/unit/frontend",
     "test:unit:backend": "vitest run test/unit/backend",
-    "test:integration:backend": "cross-env NODE_ENV=test DATABASE_URL=file:./prisma/test.db vitest run test/integration/backend",
-    "test": "npm run prisma:generate && npm run test:unit:frontend && npm run test:unit:backend && npm run prisma:test:generate && npm run prisma:test:push && npm run test:integration:backend"
+    "test:integration:backend": "cross-env NODE_ENV=test DATABASE_URL=file:./prisma/test.db npm run prisma:test:generate && cross-env DATABASE_URL=file:./prisma/test.db npm run prisma:test:push && cross-env DATABASE_URL=file:./prisma/test.db vitest run test/integration/backend",
+    "test": "npm run prisma:generate && npm run test:unit:frontend && npm run test:unit:backend && npm run test:integration:backend"
   },
   "dependencies": {
     "@nuxtjs/supabase": "^1.5.2",

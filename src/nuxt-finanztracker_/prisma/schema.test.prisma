@@ -7,9 +7,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-/* =======================
-   MODELS (1:1 Kopie)
-   ======================= */
+/* MODELS (1:1 Kopie) */
 
 model budgets {
   id         Int       @id @default(autoincrement())
@@ -56,8 +54,11 @@ model incomes {
 }
 
 model user {
-  userid     Int      @id @default(autoincrement())
+  userid     Int    @id @default(autoincrement())
+  email      String @unique
+  supabaseid String @unique
   firstname  String
   lastname   String
-  email      String
+  university String
+  birthdate  DateTime
 }
