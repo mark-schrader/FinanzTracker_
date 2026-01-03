@@ -23,10 +23,22 @@ jobs:
         with:
           node-version: 20
           cache: npm
-          cache-dependency-path: src/nuxt-finanztracker_/package-lock.json
-
+          cache-dependency-path: |
+            src/nuxt-finanztracker_/package-lock.json
+            src/nuxt-finanztracker_/prisma/schema.prisma
+            src/nuxt-finanztracker_/prisma/schema.test.prisma
+            
       - name: Install dependencies
         run: npm ci
+        
+      - name: Set test database
+        run: echo "DATABASE_URL=file:./prisma/test-${{ github.run_id }}.db" >> $GITHUB_ENV
+
+      - name: Generate Prisma Client
+        run: npx prisma generate
+
+      - name: Prepare test database
+        run: npx prisma db push --schema=prisma/schema.test.prisma
 
       - name: Run tests
         run: npm run test
