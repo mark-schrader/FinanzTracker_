@@ -6,9 +6,52 @@ include::../_includes/default-attributes.inc.adoc[]
 
 
 == Allgemeine Informationen
-In unserem aktuellen Stand haben wir noch keine Test Cases.
-//== Test Cases
 
-//=== Test Case 01
+=== Zweck und Ziel
+Dieses Dokument beschreibt die Test Cases für das Projekt {project-name}. Es dient als Leitfaden für die Durchführung der verschiedenen Testarten, um die Qualität und Funktionalität der Software sicherzustellen.
+=== Geltungsbereich
+Die Test Cases decken alle relevanten Funktionalitäten und Anforderungen des Projekts ab und sind für alle Testarten anwendbar.
+=== Definitionen und Abkürzungen
+* Test Case: Eine spezifische Situation oder ein Szenario, das getestet werden soll.
+* Unit Test: Testet einzelne Komponenten oder Module der Software.
+* Integration Test: Testet das Zusammenspiel mehrerer Komponenten oder Module.
+* System Test: Testet das gesamte System als Ganzes.
+* Abnahmetest: Testet die Software aus Sicht des Endbenutzers, um sicherzustellen, dass sie den Anforderungen entspricht.
 
-//=== Test Case 02
+== Teststrategie
+Die Teststrategie umfasst die Planung, Durchführung und Auswertung der Tests. Es werden verschiedene Testarten angewendet, um sicherzustellen, dass alle Aspekte der Software gründlich überprüft werden. Die Tests werden sowohl manuell als auch automatisiert durchgeführt, je nach Anforderung und Verfügbarkeit von Ressourcen.
+
+== Testarchitektur
+Die Testarchitektur definiert die Struktur und Organisation der Testumgebung. Sie umfasst die Auswahl der Testwerkzeuge, die Einrichtung der Testumgebungen und die Definition der Testdaten. Die Architektur stellt sicher, dass die Tests effizient und effektiv durchgeführt werden können.
+
+Unit Tests werden in isolierten Umgebungen durchgeführt, während Integrationstests in einer Umgebung stattfinden, die mehrere Komponenten umfasst. Systemtests und Abnahmetests werden in einer produktionsähnlichen Umgebung durchgeführt, um realistische Bedingungen zu simulieren.
+
+Tabelle der Testumgebungen:
+[cols="3,3,4", options="header"]
+|===
+| Testart | Umgebung | Beschreibung
+| Unit Test | Isolierte Umgebung | Testet einzelne Module unabhängig voneinander.
+| Integration Test | Integrierte Umgebung | Testet das Zusammenspiel mehrerer Module.
+| System Test | Produktionsähnliche Umgebung | Testet das gesamte System unter realistischen Bedingungen.
+| Abnahmetest | Produktionsähnliche Umgebung | Testet die Software aus Sicht des Endbenutzers.
+|===
+
+== Testarten
+
+== Frontend Unit Tests
+//== Test Cases für Unit Tests
+Tablelle der Unit Test Cases:
+Pfad: src/nuxt-finanztracker_/test/unit/
+[cols="4,4,4", options="header"]
+|===
+| Test Name | Beschreibung | User Story / Anforderung
+| Kontobewegung.incomes.category.select.spec.ts | Testet die Kategoriewahl für Einnahmen in Kontobewegungen. | Epic 2: Als Benutzer möchte ich Einnahmen kategorisieren können, um meine Finanzen besser zu verwalten.
+| Kontobewegung.expenses.category.select.spec.ts | Testet die Kategoriewahl für Ausgaben in Kontobewegungen. | Epic 2: Als Benutzer möchte ich Ausgaben kategorisieren können, um meine Finanzen besser zu verwalten.
+| Kontobewegung.incomes.popup.cancel.spec.ts | Testet das Abbrechen des Popups für Einnahmen in Kontobewegungen. | Epic 2: Als Benutzer möchte ich ein Popup für Einnahmen abbrechen können, ohne Änderungen vorzunehmen.
+| Kontobewegung.exensene.popup.cancel.spec.ts | Testet das Abbrechen des Popups für Ausgaben in Kontobewegungen. | Epic 2: Als Benutzer möchte ich ein Popup für Ausgaben abbrechen können, ohne Änderungen vorzunehmen.
+== Integration Tests
+//== Test Cases für Integration Tests
+== System Tests
+//== Test Cases für System Tests
+== Abnahmetests
+//== Test Cases für Abnahmetests
