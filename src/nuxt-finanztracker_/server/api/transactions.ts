@@ -1,22 +1,37 @@
+
+import { serverSupabaseUser } from '#supabase/server'
+import { PrismaClient } from '@prisma/client'
 import TransactionService from '../application/TransactionService'
 import { QueryUserIdSchema } from '../utility/validationUtility'
+
+
+const prisma = new PrismaClient()
 
 // Handler für die API-Endpunkte
 export default defineEventHandler(async (event) => {
   const method = getMethod(event)
-  const query = getQuery(event)
+  
+  const supabaseUser = await serverSupabaseUser(event)
+
+  if (!supabaseUser) {
+    throw createError({ statusCode: 401, message: 'Nicht Authorisiert!' })
+  }
+
+  const prismaUser = await prisma.user.findUnique({
+    where: { supabaseid: supabaseUser.id }
+  })
+  if (!prismaUser) {
+    throw createError({ statusCode: 401, message: 'Benutzer nicht gefunden!' })
+  }
+
+  const userId = prismaUser.userid
 
   try {
     // Behandeln der verschiedenen Anfragen-Methoden
     switch (method) {
-      case 'GET': { // GET /api/transactions?userId=123
-        const rawUserId = query.userId ?? query.user_id
-        const parsed = QueryUserIdSchema.safeParse(rawUserId)
-        if (!parsed.success || parsed.data === undefined) {
-          throw createError({ statusCode: 400, message: 'Missing or invalid userId' })
-        }
-        return await TransactionService.getAllTransactions(Number(parsed.data)) // Ausgabe aller Transaktionen eines Benutzers
-      }
+      case 'GET': // GET /api/transactions?userId=123
+        
+        return await TransactionService.getAllTransactions(Number(userId))
 
       default:
         throw createError({ statusCode: 405, message: `Method ${method} not allowed` })

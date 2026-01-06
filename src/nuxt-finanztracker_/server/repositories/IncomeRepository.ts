@@ -8,7 +8,7 @@ export default class IncomeRepository {
    */
   async findByUserId(userId: number) {
     return prisma.incomes.findMany({
-      where: { user_id: Number(userId) },
+      where: { user: { userid: userId } },
       include: { categories: true, user: true },
       orderBy: { date: 'desc' }
     })
@@ -25,21 +25,17 @@ export default class IncomeRepository {
   }
 
   /**   
+   * 
    * Neue Einnahme erstellen
    */
   async create(data: any) {
-    const payload: any = {
-      user_id: Number(data.user_id),
-      category_id: Number(data.category_id),
-      source: data.source,
-      amount: data.amount, // Prisma will accept number or Decimal depending on client setup
-      date: data.date ? new Date(data.date) : undefined,
-      interval: data.interval,
-      note: data.note
-    }
-
-    return prisma.incomes.create({ data: payload, include: { categories: true, user: true } })
+    
+    return prisma.incomes.create({ data: data, include: { categories: true, user: true } })
   }
+ 
+
+ 
+  
   /**   
    * Einnahme aktualisieren
    */

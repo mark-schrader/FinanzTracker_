@@ -1,3 +1,4 @@
+
 <template>
   <div class="p-6 max-w-screen-xl mx-auto space-y-6">
     <!-- Header -->
@@ -110,8 +111,14 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue";
-import { useFetch } from "#app";
+
+definePageMeta({
+  middleware: 'auth' // Auth-Middleware für diese Seite
+})
+
+import { ref, onMounted } from 'vue'
+import { useFetch } from '#app'
+//import { useSupabaseUser } from '#supabase/composables'
 
 // Komponenten
 import verlaufChart from '../components/verlaufChart.vue'
@@ -121,7 +128,8 @@ import incomelast7days from '../components/incomeintervall.vue'
 import graph_categories_expenses from '../components/graph_categories_expenses.vue'
 import graph_categories_incomes from '../components/graph_categories_incomes.vue'
 import bewegungstabelle from '../components/bewegungstabelle.vue'
-import { useTransactionFilter } from '~/composables/useTransactionFilter'
+
+const user = useSupabaseUser()
 
 // Alle Transaktionen (Einnahmen & Ausgaben)
 const transactions = ref([]);
@@ -140,14 +148,29 @@ const {
 const categories = ref([]);
 
 onMounted(async () => {
+    
+    // Sicherstellen, dass ein Benutzer angemeldet ist
+    if (!user.value) {
+    console.warn('Kein angemeldeter Benutzer gefunden.')
+    return
+    }
+    
   try {
-    // Kategorien (falls backend userId braucht, ergänzen)
-    const catData = await $fetch("/api/categories?userId=1");
-    categories.value = catData || [];
+    // Kategorien laden (Server bestimmt aktuellen User)
+    const catData = await $fetch(`/api/categories`)
+    
+    // categories setzen
+    categories.value = catData || []
 
     // Lade kombinierte Transaktionen mit userId query (wichtig für Backend)
-    const transData = await $fetch("/api/transactions?userId=1");
-    transactions.value = transData || [];
+    const transData = await $fetch(`/api/transactions`)
+    
+    transactions.value = transData || []
+
+    //console.log('Angemeldeter Benutzer ID:', userId)
+    //console.log('Geladene Transaktionen:', transactions.value)
+    //console.log('Geladene Kategorien:', categories.value)
+
   } catch (err) {
     console.error("Fehler beim Laden der Daten:", err);
   }

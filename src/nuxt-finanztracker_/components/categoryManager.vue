@@ -172,7 +172,7 @@ function sortCategories() {
 // Load categories
 async function loadCategories() {
   try {
-    categories.value = await $fetch("/api/categories?userId=1");
+    categories.value = await $fetch("/api/categories");
     sortCategories(); // Nach dem Laden sortieren alphabetisch
   } catch (err) {
     console.error('Fehler beim Laden der Kategorien:', err);
@@ -214,7 +214,7 @@ async function createCategory() {
   try {
     await $fetch("/api/categories", {
       method: "POST",
-      body: { ...form.value, userId: 1 }
+      body: { ...form.value }
     });
 
     await loadCategories();

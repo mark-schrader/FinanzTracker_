@@ -50,7 +50,7 @@
             <label>Kategorie</label>
             <select v-model="incomeForm.category" class="form-input">
               <option disabled value="">Bitte wählen</option>
-              <option v-for="cat in categories" :value="cat.id" :key="cat.id">
+              <option v-for="cat in categories.filter(c => c.type === 'income')" :value="cat.id" :key="cat.id">
                 {{ cat.name }}
               </option>
             </select>
@@ -294,6 +294,13 @@
 <script setup>
 //Imports
 import { ref, computed, onMounted } from 'vue'
+import { useFetch } from '#app'
+
+
+definePageMeta({
+  middleware: 'auth' // Auth-Middleware für diese Seite
+})
+
 
 //Reaktive Daten
 
@@ -301,7 +308,8 @@ import { ref, computed, onMounted } from 'vue'
 const { showAlertBox, alertMessage, alertType, showAlert } = useAlert();
 
 // Suchfeld für die Tabelle (nicht sichtbar in Template, aber vorbereitet)
-const search = ref("");
+
+const search = ref('')
 
 // Alle Transaktionen (Einnahmen & Ausgaben)
 const transactions = ref([]);
@@ -353,25 +361,43 @@ const incomeForm = ref({
 
 // Formular-Daten für Ausgaben
 const expenseForm = ref({
-  amount: "",
-  date: "",
-  purpose: "",
-  category: "",
-  note: "",
-  interval: "",
-});
+  amount: '',
+  date: '',
+  purpose: '',
+  category: '',
+  note: '',
+  interval: ''
+})
+
+// user wird über Supabase Auth bereitgestellt
+const user = await useSupabaseUser()
 
 //Lifecycle Hook zum Laden von Kategorien & Transaktionen
 
 onMounted(async () => {
+    
+    // Sicherstellen, dass ein Benutzer angemeldet ist
+  if (!user.value) {
+    console.warn('Kein angemeldeter Benutzer gefunden.')
+    return
+    }
+
   try {
-    // Kategorien (falls backend userId braucht, ergänzen)
-    const catData = await $fetch("/api/categories?userId=1");
-    categories.value = catData || [];
+    
+    // userId aus dem angemeldeten Benutzer abrufen
+    const userId = user.value.id
+
+    // catData mit userId query laden
+    const catData = await $fetch(`/api/categories`)
+    
+    // categories setzen
+    categories.value = catData || []
 
     // Lade kombinierte Transaktionen mit userId query (wichtig für Backend)
-    const transData = await $fetch("/api/transactions?userId=1");
-    transactions.value = transData || [];
+    const transData = await $fetch(`/api/transactions`)
+    
+    transactions.value = transData || []
+
   } catch (err) {
     console.error("Fehler beim Laden der Daten:", err);
   }
@@ -449,19 +475,28 @@ const currentBalance = computed(() => {
 
 // Einnahme speichern — POST an /api/incomes (plural)
 async function submitIncome() {
+
+  //console.log("Aktueller User beim Senden:", user.value);
+
+ 
+  if (!user.value || !user.value.id) {
+    alert("Fehler: Benutzer nicht geladen. Bitte Seite neu laden.");
+    return;
+  }
+
+
   try {
     const res = await $fetch("/api/incomes", {
       method: "POST",
-      body: {
+        body: {
         amount: incomeForm.value.amount,
         date: incomeForm.value.date,
         source: incomeForm.value.source,
         categoryId: incomeForm.value.category,
         note: incomeForm.value.note,
-        interval: incomeForm.value.interval,
-        userId: 1,
-      },
-    });
+        interval: incomeForm.value.interval
+      }
+    })
 
     const newTransaction = {
       type: "Einnahme",
@@ -506,16 +541,15 @@ async function submitExpense() {
   try {
     const res = await $fetch("/api/expenses", {
       method: "POST",
-      body: {
+        body: {
         amount: expenseForm.value.amount,
         date: expenseForm.value.date,
         use: expenseForm.value.use,
         categoryId: expenseForm.value.category,
         note: expenseForm.value.note,
-        interval: expenseForm.value.interval,
-        userId: 1,
-      },
-    });
+        interval: expenseForm.value.interval
+      }
+    })
 
     const newTransaction = {
       type: "Ausgabe",
@@ -601,7 +635,7 @@ async function saveEdit() {
     });
 
     // Aktualisierte Transaktionen neu laden
-    const transData = await $fetch("/api/transactions?userId=1");
+    const transData = await $fetch("/api/transactions");
     transactions.value = transData || [];
 
     // schließen & reset
@@ -631,7 +665,7 @@ async function deleteAuftrag() {
       method: "DELETE",
     });
 
-    const updated = await $fetch('/api/transactions?userId=1')
+    const updated = await $fetch('/api/transactions');
     transactions.value = updated || []
 
     showDeleteConfirm.value = false
@@ -688,8 +722,7 @@ async function saveTransactionEdit(updatedTransaction) {
       date: updatedTransaction.date,
       interval: updatedTransaction.interval,
       note: updatedTransaction.comment || '',
-      categoryId: updatedTransaction.categoryId,
-      userId: 1
+      categoryId: updatedTransaction.categoryId
     }
 
     if (isIncome) {
@@ -704,7 +737,7 @@ async function saveTransactionEdit(updatedTransaction) {
     })
 
     // Transaktionen neu laden
-    const transData = await $fetch('/api/transactions?userId=1')
+    const transData = await $fetch('/api/transactions')
     transactions.value = transData || []
 
     closeActionModal()
@@ -727,7 +760,7 @@ async function confirmDeleteTransaction() {
     })
 
     // Transaktionen neu laden
-    const transData = await $fetch('/api/transactions?userId=1')
+    const transData = await $fetch('/api/transactions')
     transactions.value = transData || []
 
     closeActionModal()

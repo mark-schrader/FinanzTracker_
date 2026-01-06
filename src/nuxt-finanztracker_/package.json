@@ -10,13 +10,14 @@
     "postinstall": "nuxt prepare",
     "prisma:generate": "prisma generate",
     "prisma:test:generate": "prisma generate --schema=prisma/schema.test.prisma",
-    "prisma:test:push": "cross-env DATABASE_URL=file:./prisma/test.db prisma db push --schema=prisma/schema.test.prisma",
-    "test:unit:frontend": "vitest run test/unit/frontend",
-    "test:unit:backend": "vitest run test/unit/backend",
-    "test:integration:backend": "cross-env NODE_ENV=test DATABASE_URL=file:./prisma/test.db vitest run test/integration/backend",
-    "test": "npm run prisma:generate && npm run test:unit:frontend && npm run test:unit:backend && npm run prisma:test:generate && npm run prisma:test:push && npm run test:integration:backend"
+    "prisma:test:push": "prisma db push --schema=prisma/schema.test.prisma",
+    "test:unit:frontend": "cross-env VITEST_MODE=frontend vitest run test/unit/frontend",
+    "test:unit:backend": "cross-env VITEST_MODE=backend vitest run test/unit/backend",
+    "test:integration:backend": "cross-env VITEST_MODE=integration dotenv -e .env.test vitest run test/integration/backend",
+    "test": "npm run test:unit:frontend && npm run test:unit:backend && npm run test:integration:backend"
   },
   "dependencies": {
+    "@nuxtjs/supabase": "^1.5.2",
     "@prisma/client": "^6.10.1",
     "@samk-dev/nuxt-vcalendar": "^1.0.4",
     "animate.css": "^4.1.1",
@@ -33,6 +34,7 @@
   },
   "devDependencies": {
     "@nuxtjs/tailwindcss": "6.11.4",
+    "@types/node": "^25.0.3",
     "@vitejs/plugin-vue": "^6.0.3",
     "@vue/test-utils": "^2.4.6",
     "autoprefixer": "10.4.20",

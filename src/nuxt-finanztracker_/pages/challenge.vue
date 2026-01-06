@@ -278,23 +278,24 @@ import { ref, onMounted, computed } from "vue";
 import { useFetch } from "#app";
 import { Calendar } from "v-calendar";
 import { channel } from "process";
+import 'v-calendar/dist/style.css'
 
 const showChallengeModal = ref(false);
 const showSaveModal = ref(false);
 const challenges = ref([]);
-const selectedChallengeId = ref(""); //stores only the id of the challenge
+const selectedChallengeId = ref(""); //später ausgewählte Challenge ID
 const savedAmount = ref(0);
 const isShowing = ref(false);
 
 const challengeForm = ref({
   name: "",
   target: 0,
-  dueDate: "", //end date
+  dueDate: "",
 });
 
 onMounted(async () => {
   try {
-    const result = await $fetch("/api/goals?userId=1");
+    const result = await $fetch("/api/goals");
     challenges.value = result || [];
   } catch (err) {
     console.error("Fehler beim Laden von der Datendank", err);
@@ -302,12 +303,10 @@ onMounted(async () => {
 });
 
 async function addChallenge() {
-  //console.log("BUTTON WURDE GEDRUCKT!!!!!!!!!!");
   try {
     const saved = await $fetch("/api/goals", {
       method: "POST",
       body: {
-        userId: 1,
         name: challengeForm.value.name,
         target: Number(challengeForm.value.target),
         saved: 0,
@@ -404,4 +403,9 @@ const attr = computed(() => [
     })),
   },
 ]);
+
+  definePageMeta({
+  middleware: 'auth' // Auth-Middleware für diese Seite
+})
+
 </script>

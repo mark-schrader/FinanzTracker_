@@ -1,3 +1,8 @@
+
+// src/.../server/api/incomes.ts
+
+import { serverSupabaseUser } from '#supabase/server'
+import { PrismaClient } from '@prisma/client'
 import IncomeService from '../application/IncomeService'
 import { z } from 'zod'
 import { QueryUserIdSchema, toDatePreprocess, IntervalEnum } from '../utility/validationUtility'
@@ -15,23 +20,58 @@ const CreateIncomeSchema = z.object({
 })
 
 // Handler für die API-Endpunkte
+const prisma = new PrismaClient()
+
 export default defineEventHandler(async (event) => {
   const method = getMethod(event)
-  const query = getQuery(event)
+
+  const supabaseUser = await serverSupabaseUser(event)
+
+  if (!supabaseUser) {
+    throw createError({ statusCode: 401, message: 'Nicht Authorisiert!' })
+  } 
+
+  const prismaUser = await prisma.user.findUnique({
+    where: { supabaseid: supabaseUser.id }
+  })
+  if (!prismaUser) {
+    throw createError({ statusCode: 401, message: 'Benutzer nicht gefunden!' })
+  }
+  const userId = prismaUser.userid
+  
+  const id = getRouterParam(event, 'id')
+ 
 
   try {
     // Behandeln der verschiedenen Anfragen-Methoden
     switch (method) {
-      case 'GET': { // GET /api/incomes?userId=123
-        const rawUserId = query.userId ?? query.user_id
-        const parsed = QueryUserIdSchema.safeParse(rawUserId)
-        if (!parsed.success || parsed.data === undefined) {
-          throw createError({ statusCode: 400, message: 'Missing or invalid userId' })
+      case 'GET':
+        if (id) { // Anzeige einer einzelnen Einnahme
+          // GET /api/incomes/5
+          return await IncomeService.getIncomeById(Number(id))
+        } else {  // Anzeige aller Einnahmen eines Benutzers
+          // GET /api/incomes?userId=123
+          if (!userId) throw createError({ statusCode: 400, message: 'Missing userId' })
+          return await IncomeService.getIncomesByUserId(userId)
         }
-        return await IncomeService.getIncomesByUserId(Number(parsed.data)) // Ausgabe aller Einkünfte eines Benutzers
+
+      case 'POST': { // Anlegen einer neuen Einnahme
+        // POST /api/incomes
+        const body = await readBody(event)
+        return await IncomeService.createIncome({
+          userId: userId,
+          categoryId: Number(body.categoryId),
+          source: body.source,
+          amount: Number(body.amount),
+          date: body.date,
+          interval: body.interval,
+          note: body.note,
+        })
       }
 
-      case 'POST': { // POST /api/incomes
+      case 'PUT': { // Verändern einer Einnahme
+        // PUT /api/incomes/5
+        if (!id) throw createError({ statusCode: 400, message: 'Missing ID' })
         const body = await readBody(event)
         const parsed = CreateIncomeSchema.safeParse(body)
         if (!parsed.success) {
@@ -39,7 +79,7 @@ export default defineEventHandler(async (event) => {
         }
 
         const payload: any = {
-          userId: parsed.data.userId,
+          userId: userId,
           categoryId: parsed.data.categoryId,
           source: parsed.data.source,
           amount: parsed.data.amount,
@@ -48,7 +88,7 @@ export default defineEventHandler(async (event) => {
           note: parsed.data.note
         }
 
-        return await IncomeService.createIncome(payload) // Erstellen eines neuen Einkommens
+        return await IncomeService.updateIncome(Number(id), payload) // Aktualisieren eines Einkommens
       }
 
       default:

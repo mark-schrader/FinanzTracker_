@@ -1,3 +1,5 @@
+import { serverSupabaseUser } from '#supabase/server'
+import { PrismaClient } from '@prisma/client'
 import ExpenseService from '../application/ExpenseService'
 import { z } from 'zod'
 import { QueryUserIdSchema, toDatePreprocess, IntervalEnum } from '../utility/validationUtility'
@@ -13,23 +15,58 @@ const CreateExpenseSchema = z.object({
   note: z.string().optional().nullable()
 })
 
+const prisma = new PrismaClient()
+
 export default defineEventHandler(async (event) => {
   const method = getMethod(event)
-  const query = getQuery(event)
+  const id = getRouterParam(event, 'id')
+
+  const supabaseUser = await serverSupabaseUser(event)
+
+  if (!supabaseUser) {
+    throw createError({ statusCode: 401, message: 'Nicht Authorisiert!' })
+  } 
+
+  const prismaUser = await prisma.user.findUnique({ 
+    where: { supabaseid: supabaseUser.id }
+  })
+  if (!prismaUser) {
+    throw createError({ statusCode: 401, message: 'Benutzer nicht gefunden!' })
+  }
+
+  const userId = prismaUser.userid
 
   try {
     // Handler für die API-Endpunkte
     switch (method) {
-      case 'GET': { // GET /api/expenses?userId=123
-        const rawUserId = query.userId ?? query.user_id
-        const parsed = QueryUserIdSchema.safeParse(rawUserId)
-        if (!parsed.success || parsed.data === undefined) {
-          throw createError({ statusCode: 400, message: 'Missing or invalid userId' })
+      case 'GET':
+        if (id) { // Anzeige einer einzelnen Ausgabe
+          // GET /api/expenses/5
+          return await ExpenseService.getExpenseById(Number(id))
+
+        } else {  // Anzeige aller Ausgaben eines Benutzers
+          // GET /api/expenses?userId=123
+          if (!userId) throw createError({ statusCode: 400, message: 'Missing userId' })
+          return await ExpenseService.getExpensesByUserId(userId)
         }
-        return await ExpenseService.getExpensesByUserId(Number(parsed.data)) // Ausgabe aller Ausgaben eines Benutzers
+
+      case 'POST': { // Anlegen einer neuen Ausgabe
+        // POST /api/expenses
+        const body = await readBody(event)
+        return await ExpenseService.createExpense({
+          userId: userId,
+          categoryId: body.categoryId,
+          use: body.use,
+          amount: body.amount,
+          date: body.date,
+          interval: body.interval,
+          note: body.note,
+        })
       }
 
-      case 'POST': { // POST /api/expenses
+      case 'PUT': { // Verändern einer Ausgabe
+        // PUT /api/expenses/5
+        if (!id) throw createError({ statusCode: 400, message: 'Missing ID' })
         const body = await readBody(event)
         const parsed = CreateExpenseSchema.safeParse(body)
         if (!parsed.success) {
@@ -37,7 +74,7 @@ export default defineEventHandler(async (event) => {
         }
 
         const payload: any = {
-          userId: parsed.data.userId,
+          userId: userId,
           categoryId: parsed.data.categoryId,
           use: parsed.data.use,
           amount: parsed.data.amount,
@@ -46,7 +83,7 @@ export default defineEventHandler(async (event) => {
           note: parsed.data.note
         }
 
-        return await ExpenseService.createExpense(payload) // Erstellen einer neuen Ausgabe
+        return await ExpenseService.updateExpense(Number(id), payload) // Aktualisieren einer Ausgabe
       }
 
       default:
