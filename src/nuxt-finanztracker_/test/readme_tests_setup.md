@@ -4,7 +4,7 @@ Diese Anleitung erklärt **verständlich und Schritt für Schritt**, wie Tests i
 
 ---
 
-## 📦 Projektstruktur (relevant für Tests)
+## Projektstruktur (relevant für Tests)
 
 ```
 src/nuxt-finanztracker_
@@ -32,9 +32,9 @@ src/nuxt-finanztracker_
 
 ---
 
-## 🧪 Testarten im Projekt
+## Testarten im Projekt
 
-### 1️⃣ Frontend Unit Tests
+### Frontend Unit Tests
 
 - **Ort:** `test/unit/frontend`
 - **Ziel:** Vue-Komponenten isoliert testen
@@ -42,33 +42,33 @@ src/nuxt-finanztracker_
   - `@vue/test-utils`
   - gemockte Stores & Services
 
-👉 **Kein echter Server / keine Datenbank**
+**Kein echter Server / keine Datenbank**
 
 ---
 
-### 2️⃣ Backend Unit Tests
+### Backend Unit Tests
 
 - **Ort:** `test/unit/backend`
 - **Ziel:** Services / Business-Logik testen
 - **Technik:**
   - Prisma gemockt oder In-Memory
 
-👉 **Keine echte Datenbank**
+**Keine echte Datenbank**
 
 ---
 
-### 3️⃣ Backend Integration Tests (wichtig)
+### Backend Integration Tests (wichtig)
 
 - **Ort:** `test/integration/backend`
 - **Ziel:**
   - Prisma + echte PostgreSQL-Datenbank
   - echte Constraints, Relationen, Deletes
 
-👉 **Hier wird wirklich in die DB geschrieben**
+**Hier wird wirklich in die DB geschrieben**
 
 ---
 
-## 🐘 Test-Datenbank (Postgres)
+## Test-Datenbank (Postgres)
 
 ### Lokal
 
@@ -94,7 +94,7 @@ DATABASE_URL=postgresql://postgres:postgres@localhost:5432/finanztracker_test
 
 ---
 
-## 🧱 Prisma Setup für Tests (wichtig!)
+## Prisma Setup für Tests (wichtig!)
 
 ### schema.test.prisma
 
@@ -113,7 +113,7 @@ npx dotenv -e .env.test -- prisma migrate dev \
 
 ---
 
-## ⚙️ Gemeinsames Test-Setup (setup.prisma.ts)
+## Gemeinsames Test-Setup (setup.prisma.ts)
 
 Jeder Integrationstest bekommt automatisch:
 
@@ -137,11 +137,11 @@ const WORKER_ID = process.env.VITEST_WORKER_ID ?? '0'
 const TEST_USER_EMAIL = `test-${WORKER_ID}@local`
 ```
 
-➡️ Jeder Worker bekommt **seinen eigenen User**
+Jeder Worker bekommt **seinen eigenen User**
 
 ---
 
-## ✍️ Wie schreibe ich einen Integrationstest?
+## Wie schreibe ich einen Integrationstest?
 
 ### Beispiel: Kategorie anlegen
 
@@ -166,12 +166,12 @@ describe('Integration: Kategorie erstellen', () => {
 
 ### Wichtige Regeln
 
-✅ **IMMER** `TEST_USER_ID` verwenden  
-❌ **NIEMALS** feste User-IDs
+**IMMER** `TEST_USER_ID` verwenden  
+**NIEMALS** feste User-IDs
 
 ---
 
-## ▶️ Tests ausführen
+## Tests ausführen
 
 ### Alle Tests
 
@@ -187,10 +187,10 @@ npm run test:integration:backend
 
 ---
 
-## 🚨 Häufige Fehler & Lösungen
+## Häufige Fehler & Lösungen
 
-### ❌ `column does not exist`
-➡️ Migrationen fehlen
+### `column does not exist`
+Migrationen fehlen
 
 ```bash
 npx prisma migrate deploy --schema=prisma/schema.test.prisma
@@ -198,23 +198,23 @@ npx prisma migrate deploy --schema=prisma/schema.test.prisma
 
 ---
 
-### ❌ `Unique constraint failed (email)`
-➡️ Kein Worker-sicherer Test-User
+### `Unique constraint failed (email)`
+Kein Worker-sicherer Test-User
 
-✔️ **setup.prisma.ts verwenden**
+**setup.prisma.ts verwenden**
 
 ---
 
-### ❌ Tests schlagen nur in GitHub Actions fehl
+### Tests schlagen nur in GitHub Actions fehl
 
-➡️ Prüfen:
+Prüfen:
 - `DATABASE_URL` korrekt?
 - `schema.test.prisma` verwendet?
 - Migrationen angewendet?
 
 ---
 
-## ✅ Zusammenfassung (TL;DR)
+## Zusammenfassung (TL;DR)
 
 - **Unit Tests**: schnell, isoliert, ohne DB
 - **Integration Tests**: echte DB, Prisma, Docker
@@ -224,7 +224,7 @@ npx prisma migrate deploy --schema=prisma/schema.test.prisma
 
 ---
 
-📌 Wenn du dich an diese Regeln hältst, laufen Tests **lokal UND in CI stabil**.
+Wenn du dich an diese Regeln hältst, laufen Tests **lokal UND in CI stabil**.
 
-Happy Testing 🚀
+Happy Testing
 
