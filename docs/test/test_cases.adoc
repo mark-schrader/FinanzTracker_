@@ -8,47 +8,58 @@ include::../_includes/default-attributes.inc.adoc[]
 == Allgemeine Informationen
 
 === Zweck und Ziel
-Dieses Dokument beschreibt die Test Cases für das Projekt {project-name}. Es dient als Leitfaden für die Durchführung der verschiedenen Testarten, um die Qualität und Funktionalität der Software sicherzustellen.
-=== Geltungsbereich
-Die Test Cases decken alle relevanten Funktionalitäten und Anforderungen des Projekts ab und sind für alle Testarten anwendbar.
-=== Definitionen und Abkürzungen
-* Test Case: Eine spezifische Situation oder ein Szenario, das getestet werden soll.
-* Unit Test: Testet einzelne Komponenten oder Module der Software.
-* Integration Test: Testet das Zusammenspiel mehrerer Komponenten oder Module.
-* System Test: Testet das gesamte System als Ganzes.
-* Abnahmetest: Testet die Software aus Sicht des Endbenutzers, um sicherzustellen, dass sie den Anforderungen entspricht.
+Dieses Dokument beschreibt die Test Cases für das Projekt {project-name}. Es dient als Leitfaden für die Durchführung der verschiedenen Testarten, mit dem Ziel, die Qualität und Funktionalität der Software sicherzustellen.
 
-== Teststrategie
-Die Teststrategie umfasst die Planung, Durchführung und Auswertung der Tests. Es werden verschiedene Testarten angewendet, um sicherzustellen, dass alle Aspekte der Software gründlich überprüft werden. Die Tests werden sowohl manuell als auch automatisiert durchgeführt, je nach Anforderung und Verfügbarkeit von Ressourcen.
+== Testkonzept und Architektur
+Das Testkonzept umfasst drei Haupttestarten: Unit Tests, Integrationstests und End-to-End (E2E) Tests. Jede Testart hat eine spezifische Architektur und einen definierten Zweck innerhalb des Testprozesses.
 
-== Testarchitektur
-Die Testarchitektur definiert die Struktur und Organisation der Testumgebung. Sie umfasst die Auswahl der Testwerkzeuge, die Einrichtung der Testumgebungen und die Definition der Testdaten. Die Architektur stellt sicher, dass die Tests effizient und effektiv durchgeführt werden können.
+In der Unit Tests Ebene werden Tests in isolierten Umgebungen durchgeführt. Sie testen einzelne Funktionen der Module unabhängig voneinander. Für Frontend Unit Tests wird dabei kein Backend benötigt, stattdessen werden Mock-Daten verwendet. Backend Unit Tests werden ebenfalls isoliert ausgeführt, wobei einzelne Funktionen des Backends getestet werden. Hierbei kommen Mock-Daten zum Einsatz, um Abhängigkeiten zu minimieren.
 
-Unit Tests werden in isolierten Umgebungen durchgeführt, während Integrationstests in einer Umgebung stattfinden, die mehrere Komponenten umfasst. Systemtests und Abnahmetests werden in einer produktionsähnlichen Umgebung durchgeführt, um realistische Bedingungen zu simulieren.
+Auf der Integrations Ebene finden Tests in einer Umgebung statt, die mehrere Module integriert, um deren Zusammenspiel zu testen. Hierbei wird ein Test-Backend verwendet, um realistische Datenflüsse zu simulieren. Die Testumgebung wird mittels Docker-Container bereitgestellt und bassiert auf eine PostgreSQL-Datenbank.
 
-Tabelle der Testumgebungen:
-[cols="3,3,4", options="header"]
+E2E Tests (End-to-End Tests) überprüfen wichtige Workflows innerhalb der Anwendung, um sicherzustellen, dass die entsprechenden Komponenten nahtlos zusammenarbeiten. Dabei wird das Frontend mittels einer Klickrutine automatisiert getestet. Diese Tests werden in einer vollständigen Anwendungsumgebung ausgeführt, die sowohl das Frontend als auch das Backend umfasst. Auf ein Mocken des Backends wird hierbei verzichtet, um eine realistische Testumgebung zu gewährleisten. Es handelt sich somit auch eher um Systemtests als um reine E2E Tests.
+
+Manuelle Tests werden nicht explizit in diesem Dokument behandelt, da der Fokus auf automatisierten Tests liegt. Dennoch können manuelle Tests ergänzend eingesetzt werden, um spezifische Szenarien zu überprüfen, die möglicherweise nicht durch automatisierte Tests abgedeckt sind.
+===
+
+
+Testarten Übersicht:
+[cols="2,3", options="header"]
 |===
-| Testart | Umgebung | Beschreibung
-| Unit Test | Isolierte Umgebung | Testet einzelne Module unabhängig voneinander.
-| Integration Test | Integrierte Umgebung | Testet das Zusammenspiel mehrerer Module.
-| System Test | Produktionsähnliche Umgebung | Testet das gesamte System unter realistischen Bedingungen.
-| Abnahmetest | Produktionsähnliche Umgebung | Testet die Software aus Sicht des Endbenutzers.
+| Testart | Verwendete Frameworks / Tools
+
+| Unit Test Frontend
+| vitest, @vue/test-utils, happy-dom
+
+| Unit Test Backend
+| vitest
+
+| Integration Test (Backend)
+| vitest, Prisma, PostgreSQL, Docker, dotenv
+
+| E2E Test
+| Playwright
 |===
+
 
 == Testarten
 
 == Frontend Unit Tests
 //== Test Cases für Unit Tests
 Tablelle der Unit Test Cases:
-Pfad: src/nuxt-finanztracker_/test/unit/
+
+Pfad: src/nuxt-finanztracker_/test/unit/Frontend
+
 [cols="4,4,4", options="header"]
+
 |===
 | Test Name | Beschreibung | User Story / Anforderung
 | Kontobewegung.incomes.category.select.spec.ts | Testet die Kategoriewahl für Einnahmen in Kontobewegungen. | Epic 2: Als Benutzer möchte ich Einnahmen kategorisieren können, um meine Finanzen besser zu verwalten.
 | Kontobewegung.expenses.category.select.spec.ts | Testet die Kategoriewahl für Ausgaben in Kontobewegungen. | Epic 2: Als Benutzer möchte ich Ausgaben kategorisieren können, um meine Finanzen besser zu verwalten.
 | Kontobewegung.incomes.popup.cancel.spec.ts | Testet das Abbrechen des Popups für Einnahmen in Kontobewegungen. | Epic 2: Als Benutzer möchte ich ein Popup für Einnahmen abbrechen können, ohne Änderungen vorzunehmen.
 | Kontobewegung.exensene.popup.cancel.spec.ts | Testet das Abbrechen des Popups für Ausgaben in Kontobewegungen. | Epic 2: Als Benutzer möchte ich ein Popup für Ausgaben abbrechen können, ohne Änderungen vorzunehmen.
+
+|===
 == Integration Tests
 //== Test Cases für Integration Tests
 == System Tests

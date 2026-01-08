@@ -2,7 +2,7 @@ import { describe, it, expect, vi, beforeEach } from 'vitest'
 import CategoryService from '../../../server/application/CategoryService'
 import { CategoryRepository } from '../../../server/repositories/CategoryRepository'
 
-// Repository komplett mocken
+// Mock the CategoryRepository for isolated testing
 vi.mock('../../../server/repositories/CategoryRepository')
 
 describe('Backend Unit: CategoryService', () => {
@@ -23,7 +23,7 @@ describe('Backend Unit: CategoryService', () => {
       { id: 2, name: 'Lebensmittel', type: 'expense', icon: undefined, color: undefined }
     ])
   })
-
+// Test for empty category list
   it('liefert eine leere Liste zurück, wenn keine Kategorien existieren', async () => {
     vi.spyOn(CategoryRepository.prototype, 'findByUserId')
       .mockResolvedValue([] as any)
