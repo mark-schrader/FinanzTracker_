@@ -46,7 +46,7 @@ Testarten Übersicht:
 
 == Frontend Unit Tests
 //== Test Cases für Unit Tests
-Tablelle der Unit Test Cases:
+Tablelle der Fontend Unit Test Cases:
 
 Pfad: src/nuxt-finanztracker_/test/unit/Frontend
 
@@ -62,7 +62,38 @@ Pfad: src/nuxt-finanztracker_/test/unit/Frontend
 |===
 == Integration Tests
 //== Test Cases für Integration Tests
+
+Tablelle der Integration Test Cases:
+
+Pfad: src/nuxt-finanztracker_/test/unit/Integration/Backend
+
+[cols="4,4,4", options="header"]
+|===
+| Test Name | Beschreibung | User Story / Anforderung   
+|===
+
 == System Tests
 //== Test Cases für System Tests
+Tablelle der System Test Cases:
+Pfad: src/nuxt-finanztracker_/test/e2e
+[cols="4,4,4", options="header"]
+|===
+| Test Name | Beschreibung | User Story / Anforderung
+|===   
 == Abnahmetests
 //== Test Cases für Abnahmetests
+Abnahmetests werden nicht explizit in diesem Dokument behandelt, da der Fokus auf automatisierten Tests liegt. 
+
+Eine Abnahme erfolgt durch den Produkt-Owner nach erfolgreichem Bestehen der automatisierten Tests und der Erfüllung der Akzeptanzkriterien für die jeweiligen User Stories.
+
+== GitHub Actions Integration
+Die Testarten sind in die CI/CD-Pipeline von GitHub Actions integriert. Bei Pull-Request in den Main Branch werden die Tests automatisch ausgeführt, um sicherzustellen, dass neue Änderungen keine bestehenden Funktionen beeinträchtigen.
+
+Tabelle der GitHub Actions Workflows:
+[cols="4,4", options="header"]
+|===
+| Workflow Name | Beschreibung
+| Tests | Führt alle definierten Tests (Unit, Integration) aus und baut die Anwendung. |
+| E2E Tests | Führt die End-to-End Tests aus, um wichtige Workflows in der Anwendung zu überprüfen. 
+| Supabase Deployment | Automatisiert die Bereitstellung der Anwendung auf Supabase nach erfolgreichem Bestehen aller Tests.
+|===
