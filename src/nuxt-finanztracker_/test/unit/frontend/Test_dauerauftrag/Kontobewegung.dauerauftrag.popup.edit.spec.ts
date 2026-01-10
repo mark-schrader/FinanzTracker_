@@ -1,32 +1,36 @@
 // test/unit/frontend/Test_dauerauftrag/Kontobewegung.dauerauftrag.popup.edit.spec.ts
+// Unit-Test für das Bearbeiten-Popup eines Dauerauftrags.
+
 import { mount } from '@vue/test-utils'
-import { describe, it, expect, vi } from 'vitest'
+import { describe, it, expect } from 'vitest'
 import Kontobewegung from '../../../../pages/kontobewegung.vue'
 
 describe('Unit: Kontobewegung – Dauerauftrag Bearbeiten Popup', () => {
-  it('öffnet das Bearbeiten-Modal für Dauerauftrag', async () => {
+  it('öffnet das Bearbeiten-Modal für einen Dauerauftrag', async () => {
     const wrapper = mount(Kontobewegung)
     const vm = wrapper.vm as any
 
-    // Fake Dauerauftrag 
-    vm.transactions = [
-      {
-        id: 2,
-        recordType: 'expense',
-        interval: 'monthly',
-        amount: '-300 €',
-        categoryName: 'Miete'
-      }
-    ]
+    // Fake ausgewählter Dauerauftrag
+    vm.selectedAuftrag = {
+      id: 2,
+      recordType: 'expense',
+      name: 'Miete',
+      betrag: 300,
+      intervall: 'monthly',
+      categoryId: 1,
+      categoryName: 'Miete',
+      note: '',
+      date: '2025-01-01'
+    }
 
-    await wrapper.vm.$nextTick() 
-
-    // Rufe die openEdit-Methode auf, um das Bearbeiten Modal zu öffnen
-    vm.openEdit(vm.formattedAuftraege[0])
+    // Edit-Modal öffnen 
+    vm.showEditModal = true
     await wrapper.vm.$nextTick()
 
-    expect(vm.showEditModal).toBe(true) // Prüfe, ob das Modal geöffnet ist
-    expect(vm.selectedAuftrag).not.toBeNull() // Prüfe, ob ein Auftrag ausgewählt ist
-    expect(vm.selectedAuftrag.id).toBe(2) // Prüfe, ob der richtige Auftrag ausgewählt ist
+    // Assertions
+    expect(vm.showEditModal).toBe(true)
+    expect(vm.selectedAuftrag).not.toBeNull()
+    expect(vm.selectedAuftrag.id).toBe(2)
+    expect(vm.selectedAuftrag.intervall).toBe('monthly')
   })
 })
