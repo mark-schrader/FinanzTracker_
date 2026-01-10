@@ -263,8 +263,8 @@
             </div>
 
             <!-- Fallback anzeigen, wenn keine Einträge -->
-            <div v-if="!formattedAuftraege.length" class="modal-md text-center">
-              Keine Daueraufträge vorhanden.
+            <div v-if="!formattedAuftraege.length" class="modal-lg text-center">
+              <p>Keine Daueraufträge vorhanden.</p>
             </div>
           </div>
 

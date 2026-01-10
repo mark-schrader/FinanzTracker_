@@ -1,7 +1,9 @@
+// test/unit/frontend/Test_Kategorie/categoryManager.Category.create.spec.ts
+// Frontend Unit Test – Kategorie erstellen
 import { mount } from '@vue/test-utils'
 import { describe, it, expect } from 'vitest'
-import CategoryManager from '../../../components/categoryManager.vue'
-import { fetchMock } from '../../setup.frontend'
+import CategoryManager from '../../../../components/categoryManager.vue'
+import { fetchMock } from '../../../setup.frontend'
 
 describe('Kategorie erstellen', () => {
   it('sendet Request beim Speichern', async () => {
