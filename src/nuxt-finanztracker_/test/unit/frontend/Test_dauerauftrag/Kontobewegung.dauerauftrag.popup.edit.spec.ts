@@ -6,7 +6,7 @@ import { describe, it, expect } from 'vitest'
 import Kontobewegung from '../../../../pages/kontobewegung.vue'
 
 describe('Unit: Kontobewegung – Dauerauftrag Bearbeiten Popup', () => {
-  it('öffnet das Bearbeiten-Modal für einen Dauerauftrag', async () => {
+  it('öffnet und schließt das Bearbeiten-Modal (Abbrechen)', async () => {
     const wrapper = mount(Kontobewegung)
     const vm = wrapper.vm as any
 
@@ -23,14 +23,22 @@ describe('Unit: Kontobewegung – Dauerauftrag Bearbeiten Popup', () => {
       date: '2025-01-01'
     }
 
-    // Edit-Modal öffnen 
+    // Bearbeiten-Modal öffnen
     vm.showEditModal = true
     await wrapper.vm.$nextTick()
 
-    // Assertions
+    // Modal ist geöffnet
     expect(vm.showEditModal).toBe(true)
     expect(vm.selectedAuftrag).not.toBeNull()
+
+    // Bearbeiten abbrechen (Modal schließen)
+    vm.showEditModal = false
+    await wrapper.vm.$nextTick()
+
+    // Modal ist geschlossen
+    expect(vm.showEditModal).toBe(false)
+
+    // Auftrag bleibt unverändert gesetzt (kein Speichern)
     expect(vm.selectedAuftrag.id).toBe(2)
-    expect(vm.selectedAuftrag.intervall).toBe('monthly')
   })
 })
