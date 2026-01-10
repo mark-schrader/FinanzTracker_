@@ -37,11 +37,11 @@
       <div class="flex-1 max-w-[50%] flex flex-col justify-center items-center gap-6">
         <button @click="openLogin"
           class="btn btn-primary w-[150px] rounded-full text-base shadow-md hover:scale-110 transition duration-300">
-          Sign In
+          Anmelden
         </button>
         <button @click="openRegister"
           class="btn btn-secondary w-[150px] rounded-full text-base shadow-md hover:scale-110 transition duration-300">
-          Sign Up
+          Registrieren
         </button>
       </div>
     </div>
@@ -54,15 +54,15 @@
           @click="closeForm">
           <i class="fas fa-times"></i>
         </button>
-        <form class="flex flex-col gap-4">
-          <h3>Login →</h3>
+        <form class="flex flex-col gap-4" @submit.prevent="login">
+          <h3>Anmelden →</h3>
           <label for="email">Email</label>
-          <input type="email" name="email" placeholder="Enter Email" required class="form-input" />
+          <input type="email" name="email" v-model="email" placeholder="Email eingeben" required class="form-input" />
 
-          <label for="psw">Password</label>
-          <input type="password" name="psw" placeholder="Enter Password" required class="form-input" />
+          <label for="psw">Passwort</label>
+          <input type="password" name="psw" v-model="password" placeholder="Passwort eingeben" required class="form-input" />
 
-          <button type="submit" class="btn btn-primary self-end w-1/2 mt-4 shadow-sm">Login</button>
+          <button type="submit" class="btn btn-primary self-end w-1/2 mt-4 shadow-sm">Anmelden</button>
         </form>
       </div>
     </div>
@@ -75,18 +75,18 @@
           @click="closeForm">
           <i class="fas fa-times"></i>
         </button>
-        <form class="flex flex-col gap-4">
-          <h3>Register →</h3>
+        <form class="flex flex-col gap-4" @submit.prevent="register">
+          <h3>Registrieren →</h3>
 
           <label for="fname">Vorname</label>
-          <input type="text" name="fname" id="fname" class="form-input" />
+          <input type="text" name="fname" id="fname" v-model="form.firstname" class="form-input" />
           <!-- form-input schon definiert in tailwind.css -->
 
           <label for="lname">Nachname</label>
-          <input type="text" name="lname" id="lname" class="form-input" />
+          <input type="text" name="lname" id="lname" v-model="form.lastname" class="form-input" />
 
           <label for="uni">Universität</label>
-          <select id="uni" name="uni" class="form-select">
+          <select id="uni" name="uni" v-model="form.university" class="form-select">
             <option value="htw">HTW Dresden</option>
             <option value="tu">TU Dresden</option>
             <option value="fh">Fachhochschule Dresden</option>
@@ -94,38 +94,146 @@
           </select>
 
           <label for="bday">Geburtstag</label>
-          <input type="date" name="bday" id="bday" class="form-input" />
+          <input type="date" name="bday" id="bday" v-model="form.birthdate" class="form-input" />
 
           <label for="email">Email</label>
-          <input type="email" name="email" placeholder="Enter Email" required class="form-input" />
+          <input type="email" name="email" placeholder="Email eingeben" v-model="form.email" required class="form-input" />
 
-          <label for="psw">Password</label>
-          <input type="password" name="psw" placeholder="Enter Password" required
+          <label for="psw">Passwort</label>
+          <input type="password" name="psw" placeholder="Passwort eingeben" v-model="form.password" required
             pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
             title="Muss mindestens eine Zahl und einen Groß- und Kleinbuchstaben sowie mindestens 8 oder mehr Zeichen enthalten"
             class="form-input" />
 
-          <button type="submit" class="btn btn-primary self-end w-1/2 mt-4 shadow-sm">Register</button>
+          <button type="submit" class="btn btn-primary self-end w-1/2 mt-4 shadow-sm">Registrieren</button>
         </form>
       </div>
     </div>
   </main>
 </template>
 
-<script setup>
-import { ref } from "vue";
+<script setup lang="ts">
 
+import { reactive, ref, watch } from "vue";
+import { navigateTo, useFetch } from '#app';
+
+const supabase = useSupabaseClient();
+const user = useSupabaseUser()
+
+// wenn der user eingeloggt ist, direkt zum dashboard weiterleiten
+watch(user, async (u) => {
+  try {
+    if (u) {
+      const profileData = await $fetch('/api/user/me')
+      if (profileData && profileData.userid) {
+        navigateTo(`/dashboard/${profileData.userid}`)
+      } else {
+        // fallback: dashboard root
+        navigateTo('/dashboard')
+      }
+    }
+  } catch (err) {
+    console.error('Redirect to dashboard failed:', err)
+  }
+}, { immediate: true })
+
+// UI state
 const showLogin = ref(false);
 const showRegister = ref(false);
 
-function openLogin() {
-  showLogin.value = true;
+// form state
+const form = reactive({
+  email: "",
+  password: "",
+  firstname: "",
+  lastname: "",
+  university: "",
+  birthdate: "",
+});
+
+// login state
+const email = ref('');
+const password = ref('');
+const errorMessage = ref<string | null>(null);
+
+// helper sleep
+const sleep = (ms: number) => new Promise<void>(resolve => setTimeout(resolve, ms));
+
+// Registration function
+const register = async () => {
+  try {
+    const res = await fetch('/api/UserController', {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(form)
+    });
+
+
+    const data = await res.json();
+
+    if (data.status !== 'success') {
+      console.error('Registrierung fehlgeschlagen:', data.message);
+      return;
+    }
+
+    await sleep(1000);
+
+    const { error: loginError } = await supabase.auth.signInWithPassword({
+      email: form.email,
+      password: form.password
+    });
+
+    if (loginError) {
+      console.error('Login nach Pause fehlgeschlagen:', loginError.message);
+      return;
+    }
+
+    return navigateTo(`/dashboard/${data.user.userid}`);
+  } catch (err) {
+    console.error('Fehler bei Registrierung:', err);
+  }
 }
-function openRegister() {
-  showRegister.value = true;
+
+
+// Login function
+const login = async () => {
+
+  console.log(email, password)
+
+  errorMessage.value = null;
+
+  console.log(email, password)
+
+  try {
+    const { error: authError } = await supabase.auth.signInWithPassword({
+      email: email.value,
+      password: password.value,
+    });
+
+    if (authError) {
+      errorMessage.value = authError.message;
+      return;
+    }
+
+    const profileData  = await $fetch('/api/user/me');
+
+    console.log('Profil-Daten nach dem Login:', profileData);
+
+    if (!profileData) {
+      throw new Error('Benutzerprofil nicht gefunden nach dem Login.');
+    }
+
+    const prismaUserId = profileData.userid;
+    
+    return navigateTo(`/dashboard/${prismaUserId}`);
+
+  } catch (err: any) {
+    errorMessage.value = err.message || "Ein unerwarteter Fehler ist aufgetreten.";
+    console.error('Unerwarteter Fehler:', err);
+  }
 }
-function closeForm() {
-  showLogin.value = false;
-  showRegister.value = false;
-}
+
+function openLogin() { showLogin.value = true; }
+function openRegister() { showRegister.value = true; }
+function closeForm() { showLogin.value = false; showRegister.value = false; }
 </script>

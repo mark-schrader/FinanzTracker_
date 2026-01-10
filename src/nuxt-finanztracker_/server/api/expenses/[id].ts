@@ -1,4 +1,6 @@
 import ExpenseService from '../../application/ExpenseService'
+import { serverSupabaseUser } from '#supabase/server'
+import { PrismaClient } from '@prisma/client'
 import { z } from 'zod'
 import { IdParamSchema, toDatePreprocess, IntervalEnum } from '../../utility/validationUtility'
 
@@ -23,6 +25,13 @@ export default defineEventHandler(async (event) => {
     if (!idParsed.success) throw createError({ statusCode: 400, message: 'Invalid id param' })
     const id = Number(idParsed.data)
 
+    const supabaseUser = await serverSupabaseUser(event)
+    if (!supabaseUser) throw createError({ statusCode: 401, message: 'Nicht Authorisiert!' })
+    const prisma = new PrismaClient()
+    const prismaUser = await prisma.user.findUnique({ where: { supabaseid: supabaseUser.id } })
+    if (!prismaUser) throw createError({ statusCode: 401, message: 'Benutzer nicht gefunden!' })
+    const userId = prismaUser.userid
+
     // Handler für die API-Endpunkte
     switch (method) {
       case 'PUT': { // PUT /api/expenses/:id
@@ -33,7 +42,7 @@ export default defineEventHandler(async (event) => {
         }
 
         const payload: any = {
-          userId: parsed.data.userId,
+          userId: userId,
           categoryId: parsed.data.categoryId,
           use: parsed.data.use,
           amount: parsed.data.amount,

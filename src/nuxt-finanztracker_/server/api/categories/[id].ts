@@ -1,4 +1,6 @@
 import CategoryService from '../../application/CategoryService'
+import { serverSupabaseUser } from '#supabase/server'
+import { PrismaClient } from '@prisma/client'
 import { IdParamSchema } from '../../utility/validationUtility'
 import { z } from 'zod'
 
@@ -19,6 +21,13 @@ export default defineEventHandler(async (event) => {
   const method = getMethod(event)
   const idRaw = getRouterParam(event, 'id')
   if (!idRaw) throw createError({ statusCode: 400, message: 'Missing id param' })
+
+  const supabaseUser = await serverSupabaseUser(event)
+  if (!supabaseUser) throw createError({ statusCode: 401, message: 'Nicht Authorisiert!' })
+  const prisma = new PrismaClient()
+  const prismaUser = await prisma.user.findUnique({ where: { supabaseid: supabaseUser.id } })
+  if (!prismaUser) throw createError({ statusCode: 401, message: 'Benutzer nicht gefunden!' })
+  const userId = prismaUser.userid
 
   try {
     const idParsed = IdParamSchema.safeParse(idRaw)
@@ -43,7 +52,7 @@ export default defineEventHandler(async (event) => {
           type: parsed.data.type,
           icon: parsed.data.icon,
           color: parsed.data.color,
-          userId: parsed.data.userId
+          userId: userId
         })
       }
 

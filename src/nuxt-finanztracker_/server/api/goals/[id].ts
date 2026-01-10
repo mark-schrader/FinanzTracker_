@@ -1,6 +1,8 @@
 import GoalService from '../../application/GoalService'
 import { z } from 'zod'
 import { IdParamSchema, toDatePreprocess } from '../../utility/validationUtility'
+import { serverSupabaseUser } from '#supabase/server'
+import { PrismaClient } from '@prisma/client'
 
 // Schema zum Validieren des Request-Bodys für das Aktualisieren eines Ziels
 const UpdateGoalSchema = z.object({
@@ -31,20 +33,38 @@ export default defineEventHandler(async (event) => {
     if (!idParsed.success) throw createError({ statusCode: 400, message: 'Invalid id param' })
     const id = Number(idParsed.data)
 
+    const supabaseUser = await serverSupabaseUser(event)
+    if (!supabaseUser) throw createError({ statusCode: 401, message: 'Nicht Authorisiert!' })
+    const prisma = new PrismaClient()
+    const prismaUser = await prisma.user.findUnique({ where: { supabaseid: supabaseUser.id } })
+    if (!prismaUser) throw createError({ statusCode: 401, message: 'Benutzer nicht gefunden!' })
+    const userId = prismaUser.userid
+
     // Behandeln der verschiedenen Anfragen-Methoden
     switch (method) {
       case 'GET': // GET /api/goals/5
         return await GoalService.getGoalById(Number(id))  // Ausgabe eines einzelnen Ziels
 
       case 'PUT': { // PUT /api/goals/5
-        const body = await readBody(event)
+        let body = await readBody(event)
+
+        // Fallback: Falls readBody undefined liefert (z.B. fehlender Content-Type), versuche rohen Body zu lesen
+        if (body === undefined) {
+          try {
+            const raw = await readRawBody(event)
+            if (raw) body = JSON.parse(raw.toString())
+          } catch (e) {
+            // leave body as undefined for validation to catch
+          }
+        }
+
         const parsed = UpdateGoalSchema.safeParse(body)
         if (!parsed.success) {
-          throw createError({ statusCode: 400, message: `Invalid body: ${JSON.stringify(parsed.error.errors)}` })
+          throw createError({ statusCode: 400, message: `Invalid body: ${JSON.stringify(parsed.error.errors)} (received: ${JSON.stringify(body)})` })
         }
 
         const payload: any = {
-          userId: parsed.data.userId,
+          userId: userId,
           name: parsed.data.name,
           target: parsed.data.target,
           saved: parsed.data.saved,
