@@ -71,7 +71,7 @@
         <div class="card grid md:grid-cols-3 gap-4 items-end">
             <div>
                 <label class="block mb-1">Dateiname</label>
-                <input type="text" v-model="filename" placeholder="z.B. kontobewegung_juni_2025"
+                <input type="text" v-model="filename" maxlength="50" placeholder="z.B. kontobewegung_juni_2025"
                     class="form-input border-2 border-brand-300 dark:border-brand-600" />
             </div>
 
