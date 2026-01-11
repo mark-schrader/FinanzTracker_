@@ -11,6 +11,7 @@ jobs:
     env:
       SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
       SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
+      DATABASE_URL: ${{ secrets.DATABASE_URL }}
       
     defaults:
       run:
@@ -31,6 +32,8 @@ jobs:
     - name: Install dependencies (with retries)
       run: |
         npm install
+    - name: prisma generate
+      run: npx prisma generate
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps
     - name: Run Playwright tests
