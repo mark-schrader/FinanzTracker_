@@ -30,19 +30,7 @@ jobs:
         node-version: lts/*
     - name: Install dependencies (with retries)
       run: |
-        set -euo pipefail
-        for i in 1 2 3; do
-          if npm ci --prefer-offline --no-audit --no-fund; then
-            echo "npm ci succeeded"
-            break
-          fi
-          echo "npm ci failed (attempt $i). Retrying..."
-          sleep $((i * 5))
-          if [ "$i" -eq 3 ]; then
-            echo "npm ci failed after 3 attempts, exiting." >&2
-            exit 1
-          fi
-        done
+        npm install
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps
     - name: Run Playwright tests
