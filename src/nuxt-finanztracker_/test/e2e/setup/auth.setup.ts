@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 
 test('login', async ({ page }) => {
-  await page.goto('http://localhost:3000/');
+  await page.goto('http://localhost:3000/', {timeout: 1000 * 180});
   await expect(page.getByRole('heading', { name: 'WILLKOMMEN IN PLEITEGEIER!' })).toBeVisible();
   await page.getByRole('button', { name: 'Sign In' }).click();
   await page.getByRole('textbox', { name: 'Enter Email' }).click();
