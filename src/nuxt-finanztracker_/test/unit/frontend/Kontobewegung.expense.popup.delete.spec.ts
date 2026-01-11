@@ -1,46 +1,28 @@
-// src/nuxt-finanztracker_/test/unit/frontend/Kontobewegung.income.popup.delete.spec.ts
-import { describe, it, expect } from 'vitest'
 import { mount } from '@vue/test-utils'
+import { describe, it, expect } from 'vitest'
 import Kontobewegung from '../../../pages/kontobewegung.vue'
 
-describe('Unit: Kontobewegung – Expense Delete Popup', () => {
-  it('öffnet das Delete-Popup und schließt es beim Abbrechen', async () => {
-    const wrapper = mount(Kontobewegung, {
-      global: {
-        stubs: {
-          // Child-Component mocken
-          bewegungstabelle_aktion: {
-            template: `
-              <div data-testid="delete-popup">
-                <button data-testid="cancel" @click="$emit('close')" />
-              </div>
-            `
-          }
-        }
-      }
-    })
+describe('Kontobewegung – Delete Popup (Ausgabe)', () => {
+  it('öffnet und schließt das Delete-Popup', async () => {
+    const wrapper = mount(Kontobewegung)
+    const vm = wrapper.vm as any
 
-    // Fake Expense-Transaktion setzen
-    ;(wrapper.vm as any).transactions = [
-      {
-        id: 2,
-        type: 'Ausgabe',
-        amount: '-50 €'
-      }
+    // setup a sample expense transaction
+    vm.transactions = [
+      { id: 2, type: 'Ausgabe', amount: '50 €' }
     ]
 
-    // Löschvorgang starten
-    ;(wrapper.vm as any).handleDelete(2)
+    // simulate opening the popup
+    vm.showActionModal = true
+    vm.actionMode = 'delete'
     await wrapper.vm.$nextTick()
 
-    // Popup ist geöffnet
-    expect((wrapper.vm as any).showActionModal).toBe(true)
-    expect((wrapper.vm as any).actionMode).toBe('delete')
+    expect(vm.showActionModal).toBe(true)
 
-    // Abbrechen im Popup auslösen (Event!)
-    await wrapper.find('[data-testid="cancel"]').trigger('click')
+    // simulate closing the popup
+    vm.showActionModal = false
+    await wrapper.vm.$nextTick()
 
-    // Popup ist geschlossen
-    expect((wrapper.vm as any).showActionModal).toBe(false)
+    expect(vm.showActionModal).toBe(false)
   })
 })

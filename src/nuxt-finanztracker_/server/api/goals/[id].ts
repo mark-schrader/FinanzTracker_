@@ -46,10 +46,21 @@ export default defineEventHandler(async (event) => {
         return await GoalService.getGoalById(Number(id))  // Ausgabe eines einzelnen Ziels
 
       case 'PUT': { // PUT /api/goals/5
-        const body = await readBody(event)
+        let body = await readBody(event)
+
+        // Fallback: Falls readBody undefined liefert (z.B. fehlender Content-Type), versuche rohen Body zu lesen
+        if (body === undefined) {
+          try {
+            const raw = await readRawBody(event)
+            if (raw) body = JSON.parse(raw.toString())
+          } catch (e) {
+            // leave body as undefined for validation to catch
+          }
+        }
+
         const parsed = UpdateGoalSchema.safeParse(body)
         if (!parsed.success) {
-          throw createError({ statusCode: 400, message: `Invalid body: ${JSON.stringify(parsed.error.errors)}` })
+          throw createError({ statusCode: 400, message: `Invalid body: ${JSON.stringify(parsed.error.errors)} (received: ${JSON.stringify(body)})` })
         }
 
         const payload: any = {

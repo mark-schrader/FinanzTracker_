@@ -37,11 +37,11 @@
       <div class="flex-1 max-w-[50%] flex flex-col justify-center items-center gap-6">
         <button @click="openLogin"
           class="btn btn-primary w-[150px] rounded-full text-base shadow-md hover:scale-110 transition duration-300">
-          Sign In
+          Anmelden
         </button>
         <button @click="openRegister"
           class="btn btn-secondary w-[150px] rounded-full text-base shadow-md hover:scale-110 transition duration-300">
-          Sign Up
+          Registrieren
         </button>
       </div>
     </div>
@@ -55,14 +55,14 @@
           <i class="fas fa-times"></i>
         </button>
         <form class="flex flex-col gap-4" @submit.prevent="login">
-          <h3>Login →</h3>
+          <h3>Anmelden →</h3>
           <label for="email">Email</label>
-          <input type="email" name="email" v-model="email" placeholder="Enter Email" required class="form-input" />
+          <input type="email" name="email" v-model="email" placeholder="Email eingeben" required class="form-input" />
 
-          <label for="psw">Password</label>
-          <input type="password" name="psw" v-model="password" placeholder="Enter Password" required class="form-input" />
+          <label for="psw">Passwort</label>
+          <input type="password" name="psw" v-model="password" placeholder="Passwort eingeben" required class="form-input" />
 
-          <button type="submit" class="btn btn-primary self-end w-1/2 mt-4 shadow-sm">Login</button>
+          <button type="submit" class="btn btn-primary self-end w-1/2 mt-4 shadow-sm">Anmelden</button>
         </form>
       </div>
     </div>
@@ -76,7 +76,7 @@
           <i class="fas fa-times"></i>
         </button>
         <form class="flex flex-col gap-4" @submit.prevent="register">
-          <h3>Register →</h3>
+          <h3>Registrieren →</h3>
 
           <label for="fname">Vorname</label>
           <input type="text" name="fname" id="fname" v-model="form.firstname" class="form-input" />
@@ -97,15 +97,15 @@
           <input type="date" name="bday" id="bday" v-model="form.birthdate" class="form-input" />
 
           <label for="email">Email</label>
-          <input type="email" name="email" placeholder="Enter Email" v-model="form.email" required class="form-input" />
+          <input type="email" name="email" placeholder="Email eingeben" v-model="form.email" required class="form-input" />
 
-          <label for="psw">Password</label>
-          <input type="password" name="psw" placeholder="Enter Password" v-model="form.password" required
+          <label for="psw">Passwort</label>
+          <input type="password" name="psw" placeholder="Passwort eingeben" v-model="form.password" required
             pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
             title="Muss mindestens eine Zahl und einen Groß- und Kleinbuchstaben sowie mindestens 8 oder mehr Zeichen enthalten"
             class="form-input" />
 
-          <button type="submit" class="btn btn-primary self-end w-1/2 mt-4 shadow-sm">Register</button>
+          <button type="submit" class="btn btn-primary self-end w-1/2 mt-4 shadow-sm">Registrieren</button>
         </form>
       </div>
     </div>
