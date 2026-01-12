@@ -1,6 +1,8 @@
+// test/unit/frontend/Test_Kategorie/categoryManager.Category.popup.open.spec.ts
+// Frontend Unit Test – Kategorie Popup öffnen
 import { mount } from '@vue/test-utils'
 import { describe, it, expect } from 'vitest'
-import CategoryManager from '../../../components/categoryManager.vue'
+import CategoryManager from '../../../../components/categoryManager.vue'
 
 describe('Kategorie Popup', () => {
   it('öffnet das Kategorie-Popup zum Anlegen neuer Kategorien', async () => {
