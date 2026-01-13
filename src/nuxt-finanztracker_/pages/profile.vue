@@ -39,10 +39,11 @@
           <dd class="md:col-span-2">
             <input
               v-if="isEditing"
+              v-model="profile.lastname"
               type="text"
               class="ml-30 text-lg text-gray-900 focus:outline-none font-bold"
-              placeholder="König"
             />
+            <p v-else class="text-lg text-gray-900">{{ profile.lastname }}</p>
           </dd>
         </div>
 
@@ -53,97 +54,62 @@
           <dd class="md:col-span-2">
             <input
               v-if="isEditing"
+              v-model="profile.firstname"
               type="text"
               class="ml-30 text-lg text-gray-900 focus:outline-none font-bold"
-              placeholder="Anna"
             />
-            <p v-else class=""></p>
+            <p v-else class="text-lg text-gray-900">{{ profile.firstname }}</p>
           </dd>
         </div>
 
         <div class="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
           <dt class="text-lg font-bold text-gray-700 dark:text-gray-900">
-            Gebursdatum
+            Geburtsdatum
           </dt>
-          <!--Hier nut mit datum!!!!-->
           <dd class="md:col-span-2">
             <input
               v-if="isEditing"
+              v-model="profile.birthdate"
               type="date"
               class="ml-30 text-lg text-gray-900 focus:outline-none font-bold"
               min="1900-01-01"
               max="2090-01-01"
             />
+            <p v-else class="text-lg text-gray-900">{{ profile.birthdate }}</p>
           </dd>
         </div>
 
         <div class="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
           <dt class="text-lg font-bold text-gray-700 dark:text-gray-900">
-            Geburtsland
+            Email-Adresse
           </dt>
           <dd class="md:col-span-2">
-            <select
+            <input
               v-if="isEditing"
+              v-model="profile.email"
+              type="text"
               class="ml-30 text-lg text-gray-900 focus:outline-none font-bold"
-            >
-              <option>Deutschland</option>
-              <option>Frankreich</option>
-              <option>China</option>
-              <option>Schweiz</option>
-            </select>
+            />
+            <p v-else class="text-lg text-gray-900">{{ profile.email }}</p>
           </dd>
         </div>
 
         <div class="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
           <dt class="text-lg font-bold text-gray-700 dark:text-gray-900">
-            Staatsangehörigkeit
+            Universität
           </dt>
           <dd class="md:col-span-2">
-            <select
+            <input
               v-if="isEditing"
+              v-model="profile.university"
+              type="text"
               class="ml-30 text-lg text-gray-900 focus:outline-none font-bold"
-            >
-              <option>Deutschland</option>
-              <option>Frankreich</option>
-              <option>China</option>
-              <option>Schweiz</option>
-            </select>
+            />
+            <p v-else class="text-lg text-gray-900">{{ profile.university }}</p>
           </dd>
-        </div>
-
-        <div class="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-          <dt class="text-lg font-bold text-gray-700 dark:text-gray-900">
-            Meldeadresse
-          </dt>
-          <div class="md:col-span-2 space-y-4">
-            <dd class="ml-30 text-lg text-gray-900">
-              <input
-                v-if="isEditing"
-                type="text"
-                placeholder="Straße 123"
-                class="text-m text-gray-900 focus:outline-none font-bold"
-              />
-            </dd>
-            <dd class="ml-30 text-lg text-gray-900">
-              <input
-                v-if="isEditing"
-                type="text"
-                maxlength="5"
-                placeholder="Postleitzahl"
-                class="text-lg text-gray-900 focus:outline-none font-bold"
-              />
-            </dd>
-            <dd class="ml-30 text-lg text-gray-900">
-              <input
-                v-if="isEditing"
-                type="text"
-                placeholder="Stadt"
-                class="text-lg text-gray-900 focus:outline-none font-bold"
-              />
-            </dd>
-          </div>
         </div>
       </div>
+
       <!-- Save Button -->
       <div v-if="isEditing" class="flex justify-end mt-10 text-center m-4">
         <button
@@ -158,17 +124,46 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 const isEditing = ref(false);
 
-//Formulardaten mit datenbank verbinden und speichern
+const profile = ref({
+  firstname: "",
+  lastname: "",
+  university: "",
+  birthdate: "",
+  email: "",
+});
 
-const saveProfile = () => {
+const supabaseid = "USER_SUPABASE_ID";
+
+//Daten aus der datenbank holen und hier zeigen
+onMounted(async () => {
+  const data = await $fetch("/api/user/me", {
+    method: "GET",
+    query: { supabaseid },
+  });
+  profile.value = data;
+});
+
+// Formulardaten mit datenbank verbinden und speichern + Button aktivieren
+const saveProfile = async () => {
   if (confirm("Änderungen wirklich speichern?")) {
-    alert("Änderungen sind erfolgreich gespeichert");
-    isEditing.value = false;
+    try {
+      await $fetch("/api/user", {
+        method: "PUT",
+        body: {
+          supabaseid,
+          ...profile.value,
+        },
+      });
+      alert("Änderungen sind erfolgreich gespeichert");
+      isEditing.value = false;
+    } catch (err) {
+      console.error("Fehler beim Speichern", err);
+      alert("Fehler beim Speichern. Bitte versuchen Sie es erneut.");
+    }
   }
 };
-//Daten aus der datenbank holen und hier zeigen
-// ......
+///Das Problem mit Aufladen aufheben!!!
 </script>
