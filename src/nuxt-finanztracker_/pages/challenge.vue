@@ -287,7 +287,6 @@
 
 <script setup>
 import { ref, onMounted, computed } from "vue";
-import { useFetch } from "#app";
 import { Calendar } from "v-calendar";
 import { channel } from "process";
 import "v-calendar/dist/style.css";
