@@ -4,10 +4,7 @@ Til Guhlmann <til.guhlmann@stud.htw-dresden.de>; Enna Scheer <enna.scheer@stud.h
 include::../_includes/default-attributes.inc.adoc[]
 // Platzhalter für weitere Dokumenten-Attribute
 
-
-== Allgemeine Informationen
-
-=== Zweck und Ziel
+== Zweck und Ziel
 Dieses Dokument beschreibt die Test Cases für das Projekt {project-name}. Es dient als Leitfaden für die Durchführung der verschiedenen Testarten, mit dem Ziel, die Qualität und Funktionalität der Software sicherzustellen.
 
 == Testkonzept und Architektur
@@ -39,49 +36,57 @@ Testarten Übersicht:
 
 | E2E Test
 | Playwright
+
+| DB Tests
+| pgtab 
 |===
 
+== Testdokumenttation und Berichterstattung
 
-== Testarten
+Es erfolgt eine manuelle Dokumentation der Tests in den jeweiligen Task-Tickets in GitHub. Dort werden die durchgeführten Tests, deren Ergebnisse und eventuelle Abweichungen festgehalten. Es werden zuerst Test für kritische Funktionen durchgeführt, um sicherzustellen, dass die wichtigsten Anwendungsbereiche fehlerfrei funktionieren. Anschließend werden weitere Tests für weniger kritische Funktionen durchgeführt, um eine umfassende Testabdeckung zu gewährleisten. Es wird sich an die vorgaben der Akzeptanzkriterien gehalten um die Anforderungen der User Stories zu erfüllen. Wenn der Test erfolgreich war kann das Akzeptanzkriterium als erfüllt markiert werden.
 
-== Frontend Unit Tests
-//== Test Cases für Unit Tests
-Tablelle der Fontend Unit Test Cases:
+== Getestete Module und Komponenten
+
+=== Frontend Unit Tests
 
 Pfad: src/nuxt-finanztracker_/test/unit/Frontend
 
-[cols="4,4,4", options="header"]
+Geprüft wurden:
 
-|===
-| Test Name | Beschreibung | User Story / Anforderung
-| Kontobewegung.incomes.category.select.spec.ts | Testet die Kategoriewahl für Einnahmen in Kontobewegungen. | Epic 2: Als Benutzer möchte ich Einnahmen kategorisieren können, um meine Finanzen besser zu verwalten.
-| Kontobewegung.expenses.category.select.spec.ts | Testet die Kategoriewahl für Ausgaben in Kontobewegungen. | Epic 2: Als Benutzer möchte ich Ausgaben kategorisieren können, um meine Finanzen besser zu verwalten.
-| Kontobewegung.incomes.popup.cancel.spec.ts | Testet das Abbrechen des Popups für Einnahmen in Kontobewegungen. | Epic 2: Als Benutzer möchte ich ein Popup für Einnahmen abbrechen können, ohne Änderungen vorzunehmen.
-| Kontobewegung.exensene.popup.cancel.spec.ts | Testet das Abbrechen des Popups für Ausgaben in Kontobewegungen. | Epic 2: Als Benutzer möchte ich ein Popup für Ausgaben abbrechen können, ohne Änderungen vorzunehmen.
+- Kontobewegung Ausgabe 
+- Kontobewegung Einnahme
+- Kontobewegung Category Erstellung
 
-|===
-== Integration Tests
-//== Test Cases für Integration Tests
+=== Backend Unit Tests
 
-Tablelle der Integration Test Cases:
+Pfad: src/nuxt-finanztracker_/test/unit/Backend
+
+Geprüft wurden:
+
+- Lieferung von Kategorien
+
+=== Integration Tests
 
 Pfad: src/nuxt-finanztracker_/test/unit/Integration/Backend
 
-[cols="4,4,4", options="header"]
-|===
-| Test Name | Beschreibung | User Story / Anforderung   
-|===
+Geprüft wurden:
 
-== System Tests
-//== Test Cases für System Tests
-Tablelle der System Test Cases:
+- Kategorie Erstellung
+- Kategorie nach Erstellung abrufen
+- Karegorie performance Test
+- Kategorie Farbe integrierbar
+- Einnahme Erstellung
+- Ausgabe Erstellung
+
+
+=== System Tests
+
 Pfad: src/nuxt-finanztracker_/test/e2e
-[cols="4,4,4", options="header"]
-|===
-| Test Name | Beschreibung | User Story / Anforderung
-|===   
-== Abnahmetests
-//== Test Cases für Abnahmetests
+
+Geprüft wurden:
+
+
+=== Abnahmetests
 Abnahmetests werden nicht explizit in diesem Dokument behandelt, da der Fokus auf automatisierten Tests liegt. 
 
 Eine Abnahme erfolgt durch den Produkt-Owner nach erfolgreichem Bestehen der automatisierten Tests und der Erfüllung der Akzeptanzkriterien für die jeweiligen User Stories.
@@ -90,10 +95,10 @@ Eine Abnahme erfolgt durch den Produkt-Owner nach erfolgreichem Bestehen der aut
 Die Testarten sind in die CI/CD-Pipeline von GitHub Actions integriert. Bei Pull-Request in den Main Branch werden die Tests automatisch ausgeführt, um sicherzustellen, dass neue Änderungen keine bestehenden Funktionen beeinträchtigen.
 
 Tabelle der GitHub Actions Workflows:
-[cols="4,4", options="header"]
+[cols="3,4", options="header"]
 |===
 | Workflow Name | Beschreibung
-| Tests | Führt alle definierten Tests (Unit, Integration) aus und baut die Anwendung. |
-| E2E Tests | Führt die End-to-End Tests aus, um wichtige Workflows in der Anwendung zu überprüfen. 
+| Tests | Führt alle definierten Tests (Unit, Integration) aus, um die Codequalität einzelner Module sicherzustellen.
+| E2E/Playwright | Führt die End-to-End u. System Tests aus, um wichtige Workflows in der Anwendung zu überprüfen. 
 | Supabase Deployment | Automatisiert die Bereitstellung der Anwendung auf Supabase nach erfolgreichem Bestehen aller Tests.
 |===
