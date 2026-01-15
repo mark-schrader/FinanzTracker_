@@ -1,24 +1,24 @@
 // test/setup.frontend.ts
 
-import { config } from '@vue/test-utils'
-import { vi, beforeAll, afterEach } from 'vitest'
-import { Window } from 'happy-dom'
+import { config } from "@vue/test-utils";
+import { vi, beforeAll, afterEach } from "vitest";
+import { Window } from "happy-dom";
 
-// DOM SETUP (because Vitest runs in node environment)                
+// DOM SETUP (because Vitest runs in node environment)
 beforeAll(() => {
-  const window = new Window()
+  const window = new Window();
 
-  global.window = window as any
-  global.document = window.document as any
-  global.navigator = window.navigator as any
-})
+  global.window = window as any;
+  global.document = window.document as any;
+  global.navigator = window.navigator as any;
+});
 
-// Reset mocks between tests                                          
+// Reset mocks between tests
 afterEach(() => {
-  vi.clearAllMocks()
-})
+  vi.clearAllMocks();
+});
 
-// Global Component Stubs (Nuxt / UI)                                  
+// Global Component Stubs (Nuxt / UI)
 config.global.stubs = {
   InlineAlert: true,
   CurrentTime: true,
@@ -28,35 +28,37 @@ config.global.stubs = {
   NuxtLink: true,
   NuxtPage: true,
   ClientOnly: true,
-}
+};
 
-// useAlert Mock                                                       
-vi.stubGlobal('useAlert', () => ({
+// useAlert Mock
+vi.stubGlobal("useAlert", () => ({
   showAlertBox: false,
-  alertMessage: '',
-  alertType: '',
+  alertMessage: "",
+  alertType: "",
   showAlert: vi.fn(),
-}))
+}));
 
-// $fetch Mock (Nuxt)                                                  
+/*$fetch Mock (Nuxt)                                                  
 export const fetchMock = vi.fn(async () => ({
   ok: true,
   json: async () => ({}),
-}))
+}))*/
 
-vi.stubGlobal('$fetch', fetchMock)
+// $fetch Mock (Nuxt)
+export const fetchMock = vi.fn();
+vi.stubGlobal("$fetch", fetchMock);
 
-// definePageMeta (Nuxt)                                             
-vi.stubGlobal('definePageMeta', () => {})
+// definePageMeta (Nuxt)
+vi.stubGlobal("definePageMeta", () => {});
 
-// Nuxt App Composables                                                 
-vi.mock('#app', () => ({
+// Nuxt App Composables
+vi.mock("#app", () => ({
   useFetch: vi.fn(() => ({
     data: {
       value: [
-        { id: 1, name: 'Lebensmittel', type: 'expense' },
-        { id: 2, name: 'Miete', type: 'expense' },
-        { id: 3, name: 'Gehalt', type: 'income' },
+        { id: 1, name: "Lebensmittel", type: "expense" },
+        { id: 2, name: "Miete", type: "expense" },
+        { id: 3, name: "Gehalt", type: "income" },
       ],
     },
     pending: { value: false },
@@ -70,12 +72,12 @@ vi.mock('#app', () => ({
   })),
 
   navigateTo: vi.fn(),
-}))
+}));
 
-// Supabase User Mock                                                   
-vi.stubGlobal('useSupabaseUser', () => ({
+// Supabase User Mock
+vi.stubGlobal("useSupabaseUser", () => ({
   value: {
-    id: 'test-user',
-    email: 'test@test.de',
+    id: "test-user",
+    email: "test@test.de",
   },
-}))
+}));
