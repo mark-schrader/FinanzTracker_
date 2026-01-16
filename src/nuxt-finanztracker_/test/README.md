@@ -76,6 +76,7 @@ Die Testdatenbank läuft über Docker:
 
 ```bash
 docker compose up -d
+docker compose -f docker-compose.yml up -d
 ```
 
 Die Verbindung erfolgt über:
