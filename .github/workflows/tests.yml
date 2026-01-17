@@ -50,7 +50,7 @@ jobs:
         run: npx prisma generate --schema=prisma/schema.test.prisma
 
       - name: Apply Prisma migrations (test DB)
-        run: npx prisma migrate deploy --schema=prisma/schema.test.prisma
+        run: npx prisma db push --schema=prisma/schema.test.prisma
 
       - name: Run tests
         run: npm run test
