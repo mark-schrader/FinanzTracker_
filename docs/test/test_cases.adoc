@@ -5,7 +5,7 @@ include::../_includes/default-attributes.inc.adoc[]
 // Platzhalter für weitere Dokumenten-Attribute
 
 == Zweck und Ziel
-Dieses Dokument beschreibt die Test Cases für das Projekt {project-name}. Es dient als Leitfaden für die Durchführung der verschiedenen Testarten, mit dem Ziel, die Qualität und Funktionalität der Software sicherzustellen.
+Dieses Dokument beschreibt die getesteten Module und Komponenten der Anwendung {project-name}. Es dient als Referenz für das Testteam und andere Stakeholder, um einen Überblick über die durchgeführten Tests und deren Ergebnisse zu erhalten. Ziel ist es, die Qualität und Zuverlässigkeit der Software sicherzustellen, indem alle kritischen Funktionen und Komponenten gründlich getestet werden.
 
 == Testkonzept und Architektur
 Das Testkonzept umfasst drei Haupttestarten: Unit Tests, Integrationstests und End-to-End (E2E) Tests. Jede Testart hat eine spezifische Architektur und einen definierten Zweck innerhalb des Testprozesses.
@@ -41,9 +41,9 @@ Testarten Übersicht:
 | pgtab 
 |===
 
-== Testdokumenttation und Berichterstattung
+== Testdokumentation und Berichterstattung
 
-Es erfolgt eine manuelle Dokumentation der Tests in den jeweiligen Task-Tickets in GitHub. Dort werden die durchgeführten Tests, deren Ergebnisse und eventuelle Abweichungen festgehalten. Es werden zuerst Test für kritische Funktionen durchgeführt, um sicherzustellen, dass die wichtigsten Anwendungsbereiche fehlerfrei funktionieren. Anschließend werden weitere Tests für weniger kritische Funktionen durchgeführt, um eine umfassende Testabdeckung zu gewährleisten. Es wird sich an die vorgaben der Akzeptanzkriterien gehalten um die Anforderungen der User Stories zu erfüllen. Wenn der Test erfolgreich war kann das Akzeptanzkriterium als erfüllt markiert werden.
+Es erfolgt eine manuelle Dokumentation der Tests in den jeweiligen Task-Tickets in GitHub. Dort werden die durchgeführten Tests, deren Ergebnisse und eventuelle Abweichungen festgehalten. Es werden zuerst Test für kritische Funktionen durchgeführt, um sicherzustellen, dass die wichtigsten Anwendungsbereiche fehlerfrei funktionieren. Anschließend werden weitere Tests für weniger kritische Funktionen durchgeführt, um eine umfassende Testabdeckung zu gewährleisten. Es wird sich an die vorgaben der Akzeptanzkriterien gehalten um die Anforderungen der User Stories zu erfüllen. Wenn der Test erfolgreich war kann das Akzeptanzkriterium als erfüllt markiert werden und das Ticket geschlossen werden. Bei einem fehlgeschlagenen Test wird das Ticket mit den entsprechenden Fehlerdetails aktualisiert und als Bug gekennzeichnet, um eine Nachverfolgung und Behebung zu ermöglichen.
 
 == Getestete Module und Komponenten
 
@@ -53,9 +53,43 @@ Pfad: src/nuxt-finanztracker_/test/unit/Frontend
 
 Geprüft wurden:
 
-- Kontobewegung Ausgabe 
-- Kontobewegung Einnahme
-- Kontobewegung Category Erstellung
+Ausgaben:
+
+    - Ausgaben Modul anzeigen
+    - Ausgabenerfassung abbrechen
+
+Darkmode:
+
+    - Wechsel zwischen Hell- und Dunkelmodus (beide Richtungen)
+
+Dauerauftrag:
+
+    - Bestätigungs-Popup zum Löschen eines Dauerauftrags
+    - Bearbeiten-Popup eines Dauerauftrags
+    - Öffnen des Dauerauftrag-Verwaltungsmodals
+
+Einnahmen:
+
+    - Einnahme Popup abbrechen
+    - Einnahme Kategorie anzeigen
+
+Export:
+
+    - Default Export Auswahl
+    - Dateiname Eingabe
+    - Eingrenzung des Datumsbereichs
+
+Kategorien:
+
+    - Kategorie erstellen
+    - Kategorie Popup öffnen
+
+Kontobewegungstabelle:
+
+    - Einnahme Popup anzeigen
+    - Ausgabe Popup anzeigen
+    - Kontobewegung Tabelle Anzeige, suchenn, editieren, löschen
+
 
 === Backend Unit Tests
 
@@ -84,6 +118,10 @@ Geprüft wurden:
 Pfad: src/nuxt-finanztracker_/test/e2e
 
 Geprüft wurden:
+- User Login
+- User Registrierung
+- Einnahme erstellen
+- Ausgabe erstellen
 
 
 === Abnahmetests
