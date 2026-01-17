@@ -86,8 +86,8 @@ Kategorien:
 
 Kontobewegungstabelle:
 
-    - Einnahme Popup anzeigen
-    - Ausgabe Popup anzeigen
+    - Einnahme löschen Popup anzeigen
+    - Ausgabe löschen Popup anzeigen
     - Kontobewegung Tabelle Anzeige, suchenn, editieren, löschen
 
 
