@@ -1,8 +1,9 @@
+// transaction.expense.delete.spec.ts
+// This test verifies that an expense can be deleted from the database.
 /// <reference types="node" />
 
 import { describe, it, expect } from 'vitest'
 import { prisma, TEST_USER_ID } from '../../setup.prisma'
-import TransactionService from '../../../server/application/TransactionService'
 import ExpenseService from '../../../server/application/ExpenseService'
 
 describe('Integration: delete expense', () => {
@@ -21,6 +22,8 @@ describe('Integration: delete expense', () => {
         date: new Date(),
         user_id: TEST_USER_ID,
         category_id: category.id,
+        // If your schema requires interval on expenses, uncomment:
+        // interval: 'once',
       },
     })
 
