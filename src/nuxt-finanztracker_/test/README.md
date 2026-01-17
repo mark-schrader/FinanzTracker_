@@ -5,7 +5,7 @@ Diese Anleitung erklärt **verständlich und Schritt für Schritt**, wie Tests i
 ---
 
 ## Projektstruktur (relevant für Tests)
-## 🧠 Überblick: Testarten & Tools
+## Überblick: Testarten & Tools
 
 | Testart | Zweck | Tools |
 |------|------|------|
@@ -16,7 +16,7 @@ Diese Anleitung erklärt **verständlich und Schritt für Schritt**, wie Tests i
 
 ---
 
-## 📁 Ordnerstruktur (`test/`)
+## Ordnerstruktur (`test/`)
 
 ```
 src/nuxt-finanztracker_
@@ -112,50 +112,43 @@ src/nuxt-finanztracker_
 
 ---
 
-## Test-Datenbank (Postgres)
+## Test ausführen
 
-### Lokal
+### Anleitung lokale Tests
 
-Die Testdatenbank läuft über Docker:
-
+1. Alle Module sauber neu laden!
+```bash
+npm ci
+```
+2. Prisma Client generieren
+```bash
+npx prisma generate
+```
+3. Docker Container bauen
 ```bash
 docker compose up -d
-docker compose -f docker-compose.yml up -d
 ```
-
-Die Verbindung erfolgt über:
-
-```env
-DATABASE_URL=postgresql://postgres:postgres@localhost:5432/finanztracker_test
+4. Test Prisma DB im Container laden
+```bash
+npx dotenv -e .env.test -- prisma db push --schema=prisma/schema.test.prisma
+```
+5. Tests starten
+```bash
+npm run test
+```
+6. (optional) Docker Container löschen
+```bash
+docker compose down -v
 ```
 
 ---
 
 ### GitHub Actions (CI)
 
-- Postgres läuft als **Service-Container**
+- Postgres läuft als **Docker-Container**
 - `DATABASE_URL` wird im Workflow gesetzt
 - Prisma nutzt **schema.test.prisma**
-
----
-
-## Prisma Setup für Tests (wichtig!)
-
-### schema.test.prisma
-
-- identisch zum normalen Schema
-- wird **nur für Tests** verwendet
-- Migrationen werden **explizit angewendet**
-
-
-### Migration für Tests ausführen (lokal)
-
-```bash
-npx dotenv -e .env.test -- prisma migrate dev \
-  --schema=prisma/schema.test.prisma \
-  --name test_init
-```
-
+- Test Schema ist 1 zu 1 wie Prod DB
 ---
 
 ## Gemeinsames Test-Setup (setup.prisma.ts)
