@@ -9,7 +9,7 @@ const CreateGoalSchema = z.object({
   userId: z.preprocess((val) => {
     if (val === undefined || val === null) return undefined
     return Number(val)
-  }, z.number().int().positive()),
+  }, z.number().int().positive().optional()),
   name: z.string().min(1).refine((val) => !val.startsWith(' '), {
       message: "Name darf nicht mit einem Leerzeichen beginnen"
     }),
@@ -45,10 +45,21 @@ export default defineEventHandler(async (event) => {
       }
 
       case 'POST': { // POST /api/goals
-        const body = await readBody(event)
+        let body = await readBody(event)
+
+        // Fallback: Falls readBody undefined liefert (z.B. fehlender Content-Type), versuche rohen Body zu lesen
+        if (body === undefined) {
+          try {
+            const raw = await readRawBody(event)
+            if (raw) body = JSON.parse(raw.toString())
+          } catch (e) {
+            // leave body as undefined for validation to catch
+          }
+        }
+
         const parsed = CreateGoalSchema.safeParse(body)
         if (!parsed.success) {
-          throw createError({ statusCode: 400, message: `Invalid body: ${JSON.stringify(parsed.error.errors)}` })
+          throw createError({ statusCode: 400, message: `Invalid body: ${JSON.stringify(parsed.error.errors)} (received: ${JSON.stringify(body)})` })
         }
 
         const payload: any = {

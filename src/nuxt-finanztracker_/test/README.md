@@ -5,6 +5,18 @@ Diese Anleitung erklärt **verständlich und Schritt für Schritt**, wie Tests i
 ---
 
 ## Projektstruktur (relevant für Tests)
+## 🧠 Überblick: Testarten & Tools
+
+| Testart | Zweck | Tools |
+|------|------|------|
+| Frontend Unit Tests | Vue-Komponenten & UI-Logik | vitest, @vue/test-utils, happy-dom |
+| Backend Unit Tests | Reine Logik ohne DB | vitest |
+| Backend Integration Tests | Prisma + echte DB | vitest, prisma |
+| E2E Tests | Echte User-Flows im Browser | Playwright |
+
+---
+
+## 📁 Ordnerstruktur (`test/`)
 
 ```
 src/nuxt-finanztracker_
@@ -44,6 +56,38 @@ src/nuxt-finanztracker_
 
 **Kein echter Server / keine Datenbank**
 
+- Alle Tests (Watch Mode)
+    ```
+    npm test
+    ```
+- Frontend Unit Tests
+    ```
+    npm run test:unit:frontend
+    ```
+- Backend Unit Tests
+    ```
+    npm run test:unit:backend
+    ```
+- Backend Integration Tests (Prisma)
+    ```
+    npm run test:integration:backend
+    ```
+    !!! Vorher sicherstellen, dass Migrationen existieren:
+    ```
+    npx prisma migrate deploy --schema prisma/schema.prisma
+    ```
+- E2E-Tests
+    ```
+    npx playwright test
+    ```
+    HTML Test Report
+    ```
+    npx playwright show-report
+    ```
+    Test in UI Mode
+    ```
+    npx playwright test --ui
+    ```
 ---
 
 ### Backend Unit Tests
