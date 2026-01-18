@@ -14,6 +14,8 @@ RUN npm i
 
 COPY . ./
 
+RUN npx prisma generate
+
 # Build the project
 RUN npm run build
 
