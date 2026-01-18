@@ -13,13 +13,12 @@ jobs:
     name: Run Supabase pgTAB Tests
     runs-on: ubuntu-latest
 
-    # 1. 'env' und 'steps' müssen auf der gleichen Ebene stehen
     env:
       DATABASE_URL: "postgresql://postgres:postgres@127.0.0.1:54322/postgres"
       DIRECT_URL: "postgresql://postgres:postgres@127.0.0.1:54322/postgres"
 
     steps:
-      # 2. Jeder Schritt braucht einen Bindestrich '-'
+      
       - name: Code auschecken
         uses: actions/checkout@v4
 
