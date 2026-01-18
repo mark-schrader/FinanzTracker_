@@ -31,7 +31,7 @@ INSERT INTO public.categories (name, type, id, user_id) VALUES
 \set ownerid (SELECT userid FROM public."user" WHERE supabaseid = '11111111-1111-1111-1111-111111111111');
 
 --Authentifizierten User simulieren
-SET "request.jwt.claims.sub" TO '11111111-1111-1111-1111-111111111111';
+SET "request.jwt.claim.sub" TO '11111111-1111-1111-1111-111111111111';
 SET ROLE authenticated;
 
 --Überprüfen, ob der User ein Income erstellen kann

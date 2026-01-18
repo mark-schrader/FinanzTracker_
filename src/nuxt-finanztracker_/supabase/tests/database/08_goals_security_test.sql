@@ -29,14 +29,14 @@ INSERT INTO public."user" (firstname, lastname, university, birthdate, email, su
 \set owner2id (SELECT userid FROM public."user" WHERE supabaseid = '22222222-2222-2222-2222-222222222222');
 
 --Authentifizierten User 1 simulieren
-SET "request.jwt.claims.sub" TO '11111111-1111-1111-1111-111111111111';
+SET "request.jwt.claim.sub" TO '11111111-1111-1111-1111-111111111111';
 SET ROLE authenticated;
 
 --Goals für User 1 anlegen
 INSERT INTO public.goals (user_id, name, target, due_date) VALUES ( (SELECT userid FROM public."user" WHERE supabaseid = '11111111-1111-1111-1111-111111111111'), 'Wein', 555.55, '2023-12-31');
 
 --Authentifizierng zu User 2 wechseln
-SET "request.jwt.claims.sub" TO '22222222-2222-2222-2222-222222222222';
+SET "request.jwt.claim.sub" TO '22222222-2222-2222-2222-222222222222';
 SET ROLE authenticated;
 
 --Überprüfen, ob User 2 das Goal von User 1 sehen kann
