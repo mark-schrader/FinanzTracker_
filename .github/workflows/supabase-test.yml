@@ -28,7 +28,7 @@ jobs:
                 node-version: '18'
                 cache: 'npm'
 
-            name:Abhängigkeiten installieren
+            name: Abhängigkeiten installieren
             run: npm install
 
             name: Supabase CLI installieren
