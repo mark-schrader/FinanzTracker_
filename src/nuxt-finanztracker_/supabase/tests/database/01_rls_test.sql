@@ -1,5 +1,5 @@
 
--- Test: Existieren die Tabellen und ist Row-Level Security aktiviert?
+-- Test: Ist Row-Level Security aktiviert?
 
 --SQL-Befehle für supabase zum aktieren von RLS, falls deaktiviert:
 -- ALTER TABLE public.user ENABLE ROW LEVEL SECURITY;
@@ -9,17 +9,13 @@
 -- ALTER TABLE public.incomes ENABLE ROW LEVEL SECURITY;
 -- ALTER TABLE public.goals ENABLE ROW LEVEL SECURITY;
 
+--Start
 BEGIN;
 
-SELECT plan(12);
+-- Wie viele Tests ausgeführt werden
+SELECT plan(6);
 
-SELECT has_table('public', 'user', 'Tabelle user existiert');
-SELECT has_table('public', 'budgets', 'Tabelle budgets existiert');
-SELECT has_table('public', 'incomes', 'Tabelle incomes existiert');
-SELECT has_table('public', 'expenses', 'Tabelle expenses existiert');
-SELECT has_table('public', 'goals', 'Tabelle goals existiert');
-SELECT has_table('public', 'categories', 'Tabelle categories existiert');
-
+-- Überprüfen, ob Row-Level Security für die Tabellen aktiviert ist
 SELECT results_eq(
     $$ SELECT rowsecurity FROM pg_tables WHERE tablename = 'user' AND schemaname = 'public' $$,
     $$ SELECT true $$,
@@ -56,6 +52,9 @@ SELECT results_eq(
     'Row-Level Security ist für die Tabelle categories aktiviert'
 );
 
+-- Auswertung der Tests
 SELECT * FROM finish();
+
+-- Änderungen rückgängig machen
 ROLLBACK;
 
