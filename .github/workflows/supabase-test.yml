@@ -1,0 +1,52 @@
+
+name: Database Tests
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main    
+
+jobs:
+  test:
+    name: Run Supabase pgTAB Tests
+    runs-on: ubuntu-latest
+
+    env:
+        DATABASE_URL: "postgresql://postgres:postgres@127.0.0.1:54322/postgres"
+        DIRECT_URL: "postgresql://postgres:postgres@127.0.0.1:54322/postgres"
+
+        steps:
+            name: Code auschecken
+            uses: actions/checkout@v4
+
+            name: Node.js einrichten
+            uses: actions/setup-node@v4
+            with:
+                node-version: '18'
+                cache: 'npm'
+
+            name:Abhängigkeiten installieren
+            run: npm install
+
+            name: Supabase CLI installieren
+            uses: supabase/actions/cli@v1
+            with:
+                version: 'latest'
+
+            name: Supabase starten
+            run: supabase start -x vector, storage, realtime, edge-runtime, studio
+
+            name: DB-Schema mit Prisma synchronisieren
+            run: npx prisma db push --accept-data-loss
+
+            name: Policies anwenden
+            run: npx supabse db reset --no-seed
+
+            name: pgTAP-Tests ausführen
+            run: npx supabase db test 
+
+
+
