@@ -32,7 +32,7 @@ jobs:
           cache-dependency-path: ./src/nuxt-finanztracker_/package-lock.json
 
       - name: Abhängigkeiten installieren
-        run: npm ci
+        run: npm install
 
       - name: Supabase CLI installieren
         uses: supabase/setup-cli@v1
