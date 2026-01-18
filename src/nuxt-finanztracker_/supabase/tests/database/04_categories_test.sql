@@ -21,12 +21,12 @@ INSERT INTO public."user" (firstname, lastname, university, birthdate, email, su
 \set ownerid (SELECT userid FROM public."user" WHERE supabaseid = '11111111-1111-1111-1111-111111111111');
 
 --Authentifizierten User simulieren
-SET "request.jwt.claims.sub" TO '11111111-1111-1111-1111-111111111111';
+SET "request.jwt.claim.sub" TO '11111111-1111-1111-1111-111111111111';
 SET ROLE authenticated;
 
 --Überprüfen, ob der User eine Kategorie erstellen kann
   SELECT lives_ok(
-  $$ INSERT INTO public.categories (user_id, name, type, color) VALUES ( (SELECT userid FROM public."user" WHERE supabaseid = '11111111-1111-1111-1111-11111111111'), 'Bier', 'expense', '#0044ff') $$,
+  $$ INSERT INTO public.categories (user_id, name, type, color) VALUES ( (SELECT userid FROM public."user" WHERE supabaseid = '11111111-1111-1111-1111-111111111111'), 'Bier', 'expense', '#0044ff') $$,
   'Besitzer kann eigene Kategorie erstellen'
 );
 
