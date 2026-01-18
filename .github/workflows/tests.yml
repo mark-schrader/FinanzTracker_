@@ -46,11 +46,11 @@ jobs:
       - name: Set test database URL
         run: echo "DATABASE_URL=postgresql://postgres:postgres@localhost:5432/finanztracker_test" >> $GITHUB_ENV
 
-      - name: Generate Prisma Client (test DB)
+      - name: Generate Prisma Client (test schema DB)
         run: npx prisma generate --schema=prisma/schema.test.prisma
 
-      - name: Apply Prisma migrations (test DB)
-        run: npx prisma db push --schema=prisma/schema.test.prisma
+      - name: Apply Prisma migrations (test schema DB)
+        run: npx prisma db push --schema=prisma/schema.test.prisma --force-reset
 
       - name: Run tests
         run: npm run test
