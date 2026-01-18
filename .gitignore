@@ -8,3 +8,6 @@
 
 !src/nuxt-test-erik/nuxt1/
 !src/nuxt-test-justus/nuxt/
+# Ignore Playwright stored auth sessions
+src/nuxt-finanztracker_/auth.json
+**/auth.json

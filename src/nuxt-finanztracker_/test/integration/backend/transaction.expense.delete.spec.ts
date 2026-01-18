@@ -1,66 +1,35 @@
-// test/integration/backend/transaction.expense.delete.spec.ts
-import { describe, it, expect, afterEach, afterAll } from 'vitest'
-import { PrismaClient } from '@prisma/client'
+/// <reference types="node" />
 
-const prisma = new PrismaClient()
+import { describe, it, expect } from 'vitest'
+import { prisma, TEST_USER_ID } from '../../setup.prisma'
+import TransactionService from '../../../server/application/TransactionService'
+import ExpenseService from '../../../server/application/ExpenseService'
 
-let categoryId: number | null = null
-let expenseId: number | null = null
-
-describe('Integration: Expense löschen', () => {
-
-  afterEach(async () => {
-    // Reihenfolge wegen FK!
-    if (expenseId) {
-      await prisma.expenses.delete({ where: { id: expenseId } }).catch(() => {})
-      expenseId = null
-    }
-
-    if (categoryId) {
-      await prisma.categories.delete({ where: { id: categoryId } }).catch(() => {})
-      categoryId = null
-    }
-  })
-
-  afterAll(async () => {
-    await prisma.$disconnect()
-  })
-
-  it('löscht eine Ausgabe aus der expenses Tabelle', async () => {
-
-    // Kategorie (expense) anlegen
+describe('Integration: delete expense', () => {
+  it('deletes expense from DB', async () => {
     const category = await prisma.categories.create({
       data: {
-        name: 'TEST_EXPENSE_CATEGORY',
+        name: 'Food',
         type: 'expense',
-        user_id: 1
-      }
+        user_id: TEST_USER_ID,
+      },
     })
-    categoryId = category.id
 
-    // Expense anlegen
     const expense = await prisma.expenses.create({
       data: {
         amount: 50,
-        category_id: category.id,
-        user_id: 1,
         date: new Date(),
-        note: 'TEST_EXPENSE_NOTE'
-      }
-    })
-    expenseId = expense.id
-
-    // Expense löschen
-    await prisma.expenses.delete({
-      where: { id: expense.id }
+        user_id: TEST_USER_ID,
+        category_id: category.id,
+      },
     })
 
-    // Prüfen ob Datensatz weg ist
+    await ExpenseService.deleteExpense(expense.id)
+
     const found = await prisma.expenses.findUnique({
-      where: { id: expense.id }
+      where: { id: expense.id },
     })
 
     expect(found).toBeNull()
   })
 })
-
