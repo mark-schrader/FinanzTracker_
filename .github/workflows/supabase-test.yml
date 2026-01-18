@@ -49,4 +49,4 @@ jobs:
         run: supabase db reset --no-seed
 
       - name: pgTAP-Tests ausführen
-        run: supabase db tes
+        run: supabase db test
