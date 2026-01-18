@@ -27,8 +27,9 @@ jobs:
       - name: Node.js einrichten
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: '22'
           cache: 'npm'
+          cache-dependency-path: ./src/nuxt-finanztracker_/package-lock.json
 
       - name: Abhängigkeiten installieren
         run: npm ci
