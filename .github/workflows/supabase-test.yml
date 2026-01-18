@@ -3,7 +3,7 @@ name: Database Tests
 on:
   push:
     branches:
-      - main
+      - ['**']
   pull_request:
     branches:
       - main    
@@ -12,11 +12,7 @@ jobs:
   test:
     name: Run Supabase pgTAB Tests
     runs-on: ubuntu-latest
-
-    env:
-      DATABASE_URL: "postgresql://postgres:postgres@127.0.0.1:54322/postgres"
-      DIRECT_URL: "postgresql://postgres:postgres@127.0.0.1:54322/postgres"
-
+      
     steps:
       
       - name: Code auschecken
