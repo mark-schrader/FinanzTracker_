@@ -1,3 +1,5 @@
+// src/nuxt-finanztracker_/test/unit/backend/category.service.spec.ts
+// Unit tests for CategoryService
 import { describe, it, expect, vi, beforeEach } from 'vitest'
 import CategoryService from '../../../server/application/CategoryService'
 import { CategoryRepository } from '../../../server/repositories/CategoryRepository'
