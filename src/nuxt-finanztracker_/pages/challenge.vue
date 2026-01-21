@@ -150,7 +150,7 @@
           >
             <option disabled value="text-gray-800">Challenge auswählen</option>
             <option
-              v-for="challenge in challenges"
+              v-for="challenge in activeChallenges"
               :key="challenge.id"
               :value="challenge.id"
             >
@@ -161,9 +161,12 @@
           <label class="block text-sm font-medium dark:text-gray-800"
             >Betrag einfügen
           </label>
+
           <input
             v-model="savedAmount"
             type="number"
+            min="0"
+            max="maxSaveAmount"
             class="border px-2 py-1 rounded w-full"
           />
 
@@ -187,7 +190,10 @@
 
     <div class="">
       <!-- 3 Challenge Liste-->
-      <div v-if="!challenges.length" class="text-gray-500 text-center mt-14">
+      <div
+        v-if="!challenges.length"
+        class="text-gray-500 text-center mt-14 dark: bg-gray-800"
+      >
         Noch keine Challenges erstellt.
       </div>
 
@@ -203,13 +209,19 @@
               :key="challenge.id"
               class="group w-full flex flex-col items-center justify-center gap-1 mt-5 px-4 py-4 bg-white shadow-md rounded-xl p-4 border-l-4 border-blue-400 dark:text-gray-800"
             >
+              <button @click="deleteChallenge(challenge.id)">
+                <i
+                  class="fa fa-trash hover:scale-105 transition-all duration-200"
+                ></i>
+              </button>
+
               <h2 class="text-xl font-semibold dark:text-gray-800">
                 {{ challenge.name }}
               </h2>
-              <p class="text-sm">
+              <p class="text-sm dark:text-gray-800">
                 Ziel: <strong>{{ challenge.target }} €</strong>
               </p>
-              <p class="text-sm">
+              <p class="text-sm dark:text-gray-800">
                 Gespart: <strong>{{ challenge.saved }} €</strong>
               </p>
               <div
@@ -220,11 +232,11 @@
                   :style="{ width: challengeProgress(challenge) + '%' }"
                 ></div>
               </div>
-              <p class="text-xs text-right text-gray-500">
+              <p class="text-xs text-right text-gray-500 dark:text-gray-800">
                 {{ challengeProgress(challenge) }} % erreicht
               </p>
-              <p class="text-xs text-gray-500">
-                Zeitraum: bis {{ challenge.dueDate }}
+              <p class="text-xs text-gray-500 dark:text-gray-800">
+                Zeitraum: bis {{ formatDate(challenge.dueDate) }}
               </p>
             </div>
           </div>
@@ -250,7 +262,7 @@
               <h2 class="text-xl font-semibold dark:text-gray-800">
                 {{ challenge.name }}
               </h2>
-              <p class="text-green-700 font-semibold">
+              <p class="text-green-700 font-semibold dark:text-gray-800">
                 Erfolgreich gespart: <strong>{{ challenge.target }} €</strong>
               </p>
               <!--Progress bar nicht mehr sichtbar-->
@@ -262,7 +274,7 @@
                   :style="{ width: challengeProgress(challenge) + '%' }"
                 ></div>
               </div>
-              <p class="text-xs text-right text-gray-500">
+              <p class="text-xs text-right text-gray-500 dark:text-gray-800">
                 {{ challengeProgress(challenge) }} % erreicht
               </p>
             </div>
@@ -275,10 +287,9 @@
 
 <script setup>
 import { ref, onMounted, computed } from "vue";
-import { useFetch } from "#app";
 import { Calendar } from "v-calendar";
 import { channel } from "process";
-import 'v-calendar/dist/style.css'
+import "v-calendar/dist/style.css";
 
 const showChallengeModal = ref(false);
 const showSaveModal = ref(false);
@@ -287,6 +298,7 @@ const selectedChallengeId = ref(""); //später ausgewählte Challenge ID
 const savedAmount = ref(0);
 const isShowing = ref(false);
 
+//Add challenges into db
 const challengeForm = ref({
   name: "",
   target: 0,
@@ -302,12 +314,20 @@ onMounted(async () => {
   }
 });
 
+//Format date
+const formatDate = (date) => {
+  return new Date(date).toLocaleDateString("de-DE", {
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  });
+};
+
 async function addChallenge() {
   try {
     const saved = await $fetch("/api/goals", {
       method: "POST",
       body: {
-        userId: 1,
         name: challengeForm.value.name,
         target: Number(challengeForm.value.target),
         saved: 0,
@@ -331,22 +351,28 @@ async function addChallenge() {
   }
 }
 
+//Update challenges in db
 async function saveChallenge() {
   if (!selectedChallengeId.value || savedAmount.value <= 0) {
     alert("Bitte Challenge und Betrag auswählen!");
     return;
   }
 
-  const challenge = challenges.value.find(
+  //Selected challenge for max number in Update Challenge
+  const selectedChallenge = computed(() => {
+    return challenges.value.find((c) => c.id === selectedChallengeId.value);
+  });
+  const challenge = selectedChallenge.value;
+
+  /*const challenge = challenges.value.find(
     (c) => c.id === selectedChallengeId.value
-  );
+  );*/
 
   if (!challenge) {
     alert("Challenge nicht gefunden!");
     return;
   }
-
-  const newSaved = challenge.saved + savedAmount.value; //kumulieren
+  const newSaved = challenge.saved + savedAmount.value;
 
   try {
     await $fetch(`/api/goals/${challenge.id}`, {
@@ -365,6 +391,40 @@ async function saveChallenge() {
     console.error("Fehler beim Speichern in die Datenbank", err);
   }
 }
+
+//Delete Challenge
+async function deleteChallenge(id) {
+  try {
+    await $fetch(`/api/goals/${id}`, {
+      method: "DELETE",
+    });
+    alert("Challenge wurde erfolreich gelöscht");
+    selectedChallengeId.value = "";
+  } catch (err) {
+    console.log("Challenge konnte nicht gelöscht werden", err);
+  }
+}
+
+//Max save amount, damit user nicht mehr eingibt, als bei Challenges eingegeben wurde -> beim input tag :max="maxSaveAmount"
+/*const maxSaveAmount = computed(() => {
+  if (!selectedChallenge.value);
+  return selectedChallenge.value.target - selectedChallenge.value.saved;
+});*/
+
+//Challenge cards
+const completedChallenges = computed(() => {
+  return challenges.value.filter((c) => challengeProgress(c) === 100).length;
+});
+
+const activeChallenges = computed(() => {
+  return challenges.value.filter((c) => challengeProgress(c) < 100);
+});
+
+const completedChallengesListe = computed(() => {
+  return challenges.value.filter((c) => challengeProgress(c) >= 100);
+});
+
+//Progress bar
 function challengeProgress(challenge) {
   if (!challenge.target) return 0;
   const p = Math.round((challenge.saved / challenge.target) * 100);
@@ -381,23 +441,12 @@ const successRate = computed(() => {
   return Math.round((done / total) * 100);
 });
 
-const completedChallenges = computed(() => {
-  return challenges.value.filter((c) => challengeProgress(c) === 100).length;
-});
-
-const activeChallenges = computed(() => {
-  return challenges.value.filter((c) => challengeProgress(c) < 100);
-});
-
-const completedChallengesListe = computed(() => {
-  return challenges.value.filter((c) => challengeProgress(c) >= 100);
-});
 // for Calendar styling
 const attr = computed(() => [
   {
     key: "due-dates",
     highlight: {
-      color: "blue",
+      color: "lightblue",
     },
     dates: challenges.value.map((c) => ({
       start: new Date(c.dueDate),
@@ -405,8 +454,7 @@ const attr = computed(() => [
   },
 ]);
 
-  definePageMeta({
-  middleware: 'auth' // Auth-Middleware für diese Seite
-})
-
+definePageMeta({
+  middleware: "auth", // Auth-Middleware für diese Seite
+});
 </script>

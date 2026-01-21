@@ -156,17 +156,14 @@ onMounted(async () => {
     }
     
   try {
-    // userId aus dem angemeldeten Benutzer abrufen
-    const userId = user.value.id
-    
-    // catData mit userId query laden
-    const catData = await $fetch(`/api/categories?userId=${userId}`)
+    // Kategorien laden (Server bestimmt aktuellen User)
+    const catData = await $fetch(`/api/categories`)
     
     // categories setzen
     categories.value = catData || []
 
     // Lade kombinierte Transaktionen mit userId query (wichtig für Backend)
-    const transData = await $fetch(`/api/transactions?userId=${userId}`)
+    const transData = await $fetch(`/api/transactions`)
     
     transactions.value = transData || []
 

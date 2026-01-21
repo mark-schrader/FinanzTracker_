@@ -1,61 +1,60 @@
-# 🧪 Testing Guide – Finanztracker (Nuxt 3)
+# FinanzTracker – Test Guide & README
 
-Diese Datei beschreibt **wie das Testsystem aufgebaut ist**,  
-**welche Tests wo liegen**, **welche Tools verwendet werden**  
-und **wie Tests lokal sowie in CI ausgeführt werden**.
-
-Das Ziel dieses Setups ist:
-- klare Trennung der Testarten
-- schnelle Unit Tests
-- saubere Prisma-Integrationstests
-- CI-Tauglichkeit (GitHub Actions)
-- kein Tool-Chaos
+Diese Anleitung erklärt **verständlich und Schritt für Schritt**, wie Tests im Projekt **FinanzTracker** geschrieben, ausgeführt und erweitert werden können. Sie richtet sich ausdrücklich auch an neue Teammitglieder.
 
 ---
 
-## 🧠 Überblick: Testarten & Tools
+## Projektstruktur (relevant für Tests)
+## Überblick: Testarten & Tools
 
 | Testart | Zweck | Tools |
 |------|------|------|
 | Frontend Unit Tests | Vue-Komponenten & UI-Logik | vitest, @vue/test-utils, happy-dom |
 | Backend Unit Tests | Reine Logik ohne DB | vitest |
 | Backend Integration Tests | Prisma + echte DB | vitest, prisma |
-| E2E Tests | Echte User-Flows im Browser | Playwright / Selenium / Cypress (noch offen) |
+| E2E Tests | Echte User-Flows im Browser | Playwright |
 
 ---
 
-## 📁 Ordnerstruktur (`test/`)
+## Ordnerstruktur (`test/`)
 
 ```
-test/
-├─ e2e/
-│  └─ (E2E Tests – Browser, später)
+src/nuxt-finanztracker_
 │
-├─ integration/
-│  ├─ backend/
-│  |  ├─ <domain>.<layer>.<action>.spec.ts
-|  |  └─ category.newcategoryinlist.spec.ts
-│  └─ prisma.spec.ts
-├─ unit/
-│  ├─ backend/
-│  │  ├─ <domain>.<layer>.<action>.spec.ts
-│  |  └─ category.service.spec.ts
-│  └─ frontend/
-│     ├─ <domain>.<Bereich>.<Feld>.<action>.spec.ts
-|     └─ Kontobewegung.expense.category.select.spec.ts
+├─ prisma/
+│  ├─ schema.prisma            # Produktives Schema
+│  ├─ schema.test.prisma       # Test-Schema (Postgres)
+│  └─ migrations/              # Prisma Migrations
 │
-├─ setup.frontend.ts
-└─ setup.prisma.ts
-
+├─ test/
+│  ├─ setup.prisma.ts          # Gemeinsames DB-Test-Setup
+│  ├─ setup.frontend.ts        # Frontend Test-Setup
+│  │
+│  ├─ unit/
+│  │  ├─ frontend/             # Vue-Komponenten Unit-Tests
+│  │  └─ backend/              # Service-Unit-Tests
+│  │
+│  └─ integration/
+│     └─ backend/              # Prisma + DB Integrationstests
+│
+├─ vitest.config.ts
+├─ docker-compose.yml          # Test-Postgres
+└─ package.json
 ```
-## Namenskonvention
-
-Es ist wichtig das die namen so gewählt werden das eine Fremnde Person möglicht leicht anhand des Namnes erkennen kann was dieser Test macht.
-
-Haltet euch also an die bereits vorhanden Namensgebung und fragt nach wenn ihr nicht wisst wie ihr die Test richtig benennen sollt.
 
 ---
-## ▶️ Tests ausführen
+
+## Testarten im Projekt
+
+### Frontend Unit Tests
+
+- **Ort:** `test/unit/frontend`
+- **Ziel:** Vue-Komponenten isoliert testen
+- **Technik:**
+  - `@vue/test-utils`
+  - gemockte Stores & Services
+
+**Kein echter Server / keine Datenbank**
 
 - Alle Tests (Watch Mode)
     ```
@@ -77,44 +76,193 @@ Haltet euch also an die bereits vorhanden Namensgebung und fragt nach wenn ihr n
     ```
     npx prisma migrate deploy --schema prisma/schema.prisma
     ```
+- E2E-Tests
+    ```
+    npx playwright test
+    ```
+    HTML Test Report
+    ```
+    npx playwright show-report
+    ```
+    Test in UI Mode
+    ```
+    npx playwright test --ui
+    ```
 ---
-## 🤖 Tests in GitHub Actions
 
-In CI werden ausgeführt:
-- Frontend Unit Tests
-- Backend Unit Tests
-- Prisma Integration Tests mit SQLite
+### Backend Unit Tests
 
-Vorteile:
-- Pull Requests brechen bei Fehlern
-- reproduzierbare Ergebnisse
-- kein Zugriff auf echte Datenbanken
+- **Ort:** `test/unit/backend`
+- **Ziel:** Services / Business-Logik testen
+- **Technik:**
+  - Prisma gemockt oder In-Memory
 
-## 🚫 Was nicht in Unit Tests gehört
-- echter Browser
-- Playwright / Selenium / Cypress
-- Nuxt Boot
-- echte HTTP-Server
-- echte Datenbanken (außer Integration Tests)
+**Keine echte Datenbank**
 
-diese Dinge gehören in E2E Tests, nicht in Unit Tests.
+---
 
-## 🧠 Wichtige Merksätze
-- Vitest ist der einzige Test-Runner
-- @vue/test-utils = nur Frontend Unit Tests
-- happy-dom = Fake-Browser
-- Prisma = immer Integration Test
-- E2E ≠ Unit Test
+### Backend Integration Tests (wichtig)
 
-## ✅ Ziel dieses Setups
-- schnelle Tests
-- klare Struktur
-- einfache Wartung
-- saubere CI
-- langfristig wartbar
+- **Ort:** `test/integration/backend`
+- **Ziel:**
+  - Prisma + echte PostgreSQL-Datenbank
+  - echte Constraints, Relationen, Deletes
 
-Bei Unsicherheiten:
+**Hier wird wirklich in die DB geschrieben**
 
-1. Testart bestimmen (Unit / Integration / E2E)
-2. Ordner wählen
-3. Tool laut Tabelle verwenden
+---
+
+## Test ausführen
+
+### Anleitung lokale Tests
+
+1. Alle Module sauber neu laden!
+```bash
+npm ci
+```
+2. Prisma Client generieren
+```bash
+npx prisma generate
+```
+3. Docker Container bauen
+```bash
+docker compose up -d
+```
+4. Test Prisma DB im Container laden
+```bash
+npx dotenv -e .env.test -- prisma db push --schema=prisma/schema.test.prisma
+```
+5. Tests starten
+```bash
+npm run test
+```
+6. (optional) Docker Container löschen
+```bash
+docker compose down -v
+```
+
+---
+
+### GitHub Actions (CI)
+
+- Postgres läuft als **Docker-Container**
+- `DATABASE_URL` wird im Workflow gesetzt
+- Prisma nutzt **schema.test.prisma**
+- Test Schema ist 1 zu 1 wie Prod DB
+---
+
+## Gemeinsames Test-Setup (setup.prisma.ts)
+
+Jeder Integrationstest bekommt automatisch:
+
+- eine **saubere Prisma-Verbindung**
+- einen **eindeutigen Test-User pro Worker**
+
+### Warum?
+
+Vitest führt Tests **parallel** aus. Ohne Isolation entstehen Fehler wie:
+
+- `Unique constraint failed (email)`
+- kaputte Testdaten
+
+---
+
+### Aktuelles Setup (vereinfacht erklärt)
+
+```ts
+const WORKER_ID = process.env.VITEST_WORKER_ID ?? '0'
+
+const TEST_USER_EMAIL = `test-${WORKER_ID}@local`
+```
+
+Jeder Worker bekommt **seinen eigenen User**
+
+---
+
+## Wie schreibe ich einen Integrationstest?
+
+### Beispiel: Kategorie anlegen
+
+```ts
+import { describe, it, expect } from 'vitest'
+import { prisma, TEST_USER_ID } from '../../setup.prisma'
+
+describe('Integration: Kategorie erstellen', () => {
+  it('legt eine Kategorie für den Testuser an', async () => {
+    const category = await prisma.categories.create({
+      data: {
+        name: 'TEST_KATEGORIE',
+        user_id: TEST_USER_ID,
+        color: '#ff0000',
+      },
+    })
+
+    expect(category.name).toBe('TEST_KATEGORIE')
+  })
+})
+```
+
+### Wichtige Regeln
+
+**IMMER** `TEST_USER_ID` verwenden  
+**NIEMALS** feste User-IDs
+
+---
+
+## Tests ausführen
+
+### Alle Tests
+
+```bash
+npm run test
+```
+
+### Nur Integrationstests
+
+```bash
+npm run test:integration:backend
+```
+
+---
+
+## Häufige Fehler & Lösungen
+
+### `column does not exist`
+Migrationen fehlen
+
+```bash
+npx prisma migrate deploy --schema=prisma/schema.test.prisma
+```
+
+---
+
+### `Unique constraint failed (email)`
+Kein Worker-sicherer Test-User
+
+**setup.prisma.ts verwenden**
+
+---
+
+### Tests schlagen nur in GitHub Actions fehl
+
+Prüfen:
+- `DATABASE_URL` korrekt?
+- `schema.test.prisma` verwendet?
+- Migrationen angewendet?
+
+---
+
+## Zusammenfassung (TL;DR)
+
+- **Unit Tests**: schnell, isoliert, ohne DB
+- **Integration Tests**: echte DB, Prisma, Docker
+- **setup.prisma.ts**: Pflicht für Integrationstests
+- **schema.test.prisma**: verhindert Prod-Schäden
+- **Keine festen IDs oder Emails** verwenden
+
+---
+
+Wenn du dich an diese Regeln hältst, laufen Tests **lokal UND in CI stabil**.
+
+Happy Testing
+
