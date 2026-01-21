@@ -1,5 +1,5 @@
 
---Test: Kann User 1 die Categories von User 2 sehen?
+--Test: Kann User 2 die Categories von User 1 sehen?
 
 --Start
 BEGIN;
