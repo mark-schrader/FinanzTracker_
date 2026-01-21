@@ -1,5 +1,5 @@
 // test/setup.frontend.ts
-
+// Frontend-specific test setup for Vitest with happy-dom
 import { config } from '@vue/test-utils'
 import { vi, beforeAll, afterEach } from 'vitest'
 import { Window } from 'happy-dom'

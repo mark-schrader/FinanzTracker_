@@ -1,26 +1,26 @@
+// category.color.spec.ts
+// Integration test to verify that category colors are stored and retrieved correctly
 import { describe, it, expect, afterEach } from 'vitest'
-import { prisma } from '../../setup_prisma'
-import { TEST_USER_ID } from '../../setup.prisma'
+import { prisma, TEST_USER_ID } from '../../setup.prisma'
 import { cleanupUserData } from '../../utils/cleanup'
 
-describe('Backend Integration: Kategorie mit Farbe', () => {
-
+describe('Backend Integration: Category with color', () => {
   afterEach(async () => {
     await cleanupUserData()
   })
 
-  it('speichert und liest die Farbe einer Kategorie korrekt', async () => {
+  it('stores and reads a category color correctly', async () => {
     const created = await prisma.categories.create({
       data: {
         name: 'TEST_CATEGORY_COLOR',
         type: 'income',
         color: '#123abc',
-        user_id: TEST_USER_ID
-      }
+        user_id: TEST_USER_ID,
+      },
     })
 
     const found = await prisma.categories.findUnique({
-      where: { id: created.id }
+      where: { id: created.id },
     })
 
     expect(found).not.toBeNull()

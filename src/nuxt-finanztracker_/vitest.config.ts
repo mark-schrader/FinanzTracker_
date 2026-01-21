@@ -15,11 +15,12 @@ export default defineConfig({
 
   test: {
     globals: true,
+    // Set default environment to happy-dom for frontend tests
     environment: 'happy-dom',
 
-    // ONE setup file – logic inside decides what to do
+    // ONE setup file – logic inside decides what to do for frontend/backend
     setupFiles: ['./test/setup.ts'],
-
+    // Specify test files for frontend and backend
     include: [
       'test/unit/frontend/**/*.{spec,test}.ts',
       'test/unit/backend/**/*.{spec,test}.ts',

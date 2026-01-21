@@ -1,16 +1,15 @@
-// test/integration/backend/delete.income.transaction.spec.ts
-import { describe, it, expect, afterEach, afterAll } from 'vitest'
-import { PrismaClient } from '@prisma/client'
+// transaction.income.delete.spec.ts
+// This test verifies that an income can be deleted from the database.
 
-const prisma = new PrismaClient()
+import { describe, it, expect, afterEach } from 'vitest'
+import { prisma, TEST_USER_ID } from '../../setup.prisma'
 
 let categoryId: number | null = null
 let incomeId: number | null = null
 
-describe('Integration: Income löschen', () => {
-
+describe('Integration: delete income', () => {
   afterEach(async () => {
-    // Reihenfolge ist WICHTIG (FK!)
+    // FK order matters: delete income first, then category
     if (incomeId) {
       await prisma.incomes.delete({ where: { id: incomeId } }).catch(() => {})
       incomeId = null
@@ -22,43 +21,39 @@ describe('Integration: Income löschen', () => {
     }
   })
 
-  afterAll(async () => {
-    await prisma.$disconnect()
-  })
-
-  it('löscht eine Einnahme aus der incomes Tabelle', async () => {
-
-    // Kategorie (income) anlegen
+  it('deletes an income from the incomes table', async () => {
+    // Create income category
     const category = await prisma.categories.create({
       data: {
         name: 'TEST_INCOME_CATEGORY',
         type: 'income',
-        user_id: 1
-      }
+        user_id: TEST_USER_ID,
+      },
     })
     categoryId = category.id
 
-    // Income anlegen
+    // Create income
     const income = await prisma.incomes.create({
       data: {
         amount: 100,
         category_id: category.id,
-        user_id: 1,
+        user_id: TEST_USER_ID,
         date: new Date(),
-        note: 'TEST_INCOME_NOTE'
-      }
+        note: 'TEST_INCOME_NOTE',
+        // If your schema requires interval on incomes, uncomment:
+        // interval: 'once',
+      },
     })
-    
     incomeId = income.id
 
-    // Income löschen
+    // Delete income
     await prisma.incomes.delete({
-      where: { id: income.id }
+      where: { id: income.id },
     })
 
-    // Prüfen ob Datensatz weg ist
+    // Verify deletion
     const found = await prisma.incomes.findUnique({
-      where: { id: income.id }
+      where: { id: income.id },
     })
 
     expect(found).toBeNull()
