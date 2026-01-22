@@ -4,11 +4,139 @@ Til Guhlmann <til.guhlmann@stud.htw-dresden.de>; Enna Scheer <enna.scheer@stud.h
 include::../_includes/default-attributes.inc.adoc[]
 // Platzhalter für weitere Dokumenten-Attribute
 
+== Zweck und Ziel
+Dieses Dokument beschreibt die getesteten Module und Komponenten der Anwendung {project-name}. Es dient als Referenz für das Testteam und andere Stakeholder, um einen Überblick über die durchgeführten Tests und deren Ergebnisse zu erhalten. Ziel ist es, die Qualität und Zuverlässigkeit der Software sicherzustellen, indem alle kritischen Funktionen und Komponenten gründlich getestet werden.
 
-== Allgemeine Informationen
-In unserem aktuellen Stand haben wir noch keine Test Cases.
-//== Test Cases
+== Testkonzept und Architektur
+Das Testkonzept umfasst drei Haupttestarten: Unit Tests, Integrationstests und End-to-End (E2E) Tests. Jede Testart hat eine spezifische Architektur und einen definierten Zweck innerhalb des Testprozesses.
 
-//=== Test Case 01
+In der Unit Tests Ebene werden Tests in isolierten Umgebungen durchgeführt. Sie testen einzelne Funktionen der Module unabhängig voneinander. Für Frontend Unit Tests wird dabei kein Backend benötigt, stattdessen werden Mock-Daten verwendet. Backend Unit Tests werden ebenfalls isoliert ausgeführt, wobei einzelne Funktionen des Backends getestet werden. Hierbei kommen Mock-Daten zum Einsatz, um Abhängigkeiten zu minimieren.
 
-//=== Test Case 02
+Auf der Integrations Ebene finden Tests in einer Umgebung statt, die mehrere Module integriert, um deren Zusammenspiel zu testen. Hierbei wird ein Test-Backend verwendet, um realistische Datenflüsse zu simulieren. Die Testumgebung wird mittels Docker-Container bereitgestellt und bassiert auf eine PostgreSQL-Datenbank.
+
+E2E Tests (End-to-End Tests) überprüfen wichtige Workflows innerhalb der Anwendung, um sicherzustellen, dass die entsprechenden Komponenten nahtlos zusammenarbeiten. Dabei wird das Frontend mittels einer Klickrutine automatisiert getestet. Diese Tests werden in einer vollständigen Anwendungsumgebung ausgeführt, die sowohl das Frontend als auch das Backend umfasst. Auf ein Mocken des Backends wird hierbei verzichtet, um eine realistische Testumgebung zu gewährleisten. Es handelt sich somit auch eher um Systemtests als um reine E2E Tests.
+
+Manuelle Tests werden nicht explizit in diesem Dokument behandelt, da der Fokus auf automatisierten Tests liegt. Dennoch können manuelle Tests ergänzend eingesetzt werden, um spezifische Szenarien zu überprüfen, die möglicherweise nicht durch automatisierte Tests abgedeckt sind.
+===
+
+
+Testarten Übersicht:
+[cols="2,3", options="header"]
+|===
+| Testart | Verwendete Frameworks / Tools
+
+| Unit Test Frontend
+| vitest, @vue/test-utils, happy-dom
+
+| Unit Test Backend
+| vitest
+
+| Integration Test (Backend)
+| vitest, Prisma, PostgreSQL, Docker, dotenv
+
+| E2E Test
+| Playwright
+
+| DB Tests
+| pgtab 
+|===
+
+== Testdokumentation und Berichterstattung
+
+Es erfolgt eine manuelle Dokumentation der Tests in den jeweiligen Task-Tickets in GitHub. Dort werden die durchgeführten Tests, deren Ergebnisse und eventuelle Abweichungen festgehalten. Es werden zuerst Test für kritische Funktionen durchgeführt, um sicherzustellen, dass die wichtigsten Anwendungsbereiche fehlerfrei funktionieren. Anschließend werden weitere Tests für weniger kritische Funktionen durchgeführt, um eine umfassende Testabdeckung zu gewährleisten. Es wird sich an die vorgaben der Akzeptanzkriterien gehalten um die Anforderungen der User Stories zu erfüllen. Wenn der Test erfolgreich war kann das Akzeptanzkriterium als erfüllt markiert werden und das Ticket geschlossen werden. Bei einem fehlgeschlagenen Test wird das Ticket mit den entsprechenden Fehlerdetails aktualisiert und als Bug gekennzeichnet, um eine Nachverfolgung und Behebung zu ermöglichen.
+
+== Getestete Module und Komponenten
+
+=== Frontend Unit Tests
+
+Pfad: src/nuxt-finanztracker_/test/unit/Frontend
+
+Geprüft wurden:
+
+Ausgaben:
+
+    - Ausgaben Modul anzeigen
+    - Ausgabenerfassung abbrechen
+
+Darkmode:
+
+    - Wechsel zwischen Hell- und Dunkelmodus (beide Richtungen)
+
+Dauerauftrag:
+
+    - Bestätigungs-Popup zum Löschen eines Dauerauftrags
+    - Bearbeiten-Popup eines Dauerauftrags
+    - Öffnen des Dauerauftrag-Verwaltungsmodals
+
+Einnahmen:
+
+    - Einnahme Popup abbrechen
+    - Einnahme Kategorie anzeigen
+
+Export:
+
+    - Default Export Auswahl
+    - Dateiname Eingabe
+    - Eingrenzung des Datumsbereichs
+
+Kategorien:
+
+    - Kategorie erstellen
+    - Kategorie Popup öffnen
+
+Kontobewegungstabelle:
+
+    - Einnahme löschen Popup anzeigen
+    - Ausgabe löschen Popup anzeigen
+    - Kontobewegung Tabelle Anzeige, suchenn, editieren, löschen
+
+
+=== Backend Unit Tests
+
+Pfad: src/nuxt-finanztracker_/test/unit/Backend
+
+Geprüft wurden:
+
+- Lieferung von Kategorien
+
+=== Integration Tests
+
+Pfad: src/nuxt-finanztracker_/test/unit/Integration/Backend
+
+Geprüft wurden:
+
+- Kategorie Erstellung
+- Kategorie nach Erstellung abrufen
+- Karegorie performance Test
+- Kategorie Farbe integrierbar
+- Einnahme Erstellung
+- Ausgabe Erstellung
+
+
+=== System Tests
+
+Pfad: src/nuxt-finanztracker_/test/e2e
+
+Geprüft wurden:
+- User Login
+- User Registrierung
+- Einnahme erstellen
+- Ausgabe erstellen
+
+
+=== Abnahmetests
+Abnahmetests werden nicht explizit in diesem Dokument behandelt, da der Fokus auf automatisierten Tests liegt. 
+
+Eine Abnahme erfolgt durch den Produkt-Owner nach erfolgreichem Bestehen der automatisierten Tests und der Erfüllung der Akzeptanzkriterien für die jeweiligen User Stories.
+
+== GitHub Actions Integration
+Die Testarten sind in die CI/CD-Pipeline von GitHub Actions integriert. Bei Pull-Request in den Main Branch werden die Tests automatisch ausgeführt, um sicherzustellen, dass neue Änderungen keine bestehenden Funktionen beeinträchtigen.
+
+Tabelle der GitHub Actions Workflows:
+[cols="3,4", options="header"]
+|===
+| Workflow Name | Beschreibung
+| Tests | Führt alle definierten Tests (Unit, Integration) aus, um die Codequalität einzelner Module sicherzustellen.
+| E2E/Playwright | Führt die End-to-End u. System Tests aus, um wichtige Workflows in der Anwendung zu überprüfen. 
+| Supabase Deployment | Automatisiert die Bereitstellung der Anwendung auf Supabase nach erfolgreichem Bestehen aller Tests.
+|===

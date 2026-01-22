@@ -1,4 +1,4 @@
-// import Kontobewegung from '../../../../pages/kontobewegung.vue'
+// src/nuxt-finanztracker_/test/unit/frontend/Test_einnahme/Kontobewegung.income.popup.cancel.spec.ts
 // Frontend Unit Test – Kontobewegung Einnahme Popup abbrechen
 
 import { describe, it, expect } from 'vitest'

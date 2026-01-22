@@ -1,3 +1,4 @@
+/// <reference lib="dom" />
 // src/nuxt-finanztracker_/test/unit/frontend/Test_darkmode/DarkMode.spec.ts
 // Frontend Unit Test – Dark-Mode-Funktionalität
 

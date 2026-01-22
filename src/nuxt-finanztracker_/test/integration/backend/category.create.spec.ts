@@ -1,3 +1,5 @@
+// category.create.spec.ts
+// Integration test to verify category creation in the database
 /// <reference types="node" />
 
 import { describe, it, expect } from 'vitest'
@@ -12,7 +14,12 @@ describe('Integration: create category', () => {
       userId: TEST_USER_ID,
     })
 
+    const found = await prisma.categories.findUnique({
+      where: { id: category.id },
+    })
+
     expect(category.id).toBeDefined()
     expect(category.name).toBe('Test Category')
+    expect(found).not.toBeNull()
   })
 })
