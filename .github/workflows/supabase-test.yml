@@ -1,0 +1,52 @@
+name: Database Tests
+
+on:
+  push:
+    branches: ['**']        # Korrekt: Alle Branches erlauben
+  pull_request:
+    branches: ['**']        # Korrekt: Darf nicht leer sein
+  workflow_dispatch:        # Erlaubt den manuellen Start Button
+
+jobs:
+  test:
+    name: Run Supabase pgTAB Tests
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: ./src/nuxt-finanztracker_
+    
+    env:
+      DATABASE_URL: "postgresql://postgres:postgres@127.0.0.1:54322/postgres"
+      DIRECT_URL: "postgresql://postgres:postgres@127.0.0.1:54322/postgres"
+
+    steps:
+      - name: Code auschecken
+        uses: actions/checkout@v4
+
+      - name: Node.js einrichten
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+          cache-dependency-path: ./src/nuxt-finanztracker_/package-lock.json
+
+      - name: Abhängigkeiten installieren
+        run: npm install
+
+      - name: Supabase CLI installieren
+        uses: supabase/setup-cli@v1
+        with:
+          version: latest
+
+      - name: Supabase starten
+        run: supabase start -x vector,storage,realtime,edge-runtime,studio
+
+      - name: DB-Schema mit Prisma synchronisieren
+        run: npx prisma db push --accept-data-loss
+
+      - name: Policies anwenden
+        run: supabase db reset --no-seed
+
+      - name: pgTAP-Tests ausführen
+        run: supabase db test

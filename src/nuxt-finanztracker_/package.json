@@ -23,7 +23,7 @@
     "animate.css": "^4.1.1",
     "canvg": "^4.0.3",
     "chart.js": "^4.5.0",
-    "jspdf": "^3.0.4",
+    "jspdf": "^4.0.0",
     "jspdf-autotable": "^5.0.2",
     "magic-regexp": "^0.10.0",
     "nuxt": "^3.17.5",
