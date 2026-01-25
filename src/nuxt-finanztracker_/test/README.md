@@ -55,41 +55,6 @@ src/nuxt-finanztracker_
   - gemockte Stores & Services
 
 **Kein echter Server / keine Datenbank**
-
-- Alle Tests (Watch Mode)
-    ```
-    npm test
-    ```
-- Frontend Unit Tests
-    ```
-    npm run test:unit:frontend
-    ```
-- Backend Unit Tests
-    ```
-    npm run test:unit:backend
-    ```
-- Backend Integration Tests (Prisma)
-    ```
-    npm run test:integration:backend
-    ```
-    !!! Vorher sicherstellen, dass Migrationen existieren:
-    ```
-    npx prisma migrate deploy --schema prisma/schema.prisma
-    ```
-- E2E-Tests
-    ```
-    npx playwright test
-    ```
-    HTML Test Report
-    ```
-    npx playwright show-report
-    ```
-    Test in UI Mode
-    ```
-    npx playwright test --ui
-    ```
----
-
 ### Backend Unit Tests
 
 - **Ort:** `test/unit/backend`
@@ -112,30 +77,88 @@ src/nuxt-finanztracker_
 
 ---
 
-## Test ausführen
+### E2E Tests (Playwright)
 
-### Anleitung lokale Tests
+- **Ort:** `test/e2e/`
+- **Ziel:** Echte User-Workflows vom Frontend testen
+- **Technik:**
+  - Playwright für automatisierte Browser-Tests
+  - Echte Anwendungsumgebung (Frontend + Backend)
 
-1. Alle Module sauber neu laden!
+**Vollständiges System wird getestet**
+
+---
+
+## Befehle zum Ausführen der Tests
+
+- Alle Tests (Watch Mode)
+    ```bash
+    npm test
+    ```
+
+- Frontend Unit Tests
+    ```bash
+    npm run test:unit:frontend
+    ```
+
+- Backend Unit Tests
+    ```bash
+    npm run test:unit:backend
+    ```
+
+- Backend Integration Tests (Prisma)
+    ```bash
+    npm run test:integration:backend
+    ```
+    !!!Vorher sicherstellen, dass Migrationen existieren!!!
+    ```bash
+    npx prisma migrate deploy --schema prisma/schema.test.prisma
+    ```
+
+- E2E Tests
+    ```bash
+    npx playwright test
+    ```
+
+- E2E Test Report anzeigen
+    ```bash
+    npx playwright show-report
+    ```
+
+- E2E Tests im UI Mode (interaktiv)
+    ```bash
+    npx playwright test --ui
+    ```
+
+---
+
+## Anleitung: Lokale Tests einrichten
+
+1. Alle Module sauber neu laden
 ```bash
 npm ci
 ```
+
 2. Prisma Client generieren
 ```bash
 npx prisma generate
 ```
+
 3. Docker Container bauen
 ```bash
 docker compose up -d
 ```
+
 4. Test Prisma DB im Container laden
 ```bash
 npx dotenv -e .env.test -- prisma db push --schema=prisma/schema.test.prisma
 ```
+
 5. Tests starten
 ```bash
 npm run test
 ```
+
 6. (optional) Docker Container löschen
 ```bash
 docker compose down -v
@@ -264,5 +287,4 @@ Prüfen:
 
 Wenn du dich an diese Regeln hältst, laufen Tests **lokal UND in CI stabil**.
 
-Happy Testing
 

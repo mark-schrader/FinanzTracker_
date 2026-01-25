@@ -8,19 +8,27 @@ include::../_includes/default-attributes.inc.adoc[]
 Dieses Dokument beschreibt die getesteten Module und Komponenten der Anwendung {project-name}. Es dient als Referenz für das Testteam und andere Stakeholder, um einen Überblick über die durchgeführten Tests und deren Ergebnisse zu erhalten. Ziel ist es, die Qualität und Zuverlässigkeit der Software sicherzustellen, indem alle kritischen Funktionen und Komponenten gründlich getestet werden.
 
 == Testkonzept und Architektur
-Das Testkonzept umfasst vier Haupttestarten: Unit Tests, Integrationstests, Datenbanktests und End-to-End (E2E) Tests. Jede Testart hat eine spezifische Architektur und einen definierten Zweck innerhalb des Testprozesses. Manuelle Tests werden nicht explizit in diesem Dokument behandelt, da der Fokus auf automatisierten Tests liegt. Dennoch können manuelle Tests ergänzend eingesetzt werden, um spezifische Szenarien zu überprüfen, die möglicherweise nicht durch automatisierte Tests abgedeckt sind.
+Das Testkonzept umfasst fünf Haupttestarten: Unit Tests, Integrationstests, Datenbanktests und End-to-End (E2E) Tests sowie Abnahmetests. Jede Testart hat eine spezifische Architektur und einen definierten Zweck innerhalb des Testprozesses. Manuelle Tests werden nicht explizit in diesem Dokument behandelt, da der Fokus auf automatisierten Tests liegt. Dennoch können manuelle Tests ergänzend eingesetzt werden, um spezifische Szenarien zu überprüfen, die möglicherweise nicht durch automatisierte Tests abgedeckt sind.
 
-In der Unit Tests Ebene werden Tests in isolierten Umgebungen durchgeführt. Sie testen einzelne Funktionen der Module unabhängig voneinander. Wir unterscheiden hierbei zwischen Frontend und Backend Unit Tests.
+*Unit Tests Ebene:*
 
-- Für Frontend Unit Tests wird dabei kein Backend benötigt, stattdessen werden Mock-Daten verwendet. 
+In dieser Ebene werden Tests in isolierten Umgebungen durchgeführt. Sie testen einzelne Funktionen der Module unabhängig voneinander. Es wird zwischen Frontend und Backend Unit Tests unterschieden.
 
-- Backend Unit Tests werden ebenfalls isoliert ausgeführt, wobei einzelne Funktionen des Backends getestet werden. Hierbei kommen Mock-Daten zum Einsatz, um Abhängigkeiten zu minimieren.
+- *Frontend Unit Tests:* Testen Vue-Komponenten und Composables in Isolation mit vitest und @vue/test-utils. Mock-Daten werden verwendet, um Abhängigkeiten vom Backend zu eliminieren.
 
-Auf der Integrations Ebene finden Whitebox-Tests in einer Umgebung statt, die mehrere Module integriert, um deren Zusammenspiel und interne Funktionsweise zu testen. Hierbei wird ein Test-Datenbank verwendet, um realistische Datenflüsse zu simulieren. Die Test DB wird mittels Docker-Container bereitgestellt und basiert auf einer PostgreSQL-Datenbank. Die Tests haben direkten Zugriff auf die interne Datenschicht (Prisma ORM) und überprüfen sowohl die Geschäftslogik als auch die Datenbankinteraktionen.
+- *Backend Unit Tests:* Testen einzelne API-Funktionen und Geschäftslogik isoliert. Mock-Daten ersetzen Datenbankzugriffe und externe Abhängigkeiten.
 
-Die Datenbanktests werden mit pgTab durchgeführt, um die Integrität und Korrektheit der PostgreSQL-Datenbankstruktur zu überprüfen. Die Tests stellen sicher, dass die vom Prisma ORM generierten Datenbankschemas den erwarteten Spezifikationen entsprechen und alle Constraints korrekt implementiert sind.
+*Integrations Ebene (Whitebox-Tests):*
 
-E2E Tests (End-to-End Tests) überprüfen wichtige Workflows vom Frontend der Anwendung, um sicherzustellen, dass die entsprechenden Komponenten nahtlos zusammenarbeiten. Dabei wird das Frontend mittels einer Klickrutine automatisiert getestet. Diese Tests werden in einer vollständigen Anwendungsumgebung ausgeführt, die sowohl das Frontend als auch das Backend umfasst. Auf ein Mocken des Backends wird hierbei verzichtet, um eine realistische Testumgebung zu gewährleisten. Es handelt sich somit auch eher um Systemtests als um reine E2E Tests.
+Auf dieser Ebene werden mehrere Module integriert getestet, um deren Zusammenspiel und interne Funktionsweise zu prüfen. Eine Test-PostgreSQL-Datenbank wird mittels Docker-Container bereitgestellt. Die Tests haben direkten Zugriff auf die interne Datenschicht (Prisma ORM) und überprüfen Geschäftslogik, API-Funktionalität und Datenbankinteraktionen gemeinsam.
+
+*Datenbanktests Ebene:*
+
+Datenbanktests werden mit pgTab und PostgreSQL durchgeführt, um die Integrität und Korrektheit der Datenbankstruktur zu überprüfen. Die Tests validieren Tabellenstrukturen, Constraints, Foreign Key Beziehungen und Migrationen. Sie stellen sicher, dass die vom Prisma ORM generierten Datenbankschemas den erwarteten Spezifikationen entsprechen.
+
+*System Tests (E2E):*
+
+System Tests überprüfen wichtige End-to-End-Workflows vom Frontend der Anwendung und stellen sicher, dass Frontend und Backend nahtlos zusammenarbeiten. Das Frontend wird mittels automatisierter Klickroutinen (Playwright) getestet. Diese Tests laufen in einer vollständigen Anwendungsumgebung (Frontend + Backend), ohne das Backend zu mocken, um eine realistische Testumgebung zu gewährleisten.
 
 
 Testarten Übersicht:
@@ -46,7 +54,7 @@ Testarten Übersicht:
 
 == Testdokumentation und Berichterstattung
 
-Es erfolgt eine manuelle Dokumentation der Tests in den jeweiligen Task-Tickets in GitHub. Dort werden die durchgeführten Tests, deren Ergebnisse und eventuelle Abweichungen festgehalten. Es werden zuerst Test für kritische Funktionen durchgeführt, um sicherzustellen, dass die wichtigsten Anwendungsbereiche fehlerfrei funktionieren. Anschließend werden weitere Tests für weniger kritische Funktionen durchgeführt, um eine umfassende Testabdeckung zu gewährleisten. Es wird sich an die vorgaben der Akzeptanzkriterien gehalten um die Anforderungen der User Stories zu erfüllen. Wenn der Test erfolgreich war kann das Akzeptanzkriterium als erfüllt markiert werden und das Ticket geschlossen werden. Bei einem fehlgeschlagenen Test wird das Ticket mit den entsprechenden Fehlerdetails aktualisiert und als Bug gekennzeichnet, um eine Nachverfolgung und Behebung zu ermöglichen.
+Es erfolgt eine manuelle Dokumentation der Tests in den jeweiligen Task-Tickets in GitHub. Dort werden die durchgeführten Tests, deren Ergebnisse und eventuelle Abweichungen festgehalten. Tests werden priorisiert nach kritischen Funktionen durchgeführt, um sicherzustellen, dass die wichtigsten Anwendungsbereiche fehlerfrei funktionieren. Anschließend werden weitere Tests für weniger kritische Funktionen durchgeführt, um eine umfassende Testabdeckung zu gewährleisten. Es wird sich an die Vorgaben der Akzeptanzkriterien gehalten, um die Anforderungen der User Stories zu erfüllen. Wenn ein Test erfolgreich war, kann das entsprechende Akzeptanzkriterium als erfüllt markiert und das Ticket geschlossen werden. Bei einem fehlgeschlagenen Test wird das Ticket mit den Fehlerdetails aktualisiert und als Bug gekennzeichnet, um Nachverfolgung und Behebung zu ermöglichen.
 
 == Getestete Komponenten
 
@@ -91,7 +99,7 @@ Kontobewegungstabelle:
 
     - Einnahme löschen Popup anzeigen
     - Ausgabe löschen Popup anzeigen
-    - Kontobewegung Tabelle Anzeige, suchenn, editieren, löschen
+    - Kontobewegung Tabelle Anzeige, Suche, Bearbeitung, Löschung
 
 
 === Backend Unit Tests
@@ -100,31 +108,38 @@ Pfad: src/nuxt-finanztracker_/test/unit/Backend
 
 Geprüft wurden:
 
-- Lieferung von Kategorien
+- Kategorien-API Endpunkte (Abrufen, Erstellen, Aktualisieren, Löschen)
+- Einnahme und Ausgabe API-Funktionen
+- Validierung von Eingabeparametern
+- Error-Handling und Exception-Management
 
 === Integration Tests
 
-Pfad: src/nuxt-finanztracker_/test/unit/Integration/Backend
+Pfad: src/nuxt-finanztracker_/test/integration/
 
 Geprüft wurden:
 
-- Kategorie Erstellung
-- Kategorie nach Erstellung abrufen
-- Karegorie performance Test
-- Kategorie Farbe integrierbar
-- Einnahme Erstellung
-- Ausgabe Erstellung
+- Kategorien: Erstellung, Abrufen, Aktualisierung in Datenbank
+- Kategorien Performance-Test mit realen Datenbankabfragen
+- Kategorie-Farb-Eigenschaft und deren Persistierung
+- Einnahmen: Erstellung, Speicherung, Abrufen aus Datenbank
+- Ausgaben: Erstellung, Speicherung, Abrufen aus Datenbank
+- Datenbankzustand nach Transaktionen validieren
 
 
-=== System Tests
+=== System Tests (E2E)
 
-Pfad: src/nuxt-finanztracker_/test/e2e
+Pfad: src/nuxt-finanztracker_/test/e2e/
 
 Geprüft wurden:
-- User Login
-- User Registrierung
-- Einnahme erstellen
-- Ausgabe erstellen
+
+- User-Authentifizierung (Login, Registrierung)
+- Dashboard-Navigation und -Anzeige
+- Einnahmen-Workflow (Erstellen, Anzeigen, Bearbeiten)
+- Ausgaben-Workflow (Erstellen, Anzeigen, Bearbeiten)
+- Kategorien-Management über UI
+- Export-Funktionalität
+- Daueraufträge-Verwaltung
 
 
 === Datenbanktests
@@ -151,8 +166,9 @@ Tabelle der GitHub Actions Workflows:
 [cols="3,4", options="header"]
 |===
 | Workflow Name | Beschreibung
-| Tests | Führt alle definierten Tests (Unit, Integration) aus, um die Codequalität einzelner Module sicherzustellen.
-| E2E/Playwright | Führt die End-to-End u. System Tests aus, um wichtige Workflows in der Anwendung zu überprüfen. 
+| Tests | Führt Unit Tests (Frontend und Backend) sowie Integration Tests aus, um die Codequalität einzelner Module und deren Zusammenspiel sicherzustellen.
+| E2E/Playwright | Führt System Tests (End-to-End) mit Playwright aus, um wichtige Workflows in der vollständigen Anwendung zu überprüfen.
+| Database Tests | Validiert die Datenbankstruktur und Constraints mit pgTab und PostgreSQL.
 | Supabase Deployment | Automatisiert die Bereitstellung der Anwendung auf Supabase nach erfolgreichem Bestehen aller Tests.
 |===
 
