@@ -1,18 +1,18 @@
-!include <c4/C4_Context.puml>
+@startuml
+!include c4.puml
 
-'ref http://plantuml.com/stdlib
-!include <office/Users/user.puml>
-!include <office/Users/mobile_user.puml>
+title System Context Diagram (C4 – C1) – Nuxt Finanztracker
 
-title Context für den Finanztracker
+Person(user, "Benutzer",
+"Erfasst Einnahmen und Ausgaben und analysiert Finanzdaten")
 
-Person(student, "Student", "Verwendet den Finanztracker, um Ausgaben & Einnahmen zu verwalten")
-System(finanztracker, "Finanztracker", "Webanwendung zur Verwaltung von Finanzen. Verwaltet User Daten")
+Person(admin, "Administrator",
+"Verwaltet Benutzer und Systemeinstellungen")
 
+System(finanztracker, "Nuxt Finanztracker",
+"Webbasierte Anwendung zur Verwaltung persönlicher Finanzdaten")
 
-
-Rel(student, finanztracker, "Verwendet")
-
-
+Rel(user, finanztracker, "Nutzt", "HTTPS")
+Rel(admin, finanztracker, "Administriert", "HTTPS")
 
 @enduml

@@ -1,0 +1,302 @@
+:includedir: _includes
+include::../_includes/default-attributes.inc.adoc[]
+= Entwicklerdokumentation – Architecture Notebook
+:author: Til Guhlmann, Enna Scheer, Emujin Uuganbayar, Erik Vogt, Justus Müller, Mark Schrader, Khanh Ly La
+:email: til.guhlmann@stud.htw-dresden.de, enna.scheer@stud.htw-dresden.de, emujin.uuganbayar@stud.htw-dresden.de, erik.vogt@stud.htw-dresden.de, justus.mueller@stud.htw-dresden.de, mark.schrader@stud.htw-dresden.de, khanhly.la@stud.htw-dresden.de
+:revnumber: 1.0
+:revdate: {docdate}
+:doctype: book
+:toc: left
+:toclevels: 3
+:sectnums:
+:icons: font
+:source-highlighter: rouge
+:plantuml-format: svg
+:imagesdir: images
+:pdf-theme: default
+:pdf-fontsdir: fonts
+
+<<<
+
+== Einleitung
+
+Dieses Dokument beschreibt die Philosophie, Entscheidungen, Nebenbedingungen, Begründungen, wesentliche Elemente und andere übergreifende Aspekte des Systems, die Einfluss auf Entwurf und Implementierung haben. Es dient als Leitfaden für Entwickler, um eine konsistente und wartbare Software zu gewährleisten.
+
+<<<
+
+== Entwurfsdokumentation
+
+Dieses Kapitel beschreibt die architekturellen Grundlagen des Systems,
+einschließlich Annahmen, Anforderungen, Entscheidungen und Architekturmechanismen. 
+
+=== Annahmen und Abhängigkeiten
+
+==== Annahmen
+* Die Benutzer der Web–Applikation verfügen über eine Internetverbindung mit
+ausreichender Bandbreite.
+* Die Benutzer verfügen über ein Endgerät mit einem HTML5–fähigen Browser und erlaubt
+die Funktion von JavaScript.
+* Es liegen gültige SSL-Zertifikate vor, um Cookies für die Authentifizierung verwenden zu
+können und der Browser des Nutzers aktzeptiert das Zertifikat.
+
+==== Abhängigkeiten
+* Hosting über <Rechenzentrum / Cloud / Hochschule>.
+* Verfügbarkeit und Wartung der Datenbank.
+
+=== Architektur-relevante Anforderungen
+
+==== Funktionale Anforderungen
+* NFAF-1: Persistente Speicherung von Benutzerdaten
+* NFAF-2: Zugriffsschutz für Nutzer und Administratoren
+
+==== Benutzbarkeit
+* NFAU-1 Das System sollte intuitiv aufgebaut sein und somit sofort verstanden und benutzt
+werden können
+* NFAU-2 Der Nutzer sollte zum Eintragen von neuen Ausgaben und Einnahmen maximal 60 Sekunden benötigen
+
+==== Qualitätsanforderungen
+
+===== Wartbarkeit (Supportability)
+* NFAS-1: Das System sollte in gut definierten Modulen organisiert sein, um die Wartbarkeit zu
+erleichtern 
+* NFAS-2: Das System sollte klar und umfassend dokumentiert sein um eine Anpassung oder
+Erweiterungen zu erleichtern
+
+===== Performance
+* NFAP-1: Die Webanwendung soll einen schnellen Seitenaufbau, sowie Reaktionsschnelligkeit
+gewährleisten
+* NFAP-2: Das System soll mindestens 50 gleichzeitige Nutzer unterstützen
+* NFAP-3: Datenbankabfragen und Datenbankspeicherungen sollen effizient sein
+* NFAP-4: Das System sollte innerhalb von fünf Minuten startbar und herunterfahrbar sein
+
+===== Zuverlässigkeit (Reliability)
+* NFAR-1: Die Dialogfelder sollen schnell ausgewertet und dem Benutzer dar gestellt werden können
+* NFAR-2: Die Dialogfelder ermöglichen keine Eingabe von fehlerhaften Daten
+* NFAR-3: Das System soll sich höchsten 1% seiner Laufzeit im Wartungsmodus befinden
+* NFAR-4: Datenbankbackups sollten regelmäßig vom Datenbankadmin angefertigt werden
+
+=== Architekturkonzept und Entscheidungen
+
+==== Architekturansatz
+Das System folgt einer schichtenbasierten Webarchitektur und wird als Single-Page-Application mit Nuxt 3 umgesetzt.
+Die Architektur orientiert sich an den Prinzipien einer klaren Trennung von Präsentation, Logik und Datenzugriff.
+
+==== Begründung
+* Trennung von UI-Logik und Datenzugriff erhöht die Wartbarkeit
+* Komponentenbasierter Ansatz erleichtert Erweiterungen
+* Bewährtes Framework mit großer Community
+
+=== Systemarchitektur
+
+==== Logische Sicht
+Die logische Architektur gliedert sich in folgende Hauptbereiche:
+
+Presentation Layer:: Seiten, Layouts und UI-Komponenten (Nuxt Pages & Components)
+Application Layer:: Logik zur Verarbeitung von Benutzereingaben
+Service Layer:: Kommunikation mit externen Schnittstellen (APIs)
+Infrastructure Layer:: Laufzeitumgebung (Browser, Hosting)
+
+==== Physische Sicht
+Die Anwendung läuft als Webanwendung im Browser des Nutzers.
+Die Auslieferung erfolgt über einen Webserver, der die gebaute Nuxt-Applikation bereitstellt.
+
+=== Architekturdiagramme
+
+==== System Context Diagram (C4 – C1)
+plantuml::plantuml/context.puml[svg]
+
+
+==== Container Diagram (C4 – C2)
+plantuml::plantuml/container.puml[svg]
+
+==== Component Diagram (C4 - C3)
+plantuml::plantuml/components.puml[svg]
+
+
+=== Technische Entscheidungen
+
+[cols="1,3",options="header"]
+|===
+| Technologie | Begründung
+| Nuxt 3 | Modernes Framework für Vue-basierte SPAs
+| Vue 3 | Komponentenbasierte UI-Entwicklung
+| Node.js | Standard für moderne WEb-Toolchains
+| REST | Standardisierte Kommunikation im Backend
+|===
+
+=== Schnittstellen
+
+==== REST-Schnittstelle Frontend / Backend
+* Protokoll: HTTPS
+* Datenformat: JSON
+* Zweck: Austausch von Finanzdaten, Nutzerinformationen
+
+==== Externe Bibliotheken
+* Nutzung von Nuxt-internen Modulen
+* Optionale Chart-Bibliotheken zur Visualisierung
+
+=== Zusammenarbeit zwischen Komponenten
+
+==== Sequenzdiagramm – Beispiel Ergebnisabfrage
+[plantuml, sequenz-ergebnis, svg]
+----
+@startuml
+title Zusammenarbeit zwischen Komponenten – Ergebnisabfrage
+
+actor Benutzer
+participant "Web UI\n(Frontend)" as UI
+participant "Application Service\n(Backend)" as API
+participant "Domain Service" as Domain
+database "Datenbank" as DB
+
+Benutzer -> UI : Anfrage auslösen\n(z.B. Ergebnisse anzeigen)
+UI -> API : REST-Anfrage (HTTPS, JSON)
+API -> Domain : Geschäftslogik ausführen
+Domain -> DB : Daten abfragen
+DB --> Domain : Ergebnisdaten
+Domain --> API : Aufbereitete Daten
+API --> UI : REST-Response (JSON)
+UI --> Benutzer : Darstellung der Ergebnisse
+@enduml
+
+----
+
+=== Wesentliche Abstraktionen
+* Benutzer
+* Finanzdatensatz (Einnahme / Ausgabe)
+* Kategorie
+* Auswertung
+* Zeitintervall
+
+== Softwaredokumentation
+Dieses Kapitel beschreibt die zentralen Module, Komponenten und Funktionen der Anwendung.
+Ziel ist es, neuen Entwicklern einen schnellen Überblick über den Aufbau und die Verantwortlichkeiten der Software zu geben.
+
+=== Aufbau der Software
+
+==== Ornderstruktur
+
+----
+projekt-root/
+├── public/
+│   └── config/
+│       └── runtimeConfig.json
+│
+├── assets/
+│   ├── images/
+│   └── styles/
+│
+├── components/
+│   ├── common/
+│   ├── layout/
+│   └── feature/
+│
+├── composables/
+│   └── useApi.ts
+│
+├── layouts/
+│   └── default.vue
+│
+├── pages/
+│   ├── index.vue
+│   ├── login.vue
+│   ├── dashboard.vue
+│   └── admin.vue
+│
+├── services/
+│   ├── apiService.ts
+│   ├── authService.ts
+│   └── userService.ts
+│
+├── middleware/
+│   └── auth.ts
+│
+├── plugins/
+│   └── axios.ts
+│
+├── utils/
+│   └── formatter.ts
+│
+├── app.vue
+├── nuxt.config.ts
+├── package.json
+└── README.md
+----
+
+==== Beschreibung der Hauptordner
+
+[cols="1,3",options="header"]
+|===
+| Ordner | Beschreibung
+
+| public
+| Enthält statische Dateien, die unverändert ausgeliefert werden. Die
+Laufzeitkonfiguration der Anwendung wird hier abgelegt.
+
+| assets
+| Enthält statische Ressourcen wie Bilder und Stylesheets, die beim Build-Prozess
+verarbeitet und integriert werden.
+
+| components
+| Wiederverwendbare UI-Komponenten der Anwendung, strukturiert nach allgemeinen,
+Layout- und fachlichen Komponenten.
+
+| composables
+| Wiederverwendbare Logik auf Basis der Vue Composition API, z. B. für API-Zugriffe.
+
+| layouts
+| Definiert das grundlegende Layout der Anwendung (z. B. Navigation, Footer).
+
+| pages
+| Seiten der Anwendung. Jede Datei entspricht einer Route innerhalb der Anwendung.
+
+| services
+| Kapselt die Kommunikation mit dem Backend sowie anwendungsnahe Geschäftslogik.
+
+| middleware
+| Middleware zur Zugriffskontrolle, insbesondere für geschützte Routen.
+
+| plugins
+| Initialisierung und Konfiguration externer Bibliotheken (z. B. HTTP-Clients).
+
+| utils
+| Allgemeine Hilfsfunktionen ohne direkten Bezug zur Benutzeroberfläche.
+|===
+
+==== Beschreibung ausgewählter Dateien
+
+[cols="1,3",options="header"]
+|===
+| Datei | Beschreibung
+
+| app.vue
+| Zentrale Einstiegskomponente der Anwendung.
+
+| nuxt.config.ts
+| Zentrale Konfigurationsdatei für das Nuxt-Framework.
+
+| package.json
+| Definiert Abhängigkeiten, Skripte und Metadaten des Projekts.
+
+| README.md
+| Enthält grundlegende Informationen zur Nutzung und zum Aufbau des Projekts.
+|===
+
+
+=== Klassen und Funktionen
+
+==== FinanzService
+* getTransactions(userId)
+* addTransaction(data)
+* deleteTransaction(id)
+* calculateBalance()
+
+=== Weiterführende Dokumentationen
+* https://nuxt.com/docs
+* https://vuejs.org
+* https://developer.mozilla.org
+
+=== Nächste Schritte der Entwicklung
+* Erweiterte Auswertungen
+* Benutzerverifikation
+* Rechtliche Hinweise (Impressum, DSGVO)
