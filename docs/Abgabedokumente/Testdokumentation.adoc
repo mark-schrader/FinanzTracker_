@@ -1,1 +1,177 @@
-Test
+= Test Cases: {project-name}
+Til Guhlmann <til.guhlmann@stud.htw-dresden.de>; Enna Scheer <enna.scheer@stud.htw-dresden.de>; Emujin Uuganbayar <emujin.uuganbayar@stud.htw-dresden.de>; Erik Vogt <erik.vogt@stud.htw-dresden.de>; Justus Müller <justus.mueller@stud.htw-dresden.de>; Mark Schrader <smark.schrader@stud.htw-dresden.de>; Khanh Ly La <khanhly.la@stud.htw-dresden.de>
+{localdatetime} 
+include::../_includes/default-attributes.inc.adoc[]
+// Platzhalter für weitere Dokumenten-Attribute
+
+== Zweck und Ziel
+Dieses Dokument beschreibt die getesteten Module und Komponenten der Anwendung {project-name}. Es dient als Referenz für das Testteam und andere Stakeholder, um einen Überblick über die durchgeführten Tests und deren Ergebnisse zu erhalten. Ziel ist es, die Qualität und Zuverlässigkeit der Software sicherzustellen, indem alle kritischen Funktionen und Komponenten gründlich getestet werden.
+
+== Testkonzept und Architektur
+Das Testkonzept umfasst fünf Haupttestarten: Unit Tests, Integrationstests, Datenbanktests und End-to-End (E2E) Tests sowie Abnahmetests. Jede Testart hat eine spezifische Architektur und einen definierten Zweck innerhalb des Testprozesses. Manuelle Tests werden nicht explizit in diesem Dokument behandelt, da der Fokus auf automatisierten Tests liegt. Dennoch können manuelle Tests ergänzend eingesetzt werden, um spezifische Szenarien zu überprüfen, die möglicherweise nicht durch automatisierte Tests abgedeckt sind.
+
+*Unit Tests Ebene:*
+
+In dieser Ebene werden Tests in isolierten Umgebungen durchgeführt. Sie testen einzelne Funktionen der Module unabhängig voneinander. Es wird zwischen Frontend und Backend Unit Tests unterschieden.
+
+- *Frontend Unit Tests:* Testen Vue-Komponenten und Composables in Isolation mit vitest und @vue/test-utils. Mock-Daten werden verwendet, um Abhängigkeiten vom Backend zu eliminieren.
+
+- *Backend Unit Tests:* Testen einzelne API-Funktionen und Geschäftslogik isoliert. Mock-Daten ersetzen Datenbankzugriffe und externe Abhängigkeiten.
+
+*Integrations Ebene (Whitebox-Tests):*
+
+Auf dieser Ebene werden mehrere Module integriert getestet, um deren Zusammenspiel und interne Funktionsweise zu prüfen. Eine Test-PostgreSQL-Datenbank wird mittels Docker-Container bereitgestellt. Die Tests haben direkten Zugriff auf die interne Datenschicht (Prisma ORM) und überprüfen Geschäftslogik, API-Funktionalität und Datenbankinteraktionen gemeinsam.
+
+*Datenbanktests Ebene:*
+
+Datenbanktests werden mit pgTab und PostgreSQL durchgeführt, um die Integrität und Korrektheit der Datenbankstruktur zu überprüfen. Die Tests validieren Tabellenstrukturen, Constraints, Foreign Key Beziehungen und Migrationen. Sie stellen sicher, dass die vom Prisma ORM generierten Datenbankschemas den erwarteten Spezifikationen entsprechen.
+
+*System Tests (E2E):*
+
+System Tests überprüfen wichtige End-to-End-Workflows vom Frontend der Anwendung und stellen sicher, dass Frontend und Backend nahtlos zusammenarbeiten. Das Frontend wird mittels automatisierter Klickroutinen (Playwright) getestet. Diese Tests laufen in einer vollständigen Anwendungsumgebung (Frontend + Backend), ohne das Backend zu mocken, um eine realistische Testumgebung zu gewährleisten.
+
+
+Testarten Übersicht:
+[cols="2,3", options="header"]
+|===
+| Testart | Verwendete Frameworks / Tools
+
+| Unit Test Frontend
+| vitest, @vue/test-utils, happy-dom
+
+| Unit Test Backend
+| vitest
+
+| Integration Test (Backend)
+| vitest, Prisma, PostgreSQL, Docker, dotenv
+
+| E2E Test
+| Playwright
+
+| DB Tests
+| pgTab 
+|===
+
+== Testdokumentation und Berichterstattung
+
+Es erfolgt eine manuelle Dokumentation der Tests in den jeweiligen Task-Tickets in GitHub. Dort werden die durchgeführten Tests, deren Ergebnisse und eventuelle Abweichungen festgehalten. Tests werden priorisiert nach kritischen Funktionen durchgeführt, um sicherzustellen, dass die wichtigsten Anwendungsbereiche fehlerfrei funktionieren. Anschließend werden weitere Tests für weniger kritische Funktionen durchgeführt, um eine umfassende Testabdeckung zu gewährleisten. Es wird sich an die Vorgaben der Akzeptanzkriterien gehalten, um die Anforderungen der User Stories zu erfüllen. Wenn ein Test erfolgreich war, kann das entsprechende Akzeptanzkriterium als erfüllt markiert und das Ticket geschlossen werden. Bei einem fehlgeschlagenen Test wird das Ticket mit den Fehlerdetails aktualisiert und als Bug gekennzeichnet, um Nachverfolgung und Behebung zu ermöglichen.
+
+== Getestete Komponenten
+
+=== Frontend Unit Tests
+
+Pfad: src/nuxt-finanztracker_/test/unit/Frontend
+
+Geprüft wurden:
+
+Ausgaben:
+
+    - Ausgaben Modul anzeigen
+    - Ausgabenerfassung abbrechen
+
+Darkmode:
+
+    - Wechsel zwischen Hell- und Dunkelmodus (beide Richtungen)
+
+Dauerauftrag:
+
+    - Bestätigungs-Popup zum Löschen eines Dauerauftrags
+    - Bearbeiten-Popup eines Dauerauftrags
+    - Öffnen des Dauerauftrag-Verwaltungsmodals
+
+Einnahmen:
+
+    - Einnahme Popup abbrechen
+    - Einnahme Kategorie anzeigen
+
+Export:
+
+    - Default Export Auswahl
+    - Dateiname Eingabe
+    - Eingrenzung des Datumsbereichs
+
+Kategorien:
+
+    - Kategorie erstellen
+    - Kategorie Popup öffnen
+
+Kontobewegungstabelle:
+
+    - Einnahme löschen Popup anzeigen
+    - Ausgabe löschen Popup anzeigen
+    - Kontobewegung Tabelle Anzeige, Suche, Bearbeitung, Löschung
+
+
+=== Backend Unit Tests
+
+Pfad: src/nuxt-finanztracker_/test/unit/Backend
+
+Geprüft wurden:
+
+- Kategorien-API Endpunkte (Abrufen, Erstellen, Aktualisieren, Löschen)
+- Einnahme und Ausgabe API-Funktionen
+- Validierung von Eingabeparametern
+- Error-Handling und Exception-Management
+
+=== Integration Tests
+
+Pfad: src/nuxt-finanztracker_/test/integration/
+
+Geprüft wurden:
+
+- Kategorien: Erstellung, Abrufen, Aktualisierung in Datenbank
+- Kategorien Performance-Test mit realen Datenbankabfragen
+- Kategorie-Farb-Eigenschaft und deren Persistierung
+- Einnahmen: Erstellung, Speicherung, Abrufen aus Datenbank
+- Ausgaben: Erstellung, Speicherung, Abrufen aus Datenbank
+- Datenbankzustand nach Transaktionen validieren
+
+
+=== System Tests (E2E)
+
+Pfad: src/nuxt-finanztracker_/test/e2e/
+
+Geprüft wurden:
+
+- User-Authentifizierung (Login, Registrierung)
+- Dashboard-Navigation und -Anzeige
+- Einnahmen-Workflow (Erstellen, Anzeigen, Bearbeiten)
+- Ausgaben-Workflow (Erstellen, Anzeigen, Bearbeiten)
+- Kategorien-Management über UI
+- Export-Funktionalität
+- Daueraufträge-Verwaltung
+
+
+=== Datenbanktests
+
+Pfad: Datenbankschema und -struktur in src/nuxt-finanztracker_/prisma/schema.prisma
+
+Geprüft wurden:
+
+- Tabellenstruktur und Spalten-Datentypen
+- Primary Key und Unique Constraints
+- Foreign Key Beziehungen zwischen Tabellen
+- Index-Definitionen und Datenbankperformance
+- Datenvollständigkeit und Konsistenz der Datenbankmigrationen
+
+=== Abnahmetests
+Abnahmetests werden nicht explizit in diesem Dokument behandelt, da der Fokus auf automatisierten Tests liegt. 
+
+Eine Abnahme erfolgt durch den Produkt-Owner nach erfolgreichem Bestehen der automatisierten Tests und der Erfüllung der Akzeptanzkriterien für die jeweiligen User Stories.
+
+== GitHub Actions
+Die Testarten sind in die CI/CD-Pipeline von GitHub Actions integriert. Bei Pull-Request in den Main Branch werden die Tests automatisch ausgeführt, um sicherzustellen, dass neue Änderungen keine bestehenden Funktionen beeinträchtigen.
+
+Tabelle der GitHub Actions Workflows:
+[cols="3,4", options="header"]
+|===
+| Workflow Name | Beschreibung
+| Tests | Führt Unit Tests (Frontend und Backend) sowie Integration Tests aus, um die Codequalität einzelner Module und deren Zusammenspiel sicherzustellen.
+| E2E/Playwright | Führt System Tests (End-to-End) mit Playwright aus, um wichtige Workflows in der vollständigen Anwendung zu überprüfen.
+| Database Tests | Validiert die Datenbankstruktur und Constraints mit pgTab und PostgreSQL.
+| Supabase Deployment | Automatisiert die Bereitstellung der Anwendung auf Supabase nach erfolgreichem Bestehen aller Tests.
+|===
+
+== Lokales Testen der Anwendung
+Um die Anwendung lokal zu testen, führe die Schritte in der README.md Datei im folgenden Pfad aus: 
+src/nuxt-finanztracker_/test/README.md
