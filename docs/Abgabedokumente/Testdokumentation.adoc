@@ -31,7 +31,12 @@ Datenbanktests werden mit pgTab und PostgreSQL durchgeführt, um die Integrität
 System Tests überprüfen wichtige End-to-End-Workflows vom Frontend der Anwendung und stellen sicher, dass Frontend und Backend nahtlos zusammenarbeiten. Das Frontend wird mittels automatisierter Klickroutinen (Playwright) getestet. Diese Tests laufen in einer vollständigen Anwendungsumgebung (Frontend + Backend), ohne das Backend zu mocken, um eine realistische Testumgebung zu gewährleisten.
 
 
-Testarten Übersicht:
+*Testarten Übersicht:*
+
+
+.Testpyramide der Teststrategie
+image::Testpyramide.png[Testpyramide, width=600]
+
 [cols="2,3", options="header"]
 |===
 | Testart | Verwendete Frameworks / Tools
