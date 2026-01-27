@@ -138,13 +138,12 @@ Pfad: src/nuxt-finanztracker_/test/e2e/
 
 Geprüft wurden:
 
-- User-Authentifizierung (Login, Registrierung)
-- Dashboard-Navigation und -Anzeige
-- Einnahmen-Workflow (Erstellen, Anzeigen, Bearbeiten)
-- Ausgaben-Workflow (Erstellen, Anzeigen, Bearbeiten)
-- Kategorien-Management über UI
-- Export-Funktionalität
-- Daueraufträge-Verwaltung
+- User-Authentifizierung (funktion Login)
+- Challange: Buttons vorhanden
+- Reiter-Navigation
+- Dashboard: Kontostand vorhanden, Diagramm-Überschrift einsehbar, manueller Zeitraum ansprechbar
+- Kontobewegung: Einnahme- und Ausgabenerfassung, Dauerauftrag und Kategorie-Verwalten Modal vorhanden
+- Export: Überschrift vorhanden
 
 
 === Datenbanktests
@@ -180,3 +179,6 @@ Tabelle der GitHub Actions Workflows:
 == Lokales Testen der Anwendung
 Um die Anwendung lokal zu testen, führe die Schritte in der README.md Datei im folgenden Pfad aus: 
 src/nuxt-finanztracker_/test/README.md
+
+== Probleme
+
