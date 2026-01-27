@@ -145,14 +145,15 @@ Geprüft wurden:
 === Datenbanktests
 
 Pfad: Datenbankschema und -struktur in src/nuxt-finanztracker_/prisma/schema.prisma
+Getestet mit SQL-Befehlen
 
 Geprüft wurden:
 
-- Tabellenstruktur und Spalten-Datentypen
-- Primary Key und Unique Constraints
-- Foreign Key Beziehungen zwischen Tabellen
-- Index-Definitionen und Datenbankperformance
-- Datenvollständigkeit und Konsistenz der Datenbankmigrationen
+- Existieren die geforderten Tabellen
+- Ist Row-Level-Security aktiviert
+- Kann ein Testuser erstellt werden
+- Kann der Testuser ein Budget, Goal, Einnahme, Ausgabe oder Kategorie erstellen 
+- Kann ein Testuser 2 die erstellten Daten von Testuser1 sehen(Row-Level-Security)
 
 === Abnahmetests
 Abnahmetests werden nicht explizit in diesem Dokument behandelt, da der Fokus auf automatisierten Tests liegt. 
