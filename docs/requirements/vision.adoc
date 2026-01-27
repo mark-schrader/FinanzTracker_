@@ -102,15 +102,15 @@ Die Verfeinerung der Stakeholder, die das System benutzen, wird in der "ux-conze
 [%header, cols="4,1,4,1"]
 |===
 | Bedarf | Priorität | Features / Funktionen | Geplantes Release
-| Transparente Erfassung von Einnahmen | hoch | Möglichkeit zur manuellen Eingabe von Einnahmen inkl. Datum, Betrag, Kategorie | SE1
+| Transparente Erfassung von Einnahmen | hoch | Möglichkeit zur manuellen Eingabe von Einnahmen inkl. Datum, Betrag, Kategorie, Zyklus | SE1
 
-| Transparente Erfassung von Ausgaben | hoch |  Erfassung von Ausgaben inkl. Betrag, Datum, Kategorie sowie Wiederholungseinstellungen | SE1
+| Transparente Erfassung von Ausgaben | hoch |  Möglichkeit zur manuellen Eingabe von Ausgaben inkl. Datum, Betrag, Kategorie, Zyklus | SE1
 
 | Kategorisierung von Einnahmen und Ausgaben | mittel | System zur Verwaltung und Anpassung von Kategorien | SE1
 
 | Übersicht über aktuelle Finanzen | hoch | Dashboard mit grafischer und tabellarischer Darstellung aktueller Finanzlage | SE1
 
-| Einfache und verständliche Nutzung | hoch | Intuitives und minimalistisches UI für einfache Bedienung |  SE1
+| Einfache und verständliche Nutzung | hoch | Intuitives und minimalistisches Oberfläche für einfache Bedienung |  SE1
 
 | Sicherer Zugang zum System | hoch | Registrierung, Anmeldung und Abmeldung mittels Benutzername und Passwort | SE2
 
@@ -118,11 +118,11 @@ Die Verfeinerung der Stakeholder, die das System benutzen, wird in der "ux-conze
 
 | Angenehme Nutzung bei unterschiedlichen Lichtverhältnissen | gering | Dunkles Farbschema für angenehme Nutzung bei wenig Licht (Dark Mode) |  SE2
 
-| Individuelle Anpassung der Darstellung | gering | Benutzerdefinierte Gestaltung von Farben, Diagrammen und Zeitraumfiltern |  SE2
+| Individuelle Anpassung der Darstellung | gering | Benutzerdefinierte Gestaltung von Diagrammen und Zeitraumfiltern |  SE2
 
-| Modulares Layout (Entfernen von Modulen möglich) | gering | Frei anpassbares Interface, bei dem einzelne Module ein-/ausblendbar sind |  SE2
+| Modulares Layout (Entfernen von Modulen möglich) | gering | Frei anpassbares Dashboard, bei dem einzelne Module ein- oder ausblendbar sind |  SE3
 
-| Reduzierung manueller Wiederholungseingaben | mittel |Automatische Übernahme wiederkehrender Einnahmen und Ausgaben in das nächste Intervall (Dauerauftrag) |  SE2
+| Reduzierung manueller Wiederholungseingaben | mittel |Automatisches Kopieren der wiederkehrenden Einnahmen und Ausgaben nach dem angegebenen Zyklus (Dauerauftrag) |  SE2
 
 | Externe Nutzung und Archivierung von Finanzdaten |  mittel | Export als CSV, Excel oder PDF zur Archivierung oder Analyse |  SE3
 
