@@ -6,7 +6,7 @@ Til Guhlmann <til.guhlmann@stud.htw-dresden.de>; Enna Scheer <enna.scheer@stud.h
 
 
 == Einführung
-Dieses Dokuments zeigt die wesentlichen Bedarfe und Funktionalitäten des Systems *Pleitegeier*. Der Fokus liegt auf den Fähigkeiten, die von Stakeholdern und adressierten Nutzern benötigt werden, und der Begründung dieser. Die Details, wie das System *Pleitegeier* diese Bedarfe erfüllt, werden durch _User Stories_ im _Product Backlog_ sowie dem _UX-Konzept_ beschrieben.
+Dieses Dokument zeigt die wesentlichen Bedarfe und Funktionalitäten des Systems *Pleitegeier*. Der Fokus liegt auf den Fähigkeiten, die von Stakeholdern und adressierten Nutzern benötigt werden, und der Begründung dieser. Die Details, wie das System *Pleitegeier* diese Bedarfe erfüllt, werden durch _User Stories_ im _Product Backlog_ sowie dem _UX-Konzept_ beschrieben.
 
 === Zweck
 Der Zweck dieses Dokuments ist es, die wesentlichen Anforderungen an das System aus Sicht und mit den Begriffen der künftigen Anwender zu beschreiben.
@@ -102,44 +102,44 @@ Die Verfeinerung der Stakeholder, die das System benutzen, wird in der "ux-conze
 [%header, cols="4,1,4,1"]
 |===
 | Bedarf | Priorität | Features / Funktionen | Geplantes Release
-| Eintragen von Finanzeinnahmen | hoch | Möglichkeit zur manuellen Eingabe von Einnahmen inkl. Datum, Betrag, Kategorie | SE1
+| Transparente Erfassung von Einnahmen | hoch | Möglichkeit zur manuellen Eingabe von Einnahmen inkl. Datum, Betrag, Kategorie | SE1
 
-| Eintragen von Finanzausgaben | hoch |  Erfassung aller Ausgaben mit Tags/Kategorien und Wiederholungseinstellungen | SE1
+| Transparente Erfassung von Ausgaben | hoch |  Erfassung von Ausgaben inkl. Betrag, Datum, Kategorie sowie Wiederholungseinstellungen | SE1
 
 | Kategorisierung von Einnahmen und Ausgaben | mittel | System zur Verwaltung und Anpassung von Kategorien | SE1
 
 | Übersicht über aktuelle Finanzen | hoch | Dashboard mit grafischer und tabellarischer Darstellung aktueller Finanzlage | SE1
 
-| Simples Layout | hoch | Intuitives und minimalistisches UI für einfache Bedienung |  SE1
+| Einfache und verständliche Nutzung | hoch | Intuitives und minimalistisches UI für einfache Bedienung |  SE1
 
-| Anmelden und Ausloggen | hoch | Authentifizierung durch Username und Password | SE2
+| Sicherer Zugang zum System | hoch | Registrierung, Anmeldung und Abmeldung mittels Benutzername und Passwort | SE2
 
-| Spar-challenges | mittel | Vordefinierte oder benutzerdefinierte Challenges mit Fortschrittsanzeige |  SE2
+| Motivation zum Sparen | mittel | Vordefinierte oder benutzerdefinierte Challenges mit Fortschrittsanzeige |  SE2
 
-| Dark-Mode | gering | Dunkles Farbschema für angenehme Nutzung bei wenig Licht |  SE2
+| Angenehme Nutzung bei unterschiedlichen Lichtverhältnissen | gering | Dunkles Farbschema für angenehme Nutzung bei wenig Licht (Dark Mode) |  SE2
 
-| Individuelle anpassbare Elemente | gering | Benutzerdefinierte Gestaltung von Farben, Diagrammen und Zeitraumfiltern |  SE2
+| Individuelle Anpassung der Darstellung | gering | Benutzerdefinierte Gestaltung von Farben, Diagrammen und Zeitraumfiltern |  SE2
 
 | Modulares Layout (Entfernen von Modulen möglich) | gering | Frei anpassbares Interface, bei dem einzelne Module ein-/ausblendbar sind |  SE2
 
-| Wiederkehrende Ausgaben automatisch ins nächste Semester übernehmen | mittel | Automatisches Kopieren der wiederkehrenden Ausgaben ins neue Semester (Grundkonzept) |  SE2
+| Reduzierung manueller Wiederholungseingaben | mittel |Automatische Übernahme wiederkehrender Einnahmen und Ausgaben in das nächste Intervall (Dauerauftrag) |  SE2
 
-| Finanzdaten-Export |  mittel | Export als CSV, Excel oder PDF zur Archivierung oder Analyse |  SE3
+| Externe Nutzung und Archivierung von Finanzdaten |  mittel | Export als CSV, Excel oder PDF zur Archivierung oder Analyse |  SE3
 
-| Prognosen | gering | Vorhersage zukünftiger Finanzentwicklungen basierend auf bisherigen Daten | SE3
+| Unterstützung bei finanzieller Planung | gering | Prognosen zukünftiger Finanzentwicklungen basierend auf bisherigen Daten | SE3
 
-| Zweite Sprache (Englisch) | gering |  Umschaltfunktion zwischen Deutsch und Englisch |  SE3
+| Nutzung durch nicht-deutschsprachige Anwender | gering |  Umschaltfunktion zwischen Deutsch und Englisch |  SE3
 
 |===
-Wir mussten uns dazu entscheiden, die Export- und Prognosefunktion sowie die Option für eine zweite Sprache im Rahmen von Software Engineering 2 nicht mehr umzusetzen. Hauptgrund dafür war die umfangreiche Umstrukturierung unseres Backends, die deutlich mehr Zeit in Anspruch nahm als erwartet und unseren Zeitplan spürbar verzögert hat. Während dieser Phase konnten wir vor allem das Frontend weiterentwickeln und erst später die Verbindung zwischen Frontend und Backend herstellen. Im Team haben wir gemeinsam beschlossen, dass das Testen der bereits implementierten Funktionen eine höhere Priorität hat als die Entwicklung neuer Features. Daher konzentrieren wir uns nun darauf, die noch fehlenden relevanten Funktionen fertigzustellen und umfassende Softwaretests durchzuführen. 
+Wir mussten uns dazu entscheiden, die Prognosefunktion sowie die Option für eine zweite Sprache (Englisch) im Rahmen von Software Engineering 2 nicht mehr umzusetzen. Die Exportfunktion konnten wir nur teilweise realisieren, indem wir einen PDF-Export für Kontobewegungen (alle Transaktionen) implementiert haben. Weitergehende Exportvarianten (z. B. CSV oder Excel) wurden aus Zeitgründen zurückgestellt. Hauptgrund dafür war die umfangreiche Umstrukturierung unseres Backends, die deutlich mehr Zeit in Anspruch nahm als erwartet und unseren Zeitplan spürbar verzögert hat. Während dieser Phase konnten wir vor allem das Frontend weiterentwickeln und erst später die Verbindung zwischen Frontend und Backend herstellen. Im Team haben wir gemeinsam beschlossen, dass das Testen der bereits implementierten Funktionen eine höhere Priorität hat als die Entwicklung neuer Features. Daher konzentrieren wir uns nun darauf, die noch fehlenden relevanten Funktionen fertigzustellen und umfassende Softwaretests durchzuführen. 
 
 === Zusätzliche Produktanforderungen
 //Zutreffendes angeben, nicht zutreffendes streichen oder auskommentieren
 [%header, cols="4,1,1"]
 |===
 | Anforderung | Priorität | Geplantes Release
-| Rechnungs -& Belegscanner | nicht wichtig | SE4
-| AI-basierter Finanzcoach | nicht wichtig | SE4
-| Offline-Funktionalität | sehr wichtig | SE3
-| 2-Faktor-Authentifizierung | sehr wichtig | SE3
+| Offline-Funktionalität | hoch | SE3
+| 2-Faktor-Authentifizierung | hoch | SE3
+| Rechnungs -& Belegscanner | gering | SE4
+| AI-basierter Finanzcoach | gering | SE4
 |===
