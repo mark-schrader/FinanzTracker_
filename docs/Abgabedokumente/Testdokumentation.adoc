@@ -69,42 +69,63 @@ Pfad: src/nuxt-finanztracker_/test/unit/Frontend
 
 Geprüft wurden:
 
-Ausgaben:
+.Ausgaben
+[cols="2,3", options="header"]
+|===
+| Prüfpunkt | Testdatei
+| Ausgaben Modul anzeigen | `test/unit/frontend/Test_ausgabe/Kontobewegung.expense.category.select.spec.ts`
+| Ausgabenerfassung abbrechen | `test/unit/frontend/Test_ausgabe/Kontobewegung.expense.popup.cancel.spec.ts`
+|===
 
-    - Ausgaben Modul anzeigen
-    - Ausgabenerfassung abbrechen
+.Darkmode
+[cols="2,3", options="header"]
+|===
+| Prüfpunkt | Testdatei
+| Wechsel zwischen Hell- und Dunkelmodus (beide Richtungen) | `test/unit/frontend/Test_darkmode/DarkMode.spec.ts`
+|===
 
-Darkmode:
+.Dauerauftrag
+[cols="2,3", options="header"]
+|===
+| Prüfpunkt | Testdatei
+| Bestätigungs-Popup zum Löschen eines Dauerauftrags | `test/unit/frontend/Test_dauerauftrag/Kontobewegung.dauerauftrag.popup.delete.spec.ts`
+| Bearbeiten-Popup eines Dauerauftrags | `test/unit/frontend/Test_dauerauftrag/Kontobewegung.dauerauftrag.popup.edit.spec.ts`
+| Öffnen des Dauerauftrag-Verwaltungsmodals | `test/unit/frontend/Test_dauerauftrag/Kontobewegung.dauerauftrag.popup.open.spec.ts`
+|===
 
-    - Wechsel zwischen Hell- und Dunkelmodus (beide Richtungen)
+.Einnahmen
+[cols="2,3", options="header"]
+|===
+| Prüfpunkt | Testdatei
+| Einnahme Popup abbrechen | `test/unit/frontend/Test_einnahme/Kontobewegung.income.popup.cancel.spec.ts`
+| Einnahme Kategorie anzeigen | `test/unit/frontend/Test_einnahme/Kontobewegung.incomes.category.select.spec.ts`
+|===
 
-Dauerauftrag:
+.Export
+[cols="2,3", options="header"]
+|===
+| Prüfpunkt | Testdatei
+| Default Export Auswahl | `test/unit/frontend/Test_export/Export.default.selection.spec.ts`
+| Dateiname Eingabe | `test/unit/frontend/Test_export/Export.filename.input.spec.ts`
+| Eingrenzung des Datumsbereichs | `test/unit/frontend/Test_export/Export.no.data.selected.spec.ts`
+|===
 
-    - Bestätigungs-Popup zum Löschen eines Dauerauftrags
-    - Bearbeiten-Popup eines Dauerauftrags
-    - Öffnen des Dauerauftrag-Verwaltungsmodals
+.Kategorien
+[cols="2,3", options="header"]
+|===
+| Prüfpunkt | Testdatei
+| Kategorie erstellen | `test/unit/frontend/Test_Kategorie/categoryManager.Category.create.spec.ts`
+| Kategorie Popup öffnen | `test/unit/frontend/Test_Kategorie/categoryManager.Category.popup.open.spec.ts`
+|===
 
-Einnahmen:
-
-    - Einnahme Popup abbrechen
-    - Einnahme Kategorie anzeigen
-
-Export:
-
-    - Default Export Auswahl
-    - Dateiname Eingabe
-    - Eingrenzung des Datumsbereichs
-
-Kategorien:
-
-    - Kategorie erstellen
-    - Kategorie Popup öffnen
-
-Kontobewegungstabelle:
-
-    - Einnahme löschen Popup anzeigen
-    - Ausgabe löschen Popup anzeigen
-    - Kontobewegung Tabelle Anzeige, Suche, Bearbeitung, Löschung
+.Kontobewegungstabelle
+[cols="2,3", options="header"]
+|===
+| Prüfpunkt | Testdatei
+| Einnahme löschen Popup anzeigen | `test/unit/frontend/Test_kontobewegungstabelle/Kontobewegung.income.popup.delete.spec.ts`
+| Ausgabe löschen Popup anzeigen | `test/unit/frontend/Test_kontobewegungstabelle/Kontobewegung.expense.popup.delete.spec.ts`
+| Kontobewegung Tabelle Anzeige, Suche, Bearbeitung, Löschung | `test/unit/frontend/Test_kontobewegungstabelle/Kontobewegung.table.render.spec.ts`
+|===
 
 
 === Backend Unit Tests
@@ -113,10 +134,14 @@ Pfad: src/nuxt-finanztracker_/test/unit/Backend
 
 Geprüft wurden:
 
-- Kategorien-API Endpunkte (Abrufen, Erstellen, Aktualisieren, Löschen)
-- Einnahme und Ausgabe API-Funktionen
-- Validierung von Eingabeparametern
-- Error-Handling und Exception-Management
+[cols="2,3", options="header"]
+|===
+| Prüfpunkt | Testdatei
+| Kategorien-API Endpunkte (Abrufen, Erstellen, Aktualisieren, Löschen) | `test/unit/backend/category.service.spec.ts`
+| Einnahme und Ausgabe API-Funktionen | `test/unit/backend/getAllTransactions.spec.ts`, `test/unit/backend/diff.income.expenses.spec.ts`
+| Validierung von Eingabeparametern | `test/unit/backend/refreshbugetafterinput.spec.ts`
+| Error-Handling und Exception-Management | Integriert in einzelnen Test-Dateien
+|===
 
 === Integration Tests
 
@@ -124,12 +149,16 @@ Pfad: src/nuxt-finanztracker_/test/integration/
 
 Geprüft wurden:
 
-- Kategorien: Erstellung, Abrufen, Aktualisierung in Datenbank
-- Kategorien Performance-Test mit realen Datenbankabfragen
-- Kategorie-Farb-Eigenschaft und deren Persistierung
-- Einnahmen: Erstellung, Speicherung, Abrufen aus Datenbank
-- Ausgaben: Erstellung, Speicherung, Abrufen aus Datenbank
-- Datenbankzustand nach Transaktionen validieren
+[cols="1, 2", options="header"]
+|===
+| Prüfpunkt | Testdatei
+| Kategorien: Erstellung, Abrufen, Aktualisierung in Datenbank | `test/integration/backend/category.create.spec.ts`, `test/integration/backend/category.newcategoryinlist.spec.ts`
+| Kategorien Performance-Test mit realen Datenbankabfragen | `test/integration/backend/category.performance.spec.ts`
+| Kategorie-Farb-Eigenschaft und deren Persistierung | `test/integration/backend/category.color.spec.ts`
+| Einnahmen: Erstellung, Speicherung, Abrufen aus Datenbank | `test/integration/backend/transaction.income.delete.spec.ts`
+| Ausgaben: Erstellung, Speicherung, Abrufen aus Datenbank | `test/integration/backend/transaction.expense.delete.spec.ts`
+| Datenbankzustand nach Transaktionen validieren | In allen Integrationstests implementiert
+|===
 
 
 === System Tests (E2E)
@@ -138,25 +167,34 @@ Pfad: src/nuxt-finanztracker_/test/e2e/
 
 Geprüft wurden:
 
-- User-Authentifizierung (funktion Login)
-- Challange: Buttons vorhanden
-- Reiter-Navigation
-- Dashboard: Kontostand vorhanden, Diagramm-Überschrift einsehbar, manueller Zeitraum ansprechbar
-- Kontobewegung: Einnahme- und Ausgabenerfassung, Dauerauftrag und Kategorie-Verwalten Modal vorhanden
-- Export: Überschrift vorhanden
+[cols="3, 2", options="header"]
+|===
+| Prüfpunkt | Testdatei
+| User-Authentifizierung (funktion Login) | `test/e2e/index/index.spec.ts`
+| Challange: Buttons vorhanden | `test/e2e/challenge/challenge.spec.ts`
+| Reiter-Navigation | `test/e2e/index/index.spec.ts`
+| Dashboard: Kontostand vorhanden, Diagramm-Überschrift einsehbar, manueller Zeitraum ansprechbar | `test/e2e/dashboard/dashboard.spec.ts`
+| Kontobewegung: Einnahme- und Ausgabenerfassung, Dauerauftrag und Kategorie-Verwalten Modal vorhanden | `test/e2e/kontobewegung/kontobewegung.spec.ts`
+| Export: Überschrift vorhanden | `test/e2e/export/export.spec.ts`
+|===
 
 
 === Datenbanktests
 
-Pfad: Datenbankschema und -struktur in src/nuxt-finanztracker_/prisma/schema.prisma
+Datenbankschema und -struktur: src/nuxt-finanztracker_/prisma/schema.prisma
+Supabase Database Tests: src/nuxt-finanztracker_/supabase/tests/database/
 
 Geprüft wurden:
 
-- Tabellenstruktur und Spalten-Datentypen
-- Primary Key und Unique Constraints
-- Foreign Key Beziehungen zwischen Tabellen
-- Index-Definitionen und Datenbankperformance
-- Datenvollständigkeit und Konsistenz der Datenbankmigrationen
+[cols="3,2", options="header"]
+|===
+| Prüfpunkt | Testdatei
+| Existieren die geforderten Tabellen | `supabase/tests/database/00_table_test.sql`
+| Ist Row-Level-Security aktiviert | `supabase/tests/database/01_rls_test.sql`
+| Kann ein Testuser erstellt werden | `supabase/tests/database/00_table_test.sql`, `supabase/tests/database/01_rls_test.sql`
+| Kann der Testuser ein Budget, Goal, Einnahme, Ausgabe oder Kategorie erstellen | `supabase/tests/database/02_budget_test.sql`, `supabase/tests/database/03_goals_test.sql`, `supabase/tests/database/04_categories_test.sql`, `supabase/tests/database/05_incomes_test.sql`, `supabase/tests/database/06_expenses_test.sql`
+| Kann ein Testuser 2 die erstellten Daten von Testuser1 sehen(Row-Level-Security) | `supabase/tests/database/07_budget_security_test.sql`, `supabase/tests/database/08_goals_security_test.sql`, `supabase/tests/database/09_categories_security_test.sql`, `supabase/tests/database/10_incomes_security_test.sql`, `supabase/tests/database/11_expenses_security_test.sql`
+|===
 
 === Abnahmetests
 Abnahmetests werden nicht explizit in diesem Dokument behandelt, da der Fokus auf automatisierten Tests liegt. 
@@ -182,3 +220,8 @@ src/nuxt-finanztracker_/test/README.md
 
 == Probleme
 
+Zu spätes beginnen der Tests:
+Da die Tests erst relativ spät im Projekt begonnen wurden, konnten nicht alle Komponenten und Funktionen der Anwendung getestet werden. Dies führte zu einer unvollständigen Testabdeckung und möglicherweise unentdeckten Fehlern in nicht getesteten Bereichen.
+
+Testdriven Development (TDD) wurde nicht angewendet:
+Die Tests wurden nach der Implementierung der Funktionen geschrieben, anstatt vorab. Dies erschwerte die Identifikation von Fehlern während der Entwicklungsphase und führte zu einer reaktiven statt proaktiven Teststrategie.
