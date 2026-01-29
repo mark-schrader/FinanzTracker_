@@ -226,6 +226,8 @@ siehe softwaredocumentation.html
 
 === Weiterführende Dokumentationen
 * https://nuxt.com/docs
+* https://vuejs.org
+* https://developer.mozilla.org
 * https://tailwindcss.com/docs
 
 === Nächste Schritte der Entwicklung
@@ -234,3 +236,4 @@ siehe softwaredocumentation.html
 * Erweiterte Exportmöglichkeiten
 * Fertigstellung der Benutzerverwaltung
 * Mehrsprachigkeit
+* Rechtliche Hinweise (Impressum, DSGVO)
