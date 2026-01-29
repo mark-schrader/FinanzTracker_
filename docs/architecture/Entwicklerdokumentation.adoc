@@ -1,8 +1,9 @@
 :includedir: _includes
-include::../_includes/default-attributes.inc.adoc[]
 = Entwicklerdokumentation – Architecture Notebook
-:author: Til Guhlmann, Enna Scheer, Emujin Uuganbayar, Erik Vogt, Justus Müller, Mark Schrader, Khanh Ly La
-:email: til.guhlmann@stud.htw-dresden.de, enna.scheer@stud.htw-dresden.de, emujin.uuganbayar@stud.htw-dresden.de, erik.vogt@stud.htw-dresden.de, justus.mueller@stud.htw-dresden.de, mark.schrader@stud.htw-dresden.de, khanhly.la@stud.htw-dresden.de
+//:author: Til Guhlmann, Enna Scheer, Emujin Uuganbayar, Erik Vogt, Justus Müller, Mark Schrader, Khanh Ly La
+//:email: til.guhlmann@stud.htw-dresden.de, enna.scheer@stud.htw-dresden.de, emujin.uuganbayar@stud.htw-dresden.de, erik.vogt@stud.htw-dresden.de, justus.mueller@stud.htw-dresden.de, mark.schrader@stud.htw-dresden.de, khanhly.la@stud.htw-dresden.de
+include::../_includes/default-attributes.inc.adoc[]
+
 :revnumber: 1.1
 :revdate: {docdate}
 :doctype: book
@@ -237,3 +238,10 @@ siehe softwaredocumentation.html
 * Fertigstellung der Benutzerverwaltung
 * Mehrsprachigkeit
 * Rechtliche Hinweise (Impressum, DSGVO)
+
+
+== Link zum Repository und Project
+
+Repository: https://github.com/mark-schrader/FinanzTracker_
+
+Project: https://github.com/users/mark-schrader/projects/3
