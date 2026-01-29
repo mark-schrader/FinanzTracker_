@@ -130,6 +130,38 @@ plantuml::plantuml/components.puml[svg]
 
 === Schnittstellen
 
+==== Zusammenarbeit zwischen Komponenten
+
+Das folgende Sequenzdiagramm zeigt exemplarisch den Ablauf beim
+Speichern einer Einnahme oder Ausgabe und verdeutlicht die Zusammenarbeit
+zwischen Frontend, Backend und Datenbank.
+
+[plantuml, sequenz-transaktion, svg]
+----
+@startuml
+title Zusammenarbeit zwischen Komponenten – Speichern einer Transaktion
+
+actor Benutzer
+participant "Web UI\n(Frontend)" as UI
+participant "REST API\n(Backend)" as API
+participant "Service Layer" as Service
+participant "Repository" as Repo
+database "Datenbank\n(Supabase)" as DB
+
+Benutzer -> UI : Formular absenden
+UI -> API : POST /transactions (JSON)
+API -> Service : Validierung & Geschäftslogik
+Service -> Repo : persistiere Transaktion
+Repo -> DB : INSERT Transaktion
+DB --> Repo : Bestätigung
+Repo --> Service : Erfolg
+Service --> API : Ergebnis
+API --> UI : HTTP 201 Created
+UI --> Benutzer : Bestätigung anzeigen
+@enduml
+----
+
+
 ==== REST-Schnittstelle Frontend / Backend
 * Protokoll: HTTPS
 * Datenformat: JSON

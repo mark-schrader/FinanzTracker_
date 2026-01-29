@@ -1,29 +1,16 @@
 @startuml
-!include C4.puml
+title Container Diagram - Nuxt Finanztracker
 
-title Container Diagram (C4 – C2) – Nuxt Finanztracker
+actor Benutzer
 
-Person(user, "Benutzer")
-Person(admin, "Administrator")
-
-System_Boundary(system, "Nuxt Finanztracker") {
-
-  Container(frontend, "Web Frontend",
-    "Nuxt 3 (Vue.js)",
-    "Single-Page-Application")
-
-  Container(backend, "Backend API",
-    "Node.js / REST",
-    "Geschäftslogik und Persistenz")
-
-  ContainerDb(database, "Datenbank",
-    "Relationale DB",
-    "Speichert Benutzer- und Finanzdaten")
+package "Nuxt Finanztracker" {
+  component "Web Frontend\n(Nuxt 3 / Vue.js)" as Frontend
+  component "Backend API\n(Node.js / REST)" as Backend
 }
 
-Rel(user, frontend, "Nutzt", "HTTPS")
-Rel(admin, frontend, "Administriert", "HTTPS")
-Rel(frontend, backend, "API-Aufruf", "HTTPS / JSON")
-Rel(backend, database, "SQL")
+database "Datenbank\n(Supabase / PostgreSQL)" as DB
 
+Benutzer --> Frontend : nutzt (HTTPS)
+Frontend --> Backend : REST API\n(HTTPS / JSON)
+Backend --> DB : SQL
 @enduml
