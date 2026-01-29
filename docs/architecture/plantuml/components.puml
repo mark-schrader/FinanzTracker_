@@ -1,42 +1,22 @@
-@startuml
-!include C4.puml
+@startuml FrontendComponents
+title Component Diagram - Frontend (Nuxt 3)
 
-title Component Diagram (C4 – C3) – Nuxt Finanztracker Frontend
-
-Container_Boundary(frontend, "Nuxt 3 Frontend") {
-
-  Component(pages, "Pages",
-    "Nuxt Pages",
-    "Routing & Views")
-
-  Component(layouts, "Layouts",
-    "Nuxt Layouts",
-    "Grundlayout")
-
-  Component(components, "UI Components",
-    "Vue Components",
-    "Wiederverwendbare UI-Bausteine")
-
-  Component(composables, "Composables",
-    "Composition API",
-    "Wiederverwendbare Logik")
-
-  Component(services, "Services",
-    "TypeScript",
-    "API- & Authentifizierungslogik")
-
-  Component(middleware, "Middleware",
-    "Nuxt Middleware",
-    "Zugriffskontrolle")
+rectangle "Nuxt 3 Frontend" {
+  rectangle Pages
+  rectangle Layouts
+  rectangle "UI Components" as Components
+  rectangle Composables
+  rectangle "API Client" as ApiClient
+  rectangle Middleware
 }
 
-System_Ext(api, "Backend API", "REST API")
+rectangle "Backend API (extern)" as Backend
 
-Rel(pages, layouts, "verwendet")
-Rel(pages, components, "rendert")
-Rel(components, composables, "nutzt")
-Rel(composables, services, "ruft auf")
-Rel(services, api, "kommuniziert mit", "HTTPS / JSON")
-Rel(middleware, services, "validiert Zugriff")
+Pages --> Layouts : Verwendet
+Pages --> Components : Rendert
+Components --> Composables : Nutzt
+Composables --> ApiClient : Ruft auf
+ApiClient --> Backend : REST / JSON
+Middleware --> ApiClient : Zugriff pruefen
 
 @enduml

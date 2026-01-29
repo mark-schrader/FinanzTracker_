@@ -1,18 +1,13 @@
-@startuml
-!include c4.puml
+@startuml ContextDiagram
+title System Context Diagram - Nuxt Finanztracker
 
-title System Context Diagram (C4 – C1) – Nuxt Finanztracker
+rectangle Benutzer
 
-Person(user, "Benutzer",
-"Erfasst Einnahmen und Ausgaben und analysiert Finanzdaten")
+rectangle "Nuxt Finanztracker" as System
 
-Person(admin, "Administrator",
-"Verwaltet Benutzer und Systemeinstellungen")
+rectangle "Database (Supabase / PostgreSQL)" as DB
 
-System(finanztracker, "Nuxt Finanztracker",
-"Webbasierte Anwendung zur Verwaltung persönlicher Finanzdaten")
-
-Rel(user, finanztracker, "Nutzt", "HTTPS")
-Rel(admin, finanztracker, "Administriert", "HTTPS")
+Benutzer --> System : nutzt HTTPS
+System --> DB : liest / schreibt Daten
 
 @enduml

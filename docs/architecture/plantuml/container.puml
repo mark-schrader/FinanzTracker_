@@ -1,16 +1,14 @@
-@startuml
-title Container Diagram - Nuxt Finanztracker
-
+@startuml ContainerDiagram
 actor Benutzer
 
-package "Nuxt Finanztracker" {
-  component "Web Frontend\n(Nuxt 3 / Vue.js)" as Frontend
-  component "Backend API\n(Node.js / REST)" as Backend
+rectangle "Nuxt Finanztracker" {
+  rectangle "Web Frontend\n(Nuxt 3)" as Frontend
+  rectangle "Backend API\n(Node.js / REST)" as Backend
 }
 
-database "Datenbank\n(Supabase / PostgreSQL)" as DB
+database "Supabase\n(PostgreSQL)" as DB
 
-Benutzer --> Frontend : nutzt (HTTPS)
-Frontend --> Backend : REST API\n(HTTPS / JSON)
+Benutzer --> Frontend : HTTPS
+Frontend --> Backend : REST / JSON
 Backend --> DB : SQL
 @enduml
