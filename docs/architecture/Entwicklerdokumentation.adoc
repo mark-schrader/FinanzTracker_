@@ -107,13 +107,19 @@ Die Datenbank wird extern über Supabase betrieben.
 === Architekturdiagramme
 
 ==== System Context Diagram (C4 – C1)
-plantuml::plantuml/context.puml[svg]
+//plantuml::plantuml/context.puml[svg]
+
+image::Context.jpeg[]
 
 ==== Container Diagram (C4 – C2)
-plantuml::plantuml/container.puml[svg]
+//plantuml::plantuml/container.puml[svg]
+
+image::Container.jpeg[]
 
 ==== Component Diagram (C4 – C3)
-plantuml::plantuml/components.puml[svg]
+//plantuml::plantuml/components.puml[svg]
+
+image::Components.jpeg[]
 
 === Technische Entscheidungen
 
