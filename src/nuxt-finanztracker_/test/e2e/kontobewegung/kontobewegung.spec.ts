@@ -3,7 +3,7 @@ import { test, expect } from '@playwright/test';
 test.use({ storageState: 'auth.json' });
 
 test('Kontobewegung ist da mit Buttons und Tabelle', async ({ page }) => {
-  await page.goto('http://localhost:3000/dashboard/64');
+  await page.goto('http://localhost:3000/dashboard');
   await page.getByRole('link', { name: 'KONTOBEWEGUNG' }).click();
   await page.goto('http://localhost:3000/kontobewegung');
   await page.waitForLoadState('networkidle');
