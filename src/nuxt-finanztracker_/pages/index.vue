@@ -126,7 +126,7 @@ watch(user, async (u) => {
     if (u) {
       const profileData = await $fetch('/api/user/me')
       if (profileData && profileData.userid) {
-        navigateTo(`/dashboard/${profileData.userid}`)
+        navigateTo(`/dashboard`)
       } else {
         // fallback: dashboard root
         navigateTo('/dashboard')
@@ -188,7 +188,7 @@ const register = async () => {
       return;
     }
 
-    return navigateTo(`/dashboard/${data.user.userid}`);
+    return navigateTo(`/dashboard`);
   } catch (err) {
     console.error('Fehler bei Registrierung:', err);
   }
@@ -222,10 +222,7 @@ const login = async () => {
     if (!profileData) {
       throw new Error('Benutzerprofil nicht gefunden nach dem Login.');
     }
-
-    const prismaUserId = profileData.userid;
-    
-    return navigateTo(`/dashboard/${prismaUserId}`);
+    return navigateTo(`/dashboard`);
 
   } catch (err: any) {
     errorMessage.value = err.message || "Ein unerwarteter Fehler ist aufgetreten.";
