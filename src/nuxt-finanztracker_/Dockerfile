@@ -11,6 +11,8 @@ COPY package.json package-lock.json ./
 
 RUN npm i
 
+# Prisma Client generieren
+RUN npx prisma generate
 
 COPY . ./
 
